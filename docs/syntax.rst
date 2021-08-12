@@ -13,6 +13,10 @@ Comments are usually ``//`` but ``/*..*/`` is also supported.
 The top level of a module may contain only items.
 In particular, ``let`` bindings are not permitted outside code blocks.
 
+Generally, a redundant trailing ``,`` is allowed at the end of lists
+(of values, arguments, etc.).
+But for ``;``, the precise presence or absence is usually required.
+
 Attributes
 ----------
 
@@ -72,6 +76,8 @@ Control flow "statements" are generally expressions:
     *value // deref, see [methods]
     |arg0, arg1: Type1| -> Returns expression // closure
     WrappedCounter { counter: 42 } // constructor ("struct literal")
+    type as other_type // type conversion (safe but maybe lossy)
+    collection[index] // usually panics if not found, eg bounds check
 
 Note the odd semicolon rule,
 which determines the type of block expressions.
