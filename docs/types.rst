@@ -7,11 +7,7 @@ as seen in languages like ML and Haskell.
 The compiler will often infer the types of variables (including closures)
 and also usually infer the correct types for a generic function.
 Type inference is not supported everywhere,
-notably in function signaturesa nd public interfaces.
-
-When type inference is supported, it is not always successful;
-if it isn't the compiler will say "type annotations needed".
-In this case a ``let`` binding specifying a type can often help.
+notably in function signatures and public interfaces.
 
 Generics
 --------
@@ -32,28 +28,24 @@ circumstances, the *turbofish* syntax is used, like this::
 Types
 -----
 
-Type definitions for a nominal type ``N``.
-Each of these defines a new type which is not the same as any other.
-
-
-Defining new named types
-~~~~~~~~~~~~~~~~~~~~~~~~
+Examples of nominal type definitions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. list-table::
  :widths: 35 65
 
- * - Sum type
-   - ``enum N { V0, V1(..), V2{..}, }``
  * - Product, named fields
-   - ``struct N { f: T, g: U };``        
+   - ``struct S { f: u64, g: &'static str };``
  * - Product, tuple-like
-   - ``struct N(T,U);``
+   - ``struct ST(u64, ());``
  * - Product, units
-   - ``struct N0; struct N1{}; struct N2{}``
+   - ``struct Z0; struct Z1(); struct Z2{}``
+ * - Sum type
+   - ``enum E { V0, V1(usize), V2{ f: String, }``
  * - Uninhabited type
    - ``enum Void { }`` // see `Infallible` in std; `void` crate
  * - Generic type
-   - e.g. ``struct N<F>{ f: F, g: U }``
+   - e.g. ``struct SG<F>{ f: F, g: &'static str }``
 
 Referring to types
 ~~~~~~~~~~~~~~~~~~
@@ -92,7 +84,8 @@ so the same code can compile with a variety of different array sizes,
 resulting in monomorphisation.)
 Often a slice is better.
 
-A **slice** is a contiguous sequence of objects of the same type.
+A **slice** is a contiguous sequence of objects of the same type,
+with size known at run-time.
 The slice itself (``[T]``) means the actual data,
 not a pointers to it - rather an abstract concept.
 Normally one works with ``&[T]``, which is a reference to a slice.
@@ -139,12 +132,79 @@ Some very important nominal types from the standard library
    - ``Option<T>``
  * - Fallible
    - ``Result<T,E>``
-
-
-
-Integers, conversion, checking
-------------------------------
-
      
+Constructors
+------------
+
+Values of aggregate types can be made by with a straightforward
+literal display syntax.
+Enum variants, qualified by their enum type, are also constructors.
+Using the examples from above:
+
+::
+
+   let _ = S { f: 42, g: "forty-two" };
+   let _ = ST(42, ());
+   let _: E = E::V0;
+   let _: E = E::V1(42);
+   let _: E = E::V2{ f: format!("hi") };
+   let _ = Z0;
+   let _ = Z1();
+   let _ = Z2{};
+
+Named fields can be provided in any order;
+the provided field values are computed in the order you provide.
+Aggregates can be rest-initialised with ``..``,
+naming another value of the same type (often ``default()``).
+
+If a value has fields you cannot name because they're not ``pub``,
+you cannot construct it.
+
 Patterns
 --------
+
+Rust uses functional-programming-style pattern-matching
+for variable binding,
+and for handling sum types.
+
+The pattern syntax is made out of constructor syntax,
+along with variable bindings, and ``|`` for alternation.
+
+Unneeded parts of a value can be discarded by use of
+``_`` or ``..``.
+
+Irrefutable patterns appear in ordinary ``let`` bindings
+and function parameters
+(it is not possible to define the different pattern matches
+for a single function name separately like in Haskell or Ocaml;
+use ``match``.)
+
+Refutable patterns appear in ``if let``, ``match``
+and ``matches!``.
+
+``match`` is the most basic way to handle value of a sum type.
+
+::
+
+  match variable { pat1 => ..., pat2 if cond =>, ... }
+
+Here ``cond`` may refer to the bindings established by pat2.
+
+Other features
+---------------
+
+``#[non_exhaustive]`` for limiting your published API.
+
+``#[derive]``, often ``#[derive(Trait)``, for many ``Trait``.
+In particular, see:
+
+ * ``#[derive(Debug)]``
+ * ``#[derive(Clone,Copy)]``
+ * ``#[derive(Eq,PartialEq,Ord,PartialOrd)]``
+ * ``#[derive(Hash)``
+
+It is conventional for libraries to promiscuously implement these for
+their public data structures, whenever it would make sense.
+
+Putting a ``PhantomData`` in your struct is sometimes necessary
+to avoid unused type parameters.  See the documentation.

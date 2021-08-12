@@ -22,7 +22,7 @@ Monomorphisation and dynmic despatch are both supported,
 Type inference is supported in some contexts,
 especially local variables.
 
-Rust is generally memory-safe and thread-safe,
+Rust is memory-safe and thread-safe,
 but with a clearly-defined and well-used ``unsafe`` escape hatch.
 
 Concurrency is supported by multithreading,

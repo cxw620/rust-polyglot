@@ -78,6 +78,8 @@ Control flow "statements" are generally expressions:
     WrappedCounter { counter: 42 } // constructor ("struct literal")
     type as other_type // type conversion (safe but maybe lossy)
     collection[index] // usually panics if not found, eg bounds check
+    thing.field; // field of a struct with named fields
+    tuple.0; tuple.1; // fields of type or tuple struct    
 
 Note the odd semicolon rule,
 which determines the type of block expressions.

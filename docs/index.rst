@@ -8,6 +8,7 @@ Rust for the Expert Programmer
    intro.rst
    syntax.rst
    types.rst
+   ownership.rst
 
 Indices and tables
 ==================
