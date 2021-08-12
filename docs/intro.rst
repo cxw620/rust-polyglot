@@ -3,8 +3,8 @@ Introduction
 
 There are many guides to Rust, including the [Rust Book].
 This guide is something different:
-it is intended for get the polyglot programmer,
-and it contains the bare bones.
+it is intended for the polyglot programmer,
+and it contains the bare bones to get you started.
 For the details, consult the [official documentation].
 
 Overview - language
@@ -19,6 +19,8 @@ Rust is statically typed, with an algebraic type system.
 It supports generic types (parameterised types) and generic functions.
 Monomorphisation and dynmic despatch are both supported,
 (chosen at the point where a generic type is referred to).
+Type inference is supported in some contexts,
+especially local variables.
 
 Rust is generally memory-safe and thread-safe,
 but with a clearly-defined and well-used ``unsafe`` escape hatch.
@@ -37,14 +39,27 @@ There are two macro systems for metaprogramming: a pattern matcher
 (``macro_rules!``) and a very powerful system of arbitrary code
 transformation (``proc_macro``).
 
-There are stripped-down profiles of Rust without OS functions, and
-without even a memory allocator, for use in embedded situations.
+There are fully-supported stripped-down profiles of the Rust standard library
+without OS functions ([``alloc``]), and
+without even a memory allocator ([``core``]),
+for use in embedded situations.
+
+The concrete syntax has many influences.
+The basic function and expression syntax resembles "bracey" languages,
+but with some wrinkles.
+Notably,
+``( )`` are not required around the control expression for ``if`` etc.
+but ``{ }`` *are* required around the controlled statement block.
 
 Overview - implementation, docs, tooling, etc.
 ----------------------------------------------
 
-There is one implementation, ``rustc`` which is maintained by the Rust
-project itself, alongside the documentation.
+There is one implementation, ``rustc``
+which is maintained by the Rust project itself,
+alongside the specifications and documentation.
+
+Compilation is slow by comparison with many other modern languages,
+but the runtime speed of idiomatic Rust code is extremely good.
 
 Code generation (to native code or WASM) is currently done via LLVM
 but work is ongoing to allow use of [GCC] and [Cranelift].  There is
@@ -60,10 +75,43 @@ the semantics are formally described in [Stacked Borrows]
 and programs can be checked by ``miri``,
 the interpreter for the Rust Mid-Intermediate Representation.
 
+Rust is available in "stable", "beta" and "nightly" flavours.
+Rust intends to avoid (and in practice, generally does vaoid)
+breaking existing code which was using stable interfaces.
+
+Overview - library ecosystem
+----------------------------
+
 Rust relies heavily on its ecosystem of libraries (aka "crates"),
 and its convenient but securitywise-troubling package manager ``cargo``.
 It is not practical to write any but the smallest programs
 without using external libraries.
+
 Conversely, the library ecosystem is rich and generally of high quality
 although slightly lacking in certain areas
 (especially "webby" areas when compared with more "webby" languages).
+
+The Rust ecosystem contains some exceptional and unique libraries,
+which can conveniently provide advanced capabilities
+found elsewhere only in special-purpose or research languages (if at all).
+
+The Rust Project
+----------------
+
+The Rust Project has robust and mature governance and review processes.
+The compiler implementation quality is high
+and the project is exceptionally welcoming.
+
+Notable ideological features of the Rust community are:
+
+ * A strong desire to help the programmer write correct code,
+   including a desire for the compiler to take responsibility
+   for preventing user error.
+ * Pride in helping users write performant code.
+ * Effective collaboration between practicing developers and
+   academic programming language and formal methods experts.
+
+There is also a strong desire to help the programmer
+with accessible documentation and useful error messages,
+but generally ease of programming is traded off in favour of correctness,
+and sometimes performance.
