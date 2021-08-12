@@ -51,6 +51,12 @@ Notably,
 ``( )`` are not required around the control expression for ``if`` etc.
 but ``{ }`` *are* required around the controlled statement block.
 
+There is little meaningful separate compilation.
+The usual aggregation of the Rust libraries making up a single Rust program
+involves obtaining all of the source code to all the libraries
+and building them into a single executable with static linking.
+(By default, dynamic linking is still used for FFI libraries.)
+
 Overview - implementation, docs, tooling, etc.
 ----------------------------------------------
 
@@ -94,6 +100,10 @@ although slightly lacking in certain areas
 The Rust ecosystem contains some exceptional and unique libraries,
 which can conveniently provide advanced capabilities
 found elsewhere only in special-purpose or research languages (if at all).
+
+In combination of static linking of Rust libraries,
+with heavy use of monomorphised generic code,
+can lead to very large binaries.
 
 The Rust Project
 ----------------

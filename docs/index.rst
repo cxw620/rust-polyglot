@@ -6,6 +6,8 @@ Rust for the Expert Programmer
    :caption: Contents:
 
    intro.rst
+   syntax.rst
+   types.rst
 
 Indices and tables
 ==================
