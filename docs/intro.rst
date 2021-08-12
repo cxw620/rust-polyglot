@@ -40,8 +40,8 @@ There are two macro systems for metaprogramming: a pattern matcher
 transformation (``proc_macro``).
 
 There are fully-supported stripped-down profiles of the Rust standard library
-without OS functions ([``alloc``]), and
-without even a memory allocator ([``core``]),
+without OS functions (``alloc``), and
+without even a memory allocator (``core``),
 for use in embedded situations.
 
 The concrete syntax has many influences.
@@ -55,7 +55,7 @@ There is little meaningful separate compilation.
 The usual aggregation of the Rust libraries making up a single Rust program
 involves obtaining all of the source code to all the libraries
 and building them into a single executable with static linking.
-(By default, dynamic linking is still used for FFI libraries.)
+(Generally, dynamic linking is still used for FFI libraries.)
 
 Overview - implementation, docs, tooling, etc.
 ----------------------------------------------
@@ -82,7 +82,7 @@ and programs can be checked by ``miri``,
 the interpreter for the Rust Mid-Intermediate Representation.
 
 Rust is available in "stable", "beta" and "nightly" flavours.
-Rust intends to avoid (and in practice, generally does vaoid)
+Rust intends to avoid (and in practice, generally does void)
 breaking existing code which was using stable interfaces.
 
 Overview - library ecosystem

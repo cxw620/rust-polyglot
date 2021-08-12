@@ -40,7 +40,7 @@ Items
 ::
 
     fn function(arg: T) -> ReturnValue { ... }
-    type TypeAlias = (SomeType, OtherType); // type aliases equality structural
+    type TypeAlias = (SomeType, OtherType); // type alias, structural equality
     pub struct WrappedCounter { counter: u64 } // nominal type equality
     trait Trait { fn trait_method(self); }
     const FORTY_TWO: u32 = 42;
@@ -58,33 +58,39 @@ Control flow "statements" are generally expressions:
 
 ::
 
-    { stmt0; stmt1; } // with semicolon, has type ( )
-    { stmt0; stmt1 } // no semicolon, has type of stmt1
+    { stmt0; stmt1; }  // with semicolon, has type ( )
+    { stmt0; stmt1 }   // no semicolon, has type of stmt1
+
     if condition { statements... }
-    if condition { value } else { other_value }
-    'loopname: loop { ... } // 'loopname is optional, of course
-    'loopname: while condition { }
-    'loopname: while let pattern = expr { }
-    'loopname: for loopvar in something_iterable { ... }
-    return v; // at end of function, it is idiomatic to just write v
-    continue; continue 'loop; break; break 'loop;
-    break value; break 'loop value; // `loop` loops only, not for/while
-    match value { ... } // see "Patterns", in "Types and Patterns"
+    if condition { value } else { other_value }   // no ? :, use this
+    match value { pat0 if c0 => expr0,.. }        // see "Types and Patterns"
+
+    'loopname: loop { ... }                              // 'loopname
+    'loopname: while condition { }                       // is optional
+    'loopname: while let pattern = expr { }              // of course
+    'loopname: for loopvar in something_iterable { ... } //
+
+    return v  // at end of function, it is idiomatic to just write v
+    continue; continue 'loop; break; break 'loop
+    break value; break 'loop value;  // `loop` loops only, not for/while
+
     function(arg0,arg1)
-    receiver.method(arg0,arg1,arg2) // see the section on "Methods"
-    fallible? // see [error handling]
-    *value // deref, see [methods]
-    |arg0, arg1: Type1| -> Returns expression // closure
+    receiver.method(arg0,arg1,arg2)  // see the section on "Methods"
+    |arg0, arg1: Type1| -> ReturnType expression  // closure
+
+    fallible?                      // see [error handling]
+    *value                         // deref, see [methods]
+    type as other_type             // type conversion (safe but maybe lossy)
     WrappedCounter { counter: 42 } // constructor ("struct literal")
-    type as other_type // type conversion (safe but maybe lossy)
-    collection[index] // usually panics if not found, eg bounds check
-    thing.field; // field of a struct with named fields
-    tuple.0; tuple.1; // fields of type or tuple struct    
+
+    collection[index]        // usually panics if not found, eg array bounds check
+    thing.field              // field of a struct with named fields
+    tuple.0; tuple.1;        // fields of type or tuple struct    
+    start..end; start..=end  // inclusive and exclusive Range
 
 Note the odd semicolon rule,
 which determines the type of block expressions.
 
-Closure argument and return types an often be inferred.
 Missing return type on a ``fn`` means ``()``;
 missing return type on a closure means ``_``;
 
