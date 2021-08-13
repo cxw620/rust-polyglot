@@ -1,5 +1,5 @@
-Introduction
-============
+Introduction and overview
+=========================
 
 There are many guides to Rust, including the [Rust Book].
 This guide is something different:
@@ -7,8 +7,8 @@ it is intended for the polyglot programmer,
 and it contains the bare bones to get you started.
 For the details, consult the [official documentation].
 
-Overview - language
--------------------
+Language
+--------
 
 Rust is a compiled language.
 
@@ -55,10 +55,13 @@ There is little meaningful separate compilation.
 The usual aggregation of the Rust libraries making up a single Rust program
 involves obtaining all of the source code to all the libraries
 and building them into a single executable with static linking.
-(Generally, dynamic linking is still used for FFI libraries.)
 
-Overview - implementation, docs, tooling, etc.
-----------------------------------------------
+There is a good FFI system to talk to C
+(and libraries for convenient interfacing to C++, WASM, Python,...)
+Generally, dynamic linking is still used for FFI libraries.
+
+implementation, docs, tooling, etc.
+-----------------------------------
 
 There is one implementation, ``rustc``
 which is maintained by the Rust project itself,
@@ -85,11 +88,12 @@ Rust is available in "stable", "beta" and "nightly" flavours.
 Rust intends to avoid (and in practice, generally does void)
 breaking existing code which was using stable interfaces.
 
-Overview - library ecosystem
-----------------------------
+Library ecosystem
+-----------------
 
 Rust relies heavily on its ecosystem of libraries (aka "crates"),
-and its convenient but securitywise-troubling package manager ``cargo``.
+and its convenient but securitywise-troubling
+language-specific package manager ``cargo``.
 It is not practical to write any but the smallest programs
 without using external libraries.
 
@@ -101,7 +105,7 @@ The Rust ecosystem contains some exceptional and unique libraries,
 which can conveniently provide advanced capabilities
 found elsewhere only in special-purpose or research languages (if at all).
 
-In combination of static linking of Rust libraries,
+The combination of static linking of Rust libraries,
 with heavy use of monomorphised generic code,
 can lead to very large binaries.
 
@@ -116,7 +120,7 @@ Notable ideological features of the Rust community are:
 
  * A strong desire to help the programmer write correct code,
    including a desire for the compiler to take responsibility
-   for preventing user error.
+   for preventing programmer error.
  * Pride in helping users write performant code.
  * Effective collaboration between practicing developers and
    academic programming language and formal methods experts.

@@ -1,3 +1,6 @@
+Safety
+======
+
 
 Integers, conversion, checking
 ------------------------------
