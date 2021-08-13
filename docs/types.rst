@@ -130,7 +130,7 @@ Some very important nominal types from the standard library
    - ``Arc<T>``, ``Rc<T>``
  * - Optional (aka Haskell ``Maybe``)         
    - ``Option<T>``
- * - Fallible
+ * - Fallible (commonly a function return type)
    - ``Result<T,E>``
      
 Constructors
@@ -182,7 +182,7 @@ use ``match``.)
 Refutable patterns appear in ``if let``, ``match``
 and ``matches!``.
 
-``match`` is the most basic way to handle value of a sum type.
+``match`` is the most basic way to handle a value of a sum type.
 
 ::
 
@@ -204,7 +204,7 @@ In particular, see:
  * ``#[derive(Hash)``
 
 It is conventional for libraries to promiscuously implement these for
-their public data structures, whenever it would make sense.
+their public types, whenever it would make sense.
 
 Putting a ``PhantomData`` in your struct is sometimes necessary
 to avoid unused type parameters.  See the documentation.

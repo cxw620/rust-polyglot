@@ -9,6 +9,9 @@ Rust for the Expert Programmer
    syntax.rst
    types.rst
    ownership.rst
+   methods.rst
+   safety.rst
+   errors.rst
 
 Indices and tables
 ==================

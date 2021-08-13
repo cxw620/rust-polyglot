@@ -60,6 +60,8 @@ There is a good FFI system to talk to C
 (and libraries for convenient interfacing to C++, WASM, Python,...)
 Generally, dynamic linking is still used for FFI libraries.
 
+The unit of compilation is large: the "crate", not file or module.
+
 implementation, docs, tooling, etc.
 -----------------------------------
 
