@@ -9,7 +9,7 @@ Rust for the Expert Programmer
    syntax.rst
    types.rst
    ownership.rst
-   methods.rst
+   traits.rst
    safety.rst
    errors.rst
 
