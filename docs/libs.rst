@@ -1,6 +1,11 @@
 Libraries
 =========
 
+..
+    Copyright 2021 Ian Jackson and contributors
+    SPDX-License-Identifier: MIT
+    There is NO WARRANTY.
+
 There are many excellent Rust libraries
 (and also many poor ones of course).
 These are all collected at ``crates.io``,

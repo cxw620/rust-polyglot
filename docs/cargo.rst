@@ -1,5 +1,10 @@
 Cargo
 =====
+..
+    Copyright 2021 Ian Jackson and contributors
+    SPDX-License-Identifier: MIT
+    There is NO WARRANTY.
+
 
 The ``cargo`` tool,
 which is used to build any nontrivial Rust program,

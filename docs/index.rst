@@ -1,6 +1,11 @@
 Rust for the Polyglot Programmer
 ================================
 
+..
+    Copyright 2021 Ian Jackson and contributors
+    SPDX-License-Identifier: MIT
+    There is NO WARRANTY.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:

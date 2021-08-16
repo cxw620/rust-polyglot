@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-#
+..
+    Copyright 2021 Ian Jackson, contributors to Sphinx & Rust for Polyglots
+    SPDX-License-Identifier: MIT
+    There is NO WARRANTY.
+
 # Configuration file for the Sphinx documentation builder.
 #
 # This file does only contain a selection of the most common options. For a

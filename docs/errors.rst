@@ -1,6 +1,11 @@
 Error handling
 ==============
 
+..
+    Copyright 2021 Ian Jackson and contributors
+    SPDX-License-Identifier: MIT
+    There is NO WARRANTY.
+
 Rust has two parallel runtime error handling mechanisms:
 panics, and ``Result`` / ``?``.
 

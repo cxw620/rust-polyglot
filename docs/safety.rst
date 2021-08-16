@@ -1,6 +1,11 @@
 Safety, threadsafety
 ====================
 
+..
+    Copyright 2021 Ian Jackson and contributors
+    SPDX-License-Identifier: MIT
+    There is NO WARRANTY.
+
 Most Rust code is written in Safe Rust,
 the memory-safe subset of Rust.
 Generally when people speak of Rust,

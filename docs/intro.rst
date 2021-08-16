@@ -1,6 +1,11 @@
 Introduction and overview
 =========================
 
+..
+    Copyright 2021 Ian Jackson and contributors
+    SPDX-License-Identifier: MIT
+    There is NO WARRANTY.
+
 There are many guides to Rust, including the [Rust Book].
 This guide is something different:
 it is intended for the experienced programmer

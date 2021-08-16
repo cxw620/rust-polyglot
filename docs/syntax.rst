@@ -1,6 +1,11 @@
 Syntax
 ======
 
+..
+    Copyright 2021 Ian Jackson and contributors
+    SPDX-License-Identifier: MIT
+    There is NO WARRANTY.
+
 Rust distinguishes items, statements, and expressions.
 Control flow statements tend to require block expressions (``{ }``).
 

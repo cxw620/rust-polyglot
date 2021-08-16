@@ -1,6 +1,11 @@
 Types and patterns
 ==================
 
+..
+    Copyright 2021 Ian Jackson and contributors
+    SPDX-License-Identifier: MIT
+    There is NO WARRANTY.
+
 Rust's type system is based on Hindley-Milter-style algebraic types,
 as seen in languages like ML and Haskell.
 

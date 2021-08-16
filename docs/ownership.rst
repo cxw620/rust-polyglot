@@ -1,6 +1,11 @@
 Ownership, memory model
 ======================
 
+..
+    Copyright 2021 Ian Jackson and contributors
+    SPDX-License-Identifier: MIT
+    There is NO WARRANTY.
+
 Rust has a novel ownership-based safety/memory system.
 
 The best way to think of it is as a formalisation
