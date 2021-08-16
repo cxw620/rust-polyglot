@@ -142,7 +142,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'Rust-for-experts.tex', 'Rust for the Polyglot Programmer',
+    (master_doc, 'rust-polyglot.tex', 'Rust for the Polyglot Programmer',
      'Ian Jackson and contributors', 'guide'),
 ]
 
