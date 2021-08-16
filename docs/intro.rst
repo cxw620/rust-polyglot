@@ -3,8 +3,9 @@ Introduction and overview
 
 There are many guides to Rust, including the [Rust Book].
 This guide is something different:
-it is intended for the polyglot programmer,
-and is not entirely free of opinion.
+it is intended for the experienced programmer
+who already knows many other programming languages.
+Also this guide is not entirely free of opinion.
 
 I try to give enough information to get you started,
 but to avoid going into too much detail.
@@ -19,7 +20,7 @@ Rust's execution model is imperative, with strict evaluation
 
 Rust is statically typed, with an algebraic type system.
 It supports generic types (parameterised types) and generic functions.
-Monomorphisation and dynmic despatch are both supported,
+Monomorphisation and dynamic despatch are both supported
 (chosen at the point where a generic type is referred to).
 Type inference is supported in some contexts,
 especially local variables.
@@ -29,6 +30,7 @@ but with a clearly-defined and well-used ``unsafe`` escape hatch.
 
 Concurrency is supported by multithreading,
 and alternatively via a green-threads-based ``async`` system.
+Uniquely, concurrent Rust programs are memory-safe.
 
 There is no garbage collector.
 Stack objects are explicitly defined and automatically deallocated.
