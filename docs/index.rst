@@ -12,6 +12,8 @@ Rust for the Expert Programmer
    traits.rst
    safety.rst
    errors.rst
+   cargo.rst
+   libs.rst
 
 Indices and tables
 ==================

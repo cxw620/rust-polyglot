@@ -60,6 +60,52 @@ to implement a foreign trait on a foreign type
 (where "foreign" means outside your crate, not outside your module).
 Consult the documentation for full details of the coherence rules.
 
+
+Iterators: ``Iterator``, ``IntoIterator``, ``FromIterator``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The ``Iterator`` and ``IntoIterator`` traits are
+very important in idiomatic (and performant) Rust.
+
+Most collections and many other key types (eg, ``Option``) implement
+``Iterator`` or ``IntoIterator``,
+so that they can be iterated over;
+this is how ``for x in y`` loops work:
+``y`` must ``impl IntoIterator``.
+
+The standard library provides a large set of combinator methods
+on ``Iterator``,
+for mapping, folding, filtering, and so on.
+These typically take closures as arguments.
+
+Idiomatic coding style for iteration in Rust involves
+chaining iterator combinators.
+Effectively,
+Rust contains an iterator monad sublanguage with a funky syntax.
+
+The ``.collect()`` method in ``Iterator``
+reassembles the result of an iteration
+back into a collection
+(or something which could be a collection if you squint;
+note for example the ``FromIterator`` impl for ``Result``).
+Often one has to write the type of the desired result,
+perhaps like this:
+
+::
+
+   let processed = things
+       .filter_map(|t| ...)
+       .map(|t| ...?; ...; Ok(u))
+       .take(42)
+       .collect::<Result<Vec<_>,io::Error>()?;
+
+``collect`` is more idiomatic than
+open-coding additions to a mutable collection variable.
+It can be faster,
+and aggressively-Rustic style tries to minimise the use of
+``mut`` variables.
+
+
 Existential types
 ~~~~~~~~~~~~~~~~~
 
@@ -88,21 +134,6 @@ the usual workaround is to use ``Box<dyn Trait>``
 instead of ``impl Trait``.
 
 
-Some key traits
-~~~~~~~~~~~~~~~
-
- * ``Copy``: move vs automatic-duplication semantics for values
- * ``Deref``: method despatch (see below)
- * ``std::ops::*``: expression operators (overloading)
- * ``Eq`` et al for comparison, and ``Hash`` for putting objects in many kinds of collections.
- * ``From`` and ``Into``; ``TryFrom`` and ``TryInto``
- * ``Debug`` and ``Display`` for printing with ``format!``, ``println!`` etc.
- * ``io::Read``, ``io::Write`` (not to be confused with ``fmt::Write``)
- * ``Clone``, ``AsRef``, ``Borrow``, ``ToOwned``
- * ``Send``, ``Sync`` for thread-safety
- * ``Default``
- * ``Iterator``, ``IntoIterator``.  See `Iterators`_.
-
 Closures and the fn pointer type
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -127,10 +158,26 @@ which makes ``FnOnce`` closures awkward.
 Use ``Box<dyn FnOnce>`` or somehow make the closure be ``FnMut``.
 
 
+Some other key traits
+~~~~~~~~~~~~~~~~~~~~~
+
+ * ``Copy``: move vs automatic-duplication semantics for values
+ * ``Deref``: method despatch (see below)
+ * ``std::ops::*``: expression operators (overloading)
+ * ``Eq`` et al for comparison, and ``Hash`` for putting objects in many kinds of collections.
+ * ``From`` and ``Into``; ``TryFrom`` and ``TryInto``
+ * ``Debug`` and ``Display`` for printing with ``format!``, ``println!`` etc. and ``x.to_string()``
+ * ``io::Read``, ``io::Write`` (not to be confused with ``fmt::Write``)
+ * ``Clone``, ``AsRef``, ``Borrow``, ``ToOwned``
+ * ``Send``, ``Sync`` for thread-safety
+ * ``Default``
+
+
 ``Deref`` and method resolution
 -------------------------------
 
-The magic trait ``Deref`` allows a type to "dereference to"
+The magic traits ``Deref`` and ``DerefMut``
+allow a type to "dereference to"
 another type.
 This is typically used for types like ``Arc``, ``Box``
 and ``MutexGuard`` which are "smart" pointers to some other type
@@ -155,14 +202,26 @@ This is also required for associated functions
 (whether inherent or in traits)
 which are not methods (do not take a ``self`` parameter).
 Idiomtically this includes constructors like ``T::new()``
-and can also include other funftions that
+and can also include other functions that
 the struct's author has decided ought not to be methods.
 For example ``Arc::downgrade`` is not a method
 to avoid interfering with any ``downgrade`` method on ``T``.
 
-Deref effectively imports the dereference target type's methods
+``Deref`` effectively imports the dereference target type's methods
 into the method namespace of the dereferencable object.
 This could be used for a kind of method inheritance,
 but this is considered bad style
 (and it wouldn't work for multiple inheritance,
 since there can be only one deref target).
+
+Auto-dereferencing also occurs when a reference is assigned
+(to a variable, or as part of parameter passing):
+if the type does not match,
+an attempt is made to see if dereferencing
+(perhaps multiple times) will help.
+
+The ``Deref`` implementation can be invoked explicitly
+with the ``*`` operator.
+Sometimes when this is necessary,
+one wants a reference again,
+so constructions like ``&mut **x`` are not unheard-of.

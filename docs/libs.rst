@@ -1,0 +1,121 @@
+Libraries
+=========
+
+There are many excellent Rust libraries
+(and also many poor ones of course).
+These are all collected at ``crates.io``,
+the Rust language-specific package repository.
+
+For most programs,
+use of ecosystem library packages is a practical necessity.
+
+Rust's excellent metaprogramming system
+makes it possible for libraries to provide facilities
+that resemble bespoke language features.
+
+
+Libraries you should know about:
+--------------------------------
+
+ * ``itertools``.  Superb collection of extra iterator combinators.
+
+ * ``fehler``; ``thiserror``; ``eyre`` (or ``anyhow``).  Error handling.
+
+ * ``num``, ``num-traits``, ``num-derive``.
+   Not just for "numeric" code - helpful integer conversionts etc. too.
+
+ * ``strum``.  Iterate over enum variants; enums to strings, etc.
+
+ * ``slab``; ``generational_area`` (or ``slotmap``).
+   Heap storage tools which safely sidestep borrowck (and are fast).
+
+ * ``index_vec``.  ``arrayvec``. ``indexmap``.
+   Variations on ``Vec`` and ``HashSet``.
+
+ * ``extend``.  Conveniently define methods on other people's types.
+
+ * ``rayon``: Semi-magical safe multicore parallelism
+   as a drop-in replacement for std's serial iterators.
+
+ * ``crossbeam``.  For multithreaded programming.
+
+ * ``parking_lot``.  Alternatives to the standard mutex etc.;
+   ``parking_lot::Mutex`` is const-initialisable.
+
+ * ``chrono`` for human-readable date/time handling.
+   API is a bit funky.  Be sure to use ``chrono-tz``.
+
+ * ``libc`` and ``nix``.  Take your pick.
+
+ * ``lazy_static``, ``once_cell``
+   for data to be initialised once.
+
+ * ``log`` (and ``env_logger`` etc.); ``tracing``.
+
+ * ``regex``, ``glob``, ``tempfile``, ``rand``, ``either``, ``void``.
+
+
+``serde``
+---------
+
+serde is a serialisaation/deserialisation framework.
+
+It defines a data model,
+and provides automatic translation of ordinary Rust ``struct`` s
+to and from that model.
+
+Ecosystem libraries provide concrete implementations
+for a wide variety of data formats,
+and some interesting data format metaprogramming tools.
+
+The result is a superb capability to handle
+a wide variety of data marshalling problems.
+serde is especially good for ad-hoc data structures and
+structures whose definition is owned by a Rust project.
+
+serde and its ecosystem is considerably better for many tasks than
+anything available in any other programming environment.
+
+Generally, the resulting code
+is a fully monomorphised open-coded marshaller
+specialised for the specifc data structure(s) and format(s),
+so performance is good but the code size can be very large.
+
+
+Command line parsing: ``structopt`` and ``clap``
+------------------------------------------------
+
+If you are writing a command line program
+you should probably use ``structopt``.
+It allows declarative definition of command line options.
+
+Unfortunately,
+structopt it has some problems,
+which it inherits from ``clap`` (the underlying command line parser):
+
+ * Confusion between options which may be repoeated,
+   options which contain multiple values,
+   and the troubling and novel notion of
+   options which take an indeterminate series of values
+   as separate arguments, until the next option.
+
+ * Serious problems handling options which override each other.
+   There is a facility for this but it is not convenient and
+   its algorithm is fundamentally wrong.
+
+ * General failure to follow (at least by default) well-established
+   Unix option parsing conventions.
+
+To illustrate:
+it is quite awkward even to provide a conventional pair of
+mutually-overriding ``--foo`` and ``--no-foo`` options.
+
+In practice, using ``clap`` (and, therefore using ``structopt``)
+means accepting that one's program will have
+an imperfect and sometimes-balky command line syntax.
+
+There are alternatives,
+notably ``getopts``, ``gumdrop`` and ``argparse``,
+but they are much less popular and less well maintained.
+I currently use ``argparse`` where I want a fine-tuned option parser,
+but it is quite odd and the docs are not great.
