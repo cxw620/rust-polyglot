@@ -24,6 +24,7 @@ Rust for the Polyglot Programmer
    libs.rst
    idiom.rst
    further.rst
+   colophon.md
 
 Indices and tables
 ==================
