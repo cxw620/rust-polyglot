@@ -143,15 +143,14 @@ Although a stated goal of cargo is to be
 embeddable into other build systems,
 csrgo does not expose the interfaces necessary to do this well.
 It's hard to know when to rerun cargo and when cargo's outputs changed.
-It's hard to get cargo build precisely what's needed.
-cargo likes to manage concurrenncy itself.
+It's hard to get cargo to build precisely what's needed.
 If you want to run cargo inside ``make``,
 you will need to resort to stamp files,
 and live with it sometimes doing unecessary work.
 
 It is not possible to have a
 completely local (unpublished) dependency
-without hardcoding the path on the local filesystem
-baked into the depending packages' source tree.
+without baking the path on the local filesystem
+into the depending packages' source tree.
 
 ``nailing-cargo`` and other tools may help with some of these issues.

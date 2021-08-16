@@ -13,6 +13,11 @@ Rust's excellent metaprogramming system
 makes it possible for libraries to provide facilities
 that resemble bespoke language features.
 
+When searching for libraries,
+usually use "recent downloads" for the search order on ``crates.io``
+It's inexact but is likely to give you fate-sharing
+with the rest of the community, at least.
+
 
 Libraries you should know about:
 --------------------------------
@@ -58,7 +63,7 @@ Libraries you should know about:
 ``serde``
 ---------
 
-serde is a serialisaation/deserialisation framework.
+serde is a serialisation/deserialisation framework.
 
 It defines a data model,
 and provides automatic translation of ordinary Rust ``struct`` s
@@ -80,6 +85,22 @@ Generally, the resulting code
 is a fully monomorphised open-coded marshaller
 specialised for the specifc data structure(s) and format(s),
 so performance is good but the code size can be very large.
+
+
+Web tools and frameworks
+------------------------
+
+xxx todo
+
+reqwest
+hyper
+
+disrecommend actix-web lots of unsafe
+disrecommend stdweb namespace grab
+
+rocket
+warp
+rouille
 
 
 Command line parsing: ``structopt`` and ``clap``

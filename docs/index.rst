@@ -12,8 +12,12 @@ Rust for the Expert Programmer
    traits.rst
    safety.rst
    errors.rst
+   macros.rst
+   async.rst
+   rustdoc.rst
    cargo.rst
    libs.rst
+   idiom.rst
 
 Indices and tables
 ==================
