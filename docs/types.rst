@@ -6,7 +6,7 @@ Types and patterns
     SPDX-License-Identifier: MIT
     There is NO WARRANTY.
 
-Rust's type system is based on Hindley-Milter-style algebraic types,
+Rust's type system is based on Hindley-Milner-style algebraic types,
 as seen in languages like ML and Haskell.
 
 The compiler will often infer the types of variables (including closures)
