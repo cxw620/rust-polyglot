@@ -1,5 +1,5 @@
-Rust for the Expert Programmer
-==============================
+Rust for the Polyglot Programmer
+================================
 
 .. toctree::
    :maxdepth: 2
@@ -18,6 +18,7 @@ Rust for the Expert Programmer
    cargo.rst
    libs.rst
    idiom.rst
+   further.rst
 
 Indices and tables
 ==================

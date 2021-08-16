@@ -192,7 +192,7 @@ Tactics for fighting the borrow checker
 
  * Turn a closure into a function, and pass in the closed-over variables.
    Closures are not generic.  Even over lifetimes.
-   So if you call a closure on ``&A`` and ``&B``,
+   So if you call a closure on ``&a`` and ``&b``,
    there needs to be a single lifetime that is correct for both calls.
    If you turn the closure into a ``fn`` (writing out all the types, sorry)
    then it can be generic over the relevant lifetimes ---
@@ -216,12 +216,11 @@ you have these options:
    since you usually end up passing ``&Arc<T>`` around,
    borrowing a reference rather than manipulating the refcount.
 
- * Use a crate like ``slotmap`` or ``typed_arena``
+ * Use a crate like ``generational_arena`` (or ``slotmap``) or ``slab``
    where the data structure ownes the values,
    and your "references" are actually indices.
 
-   These often perform very well because they work like slab allocators,
-   giving great locality of reference.
+   These often perform very well, and are ergonomic to use.
 
  * Completely change the algorithm and data structures
    (for example to make things less self-referential).

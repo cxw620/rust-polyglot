@@ -15,7 +15,7 @@ In particular, ``let`` bindings are not permitted outside code blocks.
 
 Generally, a redundant trailing ``,`` is allowed at the end of lists
 (of values, arguments, etc.).
-But for ``;``, the precise presence or absence is usually required.
+But ``;`` is very significant and is usually either required, or forbidden.
 
 Attributes
 ----------
@@ -40,7 +40,7 @@ Items
 ::
 
     fn function(arg: T) -> ReturnValue { ... }
-    type TypeAlias = (SomeType, OtherType); // type alias, structural equality
+    type TypeAlias = OtherType; // type alias, structural equality
     pub struct WrappedCounter { counter: u64 } // nominal type equality
     trait Trait { fn trait_method(self); }
     const FORTY_TWO: u32 = 42;
@@ -91,7 +91,7 @@ Control flow "statements" are generally expressions:
 Note the odd semicolon rule,
 which determines the type of block expressions.
 
-Missing return type on a ``fn`` means ``()``;
+Missing return type on a ``fn`` item means ``()``;
 missing return type on a closure means ``_``;
 
 
@@ -117,7 +117,8 @@ Identifiers and scopes
 
 Rust's identifiers are in the form ``scope::scope::ident``.
 
-Here ``scope`` can be a module, or an external library ("crate"),
+Here ``scope`` can be a module, type or trait,
+or an external library ("crate"),
 or special values like ``crate``, ``self``, ``super``.
 
 Each Rust module
@@ -141,6 +142,6 @@ Many items (including functions, types, fields of product types, etc.)
 can be public (``pub``) or private to the module (the default).
 
 ``_`` can often be written when an identifier is espected.
-For a type, it asks the compiler to infer the type.
+For a type or lifetime, it asks the compiler to infer.
 For a binding, it assigns the value to an anonymous variable,
 effectively discarding it.

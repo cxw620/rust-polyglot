@@ -98,10 +98,11 @@ hyper
 disrecommend actix-web lots of unsafe
 disrecommend stdweb namespace grab
 
-rocket
+rocket (stable vs unstable)
 warp
 rouille
 
+mention async
 
 Command line parsing: ``structopt`` and ``clap``
 ------------------------------------------------
@@ -114,11 +115,11 @@ Unfortunately,
 structopt it has some problems,
 which it inherits from ``clap`` (the underlying command line parser):
 
- * Confusion between options which may be repoeated,
-   options which contain multiple values,
+ * Confusion between options which may be repeated,
+   options which take multiple values as a single argument,
    and the troubling and novel notion of
    options which take an indeterminate series of values
-   as separate arguments, until the next option.
+   as separate arguments until the next option.
 
  * Serious problems handling options which override each other.
    There is a facility for this but it is not convenient and

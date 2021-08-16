@@ -112,7 +112,6 @@ Particular beartraps in Unsafe Rust are:
 
  * ``mem::transmute`` is an extremely powerful hammer
    and should be used with great care.
-   Consider casting raw pointers with ``as`` instead.
 
 (Here we distinguish references ``&T`` from raw pointers ``*T``.
 Safe Rust cannot use raw pointers, only references.)

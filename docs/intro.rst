@@ -4,8 +4,10 @@ Introduction and overview
 There are many guides to Rust, including the [Rust Book].
 This guide is something different:
 it is intended for the polyglot programmer,
-and it contains the bare bones to get you started.
-For the details, consult the [official documentation].
+and is not entirely free of opinion.
+
+I try to give enough information to get you started,
+but to avoid going into too much detail.
 
 Language
 --------
@@ -87,7 +89,7 @@ and programs can be checked by ``miri``,
 the interpreter for the Rust Mid-Intermediate Representation.
 
 Rust is available in "stable", "beta" and "nightly" flavours.
-Rust intends to avoid (and in practice, generally does void)
+Rust intends to avoid (and in practice, generally does avoid)
 breaking existing code which was using stable interfaces.
 
 Library ecosystem

@@ -5,8 +5,8 @@ Rust's type system is based on Hindley-Milter-style algebraic types,
 as seen in languages like ML and Haskell.
 
 The compiler will often infer the types of variables (including closures)
-and also usually infer the correct types for a generic function.
-Type inference is not supported everywhere,
+and also usually infer the correct types for a generic function call.
+Type elision is not supported everywhere,
 notably in function signatures and public interfaces.
 
 Generics
@@ -23,6 +23,12 @@ When it is necessary to qualify a function, or in some other
 circumstances, the *turbofish* syntax is used, like this::
 
   function::<Generic,Args>(...)
+
+Generic parameters can be constrained with bounds written
+where they are introduced ``fn foo<T: Default>() -> T;``
+or with where clauses ``fn foo<T>() -> T where T: Default;``.
+Lifetimes are constrained thus: ``'longer: 'shorter``,
+reading ``:`` as "outlives".
 
 
 Types
@@ -75,7 +81,7 @@ Referring to types
 
 Most of these are straightforward.
 
-**``char``** is a Unicode Scalar Value.  See the documentation.
+**char** is a Unicode Scalar Value.  See the documentation.
 
 In Rust an **array** has a size fixed at compile time.
 (Generic types can be parameterised by constant integers,
@@ -87,7 +93,7 @@ Often a slice is better.
 A **slice** is a contiguous sequence of objects of the same type,
 with size known at run-time.
 The slice itself (``[T]``) means the actual data,
-not a pointers to it - rather an abstract concept.
+not a pointer to it - rather an abstract concept.
 Normally one works with ``&[T]``, which is a reference to a slice.
 This consists of a pointer to the start, and a length.
 
@@ -100,19 +106,21 @@ But they can be heap allocated, and passed as references.
 References to unsized types are "fat pointers":
 they are two words wide - one for the data pointer, and one for the metadata.
 
-**``dyn Trait``** is a **trait object**:
-an object which implements ``Trait``,
-with despatch done at run-time via a vtable.
-``&dyn Trait`` is a pointer to the object,
-plus a pointer to its vtable; ``dyn Trait`` itself is unsized.
-
-**``str``** is identical to ``[u8]`` (ie, a slice of bytes),
+**str** is identical to ``[u8]`` (ie, a slice of bytes),
 except with the guarantee that it consists entirely of valid UTF-8.
 As with ``[u8]``, usually one works with ``&str``.
 Making a ``str`` containing invalid UTF-8 is UB
 (and, therefore, not possible in Safe Rust).
 
-**``usize``** is the type of array and slice indices.
+**dyn Trait** is a **trait object**:
+an object which implements ``Trait``,
+with despatch done at run-time via a vtable.
+(Not to be confused with ``impl Trait``,
+which is an `existential type`_ .)
+``&dyn Trait`` is a pointer to the object,
+plus a pointer to its vtable; ``dyn Trait`` itself is unsized.
+
+**usize** is the type of array and slice indices.
 
 Some very important nominal types from the standard library
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -155,7 +163,7 @@ Using the examples from above:
 Named fields can be provided in any order;
 the provided field values are computed in the order you provide.
 Aggregates can be rest-initialised with ``..``,
-naming another value of the same type (often ``default()``).
+naming another value of the same type (often ``Default::default()``).
 
 If a value has fields you cannot name because they're not ``pub``,
 you cannot construct it.
@@ -167,8 +175,22 @@ Rust uses functional-programming-style pattern-matching
 for variable binding,
 and for handling sum types.
 
-The pattern syntax is made out of constructor syntax,
-along with variable bindings, and ``|`` for alternation.
+The pattern syntax is made out of constructor syntax, with some
+additional features:
+
+ * ``pat1 | pat2`` for alternation
+   (both branches must bind the same names).
+ * ``name @pattern`` which binds ``name``
+   to the whole of whatever matched ``pattern``.
+ * ``ref name`` avoids moving out of the matched value;
+   instead, it makes binding a reference to the value.
+ * ``mut name`` makes the binding mutable.
+
+There is a special affordance when
+a reference is matched against a pattern:
+if the pattern does not itself start with ``&``
+the individual bindings themselves bind references to the contents
+of the referred-to value (as if they had been ``ref binding``).
 
 Unneeded parts of a value can be discarded by use of
 ``_`` or ``..``.
@@ -193,7 +215,8 @@ Here ``cond`` may refer to the bindings established by pat2.
 Other features
 ---------------
 
-``#[non_exhaustive]`` for limiting your published API.
+``#[non_exhaustive]`` for reserving space to
+non-breakingly extend types in your published API.
 
 ``#[derive]``, often ``#[derive(Trait)``, for many ``Trait``.
 In particular, see:

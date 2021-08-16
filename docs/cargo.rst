@@ -7,7 +7,7 @@ will automatically download and build all the dependencies
 (from ``crates.io``, typically)
 and (together with ``rustc``) manage reuse of previous builds etc.
 
-cargo is super-convenient, especially for new users.
+cargo is super-convenient for the common use cases.
 
 
 Basics
@@ -55,26 +55,27 @@ have some troublesome security properties.
 Since I have not seen this discussed in depth elsewhere,
 I will do so here.
 
-cargo 's model is heavily influenced by ``npm``,
+cargo's model is heavily influenced by ``npm``,
 whose ecosystem and usual methods of use
 have an appalling security record.
 
-The Rust libraries are much less atomised than in npm.
+The Rust libraries are much less atomised than npm's.
 In a typical project one may end up using
 a handful, dozens or maybe hundreds of dependencies,
 but not the thousands upon thousands one sees with npm.
 
 Both cargo and ``rustc``
 will *run*, at build-time,
-code supplied by the package they are building.
-There are no real restrictions on what that code might do.
+code supplied by the packages they are building.
+There are no restrictions on what that code might do.
 
 The ``crates.io`` package repository contains tarballs,
 and there is no mechanical linkage or machine-readable traceability
 of those crate tarballs
-back to the git repositories they were usually orignally created from.
+back to the git repositories they were hopefully orignally created from.
 (The ``crates.io`` index is maintained in git but
-as far as I'm aware cargo does not look at the git history
+as far as I'm aware cargo does not look at
+the git history of the index
 and would not mind if the index history rewound.)
 
 Some of the more important libraries are part of library collections

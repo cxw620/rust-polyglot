@@ -8,6 +8,7 @@ The ``<reciver>.method(...)`` syntax is used to call a "method":
 a function
 whose first parameter is a variant on ``self``;
 often ``&self`` or ``&mut self``.
+(``self`` is a keyword; you can't choose your own name for it.)
 
 Methods are defined in a block ``impl StructName { }``
 (and can also be part of traits).
@@ -16,6 +17,11 @@ There is no inheritance.
 Some of the same effects can be achieved with traits,
 particularly default trait methods,
 and/or macro crates like ``delegate`` or ``ambassador``.
+
+It follows from the ownership model that a method defined
+``fn foo(self,...)`` consumes its argument (unless it's ``Copy``)
+so that it can no longer be used.
+This can used to good effect in typestate-like APIs.
 
 
 Traits
@@ -58,7 +64,6 @@ in the whole program.
 To ensure this, it is forbidden (in summary)
 to implement a foreign trait on a foreign type
 (where "foreign" means outside your crate, not outside your module).
-Consult the documentation for full details of the coherence rules.
 
 
 Iterators: ``Iterator``, ``IntoIterator``, ``FromIterator``
@@ -77,6 +82,7 @@ The standard library provides a large set of combinator methods
 on ``Iterator``,
 for mapping, folding, filtering, and so on.
 These typically take closures as arguments.
+See also the excellent ``itertools`` crate.
 
 Idiomatic coding style for iteration in Rust involves
 chaining iterator combinators.
@@ -100,9 +106,9 @@ perhaps like this:
        .collect::<Result<Vec<_>,io::Error>()?;
 
 ``collect`` is more idiomatic than
-open-coding additions to a mutable collection variable.
-It can be faster,
-and aggressively-Rustic style tries to minimise the use of
+open-coding additions to a mutable collection variable:
+use of iterators is often faster than a ``for`` loop, and
+aggressively-Rustic style tries to minimise the use of
 ``mut`` variables.
 
 
@@ -186,7 +192,6 @@ and ``MutexGuard`` which are "smart" pointers to some other type
 During method resolution,
 ``Deref`` is applied repeatedly to try to find a type
 with the appropriately-named method.
-
 The signature of the method is not considered during resolution,
 so there is no signature-based method overloading/dispatch.
 
@@ -196,7 +201,7 @@ provided the trait has been ``use`` d.
 If it is necessary to specify a particular method,
 ``Type::method`` or
 ``Trait::method`` can be used,
-or even ```<T as Trait>::method``.
+or even ``<T as Trait>::method``.
 
 This is also required for associated functions
 (whether inherent or in traits)
