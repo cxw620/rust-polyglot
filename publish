@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+
+dirty=$(git status --porcelain)
+if [ "x$dirty" != x ]; then
+	git --no-pager status
+	echo >&2 '** tree is dirty **'
+#	exit 16
+fi
+
+git push --dry-run --quiet origin HEAD:published
+
+rm -rf docs/html
+make
+set -x
+
+rsync -r --delete docs/html/. ianmdlvl@chiark:public-html/rust-polyglot/.
+git push origin HEAD:published
