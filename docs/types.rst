@@ -52,7 +52,7 @@ Examples of nominal type definitions
  * - Product, units
    - ``struct Z0; struct Z1(); struct Z2{}``
  * - Sum type
-   - ``enum E { V0, V1(usize), V2{ f: String, }``
+   - ``enum E { V0, V1(usize), V2{ f: String, } }``
  * - Uninhabited type
    - ``enum Void { }`` // see `Infallible` in std; `void` crate
  * - Generic type

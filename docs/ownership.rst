@@ -81,7 +81,7 @@ Usually, when you assign a value to a variable, or pass or return it,
 the value is moved.
 
 Some types are "plain data":
-They can simply be duplicated with2out problem with memcpy.
+They can simply be duplicated without problem with memcpy.
 These types are  **Copy**.
 ``Copy`` is usually implemented via ``#[derive(Copy)]``.
 Types that are ``Copy`` are copied
@@ -135,7 +135,7 @@ known as the **borrow checker**.
 The borrow checker is (supposed to be) sound, but not complete.
 The scope of its (in)completeness is not documented
 (and is probably not possible to document in a reasonable way).
-This incompletnesss is often encountered in practice.
+This incompleteness is often encountered in practice.
 
 When you find your program is rejected by the borrow checker,
 the right approach is to flail semi-randomly

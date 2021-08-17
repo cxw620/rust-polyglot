@@ -9,7 +9,7 @@ Traits, methods
 Methods
 -------
 
-The ``<reciver>.method(...)`` syntax is used to call a "method":
+The ``<receiver>.method(...)`` syntax is used to call a "method":
 a function
 whose first parameter is a variant on ``self``;
 often ``&self`` or ``&mut self``.
@@ -137,7 +137,7 @@ typically as the return type.  e.g.
 
 It is not currently possible to make an alias for the existential
 type,
-so you still can't name it nproperly,
+so you still can't name it properly,
 put it into variables, etc.
 This can be inconvenient and work is ongoing.
 In the meantime,

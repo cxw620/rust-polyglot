@@ -41,7 +41,7 @@ Fundamentals
 A magic trait ``Future<Output=T>`` represents an
 uncompleted asynchronous process.
 
-Syntactic sugar ``asycn { }``
+Syntactic sugar ``async { }``
 for both functions and blocks
 tells the compiler to convert the contained code
 into a state machine implementing the ``Future`` trait.
@@ -49,12 +49,12 @@ An ``async fn foo() -> T`` actually returns ``impl Future<Output=T>``.
 
 Local variables (including lexical captures, for ``async`` blocks)
 become members of the state machine data structure,
-which is an anonymous type whose internals are hidde
+which is an anonymous type whose internals are hidden
 but which ``impl Future``.
 
 The special keyword constrution ``.await``
 is to be applied to a ``Future``.
-It introduces a yeild (await) point
+It introduces a yield (await) point
 into the generated state machine.
 
 Utilities, types, and combinators are available for
@@ -87,7 +87,7 @@ which is responsible for creating tasks
 (typically, it provides a ``spawn`` facility),
 keeping track of which are ready,
 and calling ``poll`` repeatedly
-so that the program make progress.
+so that the program makes progress.
 
 Practicalities
 --------------
@@ -263,7 +263,7 @@ things do not malfunction if the future is dropped before completion.
 
 There is no compiler support to ensure cancellation-safety
 and cancellation bugs turn up in real-world async Rust code
-with depressing frequencey.
+with depressing frequency.
 Avoiding them is a matter of vigilance
 (and careful study of API docs).
 
@@ -283,7 +283,7 @@ and will move tasks from thread to thread at whim.
 This means that every future in such a task must be ``Send``,
 meaning it can safely be sent between threads.
 
-Most concrete Rust types are in fact ``Senc``,
+Most concrete Rust types are in fact ``Send``,
 but many generic types are not ``Send`` unless explicitly constrained.
 So ``Send`` (or, sometimes, ``Sync``) bounds must be added,
 sometimes in surprising places.

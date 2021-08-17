@@ -19,7 +19,7 @@ makes it possible for libraries to provide facilities
 that resemble bespoke language features.
 
 When searching for libraries,
-usually use "recent downloads" for the search order on ``crates.io``
+usually use "recent downloads" for the search order on ``crates.io``.
 It's inexact but is likely to give you fate-sharing
 with the rest of the community, at least.
 
@@ -32,7 +32,7 @@ Libraries you should know about:
  * ``fehler``; ``thiserror``; ``eyre`` (or ``anyhow``).  Error handling.
 
  * ``num``, ``num-traits``, ``num-derive``.
-   Not just for "numeric" code - helpful integer conversionts etc. too.
+   Not just for "numeric" code - helpful integer conversions etc. too.
 
  * ``strum``.  Iterate over enum variants; enums to strings, etc.
 
@@ -117,7 +117,7 @@ you should probably use ``structopt``.
 It allows declarative definition of command line options.
 
 Unfortunately,
-structopt it has some problems,
+``structopt`` has some problems,
 which it inherits from ``clap`` (the underlying command line parser):
 
  * Confusion between options which may be repeated,
