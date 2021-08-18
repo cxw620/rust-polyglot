@@ -56,6 +56,13 @@ are generic over elided lifetime arguments:
 
     fn not_bonkers<'s>(s: &'s str) -> Option<&'s str> {
 
+Although lifetimes are part of types,
+there are many places where type inference is *not* supported,
+but lifetime inference *is* permitted (and usual).
+
+The special lifetime ``'static``
+is for objects that will never go away.
+
 Movement, ``Copy``, ``Clone``, ``Drop``
 ---------------------------------------
 
@@ -176,15 +183,15 @@ Tactics for fighting the borrow checker
    Sprinkle ``.clone()``, ``.to_owned()``, etc., and/or
    change types to owned variants (or ``Cow``).
 
- * Introducing ``let`` bindings to prolong the lifetime of temporaries.
+ * Introduce ``let`` bindings to prolong the lifetime of temporaries.
    (Normally if this will help the compiler will suggest it.)
 
- * Introducing a ``match``.
+ * Introduce a ``match``.
    Within the body of the ``match``,
    all the values computed in the match expression remain live.
    This is often used in macros.
 
- * Adding lifetime annotations.
+ * Add lifetime annotations.
    Typically, as you add lifetime annotations,
    the compiler messages will become more detailed and precise.
    However, they will also become harder to read ``:-)``.

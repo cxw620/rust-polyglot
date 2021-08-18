@@ -43,13 +43,13 @@ Examples of nominal type definitions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. list-table::
- :widths: 35 65
+ :widths: 37 63
 
  * - Product, named fields
    - ``struct S { f: u64, g: &'static str };``
  * - Product, tuple-like
    - ``struct ST(u64, ());``
- * - Product, units
+ * - Empty product (units)
    - ``struct Z0; struct Z1(); struct Z2{}``
  * - Sum type
    - ``enum E { V0, V1(usize), V2{ f: String, } }``
@@ -57,7 +57,7 @@ Examples of nominal type definitions
    - ``enum Void { }`` // see `Infallible` in std; `void` crate
  * - Generic type
    - e.g. ``struct SG<F>{ f: F, g: &'static str }``
- * - Untagged union (unsafe only):
+ * - Untagged union (unsafe)
    - ``union {...}``
 
 Referring to types
@@ -70,7 +70,7 @@ Referring to types
  * - Empty tuple (primitive unit type)
    - ``()``
  * - Product type, tuple
-   - ``(T,U)``
+   - ``(T,)``, ``(T,U)``, ``(T,U,V)`` etc.
  * - Primitive integers
    - ``usize``, ``isize``, ``u8``, ``u16`` .. ``u128``, ``i8`` .. ``i128``
  * - Other Primitives                
