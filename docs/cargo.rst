@@ -147,7 +147,7 @@ and some crates do not build.
 
 Although a stated goal of cargo is to be
 embeddable into other build systems,
-csrgo does not expose the interfaces necessary to do this well.
+cargo does not expose the interfaces necessary to do this well.
 It's hard to know when to rerun cargo and when cargo's outputs changed.
 It's hard to get cargo to build precisely what's needed.
 If you want to run cargo inside ``make``,

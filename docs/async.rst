@@ -53,7 +53,7 @@ An ``async fn foo() -> T`` actually returns ``impl Future<Output=T>``.
 
 Local variables (including lexical captures, for ``async`` blocks)
 become members of the state machine data structure,
-which is an anonymous type whose internals are hidde
+which is an anonymous type whose internals are hidden
 but which ``impl Future``.
 
 The special keyword constrution ``.await``
@@ -91,7 +91,7 @@ which is responsible for creating tasks
 (typically, it provides a ``spawn`` facility),
 keeping track of which are ready,
 and calling ``poll`` repeatedly
-so that the program make progress.
+so that the program makes progress.
 
 Practicalities
 --------------

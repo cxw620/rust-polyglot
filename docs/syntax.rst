@@ -146,7 +146,7 @@ you may encounter its use described as ``kebab-case``.
 Many items (including functions, types, fields of product types, etc.)
 can be public (``pub``) or private to the module (the default).
 
-``_`` can often be written when an identifier is espected.
+``_`` can often be written when an identifier is expected.
 For a type or lifetime, it asks the compiler to infer.
 For a binding, it assigns the value to an anonymous variable,
 effectively discarding it.

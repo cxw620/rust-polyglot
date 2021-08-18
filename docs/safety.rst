@@ -44,7 +44,7 @@ The ``as`` type conversion operator,
 silently truncates on overflow.
 
 The stdlib provides ``checked_*`` and ``wrapping_*`` methods,
-but they are not always convient;
+but they are not always convenient;
 the ``Wrapping`` wrapper type can be helpful.
 
 For conversion,
@@ -65,7 +65,7 @@ Of course this does not necessarily protect you from concurrency bugs
 A reasonable collection of threading primitives and tools
 is in ``std::thread`` and ``std::sync``.
 
-Multithreading in Rust can be an adjuct to,
+Multithreading in Rust can be an adjunct to,
 or replacement for,
 `async Rust`_.
 
