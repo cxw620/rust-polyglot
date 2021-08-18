@@ -233,7 +233,7 @@ you have these options:
    borrowing a reference rather than manipulating the refcount.
 
  * Use a crate like ``generational_arena`` (or ``slotmap``) or ``slab``
-   where the data structure ownes the values,
+   where the data structure owns the values,
    and your "references" are actually indices.
 
    These often perform very well, and are ergonomic to use.
