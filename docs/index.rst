@@ -22,7 +22,6 @@ Rust for the Polyglot Programmer
    rustdoc.rst
    cargo.rst
    libs.rst
-   idiom.rst
    further.rst
    colophon.md
 
