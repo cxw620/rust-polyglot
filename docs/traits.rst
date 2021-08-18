@@ -148,25 +148,59 @@ instead of ``impl Trait``.
 Closures and the fn pointer type
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Closures are values of an opaque unnameable type
-implementing some of the special closure traits
+Each closure is a value of a unique opaque unnameable type
+implementing one or more of the special closure traits
 ``Fn``, ``FnMut`` and ``FnOnce``.
 
 The different traits are because closures can borrow or own variables.
 If the closure modifies closed-over variables, it is ``FnMut``;
 if it consumes them, it is ``FnOnce``.
-A clossure pointer is a fat pointer: closed over data, and code pointer.
 
 Each closure has its own separate type,
 so closures can only be used with generics
 (whether monomorphised ``<F: Fn()>``, or type-erased ``&dyn Fn()``).
 
-There is also a pointer type ``fn (args..) -> T``
-but this is just a code pointer and only actual functions count.
+``dyn`` closures
+~~~~~~~~~~~~~~~~
 
-A closure cannot generally be passed value because it's unsized,
-which makes ``FnOnce`` closures awkward.
+An ``&dyn Fn`` closure pointer is a fat pointer:
+closed over data, and code pointer.
+
+A ``dyn`` closure trait object
+cannot be passed by value because it's unsized.
+This can make ``FnOnce`` closures awkward.
 Use ``Box<dyn FnOnce>`` or somehow make the closure be ``FnMut``.
+
+Monomorphised closures ``f: F where F: Fn()``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Monomorphisation of generic closure arguments
+specialises the generic function taking the closure
+to one which calls the specific closure.
+
+The concrete representation of a particular closure type
+is an unnameable struct containing the closed-over variables.
+
+The code is known at compile time --
+it is identified by the precise (unnameable) closure type --
+so a pointer to it not part of the closure representation at runtime.
+Likewise, the nature of the closed-over variables, and their uses,
+are known at compile-time.
+
+The monomorphised caller of a closure calls it directly
+(statically known branch target).
+The closure can even be inlined and its code and closed-over variables
+intermixed with its caller's, and the outer caller's,
+to produce more optimal code.
+
+fn pointers
+~~~~~~~~~~~
+
+There is also a pointer type ``fn (args..) -> T``
+but this is just a code pointer,
+so only actual functions,
+and closures with no captured variables,
+count.
 
 
 Some other key traits
