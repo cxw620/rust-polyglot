@@ -95,19 +95,38 @@ so performance is good but the code size can be very large.
 Web tools and frameworks
 ------------------------
 
-xxx todo
+Most Rust web tools are async.
 
-reqwest
-hyper
+Use ``reqwest`` for making HTTP requests.
 
-disrecommend actix-web lots of unsafe
-disrecommend stdweb namespace grab
+Use ``hyper`` for a raw HTTP client or server,
+but consider using ``reqwest`` (client)
+or a web framework (server) instead.
 
-rocket (stable vs unstable)
-warp
-rouille
+Rust is well supplied with web frameworks,
+but it is hard to choose.
 
-mention async
+ * I have been using ``rocket`` for some years,
+   But the ``rocket 0.4`` branch (sync) doesn't compile on Stable
+   and is in the process of being replaced by the not-yet-released
+   ``0.5`` which uses async.
+   ``0.4`` to ``0.5`` is quite a big compat break
+   (this was to be expected, but is still a nuistance).
+   If you start a new project with Rocket, use the ``0.5`` preview.
+
+ * ``actix-web`` is popular too.
+   When I was choosing Rocket some years ago,
+   it had lots of unsound ``unsafe``, but that seems fixed now.
+
+ * Other web frameworks you should consider are 
+   ``warp``, ``tide``, ``rouille``.
+
+I would avoid ``stdweb``, which depends on the ``async-std``
+async runtime,
+purely because of their very tendentious, even misleading, names.
+They are not in any way official:
+not emanations of the main Rust Project.
+
 
 Command line parsing: ``structopt`` and ``clap``
 ------------------------------------------------
