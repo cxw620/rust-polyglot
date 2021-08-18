@@ -172,6 +172,10 @@ then one of the following is the case:
 Tactics for fighting the borrow checker
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+ * Copy rather than borrowing:
+   Sprinkle ``.clone()``, ``.to_owned()``, etc., and/or
+   change types to owned variants (or ``Cow``).
+
  * Introducing ``let`` bindings to prolong the lifetime of temporaries.
    (Normally if this will help the compiler will suggest it.)
 
