@@ -51,6 +51,10 @@ for packages generating binaries,
 and omit it for libraries
 (where my personal practice is to commit ``Cargo.lock.example``.)
 
+By default cargo only operates on the crate in the cwd.
+If you want it to build/test/whatever the whole workspace,
+you must say ``--workspace``.
+
 
 Security implications
 ---------------------
