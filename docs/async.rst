@@ -35,13 +35,17 @@ or working in a completely single-threaded environment.
 
 Effectively, async Rust is a different dialect.
 
+Work is ongoing to try to improve async Rust,
+and remove some of the rough edges.
+
+
 Fundamentals
 ------------
 
 A magic trait ``Future<Output=T>`` represents an
 uncompleted asynchronous process.
 
-Syntactic sugar ``asycn { }``
+Syntactic sugar ``async { }``
 for both functions and blocks
 tells the compiler to convert the contained code
 into a state machine implementing the ``Future`` trait.
@@ -54,7 +58,7 @@ but which ``impl Future``.
 
 The special keyword constrution ``.await``
 is to be applied to a ``Future``.
-It introduces a yeild (await) point
+It introduces a yield (await) point
 into the generated state machine.
 
 Utilities, types, and combinators are available for
@@ -101,7 +105,7 @@ In practice,
 one needs async inter-task communication facilities,
 IO utilities, and so on.
 
-The runtime, and many of these other facilities,
+The executor, and many of these other facilities,
 are generally provided by the async **runtime**.
 Many useful facilities turn out to be runtime-specific.
 In practice,
@@ -130,7 +134,6 @@ Mixing and matching sync and async; thread context
 In a larger program,
 or one which makes use of diverse libraries,
 it can be necessary to mix-and-match sync and async code.
-
 Unlike in many other languages with async features,
 this is possible in Rust.
 There are facilities for calling async code from sync,
@@ -154,15 +157,16 @@ not know if it's been called, indirectly, from an async task.
 If you think this might happen,
 you're supposed to use ``spawn_blocking``.
 
-This limits the liberal use of the sync<->async gateway facilities.
+This kind of thing complicates the liberal use of the
+sync/async gateway facilities.
 The rules, while documented,
-are hard to make sese of without a full mental model
+are hard to make sense of without a full mental model
 of the whole runtime, threading, and exeuctor system.
 They are hard to follow without
 a full mental model of the whole program structure,
 including (sometimes) library implementation choices.
 
-Complex programs may have mutliple async runtimes:
+Complex programs may have multiple async executors and runtimes:
 a common way to make a sync veneer over an async library
 is to instantiate a "pet" executor.
 
@@ -194,8 +198,8 @@ See the docs for ``std::pin::Pin``
 and the crates ``pin-project`` and ``pin-project-lite``.
 
 
-Anonymous future types, traits
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Anonymous future types, traits, etc.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Futures are not quite first-class objects in Rust.
 In particular, like closures, ``async`` blocks and ``fn``\ s
@@ -225,8 +229,8 @@ The usual workaround for async trait methods to return
 This is suboptimal because
 it requires an additional heap alloction,
 and runtime despatch.
-
-Work is ongoing to extend ``impl Trait`` to address this.
+This workaround has been neatly productised
+in the ``async-trait`` macro package.
 
 
 Cancellation safety
@@ -263,16 +267,16 @@ things do not malfunction if the future is dropped before completion.
 
 There is no compiler support to ensure cancellation-safety
 and cancellation bugs turn up in real-world async Rust code
-with depressing frequencey.
+with depressing frequency.
 Avoiding them is a matter of vigilance
 (and careful study of API docs).
 
 While cancellation bugs do not affect
 the program's core memory safety,
 they often have security implications,
-because they can result
+because they can easily result
 in frame desynchronisation of network streams
-and other alarming bugs.
+and other alarming consequences.
 
 
 Send
@@ -282,14 +286,16 @@ Most async Rust executors are multithreaded
 and will move tasks from thread to thread at whim.
 This means that every future in such a task must be ``Send``,
 meaning it can safely be sent between threads.
+Therefore the local variables in async code must all be ``Send``;
+captured references must be to ``Sync`` types.
 
-Most concrete Rust types are in fact ``Senc``,
+Most concrete Rust types are in fact ``Send``,
 but many generic types are not ``Send`` unless explicitly constrained.
 So ``Send`` (or, sometimes, ``Sync``) bounds must be added,
 sometimes in surprising places.
 
 The compiler errors do a pretty good job at pointing out the
-type or field which is the root cause of a lack of ``Send``
+type or variable which is the root cause of a lack of ``Send``
 but this is still a nuisance.
 
 Futures don't *have* to be ``Send``.
@@ -303,7 +309,7 @@ Error messages
 
 Async Rust has a tendency to produce rather opaque error messages
 referring to opaque types
-missing bounds, and other strange-looking comments.
+missing bounds, and other abstruse diagnostics.
 
 You will get used to them,
 but it is in stark contrast to the rest of the language.
@@ -322,10 +328,12 @@ You will end up using, at least:
  * utilities from your runtime;
  * utilities from the ``futures`` crate.
 
-Unfortunately, these don't lend themselves to
-convenient blanket imports (use ``*``).
-They share names with non-async thread tools
-(eg, ``Mutex``, ``mpcs``, etc., can mean different things).
+Unfortunately, many of these don't lend themselves to
+convenient blanket imports
+(although you should consider ``use futures::prelude::*``).
+
+Futures-related items share names with non-async thread tools
+(eg, ``Mutex``, ``mpsc``, etc., can mean different things).
 You will often want to use both sync and async tools
 in the same program.
 (In particular, a sync ``Mutex`` is often right.)
