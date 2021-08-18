@@ -57,6 +57,8 @@ Examples of nominal type definitions
    - ``enum Void { }`` // see `Infallible` in std; `void` crate
  * - Generic type
    - e.g. ``struct SG<F>{ f: F, g: &'static str }``
+ * - Untagged union (unsafe only):
+   - ``union {...}``
 
 Referring to types
 ~~~~~~~~~~~~~~~~~~
