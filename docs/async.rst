@@ -160,7 +160,7 @@ This kind of thing complicates the liberal use of the
 sync/async gateway facilities.
 The rules, while documented,
 are hard to make sense of without a full mental model
-of the whole runtime, threading, and exeuctor system.
+of the whole runtime, threading, and executor system.
 They are hard to follow without
 a full mental model of the whole program structure,
 including (sometimes) library implementation choices.
