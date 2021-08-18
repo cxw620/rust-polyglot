@@ -109,7 +109,7 @@ from a ``TokenStream`` to a ``TokenStream``.
 
 It can arbitrarily modify the tokens as they pass through,
 and/or generate new tokens.
-There are libraries to parsing the token stream into
+There are libraries for parsing the token stream into
 an AST representation of Rust,
 and for quasiquoting.
 
