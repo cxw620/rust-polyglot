@@ -5,24 +5,335 @@ Async Rust
     SPDX-License-Identifier: MIT
     There is NO WARRANTY.
 
+Introduction
+------------
 
-xxx todo
+Rust has an  ``async`` system
+for cooperative multitasking,
+based on **futures**
+(which are rather like *promises* in e.g. JavaScript),
+but have some important novel features.
 
-don't
+Async Rust is considerably less mature than the rest of the language.
+It can achieve rather higher performance
+(including, for example, lower power use in embedded setups,
+and better scaleability in highly concurrent server applications).
+But it comes at the cost of additional inconvenience and hazards.
 
-panic wrong context
+Many important libraries (especially web libraries)
+provide (only) async interfaces.
 
-2 langs
+I recommend using ordinary (synchronous) Rust,
+with multithreading where you need concurrency,
+unless you have a reason to do otherwise.
 
-pin
+Good reasons to do otherwise might include:
+using async libraries;
+expecting a very wide deployment of your program;
+tight performance, efficiency or scaleabilty requirements;
+or working in a completely single-threaded environment.
+
+Effectively, async Rust is a different dialect.
+
+Fundamentals
+------------
+
+A magic trait ``Future<Output=T>`` represents an
+uncompleted asynchronous process.
+
+Syntactic sugar ``asycn { }``
+for both functions and blocks
+tells the compiler to convert the contained code
+into a state machine implementing the ``Future`` trait.
+An ``async fn foo() -> T`` actually returns ``impl Future<Output=T>``.
+
+Local variables (including lexical captures, for ``async`` blocks)
+become members of the state machine data structure,
+which is an anonymous type whose internals are hidde
+but which ``impl Future``.
+
+The special keyword constrution ``.await``
+is to be applied to a ``Future``.
+It introduces a yeild (await) point
+into the generated state machine.
+
+Utilities, types, and combinators are available for
+evaluating multiple futures in parallel
+and getting the answer from whichever finishes first (``select``)
+or all of the answers (``join``),
+async "iterators" (``Stream``),
+and so on.
+
+The overall result is that, at a high level,
+much code can be written in a direct imperative style,
+without explicit state machines.
+
+The usual Rust memory-safety guarantees are retained.
+
+Innards
+~~~~~~~
+
+Futures have one method, ``poll``,
+which either returns ``Ready(T)`` or ``Pending``.
+
+``poll`` takes a context which has an associated ``Waker``.
+When the future returns ``Pending``,
+it is supposed to have recorded the ``Waker`` somewhere
+so that when the task can make progress, the ``Waker`` is woken.
+
+An async Rust program contains a contraption known as the
+**executor**
+which is responsible for creating tasks
+(typically, it provides a ``spawn`` facility),
+keeping track of which are ready,
+and calling ``poll`` repeatedly
+so that the program make progress.
+
+Practicalities
+--------------
+
+Choosing a runtime
+~~~~~~~~~~~~~~~~~~
+
+The executor is not supplied by the Rust language itself.
+Multiple executors are available, as libraries.
+In practice,
+one needs async inter-task communication facilities,
+IO utilities, and so on.
+
+The runtime, and many of these other facilities,
+are generally provided by the async **runtime**.
+Many useful facilities turn out to be runtime-specific.
+In practice,
+library authors have in many cases been forced
+to choose a specific runtime.
+
+Most of the important libraries use **Tokio**,
+a mature production-quality runtime
+(which actually predates modern async Rust language features).
+xxx check this is true
+
+Worth mentioning is ``smol``, which might
+be good for small mostly-standalone projects.
+
+Fairly recently ``async-std`` appeared.
+Despite the name, ``async-std`` is not
+an official emanation of the Rust Project.
+This name grab in itself leaves a bad taste in my mouth.
+
+There are some glue libraries to help with bridging
+the gaps between different runtimes.
+
+Mixing and matching sync and async; thread context
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In a larger program,
+or one which makes use of diverse libraries,
+it can be necessary to mix-and-match sync and async code.
+
+Unlike in many other languages with async features,
+this is possible in Rust.
+There are facilities for calling async code from sync,
+and vice versa.
+
+But there are gotchas.
+Specifically,
+there are complex rules about what kind of function
+you can call from what runtime context
+(ie, in what kind of thread).
+
+For example, if you call
+``tokio::runtime::Handle::block_on``
+from a non-async function,
+to run async code from within non-async code,
+thinking you are not in an async execution context,
+but in fact the current thread is a Tokio executor thread,
+it will panic.
+Of course a sync veneer over an async library might
+not know if it's been called, indirectly, from an async task.
+If you think this might happen,
+you're supposed to use ``spawn_blocking``.
+
+This limits the liberal use of the sync<->async gateway facilities.
+The rules, while documented,
+are hard to make sese of without a full mental model
+of the whole runtime, threading, and exeuctor system.
+They are hard to follow without
+a full mental model of the whole program structure,
+including (sometimes) library implementation choices.
+
+Complex programs may have mutliple async runtimes:
+a common way to make a sync veneer over an async library
+is to instantiate a "pet" executor.
+
+Pin
+~~~
+
+The state machines generated by ``async { }``
+can contain local variables which are
+references to other local variables.
+But!  Rust does not support self-referential data structures,
+because they cannot be moved
+without invalidating their internal pointers.
+
+The solution to this is a type ``Pin``
+which is used to wrap references (and smart pointers),
+and guarantees that the referenced data does not move.
+The type judo is confusing to think about,
+and is also awkward to use in practice.
+
+Many types involved in futures
+(especially those you find in "manual" ``impl Future``)
+end up with ``Pin`` wrappers,
+in a form of syntactic vinegar.
+Pinning brings more problems:
+even ordinary struct field access (projection)
+is not straightforward on a pinned object!
+
+See the docs for ``std::pin::Pin``
+and the crates ``pin-project`` and ``pin-project-lite``.
+
+
+Anonymous future types, traits
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Futures are not quite first-class objects in Rust.
+In particular, like closures, ``async`` blocks and ``fn``\ s
+have anonymous types - types that cannot be named.
+But it is often necessary to store futures in structures,
+return them from functions (especially trait methods),
+and so on.
+
+Because the type of an ``async`` block cannot be named,
+it cannot be made into an associated type
+in a trait implementation.
+So trait methods cannot simply be async.
+
+The ``impl Trait`` existential type feature
+is nearly enough to solve this,
+but because one cannot write ``impl Trait``
+anywhere except as a function return,
+it is often not sufficient.
+
+If a trait method returns a different type
+for different implementations of the trait,
+it must be a nominal type,
+which is not possible if the function is
+an ``async fn`` (and therefore returns an anonymous future type).
+The usual workaround for async trait methods to return
+``Box<dyn Future<Output=_>``.
+This is suboptimal because
+it requires an additional heap alloction,
+and runtime despatch.
+
+Work is ongoing to extend ``impl Trait`` to address this.
+
+
+Cancellation safety
+~~~~~~~~~~~~~~~~~~~
+
+Unlike most other languages' async systems,
+Rust futures are inert:
+they don't run unless they are polled,
+by an executor.
+
+If a future is no longer needed, it is simply dropped.
+This can happen quite easily,
+for example if ``select!`` is used,
+or if a future is put explicitly into a data structure
+and then dropped at some point.
+
+The effect from the point of view of an ``async { }``
+is that the code simply stops running,
+effectively-unpredictably,
+discarding all of the local state.
+
+Many straightforward-looking implementations of common tasks
+such as reading from incoming streams
+can lose data, or become desynchronised,
+if the local variables containing partially-processed data
+are simply discarded,
+and the algorithm later restarted from the beginning
+by a re-creation of the same future
+(eg, the next iteration of a loop containing a ``select``).
+
+A type, future, data structure, or method, is said to be
+**cancellation-safe** if the underlying data structure is such that
+things do not malfunction if the future is dropped before completion.
+
+There is no compiler support to ensure cancellation-safety
+and cancellation bugs turn up in real-world async Rust code
+with depressing frequencey.
+Avoiding them is a matter of vigilance
+(and careful study of API docs).
+
+While cancellation bugs do not affect
+the program's core memory safety,
+they often have security implications,
+because they can result
+in frame desynchronisation of network streams
+and other alarming bugs.
+
 
 Send
+~~~~
 
-executor choice
+Most async Rust executors are multithreaded
+and will move tasks from thread to thread at whim.
+This means that every future in such a task must be ``Send``,
+meaning it can safely be sent between threads.
 
-tokio (vs async-std, smol etc.)
+Most concrete Rust types are in fact ``Senc``,
+but many generic types are not ``Send`` unless explicitly constrained.
+So ``Send`` (or, sometimes, ``Sync``) bounds must be added,
+sometimes in surprising places.
 
-utils libs
-  futures
-  tokio
-  std
+The compiler errors do a pretty good job at pointing out the
+type or field which is the root cause of a lack of ``Send``
+but this is still a nuisance.
+
+Futures don't *have* to be ``Send``.
+In a single-threaded environment,
+working with non-``Send`` futures is totally possible.
+But usually lack of ``Send`` is just an omission.
+
+
+Error messages
+~~~~~~~~~~~~~~
+
+Async Rust has a tendency to produce rather opaque error messages
+referring to opaque types
+missing bounds, and other strange-looking comments.
+
+You will get used to them,
+but it is in stark contrast to the rest of the language.
+
+
+Libraries and utilities
+~~~~~~~~~~~~~~~~~~~~~~~
+
+It is not entirely straightforward to find the right libraries to use.
+Matters are complicated by older decoy libraries
+from prior incarnations of Rust's approach to async.
+
+You will end up using, at least:
+
+ * ``std``\ 's builtin futures support;
+ * utilities from your runtime;
+ * utilities from the ``futures`` crate.
+
+Unfortunately, these don't lend themselves to
+convenient blanket imports (use ``*``).
+They share names with non-async thread tools
+(eg, ``Mutex``, ``mpcs``, etc., can mean different things).
+You will often want to use both sync and async tools
+in the same program.
+(In particular, a sync ``Mutex`` is often right.)
+
+Importing the sub-module names is little better
+because the useful modules have generic names:
+``futures::future`` vs ``std::future``;
+``tokio::process`` vs ``std::process``;
+``tokio::task`` vs ``futures::task`` vs ``std::task``.
+Sometimes you'll want to use all of these in one program.
+Finding and naming anything is a chore!
