@@ -8,6 +8,8 @@ Further Reading
 
 xxx todo
 
+bibliography genrated from inlink links here?
+
 Rust Reference, Book, Nomicon
 Cargo Book
 

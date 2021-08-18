@@ -167,7 +167,7 @@ then one of the following is the case:
 
    There are also a few commonly-arising particular limitations,
    for example this one surrounding borrowing and early exits:
-   xxxx
+   https://github.com/rust-lang/rust/issues/51545
 
 Tactics for fighting the borrow checker
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
