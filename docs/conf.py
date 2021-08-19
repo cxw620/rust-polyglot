@@ -183,7 +183,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'otter', 'Rust for the Polyglot Programmer',
+    (master_doc, 'rust-polyglot', 'Rust for the Polyglot Programmer',
      [author], 1)
 ]
 
