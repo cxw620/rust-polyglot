@@ -190,7 +190,7 @@ additional features:
  * ``name@ pattern`` which binds ``name``
    to the whole of whatever matched ``pattern``.
  * ``ref name`` avoids moving out of the matched value;
-   instead, it makes binding a reference to the value.
+   instead, it makes the binding a reference to the value.
  * ``mut name`` makes the binding mutable.
 
 There is a special affordance when
