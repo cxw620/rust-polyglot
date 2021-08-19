@@ -187,7 +187,7 @@ additional features:
 
  * ``pat1 | pat2`` for alternation
    (both branches must bind the same names).
- * ``name @pattern`` which binds ``name``
+ * ``name@ pattern`` which binds ``name``
    to the whole of whatever matched ``pattern``.
  * ``ref name`` avoids moving out of the matched value;
    instead, it makes binding a reference to the value.
