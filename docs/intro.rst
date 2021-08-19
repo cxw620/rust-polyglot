@@ -86,7 +86,8 @@ but work is ongoing to allow use of [GCC] and [Cranelift].  There is
 also an IR interpreter used mostly for validation.
 
 There is no formal language specification.
-The Rust Reference has most of the syntax but often lacks important details.
+The Rust Reference has most of the syntax but often lacks
+important information about semantics and details.
 
 The standard library documentation is excellent and comprehensive.
 
