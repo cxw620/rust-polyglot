@@ -40,7 +40,7 @@ Typically it is found only at the top of a whole module or crate,
 
 Attributes are used for many important purposes:
   * Conditional compilation ``#[cfg(..)]``;
-  * Denoting and functions whose value should be checked ``#[must_use]``
+  * Denoting functions whose value should be checked ``#[must_use]``
     (and types which should not be simply discarded);
   * Suppressing warnings locally ``#[allow(dead_code)]`` or
     for a whole crate (at the toplevel) ``#![allow(dead_code)]``;
