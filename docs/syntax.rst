@@ -26,7 +26,7 @@ Attributes
 ----------
 
 Rust code is frequently littered with ``#[attributes]``.
-These can be placed before the item or expression they refer to.
+These are placed before the item or expression they refer to.
 The semantics are very varied.
 New attributes can be defined by libraries.
 
