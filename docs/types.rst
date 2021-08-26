@@ -54,7 +54,7 @@ Examples of nominal type definitions
  * - Sum type
    - ``enum E { V0, V1(usize), V2{ f: String, } }``
  * - Uninhabited type
-   - ``enum Void { }`` // see `Infallible` in std; `void` crate
+   - ``enum Void { }`` // see [Uninhabited types]
  * - Generic type
    - e.g. ``struct SG<F>{ f: F, g: &'static str }``
  * - Untagged union (unsafe)
@@ -128,6 +128,9 @@ which is an `existential type`_ .)
 plus a pointer to its vtable; ``dyn Trait`` itself is unsized.
 
 **usize** is the type of array and slice indices.
+It corresponds to C ``size_t``.
+Rust guarantees that no objects are bigger than fits into an ``isize``.
+
 
 Some very important nominal types from the standard library
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -147,9 +150,11 @@ Some very important nominal types from the standard library
    - ``Option<T>``
  * - Fallible (commonly a function return type)
    - ``Result<T,E>``
+ * - Mutex (for multithreaded programs)
+   - ``Mutex<T>``, ``RwLock<T>``
      
-Constructors
-------------
+Literal value constructors
+--------------------------
 
 Values of aggregate types can be made by with a straightforward
 literal display syntax.
@@ -219,22 +224,39 @@ and ``matches!``.
 
 Here ``cond`` may refer to the bindings established by pat2.
 
+Uninhabited types
+-----------------
+
+You can write ``!`` for a function return type
+to indicate that it won't return.
+But ``!`` is not a first-class type in Stable Rust;
+you can't generally use it as a generic type parameter, etc.
+
+You can define an enum with no variants.
+The standard library has ``Infallible`` which is
+an uninhabited error type,
+but its ergnomics are not always great.
+The crate ``void`` can help fill this gap.
+It provides not only a trivial uninhabited type (``Void``)
+but also
+helpful functions and macros,
+
 Other features
 ---------------
 
 ``#[non_exhaustive]`` for reserving space to
 non-breakingly extend types in your published API.
 
-``#[derive]``, often ``#[derive(Trait)``, for many ``Trait``.
+``#[derive]``, often ``#[derive(Trait)]``, for many ``Trait``.
 In particular, see:
 
  * ``#[derive(Debug)]``
  * ``#[derive(Clone,Copy)]``
  * ``#[derive(Eq,PartialEq,Ord,PartialOrd)]``
- * ``#[derive(Hash)``
+ * ``#[derive(Hash)]``
 
 It is conventional for libraries to promiscuously implement these for
 their public types, whenever it would make sense.
 
-Putting a ``PhantomData`` in your struct is sometimes necessary
-to avoid unused type parameters.  See the documentation.
+If you derive ``Hash``, but manually implement ``Eq``,
+see the note "``Hash`` and ``Eq``" in the docs for ``Hash``.
