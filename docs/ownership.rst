@@ -17,7 +17,7 @@ Ownership
 
 Every object (value) in Rust has a single owner.
 Ownership can be lent (therefore, borrowed by the recipient),
-and also transferred.
+and also transferred ("moved" in Rust terms).
 (The reference resulting from a borrow is a machine pointer,
 but this is hidden from the programmer
 and of course might be elided by the compiler if it can.)
@@ -97,11 +97,14 @@ rather than being moved out of
 
 For other types,
 **Clone** is a trait with a single method ``clone()``
-which supports getting a "new copy of" the object,
+which supports getting a "new object like the original"
 whatever that means.
-(For example,
+You might think of it as a copy
+(although in the Rust world "copy" often means strictly ``Copy``).
+For example,
+while ``String::clone()`` copies the data into a new heap allocation,
 ``Arc::clone()`` increments the reference count,
-rather than copying the underlying object.)
+rather than copying the underlying object.
 Obviously not every type is ``Clone``.
 
 Values are destroyed when the variable containing them
@@ -126,12 +129,22 @@ for use as a constructor,
 but it is not special in any way.
 It typically does whatever setup is needed and
 finishes with a struct literal for the type.
-(Do consider implementing ``Default`` too.)
+Conventionally,
+types that have a zero-argument ``new()`` usually implement ``Default``.
+Constructors that take arguments are often
+named like ``Type::with_wombat()``.
+
+It is very common to construct from a value of another relevant type,
+for exmaple via the ``From`` and ``Into`` traits,
+or specific methods
+(for purposes like complex construction or conversion,
+typestate arrangements, and so on).
 
 There is no equivalent to C++'s "placement new".
 It is up to the caller whether the created object will go on the heap.
 Indeed, an object from ``Type::new`` might never be on the heap.
-Or it might be on the stack for a bit and then later be moved to the heap.
+Or it might be on the stack for a bit and then later be
+moved to the heap for example using ``Box::new()``.
 
 Borrow checker
 --------------
@@ -145,7 +158,11 @@ The scope of its (in)completeness is not documented
 This incompleteness is often encountered in practice.
 
 When you find your program is rejected by the borrow checker,
-the right approach is to flail semi-randomly
+firstly try the compiler's suggestions,
+which are generally very good
+(especially if the programmer is new to Rust).
+
+If that fails, the right approach is to flail semi-randomly
 applying the various tactics you're aware of.
 When the program compiles, it is correct.
 
