@@ -36,7 +36,7 @@ Libraries you should know about:
 
  * ``strum``.  Iterate over enum variants; enums to strings, etc.
 
- * ``slab``; ``generational_area`` (or ``slotmap``).
+ * ``slab``, ``generational_area`` or ``slotmap``)
    Heap storage tools which safely sidestep borrowck (and are fast).
 
  * ``index_vec``.  ``arrayvec``. ``indexmap``.

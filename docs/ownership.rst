@@ -232,7 +232,7 @@ you have these options:
    since you usually end up passing ``&Arc<T>`` around,
    borrowing a reference rather than manipulating the refcount.
 
- * Use a crate like ``generational_arena`` (or ``slotmap``) or ``slab``
+ * Use a crate like ``generational_arena`` or ``slotmap`` or ``slab``
    where the data structure owns the values,
    and your "references" are actually indices.
 
