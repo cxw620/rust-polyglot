@@ -28,9 +28,10 @@ Attributes
 Rust code is frequently littered with ``#[attributes]``.
 These are placed before the item or expression they refer to.
 The semantics are very varied.
-New attributes can be defined by libraries.
+New attributes can be defined as procedural macros in libraries.
 
-Notable is ``#[derive(...)]`` which invokes a procedural macro.
+Notable is ``#[derive(...)]`` which invokes a macro
+to autogenerate code based on a data structure type.
 Many Rust libraries provide extremely useful derive macros
 for structs and enums.
 
@@ -79,8 +80,9 @@ Control flow "statements" are generally expressions:
     { stmt0; stmt1; }  // with semicolon, has type ( )
     { stmt0; stmt1 }   // no semicolon, has type of stmt1
 
-    if condition { statements... }
+    if condition { statements... }                // can only have type ()
     if condition { value } else { other_value }   // no ? :, use this
+    if let pattern = value { .... } [else ...]    // pattern binding condition
     match value { pat0 if c0 => expr0,.. }        // see "Types and Patterns"
 
     'loopname: loop { ... }                              // 'loopname
@@ -90,7 +92,7 @@ Control flow "statements" are generally expressions:
 
     return v  // at end of function, it is idiomatic to just write v
     continue; continue 'loop; break; break 'loop
-    break value; break 'loop value;  // `loop` loops only, not for/while
+    break value; break 'loop value; // `loop` only; specifies value of `loop` expr
 
     function(arg0,arg1)
     receiver.method(arg0,arg1,arg2)  // see the section on "Methods"
@@ -104,7 +106,7 @@ Control flow "statements" are generally expressions:
     collection[index]        // usually panics if not found, eg array bounds check
     thing.field              // field of a struct with named fields
     tuple.0; tuple.1;        // fields of type or tuple struct    
-    start..end; start..=end  // inclusive and exclusive Range
+    start..end; start..=end  // end-exclusive and -inclusive Range
 
 Note the odd semicolon rule,
 which determines the type of block expressions.
@@ -121,7 +123,6 @@ Other statements
 ::
 
    let pattern = value;
-   if let pattern = value { .... }
 
 Variable names may be reused by rebinding;
 this is often considered idiomatic.
@@ -161,5 +162,4 @@ can be public (``pub``) or private to the module (the default).
 
 ``_`` can often be written when an identifier is expected.
 For a type or lifetime, it asks the compiler to infer.
-For a binding, it assigns the value to an anonymous variable,
-effectively discarding it.
+For a binding, it discards the value (droping it right away).
