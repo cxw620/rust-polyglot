@@ -125,8 +125,9 @@ Many important and perfectly deecent, stable, and reliable
 Rust libraries
 still have "0.x" version numbers.
 
-Multiple versions of the same library can end up in the same program;
-if they are require to interoperate,
+Multiple versions of the same library can end up in the same program,
+and are then treated entirely disjoint by the language.
+If they are require to interoperate,
 special measures must be taken.
 For example,
 when the ``log`` crate makes a new incompatible release,
