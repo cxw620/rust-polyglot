@@ -21,3 +21,6 @@ Rust for the Polyglot Programmer is
 Copyright 2021 Ian Jackson and contributors.
 `SPDX-License-Identifier: MIT`.
 There is **NO WARRANTY**
+
+Thanks for helpful review, comments and suggstions from:
+Simon Tatham, Mark Wooding, Daniel Silverstone.
