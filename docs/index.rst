@@ -20,6 +20,7 @@ Rust for the Polyglot Programmer
    macros.rst
    async.rst
    rustdoc.rst
+   stability.rst
    cargo.rst
    libs.rst
    further.rst
