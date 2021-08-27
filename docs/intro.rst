@@ -100,6 +100,8 @@ Rust is available in "stable", "beta" and "nightly" flavours.
 Rust intends to avoid (and in practice, generally does avoid)
 breaking existing code which was using stable interfaces.
 
+There is excellent support for cross-compilation.
+
 Library ecosystem
 -----------------
 
