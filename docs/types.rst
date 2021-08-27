@@ -24,8 +24,10 @@ This is done with a C++-like ``< >`` syntax.
 Generic code will be monomorphised automatically by the compiler,
 for all of the concrete types that are actually required.
 
-When it is necessary to qualify a function, or in some other
-circumstances, the *turbofish* syntax is used, like this::
+When it is necessary to explictly specify generic parameters,
+for example in a function call,
+one uses the *turbofish* syntax
+(so named because ``::<>`` looks a bit like a speedy fish)::
 
   function::<Generic,Args>(...)
 
