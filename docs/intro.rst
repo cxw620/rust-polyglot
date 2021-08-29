@@ -71,7 +71,7 @@ Generally, dynamic linking is still used for FFI libraries.
 
 The unit of compilation is large: the "crate", not file or module.
 
-implementation, docs, tooling, etc.
+Implementation, docs, tooling, etc.
 -----------------------------------
 
 There is one implementation, ``rustc``
@@ -101,6 +101,12 @@ Rust intends to avoid (and in practice, generally does avoid)
 breaking existing code which was using stable interfaces.
 
 There is excellent support for cross-compilation.
+
+Obtaining Rust is canonically done with rustup,
+a pre-packaged installer/updater tool.
+rustup's rather alarming ``curl|bash`` install rune
+is mitigated by the care taken by the rustup mintainers;
+however, you will also end up using cargo which is more of a problem:
 
 Library ecosystem
 -----------------
