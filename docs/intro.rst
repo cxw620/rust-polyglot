@@ -6,7 +6,7 @@ Introduction and overview
     SPDX-License-Identifier: MIT
     There is NO WARRANTY.
 
-There are many guides to Rust, including the [Rust Book].
+There are many guides to Rust, including the `Rust Book`_
 This guide is something different:
 it is intended for the experienced programmer
 who already knows many other programming languages.
@@ -101,6 +101,11 @@ Rust intends to avoid (and in practice, generally does avoid)
 breaking existing code which was using stable interfaces.
 
 There is excellent support for cross-compilation.
+
+The project provides an online playground
+for playing with and sharing small experiments.
+This is heavily used as a stable way to share snippets, repros, etc.,
+including in bug reports.
 
 Obtaining Rust is canonically done with rustup,
 a pre-packaged installer/updater tool.
