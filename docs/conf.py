@@ -72,6 +72,7 @@ release = 'DRAFT'
 extensions = [
     'recommonmark',
     'sphinx.ext.autosectionlabel',
+    'sphinx_markdown_tables',
 ]
 autosectionlabel_prefix_document = True
 

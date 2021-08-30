@@ -12,7 +12,7 @@ Rust for the Polyglot Programmer
 
    intro.rst
    syntax.rst
-   types.rst
+   types.md
    ownership.rst
    traits.rst
    safety.rst
