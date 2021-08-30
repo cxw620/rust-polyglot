@@ -129,13 +129,13 @@ blocks (incl. functions) that do not evaluate to (return) an actual value.
 
 | Purpose | Type |
 | -------- | --- |
-| Heap allocation | `Box<T>`
-| Expanding vector (ptr, len, capacity) | `Vec<T>`
-| Expanding string (ptr, len, capacity) | `String`
-| Reference-counted heap allocation <br> (no GC, can leak cycles) | `Arc<T>`, `Rc<T>`
-| Optional (aka Haskell `Maybe`) | `Option<T>`
-| Fallible (commonly a function return type) | `Result<T,E>`
-| Mutex (for multithreaded programs) | `Mutex<T>`, `RwLock<T>`
+| Heap allocation | [`Box<T>`](https://doc.rust-lang.org/std/boxed/index.html)
+| Expanding vector (ptr, len, capacity) | [`Vec<T>`](https://doc.rust-lang.org/std/vec/struct.Vec.html)
+| Expanding string (ptr, len, capacity) | [`String`](https://doc.rust-lang.org/std/string/struct.String.html)
+| Reference-counted heap allocation <br> (no GC, can leak cycles) | [`Arc<T>`](https://doc.rust-lang.org/std/sync/struct.Arc.html), [`Rc<T>`](https://doc.rust-lang.org/std/rc/index.html)
+| Optional (aka Haskell `Maybe`) | [`Option<T>`](https://doc.rust-lang.org/std/option/enum.Option.html)
+| Fallible (commonly a function return type) | [`Result<T,E>`](https://doc.rust-lang.org/std/result/enum.Result.html)
+| Mutex (for multithreaded programs) | [`Mutex<T>`](https://doc.rust-lang.org/std/sync/struct.Mutex.html), [`RwLock<T>`](https://doc.rust-lang.org/std/sync/struct.RwLock.html)
 
 See also
 [our table comparing `Box`, `Rc`, `Arc`, `RefCell`, `Mutex` etc.](ownership.html#interior-mutability-table)

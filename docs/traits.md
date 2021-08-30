@@ -20,7 +20,9 @@ Methods are defined in a block `impl StructName { }`
 There is no inheritance.
 Some of the same effects can be achieved with traits,
 particularly default trait methods,
-and/or macro crates like `delegate` or `ambassador`.
+and/or macro crates like 
+[`delegate`](https://crates.io/crates/delegate) or
+[`ambassador`](https://crates.io/crates/ambassador).
 
 It follows from the ownership model that a method defined
 `fn foo(self,...)` consumes its argument (unless it's `Copy`)
@@ -55,17 +57,17 @@ only through trait implementations.
 
 When a trait has (roughly speaking) only methods,
 pointers to objects which implement the trait can be
-made into pointers to type-erased trait objects `dyn Trait`.
+made into pointers to type-erased [trait objects](https://doc.rust-lang.org/reference/types/trait-object.html#trait-objects) `dyn Trait`.
 These "fat pointers" have a vtable as well as the actual object pointer.
 Trait objects are often seen in the form `Box<dyn Trait>`.
 Ability of a trait to be used this way is called "object safety";
-the rules are a bit complicated but often a trait can be made
+[The rules](https://doc.rust-lang.org/reference/items/traits.html#object-safety) are a bit complicated but often a trait can be made
 object-safe by adding `where Self: Sized` to troublesome methods.
 
 Rust has a strict trait coherence system.
 There can be only one implementation of a trait for any one concrete type,
 in the whole program.
-To ensure this, it is forbidden (in summary)
+To ensure this, [it is forbidden](https://doc.rust-lang.org/reference/items/implementations.html#trait-implementation-coherence) (in summary)
 to implement a foreign trait on a foreign type
 (where "foreign" means outside your crate, not outside your module).
 
@@ -73,11 +75,11 @@ to implement a foreign trait on a foreign type
 ### Iterators: `Iterator`, `IntoIterator`, `FromIterator`
 
 
-The `Iterator` and `IntoIterator` traits are
+The [`Iterator`](https://doc.rust-lang.org/std/iter/trait.Iterator.html) and [`IntoIterator`](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html) traits are
 very important in idiomatic (and performant) Rust.
 
-Most collections and many other key types (eg, `Option`) implement
-`Iterator` or `IntoIterator`,
+Most collections and many other key types (eg, [`Option`](https://doc.rust-lang.org/std/option/enum.Option.html)) implement
+`Iterator` and/oor `IntoIterator`,
 so that they can be iterated over;
 this is how `for x in y` loops work:
 `y` must `impl IntoIterator`.
