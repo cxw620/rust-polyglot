@@ -226,34 +226,35 @@ Uninhabited types
 
 You can write `!` for a function return type
 to indicate that it won't return.
-But `!` is not a first-class type in Stable Rust;
+But `!` is 
+[not a first-class type in Stable Rust](https://doc.rust-lang.org/reference/types/never.html?highlight=never#never-type);
 you can't generally use it as a generic type parameter, etc.
 
 You can define an enum with no variants.
 The standard library has `Infallible` which is
 an uninhabited error type,
 but its ergnomics are not always great.
-The crate `void` can help fill this gap.
+The crate [`void`](https://crates.io/crates/void) can help fill this gap.
 It provides not only a trivial uninhabited type (`Void`)
 but also
-helpful functions and macros,
+helpful trait impls, functions and macros,
 
 Other features
 ---------------
 
-`#[non_exhaustive]` for reserving space to
+[`#[non_exhaustive]`](https://doc.rust-lang.org/reference/attributes/type_system.html#the-non_exhaustive-attribute) for reserving space to
 non-breakingly extend types in your published API.
 
-`#[derive]`, often `#[derive(Trait)]`, for many `Trait`.
+[`#[derive]`](https://doc.rust-lang.org/reference/attributes/derive.html#derive), often `#[derive(Trait)]`, for many `Trait`.
 In particular, see:
 
- * `#[derive(Debug)]`
- * `#[derive(Clone,Copy)]`
- * `#[derive(Eq,PartialEq,Ord,PartialOrd)]`
- * `#[derive(Hash)]`
+ * `#[derive(`[`Debug`](https://doc.rust-lang.org/std/fmt/trait.Debug.html)`])`
+ * `#[derive(`[`Clone`](https://doc.rust-lang.org/std/clone/trait.Clone.html)`,`[`Copy`](https://doc.rust-lang.org/std/marker/trait.Copy.html)`)]`
+ * `#[derive(`[`Eq`](https://doc.rust-lang.org/std/cmp/trait.Eq.html)`,`[`PartialEq`](https://doc.rust-lang.org/std/cmp/trait.PartialEq.html)`,`[`Ord`](https://doc.rust-lang.org/std/cmp/trait.Ord.html)`,`[`PartialOrd`](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html)`)]`
+ * `#[derive(`[`Hash`](https://doc.rust-lang.org/std/hash/trait.Hash.html)`)]`
 
 It is conventional for libraries to promiscuously implement these for
 their public types, whenever it would make sense.
 
 If you derive `Hash`, but manually implement `Eq`,
-see the note "`Hash` and `Eq`" in the docs for `Hash`.
+see the [note in the docs for `Hash`](https://doc.rust-lang.org/std/hash/trait.Hash.html#hash-and-eq).
