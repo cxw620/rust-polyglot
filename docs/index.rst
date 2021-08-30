@@ -11,7 +11,7 @@ Rust for the Polyglot Programmer
    :caption: Contents:
 
    intro.rst
-   syntax.rst
+   syntax.md
    types.md
    ownership.rst
    traits.rst
