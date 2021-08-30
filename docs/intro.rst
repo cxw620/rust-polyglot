@@ -6,11 +6,13 @@ Introduction and overview
     SPDX-License-Identifier: MIT
     There is NO WARRANTY.
 
-There are many guides to Rust, including the `Rust Book`_
+There are many guides to Rust, including the `Rust Book`_.
 This guide is something different:
 it is intended for the experienced programmer
 who already knows many other programming languages.
 Also this guide is not entirely free of opinion.
+
+.. _Rust Book: https://doc.rust-lang.org/book/
 
 I try to give enough information to get you started,
 but to avoid going into too much detail.
@@ -75,41 +77,49 @@ Implementation, docs, tooling, etc.
 -----------------------------------
 
 There is one implementation, ``rustc``
-which is maintained by the Rust project itself,
+which is maintained by the `Rust project <https://www.rust-lang.org/>` itself,
 alongside the specifications and documentation.
 
 Compilation is slow by comparison with many other modern languages,
 but the runtime speed of idiomatic Rust code is extremely good.
 
 Code generation (to native code or WASM) is currently done via LLVM
-but work is ongoing to allow use of [GCC] and [Cranelift].  There is
-also an IR interpreter used mostly for validation.
+but work is ongoing to allow use of
+`GCC <https://blog.antoyo.xyz/rustc_codegen_gcc-progress-report-3>`_
+and
+`Cranelift <https://github.com/bjorn3/rustc_codegen_cranelift/blob/master/Readme.md>`_.
+There is also an
+`IR interpreter <https://github.com/rust-lang/miri#readme>`_
+used mostly for validation.
 
 There is no formal language specification.
-The Rust Reference has most of the syntax but often lacks
+The `Rust Reference <https://doc.rust-lang.org/reference/>`_
+has most of the syntax but often lacks
 important information about semantics and details.
 
-The standard library documentation is excellent and comprehensive.
+The `standard library documentation <https://doc.rust-lang.org/std/>`_ is excellent and comprehensive.
 
 For unsafe code, which plays with raw pointers etc.,
-the semantics are formally described in [Stacked Borrows]
-and programs can be checked by ``miri``,
+the semantics are formally but unofficially described in
+`Stacked Borrows <https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md>`_
+and programs can be checked by `Miri <https://github.com/rust-lang/miri>`_,
 the interpreter for the Rust Mid-Intermediate Representation.
 
 Rust is available in "stable", "beta" and "nightly" flavours.
 Rust intends to avoid (and in practice, generally does avoid)
 breaking existing code which was using stable interfaces.
 
-There is excellent support for cross-compilation.
+There is `excellent support for cross-compilation <https://rust-lang.github.io/rustup/cross-compilation.html>`_.
 
-The project provides an online playground
+The project provides an `online playground <https://play.rust-lang.org/>`_
 for playing with and sharing small experiments.
 This is heavily used as a stable way to share snippets, repros, etc.,
 including in bug reports.
 
 Obtaining Rust is canonically done with rustup,
 a pre-packaged installer/updater tool.
-rustup's rather alarming ``curl|bash`` install rune
+rustup's rather alarming ``curl|bash``
+`install rune <https://www.rust-lang.org/tools/install>`_
 is mitigated by the care taken by the rustup mintainers;
 however, you will also end up using cargo which is more of a problem:
 

@@ -1,0 +1,18 @@
+
+ffi
+  no mangle
+  external blocks
+  crates for
+    c++ 
+    python
+    java
+    wasm/js
+  serde: json et al
+
+https://kerkour.com/blog/rust-cryptography-ecosystem/
+
+https://without.boats/blog/the-problem-of-effects/
+
+https://github.com/newca12/awesome-rust-formalized-reasoning
+
+
