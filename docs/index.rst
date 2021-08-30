@@ -13,7 +13,7 @@ Rust for the Polyglot Programmer
    intro.rst
    syntax.md
    types.md
-   ownership.rst
+   ownership.md
    traits.rst
    safety.rst
    errors.rst
