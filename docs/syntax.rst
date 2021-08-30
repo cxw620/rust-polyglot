@@ -40,7 +40,7 @@ the thing the attribute placed inside.
 Typically it is found only at the top of a whole module or crate,
 
 Attributes are used for many important purposes:
-  * Conditional compilation ``#[cfg(..)]``;
+  * `Conditional compilation <https://doc.rust-lang.org/reference/conditional-compilation.html>`_ ``#[cfg(..)]``;
   * Denoting functions whose value should be checked ``#[must_use]``
     (and types which should not be simply discarded);
   * Suppressing warnings locally ``#[allow(dead_code)]`` or
@@ -49,7 +49,7 @@ Attributes are used for many important purposes:
     ``#![feature(min_type_alias_impl_trait)]``;
   * Marking functions as tests ``#[test]``;
   * Request (hint) inlining ``#[inline]``.
-  * Control a type's memory layout ``#[repr(...)]``.
+  * Control a `type's memory layout <https://doc.rust-lang.org/reference/type-layout.html>`_ ``#[repr(...)]``.
   * Specify where to find the source for a module
     ``#[path="foo.rs"] mod bar;``.
 
