@@ -72,7 +72,7 @@ since moving it would invalidate any references.
 
 This also means that Rust values do not contain addresses
 pointing within themselves.
-(Exception: see `Pin`, `Unpin`, etc.)
+(Exception: see [`Pin`](https://doc.rust-lang.org/std/pin/struct.Pin.html).)
 
 Moving in program source terms
 might or might not mean that its memory address actually changes
@@ -84,27 +84,27 @@ the value is moved.
 
 Some types are "plain data":
 They can simply be duplicated without problem with memcpy.
-These types are  **Copy**.
+These types are  [**Copy**](https://doc.rust-lang.org/std/marker/trait.Copy.html).
 `Copy` is usually implemented via `#[derive(Copy)]`.
 Types that are `Copy` are copied
 rather than being moved out of
 (by assignments, parameter passing, etc.)
 
 For other types,
-**Clone** is a trait with a single method `clone()`
+[**Clone**](https://doc.rust-lang.org/std/clone/trait.Clone.html) is a trait with a single method `clone()`
 which supports getting a "new object like the original"
 whatever that means.
 You might think of it as a copy
 (although in the Rust world "copy" often means strictly `Copy`).
 For example,
-while `String::clone()` copies the data into a new heap allocation,
-`Arc::clone()` increments the reference count,
+while [`String`](https://doc.rust-lang.org/std/string/struct.String.html)`::clone()` copies the data into a new heap allocation,
+[`Arc`](https://doc.rust-lang.org/std/sync/struct.Arc.html#cloning-references)`::clone()` increments the reference count,
 rather than copying the underlying object.
 Obviously not every type is `Clone`.
 
 Values are destroyed when the variable containing them
 goes out of scope,
-or (rarely) by explicit calls to `std::mem::drop` or the like.
+or (rarely) by explicit calls to [`std::mem::drop`](https://doc.rust-lang.org/std/mem/fn.drop.html) or the like.
 When a value is destroyed,
 all of its fields are automatically destroyed too.
 If this is nontrivial the type is said to have "drop glue"
@@ -112,7 +112,7 @@ If this is nontrivial the type is said to have "drop glue"
 
 If a type's destruction needs something more than
 simply destroying each of its fields,
-it can `impl Drop`.
+it can `impl `[`Drop`](https://doc.rust-lang.org/std/ops/trait.Drop.html).
 You provide a function **drop**
 which is called automatically
 precisely once
@@ -130,7 +130,7 @@ Constructors that take arguments are often
 named like `Type::with_wombat()`.
 
 It is very common to construct from a value of another relevant type,
-for exmaple via the `From` and `Into` traits,
+for exmaple via the [`From`](https://doc.rust-lang.org/std/convert/trait.From.html) and [`Into`](https://doc.rust-lang.org/std/convert/trait.Into.html) traits,
 or specific methods
 (for purposes like complex construction or conversion,
 typestate arrangements, and so on).
@@ -139,7 +139,7 @@ There is no equivalent to C++'s "placement new".
 It is up to the caller whether the created object will go on the heap.
 Indeed, an object from `Type::new` might never be on the heap.
 Or it might be on the stack for a bit and then later be
-moved to the heap for example using `Box::new()`.
+moved to the heap for example using [`Box`](https://doc.rust-lang.org/std/boxed/index.html)`::new()`.
 
 Borrow checker
 --------------
@@ -178,21 +178,21 @@ then one of the following is the case:
    This often arises with self-referential data structures.
 
    Another classic example is that soundness of
-   an implementation of `IterMut` often depends on
+   an implementation of [`Iterator<Item=&mut T>`](https://doc.rust-lang.org/std/iter/trait.Iterator.html) 
+   often depends on
    the *correctness* of the underlying iteration algorithm;
    since soundness depends on it not returning the same item twice.
    The borrow checker is not typically able to check the
-   correctness of a from-scratch `impl IterMut`.
+   correctness of a from-scratch `impl Iterator for ..::IterMut`.
 
    There are also a few commonly-arising particular limitations,
-   for example this one surrounding borrowing and early exits:
-   https://github.com/rust-lang/rust/issues/51545
+   for example [one surrounding borrowing and early exits](https://github.com/rust-lang/rust/issues/51545).
 
 ### Tactics for fighting the borrow checker
 
  * Copy rather than borrowing:
-   Sprinkle `.clone()`, `.to_owned()`, etc., and/or
-   change types to owned variants (or `Cow`).
+   Sprinkle `.clone()`, [`.to_owned`](https://doc.rust-lang.org/std/borrow/trait.ToOwned.html), etc., and/or
+   change types to owned variants (or [`Cow`](https://doc.rust-lang.org/std/borrow/enum.Cow.html)).
 
  * Introduce `let` bindings to prolong the lifetime of temporaries.
    (Normally if this will help the compiler will suggest it.)
@@ -212,7 +212,7 @@ then one of the following is the case:
 
  * Add redundant type and lifetime annotations to closures
    (`'_`, `_`, `&'_ _`, `-> &'_ _` etc.)
-   The type and lifetime elision rules can interact badly with closures.
+   The type and [lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html) rules can interact badly with closures.
    Sometimes writing out explicit types and lifetimes,
    even completely elided ones,
    can make it work.
@@ -234,7 +234,12 @@ and you can't persuade it,
 you have these options:
 
  * Use runtime ownership checking instead of compile-time checking.
-   I.e., switch to `Arc`, `Mutex`, `Rc`, `RefCell` etc.
+   I.e., switch to
+    [`Arc`](https://doc.rust-lang.org/std/sync/struct.Arc.html)
+    [`Mutex`](https://doc.rust-lang.org/std/sync/struct.Mutex.html)
+    (maybe [`parking_lot`](https://crates.io/crates/parking_lot)'s),
+    [`Rc`](https://doc.rust-lang.org/std/rc/struct.Rc.html),
+    [`RefCell`](https://doc.rust-lang.org/std/cell/struct.RefCell.html) etc.
 
    This may be not as slow as you think.
    `Arc` in particular is less slow than reference counting
@@ -242,7 +247,10 @@ you have these options:
    since you usually end up passing `&Arc<T>` around,
    borrowing a reference rather than manipulating the refcount.
 
- * Use a crate like `generational_arena` or `slotmap` or `slab`
+ * Use a crate like
+   [`generational_arena`](https://crates.io/crates/generational_arena) or
+   [`slotmap`](https://crates.io/crates/slotmap) or
+   [`slab`](https://crates.io/crates/slab)
    where the data structure owns the values,
    and your "references" are actually indices.
 
