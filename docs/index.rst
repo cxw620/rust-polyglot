@@ -14,7 +14,7 @@ Rust for the Polyglot Programmer
    syntax.md
    types.md
    ownership.md
-   traits.rst
+   traits.md
    safety.rst
    errors.rst
    macros.rst
