@@ -141,6 +141,34 @@ Indeed, an object from `Type::new` might never be on the heap.
 Or it might be on the stack for a bit and then later be
 moved to the heap for example using [`Box`](https://doc.rust-lang.org/std/boxed/index.html)`::new()`.
 
+Interior mutability and runtime lifetime management
+---------------------------------------------------
+
+When it is necessary to share references more promiscuously,
+container types are provided
+to let you modify shared data,
+and manage its lifetime or mutability at runtime.
+
+|  Type |  Storage:<br>where is `T`  | Lifetime<br> mgmt | Interior mutability:<br>`&mut T` from `&Foo<T>`   | Threads<br>[`Send`](https://doc.rust-lang.org/std/marker/trait.Send.html)/[`Sync`](https://doc.rust-lang.org/std/marker/trait.Sync.html)
+| ------ | -------- | --------------  | ------------- | ---------
+| `T` [1]  | itself | owner | No  | Yes
+| [`Box<T>`](https://doc.rust-lang.org/std/boxed/index.html) [1] | heap | owner  | No | Yes
+| [`Rc<T>`](https://doc.rust-lang.org/std/rc/index.html)  | heap | refcount[2] |  No | No
+| [`Arc<T>`](https://doc.rust-lang.org/std/sync/struct.Arc.html) | heap | refcount[2] | No  | Yes
+| [`RefCell<T>`](https://doc.rust-lang.org/std/cell/struct.RefCell.html) | within | owner | Yes, runtime checks |  No
+| [`Mutex<T>`](https://doc.rust-lang.org/std/sync/struct.Mutex.html) | within  | owner | Yes, runtime, locking | Yes
+| [`RwLock<T>`](https://doc.rust-lang.org/std/sync/struct.RwLock.html) | within  | owner | Yes, runtime, locking | Yes
+| [`Cell<T>`](https://doc.rust-lang.org/std/cell/struct.Cell.html) | within | owner  | Only move/copy | No
+| [`UnsafeCell<T>`](https://doc.rust-lang.org/std/cell/struct.UnsafeCell.html) | within | owner  | Up to you, `unsafe` | Maybe
+| [`atomic`](https://doc.rust-lang.org/std/sync/atomic/index.html)[3]  | within | owner | Only some operations  | Yes
+| `Rc<RefCell<T>>` | heap | refcount[2] | Yes, runtime checks | No |
+| `Arc<Mutex<T>>` | heap | refcount[2] | Yes, runtime, locking | Yes |
+| `Arc<RwLock<T>>` | heap | refcount[2] | Yes, runtime, locking | Yes |
+
+ 1. Plain `T` and `Box` are included in this list for completeness/comparison.
+ 2. There is no garbage collector.  If you make cycles, you can leak.
+ 3. Only types that the platform can do atomic operations on.
+
 Borrow checker
 --------------
 
