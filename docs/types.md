@@ -137,6 +137,9 @@ blocks (incl. functions) that do not evaluate to (return) an actual value.
 | Fallible (commonly a function return type) | `Result<T,E>`
 | Mutex (for multithreaded programs) | `Mutex<T>`, `RwLock<T>`
 
+See also
+[our table comparing `Box`, `Rc`, `Arc`, `RefCell`, `Mutex` etc.](ownership.html#interior-mutability-table)
+
 Literals
 --------
 
