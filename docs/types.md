@@ -63,6 +63,7 @@ Otherwise, types have structural equivalence.
 | Empty tuple (primitive unit type) | `()`
 | Product type, tuple | `(T,)`, `(T,U)`, `(T,U,V)` etc.
 | Primitive integers | `usize`, `isize`, `u8`, `u16` .. `u128`, `i8` .. `i128`
+| Floating point (IEEE-754) | `f32`, `f64` |
 | Other Primitives | `bool`, `char`, `str`
 | Array | `[T; N]`
 | Slice | `[T]`
@@ -121,46 +122,61 @@ Rust
 [generally avoids](https://doc.rust-lang.org/std/primitive.pointer.html#method.offset)
 the existence of objects bigger than fits into an `isize`.
 
+The empty tuple `()`, aka "unit", is the type of
+blocks (incl. functions) that do not evaluate to (return) an actual value.
 
 ### Some very important nominal types from the standard library
 
-
-.. list-table::
- :widths: 65 35
-
+| Purpose | Type |
+| -------- | --- |
 | Heap allocation | `Box<T>`
 | Expanding vector (ptr, len, capacity) | `Vec<T>`
 | Expanding string (ptr, len, capacity) | `String`
-| Reference-counted heap allocation (no GC, can leak cycles) | `Arc<T>`, `Rc<T>`
+| Reference-counted heap allocation <br> (no GC, can leak cycles) | `Arc<T>`, `Rc<T>`
 | Optional (aka Haskell `Maybe`) | `Option<T>`
 | Fallible (commonly a function return type) | `Result<T,E>`
 | Mutex (for multithreaded programs) | `Mutex<T>`, `RwLock<T>`
 
-Literal value constructors
---------------------------
+Literals
+--------
 
-Values of aggregate types can be made by with a straightforward
+| Type | Examples |
+| ---- | ---- |
+| integer (inferred) | `0`, `1`, `23_000`, `0x7f`, `0b010`, `0o27775` |
+| integer (specified) | `0usize`, `1i8`, `0x7fu8` |
+| floating point | `0.`, `1e23f64` |
+| `&'static str` | `"string"`, `r#"^raw:"\.\s"#`, `"\n\b\u{007d}\""` [etc.](https://doc.rust-lang.org/reference/tokens.html#string-literals) |
+| `char` | `'c'`, `'\n'`, [etc.](https://doc.rust-lang.org/reference/tokens.html#character-literals)
+| `&'static [u8]` | `b"byte string"` [etc.](https://doc.rust-lang.org/reference/tokens.html#byte-string-literals), `&[b'c', 42]` (actually `[u8;2]`) |
+| `[T; N]` | `["hi","there"]` (`[&str; 2]`), `[0u32;14]` (`[u32; 14]`) |
+| `()`, `(T,)`, `(T,U)` | `()`, `(None,)` `(42,"forty-two)` |
+
+Literals of nominal types use a straightforward
 literal display syntax.
-Enum variants, qualified by their enum type, are also constructors.
+Enum variants, qualified by their enum type, are constructors
+(although they are not types in their own right).
+
 Using the examples from above:
 
-::
-
+```
    let _ = S { f: 42, g: "forty-two" };
    let _ = ST(42, ());
-   let _: E = E::V0;
-   let _: E = E::V1(42);
-   let _: E = E::V2{ f: format!("hi") };
    let _ = Z0;
    let _ = Z1();
    let _ = Z2{};
+   let _ = E::V0;
+   let _ = E::V1(42);
+   let _ = E::V2{ f: format!("hi") };
+   let _ = SG       { f: 0u8,                g: "type of F is inferred"  };
+   let _ = SG::<u8> { f: Default::default(), g: "type of F is specified" };
+```
 
 Named fields can be provided in any order;
 the provided field values are computed in the order you provide.
 Aggregates can be rest-initialised with `..`,
 naming another value of the same type (often `Default::default()`).
 
-If a value has fields you cannot name because they're not `pub`,
+If a type has fields you cannot name because they're not `pub`,
 you cannot construct it.
 
 Patterns
@@ -200,11 +216,9 @@ Refutable patterns appear in `if let`, `match`
 and `matches!`.
 
 `match` is the most basic way to handle a value of a sum type.
-
-::
-
+```
   match variable { pat1 => ..., pat2 if cond =>, ... }
-
+```
 Here `cond` may refer to the bindings established by pat2.
 
 Uninhabited types
