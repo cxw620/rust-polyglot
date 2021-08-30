@@ -55,18 +55,18 @@ Attributes are used for many important purposes:
 Items
 -----
 
-::
-
-    fn function(arg: T) -> ReturnValue { ... }
-    type TypeAlias = OtherType; // type alias, structural equality
-    pub struct WrappedCounter { counter: u64 } // nominal type equality
-    trait Trait { fn trait_method(self); }
-    const FORTY_TWO: u32 = 42;
-    static TABLE: [u8; 256] = { 0x32, 0x26, 0o11, ...many entries };
-    impl Type { ... }
-    impl Trait for Type { ... }
-    mod some_module; // causes some_module.rs to be read
-    mod some_module { ... } // module source is right here
+```
+fn function(arg: T) -> ReturnValue { ... }
+type TypeAlias = OtherType; // type alias, structural equality
+pub struct WrappedCounter { counter: u64 } // nominal type equality
+trait Trait { fn trait_method(self); }
+const FORTY_TWO: u32 = 42;
+static TABLE: [u8; 256] = { 0x32, 0x26, 0o11, ...many entries };
+impl Type { ... }
+impl Trait for Type { ... }
+mod some_module; // causes some_module.rs to be read
+mod some_module { ... } // module source is right here
+```
 
 Expressions
 -----------
@@ -74,38 +74,38 @@ Expressions
 Most of the usual infix and assigment operators are available.
 Control flow "statements" are generally expressions:
 
-::
+```
+{ stmt0; stmt1; }  // with semicolon, has type ()
+{ stmt0; stmt1 }   // no semicolon, has type of stmt1
 
-    { stmt0; stmt1; }  // with semicolon, has type ( )
-    { stmt0; stmt1 }   // no semicolon, has type of stmt1
+if condition { statements... }                // can only have type ()
+if condition { value } else { other_value }   // no ? :, use this
+if let pattern = value { .... } [else ...]    // pattern binding condition
+match value { pat0 if c0 => expr0,.. }        // see "Types and Patterns"
 
-    if condition { statements... }                // can only have type ()
-    if condition { value } else { other_value }   // no ? :, use this
-    if let pattern = value { .... } [else ...]    // pattern binding condition
-    match value { pat0 if c0 => expr0,.. }        // see "Types and Patterns"
+'loopname: loop { ... }                              // 'loopname
+'loopname: while condition { }                       // is optional
+'loopname: while let pattern = expr { }              // of course
+'loopname: for loopvar in something_iterable { ... } //
 
-    'loopname: loop { ... }                              // 'loopname
-    'loopname: while condition { }                       // is optional
-    'loopname: while let pattern = expr { }              // of course
-    'loopname: for loopvar in something_iterable { ... } //
+return v  // at end of function, it is idiomatic to just write v
+continue; continue 'loop; break; break 'loop
+break value; break 'loop value; // `loop` only; specifies value of `loop` expr
 
-    return v  // at end of function, it is idiomatic to just write v
-    continue; continue 'loop; break; break 'loop
-    break value; break 'loop value; // `loop` only; specifies value of `loop` expr
+function(arg0,arg1)
+receiver.method(arg0,arg1,arg2)  // see the section on "Methods"
+|arg0, arg1: Type1| -> ReturnType expression  // closure
 
-    function(arg0,arg1)
-    receiver.method(arg0,arg1,arg2)  // see the section on "Methods"
-    |arg0, arg1: Type1| -> ReturnType expression  // closure
+fallible?                      // see [error handling]
+*value                         // deref, see [methods]
+type as other_type             // type conversion (safe but maybe lossy)
+WrappedCounter { counter: 42 } // constructor ("struct literal")
 
-    fallible?                      // see [error handling]
-    *value                         // deref, see [methods]
-    type as other_type             // type conversion (safe but maybe lossy)
-    WrappedCounter { counter: 42 } // constructor ("struct literal")
-
-    collection[index]        // usually panics if not found, eg array bounds check
-    thing.field              // field of a struct with named fields
-    tuple.0; tuple.1;        // fields of type or tuple struct    
-    start..end; start..=end  // end-exclusive and -inclusive Range
+collection[index]        // usually panics if not found, eg array bounds check
+thing.field              // field of a struct with named fields
+tuple.0; tuple.1;        // fields of type or tuple struct    
+start..end; start..=end  // end-exclusive and -inclusive Range
+```
 
 Note the odd semicolon rule,
 which determines the type of block expressions.
@@ -118,10 +118,9 @@ Other statements
 -----------------
 
 `let` introduces a binding.
-
-::
-
-   let pattern = value;
+```
+let pattern = value;
+```
 
 Variable names may be reused by rebinding;
 this is often considered idiomatic.
@@ -152,12 +151,13 @@ which the compiler will warn you about violating:
  * `StudlyCaps`: Types (including enum variant names)
  * `SCREAMING_SNAKE_CASE`: Constants and global variables.
 
-`-` is not valid in identifier names in Rust source code
-but when found in other places in the Rust world,
-you may encounter its use described as `kebab-case`.
+`-` is not valid in identifier names in Rust source code.
+When found in other places in the Rust world,
+you may encounter it in what is described as `kebab-case`.
 
 Many items (including functions, types, fields of product types, etc.)
-can be public (`pub`) or private to the module (the default).
+can be public (`pub`) or private to the module (the default),
+or have [more subtle visibility](https://doc.rust-lang.org/reference/visibility-and-privacy.html).
 
 `_` can often be written when an identifier is expected.
 For a type or lifetime, it asks the compiler to infer.
