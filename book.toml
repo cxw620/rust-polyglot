@@ -1,0 +1,5 @@
+[book]
+src="docs"
+
+[output.html]
+default-theme="ayu"
