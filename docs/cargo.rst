@@ -104,7 +104,7 @@ Some OS distros (e.g. Debian) are starting to maintain
 reasonable collections of Rust packages
 within the distro package respository.
 This puts your OS distro between you
-and the raw data from ``crates.io``
+and the raw data from ``crates.io``,
 which is likely to reduce your risk.
 To do this,
 you will probably want to nobble your cargo config not to

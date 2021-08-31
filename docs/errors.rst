@@ -10,7 +10,7 @@ Rust has two parallel runtime error handling mechanisms:
 panics, and ``Result`` / ``?``.
 
 Do not use panics for anything except
-unrecoverable discovery of an programming error
+unrecoverable discovery of a programming error
 (eg, assertion failure).
 
 ``Result``, ``?``

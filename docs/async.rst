@@ -224,9 +224,9 @@ it must be a nominal type,
 which is not possible if the function is
 an ``async fn`` (and therefore returns an anonymous future type).
 The usual workaround for async trait methods to return
-``Box<dyn Future<Output=_>``.
+``Box<dyn Future<Output=_>>``.
 This is suboptimal because
-it requires an additional heap alloction,
+it requires an additional heap allocation,
 and runtime despatch.
 This workaround has been neatly productised
 in the ``async-trait`` macro package.

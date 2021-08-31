@@ -77,14 +77,14 @@ Many of the standard library facilities,
 and some important and widely used crates,
 are implemented using ``unsafe``.
 
-All ``unsafe`` does by itself is allow you to use unsafe facilities.
+All ``unsafe { }`` does by itself is allow you to use unsafe facilities.
 When you use an unsafe facility you take on a proof obligation.
 The documentation for each facility explains what the rules are.
 The Rust Reference has rules for type layout etc.
 
 The Rest community generally tries very hard to make sound APIs
 for libraries which use unsafe internally.
-(Soundness being the property that no progrmas using your library,
+(Soundness being the property that no programs using your library,
 and which do not themselves use ``unsafe``, have UB.)
 You should ensure your library APIs are sound.
 

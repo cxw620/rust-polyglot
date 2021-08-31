@@ -42,7 +42,7 @@ Unstable command line options generally require
 also saying  ``-Z unstable-options``.
 
 There are even features which are known to be
-incompletel, broken, or maybe even unsound,
+incomplete, broken, or maybe even unsound,
 for which an additional 
 ``#![allow(incomplete_features)]``
 is required.
@@ -60,13 +60,13 @@ and that it doesn't paint Rust into unfortunate corners.
 "Breaking changes"
 (defined as any change to the contract
 of the language or library or tool
-which might invalidate a previously-correvt use)
+which might invalidate a previously-correct use)
 are very much the exception.
 Rarely, they are still considered,
 but they are handled very cautiously,
 including an assessment of the likely practical fallout.
 
-Actually, Stable Rust is actually simply a
+(Actually, Stable Rust is actually simply a
 stabilised release branch
 of Nightly,
 so it does contain the code for all the unstable features.
@@ -75,7 +75,7 @@ the use of unstable features
 in the stable compiler.
 This allows the Rust Project to main one main line of development
 containing both the unstable work,
-and improvements to the stable compiler.
+and improvements to the stable compiler.)
 
 
 API stability management tools
@@ -86,11 +86,11 @@ a library API designer to warn or prevent users from
 relying on API properties which might change in the future.
 
 For example,
-``#[non_exhaustive]`` on data typesm
+``#[non_exhaustive]`` on data types
 which prevents an API consumer from writing code
 which would break when a new field or variant was added.
 
-``impl Trait``, visibility tools, newtypes, and trait sealing,
+``impl Trait``, visibility specifiers, newtypes, and trait sealing,
 are also useful.
 
 The standard library makes very extensive use of these facilities,
@@ -120,13 +120,13 @@ no "0.x" version is treated as compatible in any way with any other.)
 That cargo expects there to be stability rules for "0.x" versions
 has made it feasible for many crate authors to avoid publishing a "1.0",
 and inevitably many have failed to do so,
-for all the usual crop of (bad) reasons.
-Many important and perfectly deecent, stable, and reliable
+for all the usual kinds of reasons.
+Many important and perfectly decent, stable, and reliable
 Rust libraries
 still have "0.x" version numbers.
 
 Multiple versions of the same library can end up in the same program,
-and are then treated entirely disjoint by the language.
+and are then treated as entirely disjoint by the language.
 If they are require to interoperate,
 special measures must be taken.
 For example,
