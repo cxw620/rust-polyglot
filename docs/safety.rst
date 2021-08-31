@@ -64,6 +64,7 @@ Of course this does not necessarily protect you from concurrency bugs
 
 A reasonable collection of threading primitives and tools
 is in ``std::thread`` and ``std::sync``.
+Many projects prefer the primitves from the [`parking_lot`] crate.
 
 Multithreading in Rust can be an adjunct to,
 or replacement for,
