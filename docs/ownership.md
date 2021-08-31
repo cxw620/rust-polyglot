@@ -26,7 +26,7 @@ but objects can also contain references to (borrows of) values
 held elsewhere.
 
 Borrowing is done explicitly with the `&` reference operator.
-Borrows can be mutable (`&mut T`) or immutable (`&T`).
+Borrows can be [mutable (`&mut T`) or immutable (`&T`)](https://doc.rust-lang.org/std/primitive.reference.html).
 The same object can be borrowed immutably any number of times,
 but only borrowed mutably once.
 
