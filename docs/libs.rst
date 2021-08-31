@@ -42,7 +42,7 @@ Libraries you should know about:
  * ``index_vec``.  ``arrayvec``. ``indexmap``.
    Variations on ``Vec`` and ``HashSet``.
 
- * ``extend``.  Conveniently define methods on other people's types.
+ * ``easy_ext``.  Conveniently define methods on other people's types.
 
  * ``rayon``: Semi-magical safe multicore parallelism
    as a drop-in replacement for std's serial iterators.
