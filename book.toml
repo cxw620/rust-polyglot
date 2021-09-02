@@ -2,5 +2,7 @@
 src="docs"
 title="Rust for the Polyglot Programmer"
 
+[preprocessor.links]
+
 [output.html]
 default-theme="ayu"

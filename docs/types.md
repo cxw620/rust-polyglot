@@ -106,7 +106,7 @@ except with the guarantee that it consists entirely of valid UTF-8.
 As with `[u8]`, usually one works with `&str`.
 Making a `str` containing invalid UTF-8 is UB
 (and, therefore, not possible in Safe Rust).
-C.f. [`String`](https://doc.rust-lang.org/std/string/struct.String.html), [`Box<str>`](https://doc.rust-lang.org/std/boxed/struct.Box.html#impl-From%3C%26%27_%20str%3E)
+C.f. [`String`], [`Box<str>`](https://doc.rust-lang.org/std/boxed/struct.Box.html#impl-From%3C%26%27_%20str%3E)
 
 [**dyn Trait**](https://doc.rust-lang.org/reference/types/trait-object.html) is a **trait object**:
 an object which implements `Trait`,
@@ -261,3 +261,5 @@ their public types, whenever it would make sense.
 
 If you derive `Hash`, but manually implement `Eq`,
 see the [note in the docs for `Hash`](https://doc.rust-lang.org/std/hash/trait.Hash.html#hash-and-eq).
+
+{{ #include refs.md }}
