@@ -189,7 +189,7 @@ a > .hljs {
 
 :not(pre) > .hljs {
     display: inline;
-    padding: 0.1em 0.3em;
+    padding: initial;
     border-radius: 3px;
 }
 
