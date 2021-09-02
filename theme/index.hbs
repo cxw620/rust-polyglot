@@ -133,6 +133,19 @@
                             <i class="fa fa-search"></i>
                         </button>
                         {{/if}}
+
+                {{#previous}}
+                    <a rel="prev" href="{{ path_to_root }}{{link}}" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                {{/previous}}
+
+                {{#next}}
+                    <a rel="next" href="{{ path_to_root }}{{link}}" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                {{/next}}
+
                     </div>
 
                     <h1 class="menu-title">{{ book_title }}</h1>
@@ -203,6 +216,7 @@
                 </div>
             </div>
 
+<!--
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 {{#previous}}
                     <a rel="prev" href="{{ path_to_root }}{{link}}" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
@@ -216,6 +230,7 @@
                     </a>
                 {{/next}}
             </nav>
+-->
 
         </div>
 
