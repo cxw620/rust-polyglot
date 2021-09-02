@@ -1,5 +1,6 @@
 [book]
 src="docs"
+title="Rust for the Polyglot Programmer"
 
 [output.html]
 default-theme="ayu"
