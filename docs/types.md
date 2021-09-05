@@ -264,5 +264,3 @@ their public types, whenever it would make sense.
 
 If you derive `Hash`, but manually implement `Eq`,
 see the [note in the docs for `Hash`](https://doc.rust-lang.org/std/hash/trait.Hash.html#hash-and-eq).
-
-{{ #include refs.md }}

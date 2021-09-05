@@ -1,5 +1,5 @@
 [book]
-src="docs"
+src="mdbook"
 title="DRAFT - Rust for the Polyglot Programmer"
 
 [preprocessor.links]

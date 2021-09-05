@@ -357,5 +357,3 @@ because the useful modules have generic names:
 `tokio::task` vs `futures::task` vs `std::task`.
 Sometimes you'll want to use all of these in one program.
 Finding and naming anything is a chore!
-
-{{ #include refs.md }}
