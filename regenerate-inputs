@@ -57,6 +57,7 @@ our @crate_refs_docs_rs = qw(
    getopts
    gumdrop
    jni
+   ring
 );
 our @crate_refs_crates_io = qw(
    generational_arena
@@ -82,6 +83,7 @@ our @crate_refs_crates_io = qw(
    web-sys
    rusty_v8
    j4rs
+   rustls
 );
 
 our $precontents = <<END;
