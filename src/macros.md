@@ -1,66 +1,81 @@
 Macros and metaprogramming
 ==========================
 
-..
-    Copyright 2021 Ian Jackson and contributors
-    SPDX-License-Identifier: MIT
-    There is NO WARRANTY.
+[comment]: # ( Copyright 2021 Ian Jackson and contributors  )
+[comment]: # ( SPDX-License-Identifier: MIT                 )
+[comment]: # ( There is NO WARRANTY.                        )
 
 Overview
 --------
 
-Rust itself has two macro systems,
-and cargo has built-in support for
-some build hooks including build-time code generation.
+Rust itself has two macro systems
+and a cargo-based code generation system.
+Each has its own section in this chapter:
 
-Many macros are "function-like":
-invoked as ``macro!(...)``
-(where ``macro`` is the name of the macro).
-They can expand to expressions, blocks, types, items, etc.
-You can write ``macro!{..}``, ``macro!(..)`` and ``macro![..]``,
-as you please.
-``macro_rules!`` macros cannot distinguish these cases,
-but there is generally a conventional invocation style for each macro.
+ * ["Macros by example" `macro_rules!`](#macros-by-example-macro_rules)
+ * [Procedural macros `proc_macro`](#procedural-macros-proc_macro)
+ * [`build.rs`](#build-rs)
 
-Rust also supports attribute macros and derive macros,
-which are invoked as
-``#[macro]`` (before some language construct)
-and
-``#[derive(macro)]`` (before a struct, enum, or union).
+### Macro invocation syntax
+
+Roughly orthogonally to the two macro implementation methods,
+there are (broadly) three macro namespaces,
+with different invocation syntaxes:
+
+ * "function-like":
+   Invoked as `macro!(...)`
+   (where `macro` is the name of the macro).
+   They can expand to expressions, blocks, types, items, etc.
+
+   You can write `macro!{..}`, `macro!(..)` and `macro![..]`,
+   as you please.
+   `macro_rules!` macros cannot distinguish these cases,
+   but there is generally a conventional invocation style for each macro.
+   proc_macros can distinguish them.
+
+ * Atrributes: `#[macro]` (before some language construct).
+   The macro can filter/alter decorated thing.
+
+ * `#[derive(macro)]` before a struct, enum, or union.
+   The macro does not modify the decorated data structure,
+   but it takes it as input and can generate *additional* code.
 
 You can qualify the macro name with a crate or module path.
+The rules for macro name scope, export, import, etc. are odd,
+and can be confusing in unusual cases.
 
-"Macros by example" ``macro_rules!``
-------------------------------------
+"Macros by example" `macro_rules!`
+----------------------------------
 
-``macro_rules!`` defines a (function-like) macro in terms of
+[`macro_rules!`](https://doc.rust-lang.org/reference/macros-by-example.html)
+defines a (function-like) macro in terms of
 template matches and and substitutions.
 
-::
-
+```
    macro_rules! name { { template1 } => { replacement1 }, ... }
    name!{ ... }
+```
 
 The contents of the macro invocation are matched against
 the templates in turn,
 stopping at the first one that matches.
 
-Non-literal text in the template is introduced with ``$``:
+Non-literal text in the template is introduced with `$`:
 
-::
-
+```
    $binding:syntaxtype     syntaxtype can be one of
        block expr ident item lifetime literal
        meta pat pat_param path stmt tt ty vis
    $( ... )?
    $( ... )*  $( ... ),*    could be other separators besides ,
    $( ... )+  $( ... ),+    could be other separators besides ,
+```
 
-In the replacement, write just ``$binding`` (without the syntax type).
+In the replacement, write just `$binding` (without the syntax type).
 
 Curious points:
 
- * ``macro_rules!`` macros are partially hygienic.
+ * `macro_rules!` macros are partially hygienic.
 
  * The repetition and optional constructs have funky rules
    to relate repetitions in the substitution to
@@ -83,31 +98,31 @@ Curious points:
    (and indeed precisely what these tokens match)
    have not 100% kept pace with Rust's language evolution.
    The usual way to deal with this is simply to define one's macro
-   to take ``,`` or ``;`` delimiters, where this problem arises.
+   to take `,` or `;` delimiters, whenever this problem arises.
 
  * Macros which are lexically in scope at, and precede, the call site
    do not need qualified names (and can be entirely local).
    To make a macro available elsewhere,
-   write ``#[macro_export]`` before it.
+   write `#[macro_export]` before it.
    This will cause the macro to exist as a name in the toplevel
    of the current *crate* (not in the current module),
-   from where it can be ``use``\ d.
+   from where it can be `use`d.
    (Rust 2015 has even odder scoping rules.)
 
 There are many details which are too fiddly to go into here.
 
-If you want to do something exciting in a ``macro_rules!`` macro,
-the ``paste`` token pasting crate may be helpful.
+If you want to do something exciting in a `macro_rules!` macro,
+the [`paste`](https://docs.rs/paste/latest/paste/) token pasting crate may be helpful.
 
-Procedural macros ``proc_macro``
---------------------------------
+Procedural macros `proc_macro`
+------------------------------
 
 Rust's 2nd macro system is very powerful and
 forms the basis for many advanced library facilities.
 The basic idea is: a proc_macro is a function
-from a ``TokenStream`` to a ``TokenStream``.
+from a [`TokenStream`] to a [`TokenStream`].
 
-It can arbitrarily modify the tokens as they pass through,
+The macro can arbitrarily modify the tokens as they pass through,
 and/or generate new tokens.
 There are libraries for parsing the token stream into
 an AST representation of Rust,
@@ -115,12 +130,12 @@ and for quasiquoting.
 
 proc_macros can be "function-like",
 but they can also be
-``#[attribute]``\ s which are prefixed to their input
+`#[attribute]`s which are prefixed to their input
 (often used for code and particularly function transformations),
 and the heavily used
-``#[derive(macro)]``
+`#[derive(macro)]`
 which is applied to a struct, enum or union;
-in this case the input (the struct) is retained unchanged,
+in the case of `#[derive]` the input (the struct) is retained unchanged,
 and the tokenstream produced by the macro function is
 inserted after its definition.
 
@@ -148,8 +163,8 @@ in lexically-subsequent code;
 outside its crate it can be available anywhere.
 
 
-Practicalities
-~~~~~~~~~~~~~~
+### Practicalities
+
 
 For Reasons,
 a proc_macro must be a separate crate,
@@ -158,44 +173,52 @@ Usually a proc_macro needs some non-macro support,
 or is just an affordance to help use some non-macro Rust.
 It is conventional to wrap a proc_macro
 in a package containing the non-macro code,
-and to use ``use`` to re-export the macro.
+and to use `use` to re-export the macro.
 
 You should probably maintain the macro package as another
 member of a cargo workspace,
 alongside the non-macro facade/utilities.
-
-The macro crate ends up as a separate package on ``crates.io``.
-It is conventional to call it ``...-macros`` or ``...-derive``.
+The macro crate ends up as a separate package on `crates.io`.
+It is conventional to call it `...-macros` or `...-derive`.
 
 To write a proc_macro,
 you will probably want to use some of these libraries:
 
-  * ``syn`` for parsing a ``TokenStream`` into an AST.
-  * ``proc-macro-error`` for providing pleasant error messages.
-  * ``proc_macro2`` to arrange that your main macro functionality
+  * [`syn`](https://docs.rs/syn/latest/syn/)
+    for parsing a `TokenStream` into an AST.
+  * [`proc-macro-error`](https://crates.io/crates/proc-macro-error)
+    for providing pleasant error messages.
+  * [`proc_macro2`](https://docs.rs/proc-macro2/1.0.29/proc_macro2/)
+    to arrange that your main macro functionality
     can be tested outside of the rustc macro context.
-  * ``quote`` for quasiquoting macro output.
+  * [`quote`](https://docs.rs/quote/latest/quote/)
+    for quasiquoting macro output.
 
 proc_macros are entirely unhygienic.
 In your macro output,
 you must fully qualify the names of everything you use,
 even things from std.
+The [`Span`](https://docs.rs/proc-macro2/latest/proc_macro2/struct.Span.html)
+of identifiers determines their hygiene context.
 
-``build.rs``
-------------
+
+[`build.rs`](https://doc.rust-lang.org/cargo/reference/build-scripts.html)
+--------------------------------------------------------------------------
 
 cargo supports running code at build-time,
-by providing a file ``build.rs`` in the toplevel
+by providing a file `build.rs` in the toplevel
 containing appropriate functions.
 This can run arbitrary code,
-and includes the ability to generate ``*.rs`` files
+and includes the ability to generate `*.rs` files
 to be included in the current crate build.
 
 This is an awkward way to to organise build-time code generation,
 because Rust is not an ideal language for writing build rules
 (although it can make a good language for generating Rust code).
 
-``build.rs`` can be the best choice
-if you want very portable build-time code generation
+`build.rs` can be the best choice
+if you want very portable build-time code generation,
 since it doesn't rely on anything but the Rust system
 that you were depending on anyway.
+
+[`TokenStream`]: file:///home/rustcargo/docs/share/doc/rust/html/proc_macro/struct.TokenStream.html
