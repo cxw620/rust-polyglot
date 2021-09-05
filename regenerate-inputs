@@ -150,6 +150,20 @@ sub autorefs() {
   end_output();
 }
 
+sub append_to_colophon ($$) {
+  my ($file, $title) = @_;
+  ol();
+  ol("#### $title (`$file`)");
+  ol();
+  ol('```');
+  open F, "< $file" or die $!;
+  while (<F>) { o($_); }
+  F->error and die;
+  close F;
+  ol('```');
+  ol();
+}
+
 #---------- input scanning ----------
 
 our @output_files;
@@ -190,6 +204,25 @@ sub scan_filter() {
 	$new_last_l = $_;
       }
       $last_l = $new_last_l;
+    }
+    C->error and die $!;
+
+    if ($leaf eq 'colophon.md') {
+      open O, ">&MD" or die $!;
+      append_to_colophon('LICENCE',
+			 'Full copyright notice');
+      append_to_colophon('DEVELOPER-CERTIFICATE',
+			 'Developer Certificate of Origin');
+      ol("---");
+      ol("formatted ".
+	 strftime("%Y-%m-%d %H:%M:%S UTC", gmtime time));
+      ol();
+      my $git_commit = `git rev-parse HEAD` || die "$? $!";
+      chomp $git_commit;
+      $?=0; $!=0; my $status = `git status --porcelain`;
+      die "$? $!" if $? || $!;
+      ol("git commit `$git_commit`". (length($status) ? "; tree dirty" : ""));
+      close O or die $!;
     }
 
     print MD "\n\n$mdbook_refs" or die $!;
