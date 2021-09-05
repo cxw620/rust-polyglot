@@ -55,12 +55,14 @@ generating a warning.)
 
 (`?` can also be used with [`Option`].)
 
-In quick-and-dirty programs it is common to call `unwrap`
-(or `except`), on a `Result`; these panic on errors.
-But, the return type from `main` can be a suitable `Result`;
-this,
-plus use of `?` and a portmanteau error type like `eyre::Report`,
-is usually better in a prototype because it avoids writing
+In quick-and-dirty programs it is common to call
+[`unwrap`](https://doc.rust-lang.org/nightly/std/result/enum.Result.html#method.unwrap)
+(or [`expect`](https://doc.rust-lang.org/nightly/std/result/enum.Result.html#method.expect)), on a `Result`; these panic on errors.
+But, the return type from `main` can be a suitable `Result`.
+This,
+plus use of `?` and a portmanteau error type like
+[`eyre::Report`](https://docs.rs/eyre/latest/eyre/struct.Report.html),
+is usually better even in a prototype because it avoids writing
 `unwrap` calls that should be removed later
 to make the code production-ready.
 
@@ -74,17 +76,18 @@ The available and useful range of error types is
 too extensive to discuss here.
 But, consider:
 
- * `eyre` (or `anyhow`) for a boxed portmanteau error type;
+ * [`eyre`](https://docs.rs/eyre/latest/eyre/) (or [`anyhow`](https://docs.rs/anyhow/latest/anyhow/))
+   for a boxed portmanteau error type;
    good for application programs which need to
    aggregate many kinds of error.
 
- * `thiserror` for defining your own error enum;
+ * [`thiserror`](https://docs.rs/thiserror/latest/thiserror/) for defining your own error enum;
    good when you're writing a library.
 
  * Defining your own unit struct as the error type
    for a specific function or scenario.  (Perhaps several such.)
 
- * `std::io::Error` if you primarily need to report OS errors.
+ * [`std::io::Error`](https://doc.rust-lang.org/nightly/std/io/struct.Error.html) if you primarily need to report OS errors.
 
 In a sophisticated program errors often start out
 near the bottom of this list,
