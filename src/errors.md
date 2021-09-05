@@ -100,7 +100,9 @@ Panic
 A panic is a synchronous unrecoverable failure of program execution,
 similar in some respects to a C++ exception.
 
-Panics can be caused explicitly by `panic!()`, `assert!`, etc.
+Panics can be caused explicitly by
+[`panic!()`](https://doc.rust-lang.org/nightly/std/macro.panic.html),
+[`assert!`](https://doc.rust-lang.org/nightly/std/macro.assert.html), etc.
 The language will sometimes generate panics itself:
 for example,
 on arithmetic overflow in debug builds,
