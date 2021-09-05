@@ -30,10 +30,10 @@ doc:	$(OUTPUT_INDEX)
 	@echo 'Documentation can now be found here:'
 	@echo '  file://$(abspath $<)'
 
-$(OUTPUT_INDEX): book.toml docs/SUMMARY.md $(MD_SOURCES)
+$(OUTPUT_INDEX): book.toml mdbook/SUMMARY.md $(MD_SOURCES)
 	$(NAILING_CARGO_JUST_RUN) $(MDBOOK) build $(MDBOOK_BUILD_NAILING_OPTS)
 
-docs/SUMMARY.md: regenerate-inputs $(MD_SOURCES)
+mdbook/SUMMARY.md: regenerate-inputs $(MD_SOURCES)
 	./$<
 
 $(OUTPUT_PDF):
