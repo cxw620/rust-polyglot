@@ -101,15 +101,15 @@ Some modules (including, for example, `std::io`)
 define their own type called `Error`
 and their own `Result` to go with it.
 
-This is fine.
-But exercise discretion before importing an unqualified
-`Result` that isn't [`std::result::Result`][`Result`].
-This can elide some tiresome `my::Result` typing,
-but
-`std::result::Result` is in the prelude,
-so importing a different one as `Result`
-can be confusing.
+This can be confusing.
+You can tell such a `Result`
+from [`std::result::Result`][`Result`]
+(which is in the language prelude)
+because it will only have one type parameter: the success value:
+e.g. `Result<()>` instead of `Result<(), io::Error>`.
 
+Exercise discretion before importing an unqualified
+`Result` that isn't `std::result::Result`.
 Consider whether maybe [`fehler`]'s default `#[throws]`
 (meaning `#[throws(Error)]`) would be a better answer.
 
