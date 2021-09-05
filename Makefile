@@ -22,14 +22,19 @@ OUTPUT_DIR ?= html
 OUTPUT_INDEX = $(OUTPUT_DIR)/index.html
 OUTPUT_PDF = polyglot.pdf
 
+MD_SOURCES := $(wildcard docs/*[^A-Z].md)
+
 default: doc
 
 doc:	$(OUTPUT_INDEX)
 	@echo 'Documentation can now be found here:'
 	@echo '  file://$(abspath $<)'
 
-$(OUTPUT_INDEX): book.toml $(wildcard docs/*.md)
+$(OUTPUT_INDEX): book.toml docs/SUMMARY.md $(MD_SOURCES)
 	$(NAILING_CARGO_JUST_RUN) $(MDBOOK) build $(MDBOOK_BUILD_NAILING_OPTS)
+
+docs/SUMMARY.md: regenerate-inputs $(MD_SOURCES)
+	./$<
 
 $(OUTPUT_PDF):
 	pandoc -o $@ docs/*.md

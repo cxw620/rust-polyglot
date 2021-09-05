@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+xxx-needs-updating-for-new-output-location
+
 dirty=$(git status --porcelain)
 if [ "x$dirty" != x ]; then
 	git --no-pager status
