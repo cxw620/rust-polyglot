@@ -130,15 +130,10 @@ and for quasiquoting.
 
 proc_macros can be "function-like",
 but they can also be
-`#[attribute]`s which are prefixed to their input
+`#[attribute]`s
 (often used for code and particularly function transformations),
-and the heavily used
-`#[derive(macro)]`
-which is applied to a struct, enum or union;
-in the case of `#[derive]` the input (the struct) is retained unchanged,
-and the tokenstream produced by the macro function is
-inserted after its definition.
-
+or
+`#[derive(macro)]`s.
 Many important Rust facilities and libraries are derive macros.
 
 proc_macros operate at a syntactic, not semantic level.
