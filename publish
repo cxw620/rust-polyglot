@@ -1,8 +1,6 @@
 #!/bin/sh
 set -e
 
-xxx-needs-updating-for-new-output-location
-
 dirty=$(git status --porcelain)
 if [ "x$dirty" != x ]; then
 	git --no-pager status
@@ -12,9 +10,11 @@ fi
 
 git push --dry-run --quiet origin HEAD:published
 
-rm -rf docs/html
+make clean
 make
 set -x
 
-rsync -r --delete docs/html/. ianmdlvl@chiark:public-html/rust-polyglot/.
+rsync -r --delete ../Build/poloyglot/html/. \
+	ianmdlvl@chiark:public-html/rust-polyglot/.
+
 git push origin HEAD:published
