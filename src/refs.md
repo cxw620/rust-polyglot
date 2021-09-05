@@ -8,6 +8,7 @@
 [`Vec`]: https://doc.rust-lang.org/std/vec/struct.Vec.html
 [`HashMap`]: https://doc.rust-lang.org/nightly/std/collections/struct.HashMap.html
 [`BTreeMap`]: https://doc.rust-lang.org/nightly/std/collections/struct.BTreeMap.html
+[`Result`]: https://doc.rust-lang.org/std/result/enum.Result.html
 
 [Reference]: (https://doc.rust-lang.org/reference/)
 

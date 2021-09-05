@@ -1,6 +1,4 @@
 
-mention crate::Result and crate::Error
-
 ffi
   no mangle
   external blocks

@@ -94,6 +94,26 @@ near the bottom of this list,
 and are progressively wrapped/converted into types
 nearer the top of the list.
 
+
+### Crate- and module-local `Result` and `Error`
+
+Some modules (including, for example, `std::io`)
+define their own type called `Error`
+and their own `Result` to go with it.
+
+This is fine.
+But exercise discretion before importing an unqualified
+`Result` that isn't [`std::result::Result`][`Result`].
+This can elide some tiresome `my::Result` typing,
+but
+`std::result::Result` is in the prelude,
+so importing a different one as `Result`
+can be confusing.
+
+Consider whether maybe [`fehler`]'s default `#[throws]`
+(meaning `#[throws(Error)]`) would be a better answer.
+
+
 Panic
 -----
 

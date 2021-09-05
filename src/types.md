@@ -138,7 +138,7 @@ blocks (incl. functions) that do not evaluate to (return) an actual value.
 | Hash table / ordered B-Tree | [`HashMap`] / [`BTreeMap`]
 | Reference-counted heap allocation <br> (no GC, can leak cycles) | [`Arc<T>`](https://doc.rust-lang.org/std/sync/struct.Arc.html), [`Rc<T>`](https://doc.rust-lang.org/std/rc/index.html)
 | Optional (aka Haskell `Maybe`) | [`Option<T>`][`Option`]
-| Fallible (commonly a function return type) | [`Result<T,E>`](https://doc.rust-lang.org/std/result/enum.Result.html)
+| Fallible (commonly a function return type) | [`Result<T,E>`][`Result`]
 | Mutex (for multithreaded programs) | [`Mutex<T>`](https://doc.rust-lang.org/std/sync/struct.Mutex.html), [`RwLock<T>`](https://doc.rust-lang.org/std/sync/struct.RwLock.html)
 
 See also
