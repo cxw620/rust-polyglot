@@ -69,7 +69,7 @@ and getting the answer from whichever finishes first
 ([`select!`](https://docs.rs/tokio/latest/tokio/macro.select.html))
 or all of the answers
 ([`join!`](https://docs.rs/tokio/latest/tokio/macro.join.html)),
-async "iterators" ([`Stream`](https://docs.rs/futures/latest/futures/stream/index.html)),
+async "iterators" ([`Stream`](https://docs.rs/futures/latest/futures/stream/)),
 and so on.
 
 The overall result is that, at a high level,
@@ -203,7 +203,7 @@ is not straightforward on a pinned object!
 
 See the
 docs for
-[`std::pin`](https://doc.rust-lang.org/std/pin/index.html)
+[`std::pin`](https://doc.rust-lang.org/std/pin/)
 and the crates
 [`pin-project`](https://crates.io/crates/pin-project)
 and
@@ -336,14 +336,14 @@ from prior incarnations of Rust's approach to async.
 You will end up using, at least:
 
  * `std`'s builtin futures support:
-   [std::task](https://doc.rust-lang.org/std/task/index.html),
-   [std::future](https://doc.rust-lang.org/std/future/index.html);
+   [std::task](https://doc.rust-lang.org/std/task/),
+   [std::future](https://doc.rust-lang.org/std/future/);
  * utilities from your runtime, eg: [Tokio](https://docs.rs/tokio/latest/tokio/)'s modules and macros.
  * utilities from the [`futures` crate](https://docs.rs/futures/latest/futures/).
 
 Unfortunately, many of these don't lend themselves to
 convenient blanket imports
-(although you should consider `use `[`futures::prelude`](https://docs.rs/futures/0.3.17/futures/prelude/index.html)`::*`).
+(although you should consider `use `[`futures::prelude`](https://docs.rs/futures/0.3.17/futures/prelude/)`::*`).
 
 Futures-related items share names with non-async thread tools
 (eg, `Mutex`, `mpsc`, etc., can mean different things).
@@ -353,17 +353,17 @@ in the same program.
 
 Importing the sub-module names is little better
 because the useful modules have generic names:
- - [`futures::future`](https://docs.rs/futures/0.3.17/futures/future/index.html) vs
-   [`std::future`](https://doc.rust-lang.org/std/future/index.html)
- - [`tokio::process`](https://docs.rs/tokio/latest/tokio/process/index.html) vs
-   [`std::process`](https://doc.rust-lang.org/std/process/index.html)
- - [`tokio::task`](https://docs.rs/tokio/latest/tokio/task/index.html) vs
-   [`futures::task`](https://docs.rs/futures/0.3.17/futures/task/index.html) vs
-   [`std::task`](https://doc.rust-lang.org/std/task/index.html)
- - [`tokio::stream`](https://docs.rs/tokio/latest/tokio/stream/index.html) vs
-   [`futures::stream`](https://docs.rs/futures/latest/futures/stream/index.html)
+ - [`futures::future`](https://docs.rs/futures/0.3.17/futures/future/) vs
+   [`std::future`](https://doc.rust-lang.org/std/future/)
+ - [`tokio::process`](https://docs.rs/tokio/latest/tokio/process/) vs
+   [`std::process`](https://doc.rust-lang.org/std/process/)
+ - [`tokio::task`](https://docs.rs/tokio/latest/tokio/task/) vs
+   [`futures::task`](https://docs.rs/futures/0.3.17/futures/task/) vs
+   [`std::task`](https://doc.rust-lang.org/std/task/)
+ - [`tokio::stream`](https://docs.rs/tokio/latest/tokio/stream/) vs
+   [`futures::stream`](https://docs.rs/futures/latest/futures/stream/)
    vs the decoy (nightly-only)
-   [`std::stream`](https://doc.rust-lang.org/std/stream/index.html)
+   [`std::stream`](https://doc.rust-lang.org/std/stream/)
 
 Sometimes you'll want to use all of these in one program.
 Finding and naming anything is a chore!
