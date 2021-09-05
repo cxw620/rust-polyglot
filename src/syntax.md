@@ -41,7 +41,8 @@ Typically it is found only at the top of a whole module or crate,
 Attributes are used for many important purposes:
   * [Conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) `#[cfg(..)]`;
   * Denoting functions whose value should be checked
-    (and types which should not be simply discarded):  [`#[must_use]`](https://doc.rust-lang.org/reference/attributes/diagnostics.html#the-must_use-attribute),
+    (and types which should not be simply discarded):
+    [`#[must_use]`][must_use],
   * [Suppressing warnings](https://doc.rust-lang.org/reference/attributes/diagnostics.html#lint-check-attributes) locally `#[allow(dead_code)]` or
     for a whole crate (at the toplevel) `#![allow(dead_code)]`;
   * Enabling [unstable features](https://doc.rust-lang.org/unstable-book/index.html) on Nightly

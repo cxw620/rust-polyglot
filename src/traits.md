@@ -217,8 +217,8 @@ count.
  * [`Deref`](https://doc.rust-lang.org/std/ops/trait.Deref.html): method despatch (see below)
  * [`std::ops::*`](https://doc.rust-lang.org/std/ops/index.html): expression operators (overloading)
  * [`Eq` et al](https://doc.rust-lang.org/std/cmp/index.html) for comparison, and `Hash` for putting objects in many kinds of collections.
- * [`From`](https://doc.rust-lang.org/std/convert/trait.From.html) and
-   [`Into`](https://doc.rust-lang.org/std/convert/trait.Into.html); 
+ * [`From`]
+   [`Into`]
    [`TryFrom`](https://doc.rust-lang.org/std/convert/trait.TryFrom.html) and 
    [`TryInto`](https://doc.rust-lang.org/std/convert/trait.TryInto.html).
    Prefer to `impl From` rather than `Into` if you can;
