@@ -3,6 +3,7 @@
 # There is NO WARRANTY.
 
 MDBOOK ?= mdbook
+PANDOC ?= pandoc
 
 ifneq (,$(wildcard ../Cargo.nail))
 
@@ -19,6 +20,7 @@ CARGO ?= cargo
 OUTPUT_DIR ?= html
 
 OUTPUT_INDEX = $(OUTPUT_DIR)/index.html
+OUTPUT_PDF = polyglot.pdf
 
 default: doc
 
@@ -28,3 +30,6 @@ doc:	$(OUTPUT_INDEX)
 
 $(OUTPUT_INDEX): book.toml $(wildcard docs/*.md)
 	$(NAILING_CARGO_JUST_RUN) $(MDBOOK) build $(MDBOOK_BUILD_NAILING_OPTS)
+
+$(OUTPUT_PDF):
+	pandoc -o $@ docs/*.md
