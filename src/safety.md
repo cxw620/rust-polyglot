@@ -67,7 +67,7 @@ A reasonable collection of threading primitives and tools
 is in
 [`std::thread`](https://doc.rust-lang.org/std/thread/index.html) and
 [`std::sync`](https://doc.rust-lang.org/std/sync/index.html#higher-level-synchronization-objects).
-Many projects prefer the primitves from the [`parking_lot`](https://crates.io/crates/parking_lot) crate.
+Many projects prefer the primitves from the [`parking_lot`] crate.
 
 Multithreading in Rust can be an adjunct to,
 or replacement for,
