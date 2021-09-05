@@ -23,6 +23,7 @@ our @chapters = qw(
    errors
    macros
    async
+   ffi
    rustdoc
    stability
    cargo
@@ -51,6 +52,7 @@ our @crate_refs_docs_rs = qw(
    tempfile
    reqwest
    hyper
+   pyo3
    warp
    getopts
    gumdrop
@@ -75,6 +77,9 @@ our @crate_refs_crates_io = qw(
    structopt
    clap
    argparse
+   wasm-bindgen
+   web-sys
+   rusty_v8
 );
 
 our $precontents = <<END;

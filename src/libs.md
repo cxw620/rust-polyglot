@@ -71,7 +71,7 @@ Libraries you should know about:
 `serde`
 ---------
 
-[serde](https://serde.rs/) 
+[serde]
 is a serialisation/deserialisation framework.
 
 It defines a [data model](https://serde.rs/data-model.html),
