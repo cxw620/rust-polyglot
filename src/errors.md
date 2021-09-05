@@ -12,15 +12,15 @@ Do not use panics for anything except
 unrecoverable discovery of a programming error
 (eg, assertion failure).
 
-[`Result`](https://doc.rust-lang.org/std/result/), `?`
--------------
+`Result` / `?`
+--------------
 
 Rust has exceptionally good in-language support for functions which
 either return successfully,
 or return an error (such as an error code).
 This is the usual error handling style in Rust programs.
 
-The core is this type in the standard library
+The core is the [`Result`] type in the standard library:
 
 ```
     pub enum Result<T,E> { Ok(T), Err(E) }
@@ -44,7 +44,7 @@ The [`fehler`] macro library addresses this problem;
 due to language limitations it is not perfect,
 but even so it greatly improves the ergonomics.
 (For some reason `crates.io` has failed to render
-[fehler's `README.md`](https://github.com/withoutboats/fehler).)
+`fehler`'s [`README.md`](https://github.com/withoutboats/fehler).)
 
 The compiler will tell you if you forget to write a needed `?`.
 (If you tried to use the return value for something,

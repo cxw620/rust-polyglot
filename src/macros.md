@@ -10,7 +10,7 @@ Each has its own section in this chapter:
 
  * ["Macros by example" `macro_rules!`](#macros-by-example-macro_rules)
  * [Procedural macros `proc_macro`](#procedural-macros-proc_macro)
- * [`build.rs`](#build-rs)
+ * [`build.rs`](#buildrs)
 
 ### Macro invocation syntax
 
@@ -30,7 +30,7 @@ with different invocation syntaxes:
    proc_macros can distinguish them.
 
  * Atrributes: `#[macro]` (before some language construct).
-   The macro can filter/alter decorated thing.
+   The macro can filter/alter the decorated thing.
 
  * `#[derive(macro)]` before a struct, enum, or union.
    The macro does not modify the decorated data structure,
@@ -115,7 +115,9 @@ Procedural macros `proc_macro`
 
 Rust's 2nd macro system is very powerful and
 forms the basis for many advanced library facilities.
-The basic idea is: a proc_macro is a function
+The basic idea is: a
+proc_macro
+is a function
 from a [`TokenStream`] to a [`TokenStream`].
 
 The macro can arbitrarily modify the tokens as they pass through,
@@ -131,6 +133,11 @@ but they can also be
 or
 `#[derive(macro)]`s.
 Many important Rust facilities and libraries are derive macros.
+
+`#[derive]` macros can define additional helper `#[atrributes]`
+to be sprinkled on the type or its fields,
+to influence the generated code.
+(These helper attributes are not namespaced.)
 
 proc_macros operate at a syntactic, not semantic level.
 They do not have access to compiler symbol tables, or
@@ -173,7 +180,10 @@ The macro crate ends up as a separate package on `crates.io`.
 It is conventional to call it `...-macros` or `...-derive`.
 
 To write a proc_macro,
-you will probably want to use some of these libraries:
+you will probably want to 
+refer to the
+[chapter in the Reference](https://doc.rust-lang.org/reference/procedural-macros.html)
+and use some of these libraries:
 
   * [`syn`](https://docs.rs/syn/latest/syn/)
     for parsing a `TokenStream` into an AST.
@@ -193,18 +203,20 @@ The [`Span`](https://docs.rs/proc-macro2/latest/proc_macro2/struct.Span.html)
 of identifiers determines their hygiene context.
 
 
-[`build.rs`](https://doc.rust-lang.org/cargo/reference/build-scripts.html)
---------------------------------------------------------------------------
+`build.rs`
+----------
 
 cargo supports running code at build-time,
-by providing a file `build.rs` in the toplevel
+by providing a file
+[`build.rs`](https://doc.rust-lang.org/cargo/reference/build-scripts.html)
+in the toplevel
 containing appropriate functions.
 This can run arbitrary code,
 and includes the ability to generate `*.rs` files
 to be included in the current crate build.
 
 This is an awkward way to to organise build-time code generation,
-because Rust is not an ideal language for writing build rules
+because Rust is not an ideal language for writing build rules,
 (although it can make a good language for generating Rust code).
 
 `build.rs` can be the best choice

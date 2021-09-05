@@ -278,8 +278,8 @@ you have these options:
    borrowing a reference rather than manipulating the refcount.
 
  * Use a crate like
-   [`generational_arena`]
-   [`slotmap`]
+   [`generational_arena`],
+   [`slotmap`],
    [`slab`]
    where the data structure owns the values,
    and your "references" are actually indices.
