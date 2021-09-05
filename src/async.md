@@ -128,10 +128,11 @@ Worth mentioning is
 be good for small mostly-standalone projects.
 
 Fairly recently 
-[`async-std`](https://docs.rs/async-std/1.10.0/async_std/) appeared.
-Despite the name and strapline etc., `async-std` is not
+["`async-std`"](https://docs.rs/async-std/1.10.0/async_std/) appeared.
+Despite the name and strapline etc., "`async-std`" is not
 an official emanation of the Rust Project.
 This name grab in itself leaves a bad taste in my mouth.
+Also, "`async-std`" seems less comprehensive than Tokio in some area.
 
 There are some glue libraries to help with bridging
 the gaps between different runtimes.

@@ -51,27 +51,30 @@ Libraries you should know about:
 
  * [`parking_lot`].  Alternatives to the standard mutex etc.;
    `parking_lot::Mutex` is const-initialisable.
-    [`crossbeam`]: other tools For multithreaded programming.
 
- * `chrono` for human-readable date/time handling.
-   API is a bit funky.  Be sure to use `chrono-tz`.
+ * [`crossbeam`]: other tools For multithreaded programming.
 
- * `libc` and `nix`.  Take your pick.
+ * [`chrono`] for human-readable date/time handling.
+   API is a bit funky.  Be sure to use [`chrono-tz`] on Unix.
 
- * `lazy_static`, `once_cell`
+ * [`libc`] and [`nix`].  Take your pick.
+
+ * [`lazy_static`], [`once_cell`]
    for data to be initialised once.
 
- * `log` (and `env_logger` etc.); `tracing`.
+ * [`log`] (and [`env_logger`],  etc.); [`tracing`].
 
- * `regex`, `glob`, `tempfile`, `rand`, `either`, `void`.
+ * [`regex`] (and [`lazy_regex`]), [`glob`], 
+   [`tempfile`], [`rand`], [`either`], [`void`].
 
 
 `serde`
 ---------
 
-serde is a serialisation/deserialisation framework.
+[serde](https://serde.rs/) 
+is a serialisation/deserialisation framework.
 
-It defines a data model,
+It defines a [data model](https://serde.rs/data-model.html),
 and provides automatic translation of ordinary Rust `struct` s
 to and from that model.
 
@@ -98,16 +101,16 @@ Web tools and frameworks
 
 Most Rust web tools are async.
 
-Use `reqwest` for making HTTP requests.
+Use [`reqwest`] for making HTTP requests.
 
-Use `hyper` for a raw HTTP client or server,
-but consider using `reqwest` (client)
+Use [`hyper`] for a raw HTTP client or server,
+but consider using [`reqwest`] (client)
 or a web framework (server) instead.
 
 Rust is well supplied with web frameworks,
 but it is hard to choose.
 
- * I have been using `rocket` for some years,
+ * I have been using [Rocket](https://rocket.rs/) for some years,
    But the `rocket 0.4` branch (sync) doesn't compile on Stable
    and is in the process of being replaced by the not-yet-released
    `0.5` which uses async.
@@ -115,16 +118,19 @@ but it is hard to choose.
    (this was to be expected, but is still a nuistance).
    If you start a new project with Rocket, use the `0.5` preview.
 
- * `actix-web` is popular too.
+ * [`actix-web`](https://actix.rs/) is popular too.
    When I was choosing Rocket some years ago,
    it had lots of unsound `unsafe`, but that seems fixed now.
 
- * Other web frameworks you should consider are 
-   `warp`, `tide`, `rouille`.
+ * [`rouille`](https://crates.io/crates/rouille) is sync.
+   Yay!  But I haven't tried it.
 
-I would avoid `stdweb`, which depends on the `async-std`
+ * You should perhaps also consider: [`warp`].
+
+I would avoid "`stdweb`", which depends on the "`async-std`"
 async runtime,
-purely because of their very tendentious, even misleading, names.
+purely because of their very tendentious, even misleading, names
+and straplines.
 They are not in any way official:
 not emanations of the main Rust Project.
 
@@ -133,12 +139,12 @@ Command line parsing: `structopt` and `clap`
 ------------------------------------------------
 
 If you are writing a command line program
-you should probably use `structopt`.
+you should probably use [`structopt`].
 It allows declarative definition of command line options.
 
 Unfortunately,
 `structopt` has some problems,
-which it inherits from `clap` (the underlying command line parser):
+which it inherits from [`clap`] (the underlying command line parser):
 
  * Confusion between options which may be repeated,
    options which take multiple values as a single argument,

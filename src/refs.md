@@ -29,4 +29,28 @@
 [`strum`]: https://crates.io/crates/strum
 [`thiserror`]: https://docs.rs/thiserror/latest/thiserror/
 
+https://docs.rs/chrono/0.4.19/chrono/
+https://docs.rs/chrono-tz/0.5.3/chrono_tz/
+https://crates.io/crates/libc
+https://crates.io/crates/nix
+https://docs.rs/lazy_static/1.4.0/lazy_static/
+https://docs.rs/once_cell/1.8.0/once_cell/
+https://crates.io/crates/env_logger
+https://docs.rs/tracing/0.1.26/tracing/
+https://crates.io/crates/regex
+https://docs.rs/lazy-regex/2.2.1/lazy_regex/
+https://docs.rs/glob/0.3.0/glob/
+https://docs.rs/tempfile/3.2.0/tempfile/
+https://crates.io/crates/rand
+https://crates.io/crates/either
+https://crates.io/crates/void
+https://docs.rs/reqwest/0.11.4/reqwest/
+https://docs.rs/hyper/0.14.12/hyper/
+https://docs.rs/warp/0.3.1/warp/
+https://crates.io/crates/structopt
+https://crates.io/crates/clap
+https://docs.rs/getopts/0.2.21/getopts/
+https://docs.rs/gumdrop/0.8.0/gumdrop/
+https://crates.io/crates/argparse
+
 [must_use]: https://doc.rust-lang.org/reference/attributes/diagnostics.html#the-must_use-attribute

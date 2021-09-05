@@ -241,7 +241,7 @@ You can define an enum with no variants.
 The standard library has `Infallible` which is
 an uninhabited error type,
 but its ergnomics are not always great.
-The crate [`void`](https://crates.io/crates/void) can help fill this gap.
+The crate [`void`] can help fill this gap.
 It provides not only a trivial uninhabited type (`Void`)
 but also
 helpful trait impls, functions and macros,
