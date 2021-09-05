@@ -221,7 +221,7 @@ then one of the following is the case:
 ### Tactics for fighting the borrow checker
 
  * Copy rather than borrowing:
-   Sprinkle `.clone()`, [`.to_owned`](https://doc.rust-lang.org/std/borrow/trait.ToOwned.html), etc., and/or
+   Sprinkle `.clone()`, [`.to_owned()`](https://doc.rust-lang.org/std/borrow/trait.ToOwned.html), etc., and/or
    change types to owned variants (or [`Cow`](https://doc.rust-lang.org/std/borrow/enum.Cow.html)).
 
  * Introduce `let` bindings to prolong the lifetime of temporaries.
@@ -265,7 +265,7 @@ you have these options:
 
  * Use runtime ownership checking instead of compile-time checking.
    I.e., switch to
-    [`Arc`](https://doc.rust-lang.org/std/sync/struct.Arc.html)
+    [`Arc`](https://doc.rust-lang.org/std/sync/struct.Arc.html),
     [`Mutex`](https://doc.rust-lang.org/std/sync/struct.Mutex.html)
     (maybe [`parking_lot`](https://crates.io/crates/parking_lot)'s),
     [`Rc`](https://doc.rust-lang.org/std/rc/struct.Rc.html),

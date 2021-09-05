@@ -5,7 +5,7 @@ Types and patterns
 [comment]: # ( SPDX-License-Identifier: MIT                 )
 [comment]: # ( There is NO WARRANTY.                        )
 
-Rust's type system is based on Hindley--Milner--style algebraic types,
+Rust's type system is based on Hindley-Milner-style algebraic types,
 as seen in languages like ML and Haskell.
 
 The compiler will often infer the types of variables (including closures)
@@ -26,8 +26,8 @@ for all of the concrete types that are actually required.
 When it is necessary to explictly specify generic parameters,
 for example in a function call,
 one uses the
-`turbofish <https://doc.rust-lang.org/reference/glossary.html?highlight=turbo#turbofish>`_ syntax
-(so named because `::<>` looks a bit like a speedy fish)::
+[turbofish](https://doc.rust-lang.org/reference/glossary.html?highlight=turbo#turbofish) syntax
+(so named because `::<>` looks a bit like a speedy fish):
 
 ```
 function::<Generic,Args>(...)
@@ -119,8 +119,11 @@ plus a pointer to its vtable; `dyn Trait` itself is unsized.
 [**usize**](file:///home/rustcargo/docs/share/doc/rust/html/std/primitive.usize.html) is the type of array and slice indices.
 It corresponds to C `size_t`.
 Rust
-[generally avoids](https://doc.rust-lang.org/std/primitive.pointer.html#method.offset)
+([generally](https://doc.rust-lang.org/std/primitive.pointer.html#method.offset))
+[avoids](https://doc.rust-lang.org/std/primitive.pointer.html#method.offset_from)
 the existence of objects bigger than fits into an `isize`.
+
+xxx tuple field references
 
 The empty tuple `()`, aka "unit", is the type of
 blocks (incl. functions) that do not evaluate to (return) an actual value.
@@ -150,7 +153,7 @@ Literals
 | floating point | `0.`, `1e23f64` |
 | `&'static str` | `"string"`, `r#"^raw:"\.\s"#`, `"\n\b\u{007d}\""` [etc.](https://doc.rust-lang.org/reference/tokens.html#string-literals) |
 | `char` | `'c'`, `'\n'`, [etc.](https://doc.rust-lang.org/reference/tokens.html#character-literals)
-| `&'static [u8]` | `b"byte string"` [etc.](https://doc.rust-lang.org/reference/tokens.html#byte-string-literals), `&[b'c', 42]` (actually `[u8;2]`) |
+| `&'static [u8]` | `b"byte string"` [etc.](https://doc.rust-lang.org/reference/tokens.html#byte-string-literals), `&[b'c', 42]` (actually `&[u8;2]`) |
 | `[T; N]` | `["hi","there"]` (`[&str; 2]`), `[0u32;14]` (`[u32; 14]`) |
 | `()`, `(T,)`, `(T,U)` | `()`, `(None,)` `(42,"forty-two)` |
 
@@ -179,7 +182,7 @@ the provided field values are computed in the order you provide.
 Aggregates can be rest-initialised with `..`,
 naming another value of the same type (often `Default::default()`).
 
-If a type has fields you cannot name because they're not `pub`,
+If a nominal type has fields you cannot name because they're not `pub`,
 you cannot construct it.
 
 Patterns
@@ -210,8 +213,8 @@ Unneeded parts of a value can be discarded by use of
 `_` or `..`.
 
 Irrefutable patterns appear in ordinary `let` bindings
-and function parameters
-(it is not possible to define the different pattern matches
+and function parameters.
+(It is not possible to define the different pattern matches
 for a single function name separately like in Haskell or Ocaml;
 use `match`.)
 
