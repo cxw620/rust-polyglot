@@ -28,6 +28,16 @@ our @chapters = qw(
    colophon
 );
 
+our $precontents = <<END;
+Rust for the experienced programmer, a DRAFT guide.
+
+See the [Introduction](intro.md) for
+the rubric, goals, and non-goals.
+See the [Colophon](colophon.md) for
+authorship, making contributions and corrections,
+and document source code,
+END
+
 #---------- output generation functions ----------
 
 # variables that come from the parser
@@ -49,8 +59,12 @@ sub contents() {
   start_output("CONTENTS.md");
   ol("# $title");
   o_autogen();
-  ol("## Table of Contents");
-  ol();
+  o(<<END);
+$precontents
+
+## Table of Contents
+
+END
 
   for my $section (@sections) {
     o("  " x (1 + $section->[0]));
