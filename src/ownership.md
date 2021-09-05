@@ -278,9 +278,9 @@ you have these options:
    borrowing a reference rather than manipulating the refcount.
 
  * Use a crate like
-   [`generational_arena`](https://crates.io/crates/generational_arena) or
-   [`slotmap`](https://crates.io/crates/slotmap) or
-   [`slab`](https://crates.io/crates/slab)
+   [`generational_arena`]
+   [`slotmap`]
+   [`slab`]
    where the data structure owns the values,
    and your "references" are actually indices.
 

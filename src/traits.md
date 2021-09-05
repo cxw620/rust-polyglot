@@ -88,7 +88,7 @@ The standard library provides a large set of combinator methods
 on `Iterator`,
 for mapping, folding, filtering, and so on.
 These typically take closures as arguments.
-See also the excellent [`itertools`](https://crates.io/crates/itertools) crate.
+See also the excellent [`itertools`] crate.
 
 Idiomatic coding style for iteration in Rust involves
 chaining iterator combinators.

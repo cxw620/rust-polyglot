@@ -40,7 +40,7 @@ One must write
 `Ok(())` at the end of a function which would otherwise fall off the end
 implicitly returning `()`.
 
-The [`fehler`](https://boats.gitlab.io/blog/post/failure-to-fehler/) macro library addresses this problem;
+The [`fehler`] macro library addresses this problem;
 due to language limitations it is not perfect,
 but even so it greatly improves the ergonomics.
 (For some reason `crates.io` has failed to render
@@ -76,12 +76,12 @@ The available and useful range of error types is
 too extensive to discuss here.
 But, consider:
 
- * [`eyre`](https://docs.rs/eyre/latest/eyre/) (or [`anyhow`](https://docs.rs/anyhow/latest/anyhow/))
+ * [`eyre`] (or [`anyhow`])
    for a boxed portmanteau error type;
    good for application programs which need to
    aggregate many kinds of error.
 
- * [`thiserror`](https://docs.rs/thiserror/latest/thiserror/) for defining your own error enum;
+ * [`thiserror`] for defining your own error enum;
    good when you're writing a library.
 
  * Defining your own unit struct as the error type
