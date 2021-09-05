@@ -356,13 +356,13 @@ because the useful modules have generic names:
  - [`futures::future`](https://docs.rs/futures/0.3.17/futures/future/index.html) vs
    [`std::future`](https://doc.rust-lang.org/std/future/index.html)
  - [`tokio::process`](https://docs.rs/tokio/latest/tokio/process/index.html) vs
-   [`std::process`](https://doc.rust-lang.org/std/task/index.html)
+   [`std::process`](https://doc.rust-lang.org/std/process/index.html)
  - [`tokio::task`](https://docs.rs/tokio/latest/tokio/task/index.html) vs
    [`futures::task`](https://docs.rs/futures/0.3.17/futures/task/index.html) vs
    [`std::task`](https://doc.rust-lang.org/std/task/index.html)
  - [`tokio::stream`](https://docs.rs/tokio/latest/tokio/stream/index.html) vs
    [`futures::stream`](https://docs.rs/futures/latest/futures/stream/index.html)
-   vs the nightly-only
+   vs the decoy (nightly-only)
    [`std::stream`](https://doc.rust-lang.org/std/stream/index.html)
 
 Sometimes you'll want to use all of these in one program.
