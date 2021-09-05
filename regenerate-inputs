@@ -31,6 +31,53 @@ our @chapters = qw(
    colophon
 );
 
+our @crate_refs_docs_rs = qw(
+   anyhow
+   arrayvec
+   crossbeam
+   easy-ext
+   eyre
+   index_vec
+   indexmap
+   num-derive
+   thiserror
+   chrono
+   chrono-tz
+   lazy_static
+   once_cell
+   tracing
+   lazy-regex
+   log
+   glob
+   tempfile
+   reqwest
+   hyper
+   warp
+   getopts
+   gumdrop
+);
+our @crate_refs_crates_io = qw(
+   generational_arena
+   itertools
+   num-traits
+   num
+   parking_lot
+   rayon
+   slab
+   slotmap
+   strum
+   libc
+   nix
+   env_logger
+   regex
+   rand
+   either
+   void
+   structopt
+   clap
+   argparse
+);
+
 our $precontents = <<END;
 Rust for the experienced programmer, a DRAFT guide.
 
@@ -41,7 +88,10 @@ authorship, making contributions and corrections,
 and document source code,
 END
 
-our $mdbook_refs = "{{ #include ../$src/refs.md }}";
+our $mdbook_refs = <<END;
+{{ #include ../$src/refs.md }}
+{{ #include autorefs.md }}
+END
 
 #---------- output generation functions ----------
 
@@ -83,7 +133,20 @@ END
     }
     ol(")");
   }
-  ol("\n$mdbook_refs");
+  o("\n$mdbook_refs");
+  end_output();
+}
+
+sub autorefs() {
+  start_output("mdbook/autorefs.md");
+  foreach my $crate (@crate_refs_docs_rs) {
+    my $rustc_crate = $crate;
+    $rustc_crate =~ y/-/_/;
+    ol("[\`$crate`]: https://docs.rs/$crate/latest/$rustc_crate/");
+  }
+  foreach my $crate (@crate_refs_crates_io) {
+    ol("[\`$crate`]: https://crates.io/crates/$crate");
+  }
   end_output();
 }
 
@@ -129,7 +192,7 @@ sub scan_filter() {
       $last_l = $new_last_l;
     }
 
-    print MD "\n\n$mdbook_refs\n" or die $!;
+    print MD "\n\n$mdbook_refs" or die $!;
     close MD or die $!;
 
     push @sections, @csections;
@@ -189,4 +252,5 @@ mkdir "mdbook" or $!==EEXIST or die $!;
 scan_filter();
 summary();
 contents();
+autorefs();
 install_outputs();

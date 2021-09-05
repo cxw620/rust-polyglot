@@ -64,7 +64,7 @@ Libraries you should know about:
 
  * [`log`] (and [`env_logger`],  etc.); [`tracing`].
 
- * [`regex`] (and [`lazy_regex`]), [`glob`], 
+ * [`regex`] (and [`lazy-regex`]), [`glob`], 
    [`tempfile`], [`rand`], [`either`], [`void`].
 
 
@@ -168,7 +168,7 @@ means accepting that one's program will have
 an imperfect and sometimes-balky command line syntax.
 
 There are alternatives,
-notably `getopts`, `gumdrop` and `argparse`,
+notably [`getopts`], [`gumdrop`] and [`argparse`],
 but they are much less popular and less well maintained.
 I currently use `argparse` where I want a fine-tuned option parser,
 but it is quite odd and the docs are not great.
