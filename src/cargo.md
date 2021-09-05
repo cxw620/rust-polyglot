@@ -116,7 +116,9 @@ This puts your OS distro between you
 and the raw data from `crates.io`,
 which is likely to reduce your risk.
 To do this,
-you will probably want to nobble your cargo config not to
+you will probably want to configure cargo's
+[source replacement](https://doc.rust-lang.org/cargo/reference/source-replacement.html)
+not to
 look at `crates.io` but to
 [look at your distro packages instead](https://salsa.debian.org/rust-team/debcargo-conf/blob/master/README.rst#id22) (sorry, link needs JS).
 
@@ -160,6 +162,9 @@ is not provided to the crates being compiled.
 The ecosystem infrastructure does not use out-of-tree builds.
 So many crates' tests do not work out-of-tree,
 and some crates do not build.
+(You *can* arrange for the `target` directory
+to be somewhere else,
+if you don't mind the build still needing write access to the source tree.)
 
 Although a stated goal of cargo is to be
 embeddable into other build systems,
