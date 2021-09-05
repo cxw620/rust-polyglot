@@ -267,7 +267,7 @@ you have these options:
    I.e., switch to
     [`Arc`](https://doc.rust-lang.org/std/sync/struct.Arc.html),
     [`Mutex`](https://doc.rust-lang.org/std/sync/struct.Mutex.html)
-    (maybe [`parking_lot`](https://crates.io/crates/parking_lot)'s),
+    (maybe [`parking_lot`]'s),
     [`Rc`](https://doc.rust-lang.org/std/rc/struct.Rc.html),
     [`RefCell`](https://doc.rust-lang.org/std/cell/struct.RefCell.html) etc.
 

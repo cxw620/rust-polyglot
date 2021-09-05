@@ -133,8 +133,9 @@ blocks (incl. functions) that do not evaluate to (return) an actual value.
 | Purpose | Type |
 | -------- | --- |
 | Heap allocation | [`Box<T>`](Box)
-| Expanding vector (ptr, len, capacity) | [`Vec<T>`](https://doc.rust-lang.org/std/vec/struct.Vec.html)
+| Expanding vector (ptr, len, capacity) | [`Vec<T>`][`Vec`]
 | Expanding string (ptr, len, capacity) | [`String`]
+| Hash table / ordered B-Tree | [`HashMap`] / [`BTreeMap`]
 | Reference-counted heap allocation <br> (no GC, can leak cycles) | [`Arc<T>`](https://doc.rust-lang.org/std/sync/struct.Arc.html), [`Rc<T>`](https://doc.rust-lang.org/std/rc/index.html)
 | Optional (aka Haskell `Maybe`) | [`Option<T>`][`Option`]
 | Fallible (commonly a function return type) | [`Result<T,E>`](https://doc.rust-lang.org/std/result/enum.Result.html)

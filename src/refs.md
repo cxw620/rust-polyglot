@@ -5,15 +5,25 @@
 [`Send`]: https://doc.rust-lang.org/std/marker/trait.Send.html
 [`String`]: https://doc.rust-lang.org/std/string/struct.String.html
 [`Sync`]: https://doc.rust-lang.org/std/marker/trait.Sync.html
+[`Vec`]: https://doc.rust-lang.org/std/vec/struct.Vec.html
+[`HashMap`]: https://doc.rust-lang.org/nightly/std/collections/struct.HashMap.html
+[`BTreeMap`]: https://doc.rust-lang.org/nightly/std/collections/struct.BTreeMap.html
 
 [`anyhow`]: https://docs.rs/anyhow/latest/anyhow/
+[`arrayvec`]: https://docs.rs/arrayvec/latest/arrayvec/
+[`crossbeam`]: https://docs.rs/crossbeam/latest/crossbeam/
+[`easy-ext`]: https://docs.rs/easy-ext/latest/easy_ext/
 [`eyre`]: https://docs.rs/eyre/latest/eyre/
 [`fehler`]: https://boats.gitlab.io/blog/post/failure-to-fehler/
 [`generational_arena`]: https://crates.io/crates/generational_arena
+[`index_vec`]: https://docs.rs/index_vec/latest/index_vec/
+[`indexmap`]: https://docs.rs/indexmap/latest/indexmap/
 [`itertools`]: https://crates.io/crates/itertools
 [`num-derive`]: https://docs.rs/num-derive/latest/num_derive/
 [`num-traits`]: https://crates.io/crates/num-traits
 [`num`]: https://crates.io/crates/num
+[`parking_lot`]: https://crates.io/crates/parking_lot
+[`rayon`]: https://crates.io/crates/rayon
 [`slab`]: https://crates.io/crates/slab
 [`slotmap`]: https://crates.io/crates/slotmap
 [`strum`]: https://crates.io/crates/strum

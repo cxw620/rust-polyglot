@@ -7,7 +7,7 @@ Libraries
 
 There are many excellent Rust libraries
 (and also many poor ones of course).
-These are all collected at `crates.io`,
+These are all collected at [`crates.io`](https://crates.io/),
 the Rust language-specific package repository.
 
 For most programs,
@@ -38,21 +38,20 @@ Libraries you should know about:
 
  * [`strum`].  Iterate over enum variants; enums to strings, etc.
 
- * [`slab`], [`generational_area`] or [`slotmap`])
+ * [`slab`], [`generational_arena`] or [`slotmap`].
    Heap storage tools which safely sidestep borrowck (and are fast).
 
- * `index_vec`.  `arrayvec`. `indexmap`.
-   Variations on `Vec` and `HashSet`.
+ * [`index_vec`].  [`arrayvec`]. [`indexmap`].
+   Variations on [`Vec`] and [`HashMap`].
 
- * `easy_ext`.  Conveniently define methods on other people's types.
+ * [`easy-ext`].  Conveniently define methods on other people's types.
 
- * `rayon`: Semi-magical safe multicore parallelism
+ * [`rayon`]: Semi-magical safe multicore parallelism
    as a drop-in replacement for std's serial iterators.
 
- * `crossbeam`.  For multithreaded programming.
-
- * `parking_lot`.  Alternatives to the standard mutex etc.;
+ * [`parking_lot`].  Alternatives to the standard mutex etc.;
    `parking_lot::Mutex` is const-initialisable.
+    [`crossbeam`]: other tools For multithreaded programming.
 
  * `chrono` for human-readable date/time handling.
    API is a bit funky.  Be sure to use `chrono-tz`.
