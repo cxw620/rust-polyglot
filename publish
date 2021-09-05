@@ -14,7 +14,7 @@ make clean
 make
 set -x
 
-rsync -r --delete ../Build/poloyglot/html/. \
+rsync -r --delete ../Build/polyglot/html/. \
 	ianmdlvl@chiark:public-html/rust-polyglot/.
 
 git push origin HEAD:published
