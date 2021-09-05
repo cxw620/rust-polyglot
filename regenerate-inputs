@@ -1,0 +1,100 @@
+#!/usr/bin/perl -w
+use strict;
+our $copyright = <<END;
+    Copyright 2021 Ian Jackson and contributors
+    SPDX-License-Identifier: MIT
+    There is NO WARRANTY.
+END
+
+#---------- input data and templates ----------
+
+our $title = "Rust for the Polyglot Programmer";
+
+our @chapters = qw(
+   intro
+   syntax
+   types
+   ownership
+   traits
+   safety
+   errors
+   macros
+   async
+   rustdoc
+   stability
+   cargo
+   libs
+   further
+   colophon
+);
+
+#---------- output generation functions ----------
+
+sub summary() {
+  start_output("SUMMARY.md");
+  ol("# $title");
+  o_autogen();
+  foreach my $section {@sections) {
+    next if $section->[0];
+    ol(" - [$section->[2]]($section->[1])");
+  }
+  end_output();
+}
+#---------- input scanning ----------
+
+our @sections;
+
+sub scan() {
+  foreach my $chap (@chapters) {
+    if (stat "$src/$chap.rst") { warn "$chap still RST!"; next; }
+
+    my @csections;
+
+    my $leaf = "$chap.md";
+
+    open C, "$src/$leaf" or die "$leaf $!";
+    my $last_l;
+    while (<C>) {
+      s{\s+$}{};
+      my $new_last_l;
+      if (m{^---+$} || m{^===+$}) {
+	my $level = 0 + !!m{^---};
+	push @csections, [ $level, $leaf, ($last_l // die) ];
+      } elsif (m{^(\#+) (\S.*\S)}) {
+	my $level = -1 + length $1;
+	push @csections, [ $level, $leaf, $2 ];
+      } else {
+	die if $.==2;
+	$new_last_l = $_;
+      }
+      $last_l = $new_last_l;
+    }
+
+    push @sections, @csections;
+  }
+}
+
+#---------- machinery and main program ----------
+
+our $current_output_file;
+
+sub start_output ($) {
+  die if defined $current_output_file;
+  $current_output_file = "docs/$_[0]";
+  open O, "> $current_output_file.tmp" or die "$current_output_file.tmp $!";
+}
+sub o {
+  print O @_ or die $!;
+}
+sub ol {
+  o @_;
+  o "\n";
+}
+sub end_output () {
+  die unless defined $current_output_file;
+  close O or die $!;
+  rename "$current_output_file.tmp", $current_output_file or die $!;
+}
+
+scan();
+summary();
