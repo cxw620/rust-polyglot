@@ -78,6 +78,7 @@ END
     }
     ol(")");
   }
+  ol("\n{{ #include refs.md }}");
   end_output();
 }
 
