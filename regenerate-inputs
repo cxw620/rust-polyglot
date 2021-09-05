@@ -54,10 +54,15 @@ sub contents() {
 
   for my $section (@sections) {
     o("  " x (1 + $section->[0]));
-    o(" - [$section->[2]]($section->[1]",
-      $section->[0] ? "#$section->[2]" : "",
-      ")");
-    ol();
+    o(" - [$section->[2]]($section->[1]");
+    if ($section->[0]) {
+      my $lref = $section->[2];
+      $lref =~ s/[^ \w]//g;
+      $lref =~ s/ /-/g;
+      $lref = lc $lref;
+      o("#$lref");
+    }
+    ol(")");
   }
   end_output();
 }
