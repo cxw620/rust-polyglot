@@ -234,8 +234,7 @@ count.
    [`Clone`](https://doc.rust-lang.org/std/clone/trait.Clone.html),
    [`AsRef`](https://doc.rust-lang.org/std/convert/trait.AsRef.html),
    [`Borrow`](https://doc.rust-lang.org/std/borrow/trait.Borrow.html)/[`ToOwned`](https://doc.rust-lang.org/std/borrow/trait.ToOwned.html).
- * [`Send`](https://doc.rust-lang.org/std/marker/trait.Send.html),
-   [`Sync`](https://doc.rust-lang.org/std/marker/trait.Sync.html)
+ * [`Send`] [`Sync`]
    for thread-safety (permitting use in multithreaded programs).
  * [`Default`](https://doc.rust-lang.org/std/default/trait.Default.html)
    (implemented promiscuously)

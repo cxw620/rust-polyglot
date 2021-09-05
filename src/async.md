@@ -43,7 +43,7 @@ Fundamentals
 ------------
 
 A magic trait 
-[`Future<Output=T>`](https://doc.rust-lang.org/nightly/std/future/trait.Future.html)
+[`Future<Output=T>`](https://doc.rust-lang.org/std/future/trait.Future.html)
  represents an
 uncompleted asynchronous process.
 
@@ -82,12 +82,12 @@ The usual Rust memory-safety guarantees are retained.
 
 Futures have one method, `poll`,
 which either returns
-[`Ready(T)` or `Pending`](https://doc.rust-lang.org/nightly/std/task/enum.Poll.html).
+[`Ready(T)` or `Pending`](https://doc.rust-lang.org/std/task/enum.Poll.html).
 
 `poll` takes a 
-[Context](https://doc.rust-lang.org/nightly/std/task/struct.Context.html)
+[Context](https://doc.rust-lang.org/std/task/struct.Context.html)
  which has an associated 
-[`Waker`](https://doc.rust-lang.org/nightly/std/task/struct.Waker.html).
+[`Waker`](https://doc.rust-lang.org/std/task/struct.Waker.html).
 When the future returns `Pending`,
 it is supposed to have recorded the `Waker` somewhere
 so that when the task can make progress, the `Waker` is woken.
@@ -119,7 +119,7 @@ In practice,
 library authors have in many cases been forced
 to choose a specific runtime.
 
-Most of the important libraries use [**Tokio**](https://tokio.rs/),
+Most of the important libraries use **Tokio**
 a mature production-quality runtime
 (which actually predates modern async Rust language features).
 
@@ -203,7 +203,7 @@ is not straightforward on a pinned object!
 
 See the
 docs for
-[`std::pin`](https://doc.rust-lang.org/nightly/std/pin/index.html)
+[`std::pin`](https://doc.rust-lang.org/std/pin/index.html)
 and the crates
 [`pin-project`](https://crates.io/crates/pin-project)
 and
@@ -242,11 +242,10 @@ This is suboptimal because
 it requires an additional heap allocation,
 and runtime despatch.
 This workaround has been neatly productised
-in the `async-trait` macro package.
+in the [`async-trait`](https://crates.io/crates/async-trait) macro package.
 
 
-Cancellation safety
-~~~~~~~~~~~~~~~~~~~
+### Cancellation safety
 
 Unlike most other languages' async systems,
 Rust futures are inert:
@@ -260,7 +259,7 @@ or if a future is put explicitly into a data structure
 and then dropped at some point.
 
 The effect from the point of view of an `async { }`
-is that the code simply stops running,
+is that the code simply stops running in the middle,
 effectively-unpredictably,
 discarding all of the local state.
 
@@ -271,7 +270,7 @@ if the local variables containing partially-processed data
 are simply discarded,
 and the algorithm later restarted from the beginning
 by a re-creation of the same future
-(eg, the next iteration of a loop containing a `select`).
+(eg, the next iteration of a loop containing a `select!`).
 
 A type, future, data structure, or method, is said to be
 **cancellation-safe** if the underlying data structure is such that
@@ -291,15 +290,15 @@ in frame desynchronisation of network streams
 and other alarming consequences.
 
 
-Send
-~~~~
+### Send
+
 
 Most async Rust executors are multithreaded
 and will move tasks from thread to thread at whim.
-This means that every future in such a task must be `Send`,
+This means that every future in such a task must be [`Send`],
 meaning it can safely be sent between threads.
 Therefore the local variables in async code must all be `Send`;
-captured references must be to `Sync` types.
+captured references must be to [`Sync`] types.
 
 Most concrete Rust types are in fact `Send`,
 but many generic types are not `Send` unless explicitly constrained.
@@ -316,8 +315,8 @@ working with non-`Send` futures is totally possible.
 But usually lack of `Send` is just an omission.
 
 
-Error messages
-~~~~~~~~~~~~~~
+### Error messages
+
 
 Async Rust has a tendency to produce rather opaque error messages
 referring to opaque types
@@ -327,8 +326,8 @@ You will get used to them,
 but it is in stark contrast to the rest of the language.
 
 
-Libraries and utilities
-~~~~~~~~~~~~~~~~~~~~~~~
+### Libraries and utilities
+
 
 It is not entirely straightforward to find the right libraries to use.
 Matters are complicated by older decoy libraries
@@ -336,13 +335,15 @@ from prior incarnations of Rust's approach to async.
 
 You will end up using, at least:
 
- * `std`\ 's builtin futures support;
- * utilities from your runtime;
- * utilities from the `futures` crate.
+ * `std`'s builtin futures support:
+   [std::task](https://doc.rust-lang.org/std/task/index.html),
+   [std::future](https://doc.rust-lang.org/std/future/index.html);
+ * utilities from your runtime, eg: [Tokio](https://docs.rs/tokio/latest/tokio/)'s modules and macros.
+ * utilities from the [`futures` crate](https://docs.rs/futures/latest/futures/).
 
 Unfortunately, many of these don't lend themselves to
 convenient blanket imports
-(although you should consider `use futures::prelude::*`).
+(although you should consider `use `[`futures::prelude`](https://docs.rs/futures/0.3.17/futures/prelude/index.html)`::*`).
 
 Futures-related items share names with non-async thread tools
 (eg, `Mutex`, `mpsc`, etc., can mean different things).
@@ -352,8 +353,17 @@ in the same program.
 
 Importing the sub-module names is little better
 because the useful modules have generic names:
-`futures::future` vs `std::future`;
-`tokio::process` vs `std::process`;
-`tokio::task` vs `futures::task` vs `std::task`.
+ - [`futures::future`](https://docs.rs/futures/0.3.17/futures/future/index.html) vs
+   [`std::future`](https://doc.rust-lang.org/std/future/index.html)
+ - [`tokio::process`](https://docs.rs/tokio/latest/tokio/process/index.html) vs
+   [`std::process`](https://doc.rust-lang.org/std/task/index.html)
+ - [`tokio::task`](https://docs.rs/tokio/latest/tokio/task/index.html) vs
+   [`futures::task`](https://docs.rs/futures/0.3.17/futures/task/index.html) vs
+   [`std::task`](https://doc.rust-lang.org/std/task/index.html)
+ - [`tokio::stream`](https://docs.rs/tokio/latest/tokio/stream/index.html) vs
+   [`futures::stream`](https://docs.rs/futures/latest/futures/stream/index.html)
+   vs the nightly-only
+   [`std::stream`](https://doc.rust-lang.org/std/stream/index.html)
+
 Sometimes you'll want to use all of these in one program.
 Finding and naming anything is a chore!
