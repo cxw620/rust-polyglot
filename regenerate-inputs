@@ -8,7 +8,7 @@ END
 
 #---------- input data and templates ----------
 
-our $title = "Rust for the Polyglot Programmer";
+our $title = "DRAFT - Rust for the Polyglot Programmer";
 
 our @chapters = qw(
    intro
