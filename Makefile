@@ -2,13 +2,29 @@
 # SPDX-License-Identifier: MIT
 # There is NO WARRANTY.
 
-SPHINXBUILD	?= sphinx-build
+MDBOOK ?= mdbook
+
+ifneq (,$(wildcard ../Cargo.nail))
+
+NAILING_CARGO ?= nailing-cargo
+CARGO ?= $(NAILING_CARGO)
+BUILD_SUBDIR ?= ../Build
+OUTPUT_DIR = $(BUILD_SUBDIR)/$(notdir $(PWD))/html
+NAILING_CARGO_JUST_RUN ?= $(NAILING_CARGO) --just-run -q ---
+MDBOOK_BUILD_NAILING_OPTS ?= -d $(OUTPUT_DIR) $(PWD)
+
+endif # Cargo.nail
+
+CARGO ?= cargo
+OUTPUT_DIR ?= html
+
+OUTPUT_INDEX = $(OUTPUT_DIR)/index.html
 
 default: doc
 
-doc:	docs/html/index.html
+doc:	$(OUTPUT_INDEX)
 	@echo 'Documentation can now be found here:'
-	@echo '  file://$(PWD)/$<'
+	@echo '  file://$(abspath $<)'
 
-docs/html/index.html: docs/conf.py $(wildcard docs/*.md docs/*.rst docs/*.png)
-	$(SPHINXBUILD) -M html docs docs $(SPHINXOPTS)
+$(OUTPUT_INDEX): book.toml $(wildcard docs/*.md)
+	$(NAILING_CARGO_JUST_RUN) $(MDBOOK) build $(MDBOOK_BUILD_NAILING_OPTS)
