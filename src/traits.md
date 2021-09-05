@@ -94,6 +94,8 @@ Idiomatic coding style for iteration in Rust involves
 chaining iterator combinators.
 Effectively,
 Rust contains an iterator monad sublanguage with a funky syntax.
+withoutboats has an excellent
+[essay on Rust and Monads/effects](https://without.boats/blog/the-problem-of-effects/).
 
 The [`.collect()`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect) method in `Iterator`
 reassembles the result of an iteration
