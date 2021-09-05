@@ -9,6 +9,8 @@
 [`HashMap`]: https://doc.rust-lang.org/nightly/std/collections/struct.HashMap.html
 [`BTreeMap`]: https://doc.rust-lang.org/nightly/std/collections/struct.BTreeMap.html
 
+[Reference]: (https://doc.rust-lang.org/reference/)
+
 [must_use]: https://doc.rust-lang.org/reference/attributes/diagnostics.html#the-must_use-attribute
 
 [`fehler`]: https://boats.gitlab.io/blog/post/failure-to-fehler/

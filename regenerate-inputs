@@ -27,7 +27,6 @@ our @chapters = qw(
    stability
    cargo
    libs
-   further
    colophon
 );
 
@@ -84,7 +83,8 @@ Rust for the experienced programmer, a DRAFT guide.
 See the [Introduction](intro.md) for
 the rubric, goals, and non-goals.
 See the [Colophon](colophon.md) for
-authorship, making contributions and corrections,
+authorship and acknowledgements,
+making contributions and corrections,
 and document source code,
 END
 

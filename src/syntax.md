@@ -149,7 +149,7 @@ Rust has strong conventions about identifier case and spelling,
 which the compiler will warn you about violating:
 
  * `snake_case`: Variables, functions and modules.
- * `StudlyCaps`: Types (including enum variant names)
+ * `StudlyCaps`: Types (including enum variant names and traits).
  * `SCREAMING_SNAKE_CASE`: Constants and global variables.
 
 `-` is not valid in identifier names in Rust source code.

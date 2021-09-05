@@ -34,7 +34,7 @@ Alternatives or supplements to this guide
  * Official docs:
    the [Standard Library reference](https://doc.rust-lang.org/std/)
    (excllent) and the
-   [Reference](https://doc.rust-lang.org/reference/).
+   [Reference].
    (woefully incomplete).
 
 Language
@@ -113,7 +113,7 @@ There is also an
 used mostly for validation.
 
 There is no formal language specification.
-The [Rust Reference](https://doc.rust-lang.org/reference/)
+The [Rust Reference][Reference]
 has most of the syntax but usually lacks
 important information about semantics and details.
 

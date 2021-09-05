@@ -92,12 +92,21 @@ for libraries which use unsafe internally.
 and which do not themselves use `unsafe`, have UB.)
 You should ensure your library APIs are sound.
 
+Most facilities marked unsafe are unsafe because they can allow
+memory misuse and/or violation of the ownership and aliasing rules.
+
 How difficult a proof obligation you have depends very much on
 what you are doing.
 Sometimes it is easy.
 
-Most facilities marked unsafe are unsafe because they can allow
-memory misuse and/or violation of the ownership and aliasing rules.
+One difficulty is the lack of formal specifications.
+The [Reference] and the
+[Nomicon](https://doc.rust-lang.org/nomicon/index.html)
+have some information.
+It is sometimes necessary to rely on
+the reasonableness of the implementation.
+This is less bad than it sounds because
+the Rust community try quite hard to make things reasonable.
 
 Aliasing rules are provenance-based.
 (There is no type-based alias analysis.)

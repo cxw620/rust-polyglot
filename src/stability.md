@@ -28,8 +28,8 @@ and exists mostly to be tested.
 The big difference is between Nightly and Beta/Stable
 (henceforth and elsewhere, Stable).
 
-### Nightly
 
+### Nightly
 
 Nightly provides numerous features which are explicitly denoted unstable.
 These are sometimes introduced experimentally.
@@ -46,8 +46,8 @@ for which an additional
 `#![allow(incomplete_features)]`
 is required.
 
-### Stable
 
+### Stable
 
 Conversely Stable Rust aims to keep existing code working,
 almost entirely successfully.
