@@ -22,7 +22,7 @@ OUTPUT_DIR ?= html
 OUTPUT_INDEX = $(OUTPUT_DIR)/index.html
 OUTPUT_PDF = polyglot.pdf
 
-MD_SOURCES := $(wildcard docs/*[^A-Z].md)
+MD_SOURCES := $(wildcard src/*[^A-Z].md)
 
 default: doc
 
@@ -37,4 +37,4 @@ mdbook/SUMMARY.md: regenerate-inputs $(MD_SOURCES)
 	./$<
 
 $(OUTPUT_PDF):
-	pandoc -o $@ docs/*.md
+	pandoc -o $@ src/*.md

@@ -7,6 +7,7 @@ our $copyright = <<END;
 END
 
 use POSIX;
+our $src = "src";
 
 #---------- input data and templates ----------
 
@@ -39,6 +40,8 @@ See the [Colophon](colophon.md) for
 authorship, making contributions and corrections,
 and document source code,
 END
+
+our $mdbook_refs = "{{ #include ../$src/refs.md }}";
 
 #---------- output generation functions ----------
 
@@ -80,14 +83,13 @@ END
     }
     ol(")");
   }
-  ol("\n{{ #include ../docs/refs.md }}");
+  ol("\n$mdbook_refs");
   end_output();
 }
 
 #---------- input scanning ----------
 
 our @output_files;
-our $src = "docs";
 
 sub scan_filter() {
   foreach my $chap (@chapters) {
@@ -121,7 +123,7 @@ sub scan_filter() {
       $last_l = $new_last_l;
     }
 
-    print MD "\n\n{{ #include ../docs/refs.md }}\n" or die $!;
+    print MD "\n\n$mdbook_refs\n" or die $!;
     close MD or die $!;
 
     push @sections, @csections;
