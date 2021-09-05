@@ -182,6 +182,7 @@ Notable ideological features of the Rust community are:
  * Pride in helping users write performant code.
  * Effective collaboration between practicing developers and
    academic programming language and formal methods experts.
+   ([Comprehensive survey](https://github.com/newca12/awesome-rust-formalized-reasoning).)
 
 There is also a strong desire to help the programmer
 with accessible documentation and useful error messages,
