@@ -34,6 +34,12 @@ GIT_INFLUENCES := $(widlcard .git/HEAD .git/packed-refs) \
 		$(wildcard .git/$(git symbolic-ref HEAD 2>/dev/null))
 MDBOOK_INFLUENCES := $(shell find theme -type f -name '[a-z]*.*[^~]')
 
+ifneq (,$(shell $(PANDOC) --help 2>&1 | egrep '^  *--chapters\b'))
+PANDOC_CHAPTERS_OPTION = --chapters
+else
+PANDOC_CHAPTERS_OPTION = --top-level-division=chapter
+endif
+
 default: doc
 
 doc:	html
@@ -60,7 +66,7 @@ latex/polyglot.tex:
 TEX_INPUTS = $(foreach c,$(CHAPTERS),latex/$c.tex)
 $(TEX_INPUTS): latex/%.tex: src/refs.md mdbook/SUMMARY.md
 	mkdir -p latex/
-	pandoc --chapters --columns=132 -o$@ $< src/$*.md mdbook/autorefs.md
+	pandoc $(PANDOC_CHAPTERS_OPTION) --columns=132 -o$@ $< src/$*.md mdbook/autorefs.md
 
 $(OUTPUT_PDF): $(TEX_INPUTS) latex/polyglot.tex
 	cd latex && \
