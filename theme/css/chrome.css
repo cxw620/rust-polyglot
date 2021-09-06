@@ -96,7 +96,7 @@ a > .hljs {
     display: flex;
     margin: 0 5px;
 }
-.no-js .left-buttons {
+.no-js .left-buttons .button-needs-js {
     display: none;
 }
 
