@@ -1,3 +1,9 @@
+<!--
+[comment]: # ( Copyright 2021 Ian Jackson and contributors  )
+[comment]: # ( SPDX-License-Identifier: MIT                 )
+[comment]: # ( There is NO WARRANTY.                        )
+  -->
+
 [`Box`]: https://doc.rust-lang.org/std/boxed/
 [`From`]: https://doc.rust-lang.org/std/convert/trait.From.html
 [`Into`]: https://doc.rust-lang.org/std/convert/trait.Into.html

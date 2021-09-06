@@ -31,13 +31,20 @@ GIT_INFLUENCES := $(widlcard .git/HEAD .git/packed-refs) \
 		$(wildcard .git/$(git symbolic-ref HEAD 2>/dev/null))
 MDBOOK_INFLUENCES := $(shell find theme -type f -name '[a-z]*.*[^~]')
 
-PANDOC_INPUTS = $(addprefix pandoc/, $(addsuffix .md, $(CHAPTERS)))
+PANDOC_INPUTS = $(addprefix pandoc/, $(addsuffix .md, $(CHAPTERS))) \
+	src/refs.md mdbook/autorefs.md
 
 default: doc
 
-doc:	$(OUTPUT_INDEX)
+doc:	html
+
+html:	$(OUTPUT_INDEX)
 	@echo 'Documentation can now be found here:'
 	@echo '  file://$(abspath $<)'
+
+pdf:	$(OUTPUT_PDF)
+
+.PHONY: html pdf
 
 $(OUTPUT_INDEX): book.toml mdbook/SUMMARY.md $(MD_SOURCES) $(MDBOOK_INFLUENCES)
 	$(NAILING_CARGO_JUST_RUN) $(MDBOOK) build $(MDBOOK_BUILD_NAILING_OPTS)
