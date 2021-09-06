@@ -13,7 +13,6 @@ our $src = "src";
 
 our @chapters;
 our ($title, @crate_refs_docs_rs, @crate_refs_crates_io);
-our ($precontents);
 
 do './src/gendefs.pl' or die $!;
 
@@ -43,8 +42,11 @@ sub contents() {
   start_output("mdbook/README.md");
   ol("# $title");
   o_autogen();
+  open P, "src/precontents.md" or die $!;
+  while (<P>) { o($_); }
+  P->error and die $!;
+  close P;
   o(<<END);
-$precontents
 
 ## Table of Contents
 
