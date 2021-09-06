@@ -151,7 +151,7 @@ and manage its lifetime or mutability at runtime.
 
 <a name="interior-mutability-table"></a>
 
-|  Type |  Storage:<br> where is `T`  | Lifetime<br> mgmt | Interior mutability:<br>`&mut T` from `&Foo<T>`   | Threads<br> [`Send`](https://doc.rust-lang.org/std/marker/trait.Send.html)/[`Sync`](https://doc.rust-lang.org/std/marker/trait.Sync.html)
+|  Type |  Storage:<br> where is `T`  | Lifetime<br> mgmt | Interior mutability: <br>`&mut T` from `&Foo<T>`   | Threads<br> [`Send`](https://doc.rust-lang.org/std/marker/trait.Send.html)/[`Sync`](https://doc.rust-lang.org/std/marker/trait.Sync.html)
 | ------ | -------- | --------------  | ------------- | ---------
 | `T` [1]  | itself | owner | No  | Yes
 | [`Box<T>`](https://doc.rust-lang.org/std/boxed/index.html) [1] | heap | owner  | No | Yes
