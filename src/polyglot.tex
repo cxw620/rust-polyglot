@@ -4,27 +4,51 @@
 
 \documentclass[a4paper]{memoir}
 
+\usepackage[british]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{textcomp}
+\usepackage{pslatex}
+\usepackage{palatino}
 
+\usepackage{color}
 \usepackage{longtable}
+
+\definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.6}
 
 \usepackage
   [bookmarks = true, bookmarksnumbered = true, bookmarksdepth = 3,
-   colorlinks = true, linkcolor = blue, citecolor = blue, urlcolor = blue,
-   breaklinks = true]
+   colorlinks = true, linkcolor = darkgreen, citecolor = darkgreen,
+   urlcolor = darkblue, breaklinks = true]
   {hyperref}
+
+\makechapterstyle{sans}
+  {\renewcommand{\chapnamefont}{\normalfont\huge\sffamily\bfseries}
+   \renewcommand{\chapnumfont}{\normalfont\huge\sffamily\bfseries}
+   \renewcommand{\chaptitlefont}{\normalfont\Huge\sffamily\bfseries}}
+\chapterstyle{sans}
+\setsecheadstyle{\Large\sffamily\bfseries}
+\setsubsecheadstyle{\large\sffamily\bfseries}
+\setsubsubsecheadstyle{\sffamily\bfseries}
+\setparaheadstyle{\sffamily\bfseries}
+\setsubparaheadstyle{\sffamily\bfseries}
+
+\nonzeroparskip
+\setlength{\parindent}{0pt}
 
 \title{DRAFT -- Rust for the Polyglot Programmer}
 \author{Ian Jackson and contributors}
 
 \begin{document}
+
 \pagestyle{plain}
 \frontmatter
 
 \begin{titlingpage}
   \maketitle
+  \vfill
+  \input{precontents}
 \end{titlingpage}
 
 \tableofcontents
