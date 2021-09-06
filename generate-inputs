@@ -14,7 +14,7 @@ our $src = "src";
 our @chapters;
 our ($title, @crate_refs_docs_rs, @crate_refs_crates_io);
 
-do './src/gendefs.pl' or die $!;
+do './src/definitions.pl' or die $!;
 
 our $mdbook_refs = <<END;
 {{ #include ../$src/refs.md }}

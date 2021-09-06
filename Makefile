@@ -55,7 +55,7 @@ pdf:	$(OUTPUT_PDF)
 $(OUTPUT_INDEX): book.toml mdbook/SUMMARY.md $(MD_SOURCES) $(MDBOOK_INFLUENCES)
 	$(NAILING_CARGO_JUST_RUN) $(MDBOOK) build $(MDBOOK_BUILD_NAILING_OPTS)
 
-mdbook/SUMMARY.md: generate-inputs src/gendefs.pl \
+mdbook/SUMMARY.md: generate-inputs src/definitions.pl \
 		$(MD_SOURCES) $(GIT_INFLUENCES)
 	./$< $(CHAPTERS)
 
