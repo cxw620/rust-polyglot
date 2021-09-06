@@ -1,0 +1,50 @@
+#!/usr/bin/perl -w
+use strict;
+our $copyright = <<END;
+    Copyright 2021 Ian Jackson and contributors
+    SPDX-License-Identifier: MIT
+    There is NO WARRANTY.
+END
+
+use autodie;
+
+my $CTX = '-';
+my $BASE = undef;
+
+sub hack_label ($) {
+  my ($lab) = @_;
+
+  ##   * The \chapter label should be named after the input file only, and
+  ##     not the chapter title, because references in other files only know
+  ##     the former.
+  ##
+  ##   * The \section etc. labels should be /qualified/ with the input file
+  ##     name, because they're only guaranteed unique within the file.
+  if ($CTX eq "chapter") { return $BASE; }
+  else { return "$BASE.$lab"; }
+}
+
+sub hack_ref ($$) {
+  my ($fn, $frag) = @_;
+
+  if (defined $frag) { return "$fn.$frag"; }
+  else { return $fn; }
+}
+
+while (<>) {
+
+  ## Capture the input basename.
+  ($BASE = $ARGV) =~ s!^(?:.*/)?([^./]+)(?:\.[^/]*)?!$1!;
+
+  ## Notice changes in context.
+  if (/^\\(chapter|(?:|sub|subsub)section|(?:|sub)paragraph)[[{]/)
+    { $CTX = $1; }
+
+  ## Hack labels.
+  s/\\label\{([^}]*)\}/"\\label{" . hack_label($1) . "}"/ge;
+
+  ## Hack references.
+  s/\\href\{([^\.}]*)\.md(?:\\\#([^}]*))?\}/"\\hyperref[" . hack_ref($1, $2) . "]"/ge;
+
+  print;
+}
