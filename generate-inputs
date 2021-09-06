@@ -30,7 +30,7 @@ sub summary() {
   start_output("mdbook/SUMMARY.md");
   ol("# $title");
   o_autogen();
-  ol(" - [Contents](README.md)");
+  ol(" [Contents](README.md)");
   foreach my $section (@sections) {
     next if $section->[0];
     ol(" - [$section->[2]]($section->[1])");
