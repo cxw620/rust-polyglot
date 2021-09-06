@@ -57,10 +57,12 @@ and acknowledgement.
 
 ### Acknowledgements
 
-Thanks for helpful review, comments and suggstions from:
+Thanks for helpful review, comments and suggestions from:
 Simon Tatham,
 Mark Wooding,
 Daniel Silverstone.
+
+Thanks to Mark Wooding for (currently WIP) the LaTeX/PDF arrangements.
 
 ### Legal
 
