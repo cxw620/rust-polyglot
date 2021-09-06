@@ -291,7 +291,9 @@ die unless @ARGV;
 die if $ARGV[0] =~ m/^-/;
 @chapters = @ARGV;
 
-mkdir "mdbook" or $!==EEXIST or die $!;
+foreach my $sd (qw(mdbook pandoc)) {
+  mkdir $sd or $!==EEXIST or die $!;
+}
 scan_filter();
 summary();
 contents();

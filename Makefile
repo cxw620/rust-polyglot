@@ -47,3 +47,4 @@ $(OUTPUT_PDF):
 
 clean:
 	$(NAILING_CARGO_JUST_RUN) rm -rf $(abspath $(OUTPUT_DIR))
+	rm -rf mdbook pandoc
