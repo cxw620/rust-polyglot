@@ -131,12 +131,9 @@ but it is hard to choose.
 
  * You should perhaps also consider: [`warp`].
 
-I would avoid "`stdweb`", which depends on the "`async-std`"
-async runtime,
-purely because of their very tendentious, even misleading, names
-and straplines.
-They are not in any way official:
-not emanations of the main Rust Project.
+I would avoid "`stdweb`",
+which depends on the "`async-std`" async runtime.
+because [I prefer Tokio](async.md#practicalities).
 
 
 Command line parsing: `structopt` and `clap`
