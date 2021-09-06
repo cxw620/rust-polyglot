@@ -10,6 +10,7 @@ use autodie;
 
 my $CTX = '-';
 my $BASE = undef;
+my $TABHEAD = undef;
 
 sub hack_label ($) {
   my ($lab) = @_;
@@ -45,6 +46,37 @@ while (<>) {
 
   ## Hack references.
   s/\\href\{([^\.}]*)\.md(?:\\\#([^}]*))?\}/"\\hyperref[" . hack_ref($1, $2) . "]"/ge;
+
+  ## Hack tables.
+  ##
+  ## This is where things get ugly.
+  if (/\\begin\{longtable\}/) { $TABHEAD = ""; }
+  if (defined $TABHEAD) {
+    $TABHEAD .= $_;
+    if (/\\endhead/) {
+      $_ = $TABHEAD; $TABHEAD = undef;
+      /^ (\\begin\{longtable\} .* \\toprule \s*)
+	 (.*)
+	 (\s* \\tabularnewline .* \\endhead .*) $/sx
+	   or die "failed to parse table header";
+      my ($pre, $hd, $post) = ($1, $2, $3);
+      my @hd = split /\s*(?<!\\)\&\s*/, $hd;
+      my $sig = join "|",
+	map { my $t = $_; $t =~ s/^\s+//; $t =~ s/\s.*$//s; lc $t }
+	@hd;
+      if ($sig eq "type|storage:|lifetime|interior|threads") {
+	my @wd = (10, 16, 15, 34, 16);
+	for (my $i = 0; $i < 5; $i++) {
+	  my $l = $i ? "" : '@{}';
+	  my $r = $i == 4 ? '@{}' : "";
+	  $hd[$i] = "\\multicolumn{1}{${l}b{$wd[$i]mm}$r}{\\raggedright $hd[$i]}";
+	}
+      }
+      $_ = $pre . join(" & ", @hd) . $post;
+    } else {
+      $_ = "";
+    }
+  }
 
   print;
 }

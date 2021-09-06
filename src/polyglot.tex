@@ -12,7 +12,6 @@
 \usepackage{palatino}
 
 \usepackage{color}
-\usepackage{longtable}
 
 \definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
 \definecolor{darkblue}{rgb}{0.0, 0.0, 0.6}
@@ -22,6 +21,9 @@
    colorlinks = true, linkcolor = darkgreen, citecolor = darkgreen,
    urlcolor = darkblue, breaklinks = true]
   {hyperref}
+
+\isopage[10]
+\fixthelayout
 
 \makechapterstyle{sans}
   {\renewcommand{\chapnamefont}{\normalfont\huge\sffamily\bfseries}
@@ -36,6 +38,12 @@
 
 \nonzeroparskip
 \setlength{\parindent}{0pt}
+
+\newenvironment{longtable}[2][]
+  {\begin{center}%
+   \let\endhead=\relax
+   \begin{tabular}{#2}}
+  {\end{tabular}\end{center}}
 
 \title{DRAFT -- Rust for the Polyglot Programmer}
 \author{Ian Jackson and contributors}
