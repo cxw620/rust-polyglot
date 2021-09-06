@@ -60,7 +60,7 @@ Panicking on failure is fine.
 
 It is often convenient to put tests together in a module,
 marked
-[`#[cfg(test)]`](https://doc.rust-lang.org/reference/conditional-compilation.html,
+[`#[cfg(test)]`](https://doc.rust-lang.org/reference/conditional-compilation.html),
 if for no other reason than to avoid dead code warnings
 for code which exists just to support tests.
 
