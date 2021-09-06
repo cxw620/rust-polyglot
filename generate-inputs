@@ -11,88 +11,11 @@ our $src = "src";
 
 #---------- input data and templates ----------
 
-our $title = "DRAFT - Rust for the Polyglot Programmer";
 our @chapters;
+our ($title, @crate_refs_docs_rs, @crate_refs_crates_io);
+our ($precontents);
 
-our @crate_refs_docs_rs = qw(
-   anyhow
-   arrayvec
-   crossbeam
-   easy-ext
-   eyre
-   index_vec
-   indexmap
-   num-derive
-   thiserror
-   chrono
-   chrono-tz
-   lazy_static
-   once_cell
-   tracing
-   lazy-regex
-   log
-   glob
-   tempfile
-   reqwest
-   hyper
-   pyo3
-   warp
-   getopts
-   gumdrop
-   jni
-   ring
-);
-our @crate_refs_crates_io = qw(
-   generational_arena
-   itertools
-   num-traits
-   num
-   parking_lot
-   rayon
-   slab
-   slotmap
-   strum
-   libc
-   nix
-   env_logger
-   regex
-   rand
-   either
-   void
-   structopt
-   clap
-   argparse
-   wasm-bindgen
-   web-sys
-   rusty_v8
-   j4rs
-   rustls
-);
-
-our $precontents = <<END;
-Rust for the experienced programmer, a DRAFT guide.
-
-See the [Introduction](intro.md) for
-the rubric, goals, and non-goals.
-See the [Colophon](colophon.md) for
-authorship and acknowledgements,
-making contributions and corrections,
-and document source code,
-
-### THIS IS A DRAFT - FOR REVIEW BY THE RUST COMMUNITY
-
-I would greatly appreciate feedback from fellow Rustaceans.
-
-I am interested in reports of any or all of
- * Technical errors
- * Significant omissions
- * Duplication, redundancy, verbosity, or otioseness
- * Differences of opinion especially about crate recommendations,
-
-See the [Colophon](colophon.md) for information about contributing
-including a link to the Gitlab repo.
-
-END
+do './src/gendefs.pl' or die $!;
 
 our $mdbook_refs = <<END;
 {{ #include ../$src/refs.md }}
