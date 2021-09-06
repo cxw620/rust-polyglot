@@ -1,0 +1,48 @@
+\documentclass[a4paper]{memoir}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+
+\usepackage{longtable}
+
+\usepackage
+  [bookmarks = true, bookmarksnumbered = true, bookmarksdepth = 3,
+   colorlinks = true, linkcolor = blue, citecolor = blue, urlcolor = blue,
+   breaklinks = true]
+  {hyperref}
+
+\title{Rust for the Polyglot Programmer}
+\author{Ian Jackson}
+
+\begin{document}
+\pagestyle{plain}
+\frontmatter
+
+\begin{titlingpage}
+  \maketitle
+\end{titlingpage}
+
+\tableofcontents
+
+\pagestyle{headings}
+\mainmatter
+\include{intro}
+\include{syntax}
+\include{types}
+\include{ownership}
+\include{traits}
+\include{safety}
+\include{errors}
+\include{macros}
+\include{async}
+\include{ffi}
+\include{rustdoc}
+\include{stability}
+\include{cargo}
+\include{libs}
+
+\backmatter
+\include{colophon}
+
+\end{document}
