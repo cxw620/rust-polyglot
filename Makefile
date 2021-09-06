@@ -31,6 +31,8 @@ GIT_INFLUENCES := $(widlcard .git/HEAD .git/packed-refs) \
 		$(wildcard .git/$(git symbolic-ref HEAD 2>/dev/null))
 MDBOOK_INFLUENCES := $(shell find theme -type f -name '[a-z]*.*[^~]')
 
+PANDOC_INPUTS = $(addprefix pandoc/, $(addsuffix .md, $(CHAPTERS)))
+
 default: doc
 
 doc:	$(OUTPUT_INDEX)
@@ -44,8 +46,8 @@ mdbook/SUMMARY.md: generate-inputs src/gendefs.pl \
 		$(MD_SOURCES) $(GIT_INFLUENCES)
 	./$< $(CHAPTERS)
 
-$(OUTPUT_PDF):
-	pandoc -o $@ 
+$(OUTPUT_PDF): mdbook/SUMMARY.md
+	pandoc -o $@ $(PANDOC_INPUTS)
 
 clean:
 	$(NAILING_CARGO_JUST_RUN) rm -rf $(abspath $(OUTPUT_DIR))

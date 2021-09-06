@@ -107,16 +107,25 @@ sub scan_filter() {
     my $leaf = "$chap.md";
 
     open MD, "> mdbook/$leaf.tmp" or die $!;
-    push @output_files, "mdbook/$leaf";
+    open PD, "> pandoc/$leaf.tmp" or die $!;
+    push @output_files, "mdbook/$leaf",
+                        "pandoc/$leaf";
 
     open C, "$src/$leaf" or die "$src/$leaf $!";
     my $last_l;
     while (<C>) {
-      print MD or die $! unless m{$comment_re};
+      if (!m{$comment_re}) {
+	print MD or die $!;
+	print PD or die $!;
+      }
 
       if (!m/\S/ && defined($last_l) && $last_l =~ m{$comment_re}) {
-	autogen_any("$src/$leaf", sub { print MD @_, "\n" or die $!; });
+	autogen_any("$src/$leaf", sub {
+	  print MD md_comment($_[0]), "\n" or die $!;
+	  print PD pd_comment($_[0]), "\n" or die $!;
+	});
 	print MD "\n" or die $!;
+	print PD "\n" or die $!;
       }
 
       s{\s+$}{};
@@ -137,21 +146,25 @@ sub scan_filter() {
     C->error and die $!;
 
     if ($leaf eq 'colophon.md') {
-      open O, ">&MD" or die $!;
-      append_to_colophon('LICENCE',
-			 'Full copyright notice');
-      append_to_colophon('DEVELOPER-CERTIFICATE',
-			 'Developer Certificate of Origin');
-      ol("---");
-      ol("formatted ".
-	 strftime("%Y-%m-%d %H:%M:%S UTC", gmtime time));
-      ol();
       my $git_commit = `git rev-parse HEAD` || die "$? $!";
       chomp $git_commit;
       $?=0; $!=0; my $status = `git status --porcelain`;
       die "$? $!" if $? || $!;
-      ol("git commit `$git_commit`". (length($status) ? "; tree dirty" : ""));
-      close O or die $!;
+
+      foreach my $fh (qw(MD PD)) {
+	open O, ">&$fh" or die $!;
+	append_to_colophon('LICENCE',
+			   'Full copyright notice');
+	append_to_colophon('DEVELOPER-CERTIFICATE',
+			   'Developer Certificate of Origin');
+	ol("---");
+	ol("formatted ".
+	   strftime("%Y-%m-%d %H:%M:%S UTC", gmtime time));
+	ol();
+	ol("git commit `$git_commit`".
+	   (length($status) ? "; tree dirty" : ""));
+	close O or die $!;
+      }
     }
 
     print MD "\n\n$mdbook_refs" or die $!;
@@ -162,6 +175,9 @@ sub scan_filter() {
 }
 
 #---------- machinery and main program ----------
+
+sub md_comment ($) { "[comment]: # ( $_[0] )" }
+sub pd_comment ($) { "<!-- $_[0] -->" }
 
 our $current_output_file;
 
@@ -188,12 +204,12 @@ sub autogen_any ($$) {
     $l =~ s/^\s+//;
     $l =~ s/\s+$//;
     $l = sprintf "%-60s", $l;
-    $f->("[comment]: # ( $l )");
+    $f->($l);
   }
 }
 sub o_autogen {
   ol();
-  autogen_any($0, \&ol);
+  autogen_any($0, sub { ol(md_comment($_[0])) });
   ol();
 }
 

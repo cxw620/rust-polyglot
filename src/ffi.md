@@ -1,6 +1,10 @@
 FFI
 ===
 
+[comment]: # ( Copyright 2021 Ian Jackson and contributors  )
+[comment]: # ( SPDX-License-Identifier: MIT                 )
+[comment]: # ( There is NO WARRANTY.                        )
+
 Rust has a range of FFI support
 for interworking with other languages.
 

@@ -1,6 +1,10 @@
 Colophon
 ========
 
+[comment]: # ( Copyright 2021 Ian Jackson and contributors  )
+[comment]: # ( SPDX-License-Identifier: MIT                 )
+[comment]: # ( There is NO WARRANTY.                        )
+
 This is a **DRAFT** guide to the Rust programming language.  It was written by
 me, Ian Jackson, and I am responsible for the content and opinions.
 
@@ -61,3 +65,5 @@ Copyright 2021 Ian Jackson and contributors.
 `SPDX-License-Identifier: MIT`.
 
 There is **NO WARRANTY**
+
+[comment]: # ( Extra data is appended here by generate-inputs: )
