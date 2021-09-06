@@ -46,13 +46,13 @@ Libraries you should know about:
 
  * [`easy-ext`].  Conveniently define methods on other people's types.
 
- * [`rayon`]: Semi-magical safe multicore parallelism
+ * [`rayon`]\: Semi-magical safe multicore parallelism
    as a drop-in replacement for std's serial iterators.
 
  * [`parking_lot`].  Alternatives to the standard mutex etc.;
    `parking_lot::Mutex` is const-initialisable.
 
- * [`crossbeam`]: other tools For multithreaded programming.
+ * [`crossbeam`]\: other tools For multithreaded programming.
 
  * [`chrono`] for human-readable date/time handling.
    API is a bit funky.  Be sure to use [`chrono-tz`] on Unix.
