@@ -11,10 +11,10 @@ fi
 git push --dry-run --quiet origin HEAD:published
 
 make clean
-make
+make html pdf
 set -x
 
-rsync -r --delete ../Build/polyglot/html/. \
+rsync -r --delete ../Build/polyglot/html/. polyglot.pdf \
 	ianmdlvl@chiark:public-html/rust-polyglot/.
 
 git push origin HEAD:published
