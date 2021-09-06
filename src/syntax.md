@@ -134,7 +134,9 @@ which will have local scope.
 Identifiers and scopes
 ----------------------
 
-Rust's identifiers are in the form `scope::scope::ident`.
+Names are
+[paths](https://doc.rust-lang.org/reference/paths.html#types-of-paths)
+like `scope::scope::ident`.
 
 Here `scope` can be a module, type or trait,
 or an external library ("crate"),
