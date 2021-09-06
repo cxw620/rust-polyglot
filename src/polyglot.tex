@@ -7,6 +7,8 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{textcomp}
+\usepackage{pslatex}
+\usepackage{palatino}
 
 \usepackage{longtable}
 
@@ -15,6 +17,17 @@
    colorlinks = true, linkcolor = blue, citecolor = blue, urlcolor = blue,
    breaklinks = true]
   {hyperref}
+
+\makechapterstyle{sans}
+  {\renewcommand{\chapnamefont}{\normalfont\huge\sffamily\bfseries}
+   \renewcommand{\chapnumfont}{\normalfont\huge\sffamily\bfseries}
+   \renewcommand{\chaptitlefont}{\normalfont\Huge\sffamily\bfseries}}
+\chapterstyle{sans}
+\setsecheadstyle{\Large\sffamily\bfseries}
+\setsubsecheadstyle{\large\sffamily\bfseries}
+\setsubsubsecheadstyle{\sffamily\bfseries}
+\setparaheadstyle{\sffamily\bfseries}
+\setsubparaheadstyle{\sffamily\bfseries}
 
 \nonzeroparskip
 \setlength{\parindent}{0pt}
