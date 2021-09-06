@@ -44,7 +44,7 @@ They are in any case subject to change without notice.
 Each nightly language feature must be explicitly enabled by the use of
 `#![feature(something)]` at the start of the crate toplevel.
 Unstable command line options generally require
-also saying  `-Z unstable-options`.
+adding  `-Z unstable-options`.
 
 There are even features which are known to be
 incomplete, broken, or maybe even unsound,
@@ -90,8 +90,8 @@ Orthogonally to the different release channels,
 there are Editions of Rust.
 Currently, Rust 2015, 2018, and the work-in-progress 2021.
 
-Each edition is a dialect.
-The same compiler supports several editions.
+Each edition is a dialect, even with different syntax.
+The same compiler supports all the editions.
 The edition is specified at the level of a crate,
 and a single program may contain code from several editions.
 
@@ -139,7 +139,7 @@ choose a cargo-semver-incompatible version
 for releases with breaking changes.
 The community will typically expect that
 any inadvertant breaking changes
-are reverted.
+are reverted or fixed.
 
 The semver scheme is like official semver,
 but with an additional compatibility rule for `0.x.y` versions
