@@ -62,7 +62,7 @@ Simon Tatham,
 Mark Wooding,
 Daniel Silverstone.
 
-Thanks to Mark Wooding for the (currently WIP) LaTeX/PDF arrangements.
+Thanks to Mark Wooding for the LaTeX/PDF arrangements.
 
 [comment]: # ( DRAFT ^ )
 
