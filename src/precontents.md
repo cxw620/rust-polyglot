@@ -1,3 +1,7 @@
+[comment]: # ( Copyright 2021 Ian Jackson and contributors  )
+[comment]: # ( SPDX-License-Identifier: MIT                 )
+[comment]: # ( There is NO WARRANTY.                        )
+
 Rust for the experienced programmer, a DRAFT guide.
 
 See the [Introduction](intro.md) for
