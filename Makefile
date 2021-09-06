@@ -43,7 +43,7 @@ mdbook/SUMMARY.md: regenerate-inputs $(MD_SOURCES) $(GIT_INFLUENCES)
 	./$< $(CHAPTERS)
 
 $(OUTPUT_PDF):
-	pandoc -o $@ src/*.md
+	pandoc -o $@ $(addprefix src/, $(addsuffix .md, $(CHAPTERS)))
 
 clean:
 	$(NAILING_CARGO_JUST_RUN) rm -rf $(abspath $(OUTPUT_DIR))
