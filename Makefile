@@ -26,6 +26,10 @@ MD_SOURCES := $(wildcard src/*[^A-Z].md)
 GIT_INFLUENCES := $(widlcard .git/HEAD .git/packed-refs) \
 		$(wildcard .git/$(git symbolic-ref HEAD 2>/dev/null))
 
+CHAPTERS := 	intro syntax types ownership traits safety 		\
+		errors macros async ffi rustdoc stability cargo 	\
+		libs colophon
+
 default: doc
 
 doc:	$(OUTPUT_INDEX)
@@ -36,7 +40,7 @@ $(OUTPUT_INDEX): book.toml mdbook/SUMMARY.md $(MD_SOURCES)
 	$(NAILING_CARGO_JUST_RUN) $(MDBOOK) build $(MDBOOK_BUILD_NAILING_OPTS)
 
 mdbook/SUMMARY.md: regenerate-inputs $(MD_SOURCES) $(GIT_INFLUENCES)
-	./$<
+	./$< $(CHAPTERS)
 
 $(OUTPUT_PDF):
 	pandoc -o $@ src/*.md

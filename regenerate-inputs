@@ -12,24 +12,7 @@ our $src = "src";
 #---------- input data and templates ----------
 
 our $title = "DRAFT - Rust for the Polyglot Programmer";
-
-our @chapters = qw(
-   intro
-   syntax
-   types
-   ownership
-   traits
-   safety
-   errors
-   macros
-   async
-   ffi
-   rustdoc
-   stability
-   cargo
-   libs
-   colophon
-);
+our @chapters;
 
 our @crate_refs_docs_rs = qw(
    anyhow
@@ -303,6 +286,10 @@ sub install_outputs () {
     rename "$o.tmp", $o or die "$o $!";
   }
 }
+
+die unless @ARGV;
+die if $ARGV[0] =~ m/^-/;
+@chapters = @ARGV;
 
 mkdir "mdbook" or $!==EEXIST or die $!;
 scan_filter();
