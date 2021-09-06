@@ -56,14 +56,16 @@ Rust is memory-safe and thread-safe,
 but with a clearly-defined and well-used `unsafe` escape hatch.
 
 Concurrency is supported by multithreading,
-and alternatively via a green-threads-based [`async` system](async.html).
-Uniquely, concurrent Rust programs are memory-safe.
+and alternatively via a green-threads-based 
+`async` system.
+Concurrent Rust programs are still memory-safe.
 
 There is no garbage collector.
 Stack objects are explicitly defined and automatically deallocated.
 Heap objects are explicitly allocated, and automatically deallocated
 when their references go out of scope.
-Rust has a novel [memory and object lifetime management approach](ownership.html)
+Rust has a novel
+[memory and object lifetime management approach
 with lifetime-based aliasing/mutability rules.
 
 There are two macro systems for metaprogramming: a pattern matcher
@@ -127,7 +129,7 @@ the semantics are formally but unofficially described in
 and programs can be checked by [Miri](https://github.com/rust-lang/miri)
 the interpreter for the Rust Mid-Intermediate Representation.
 
-Rust is available in ["stable", "beta" and "nightly" flavours](stability.html#rust-language-release-channels).
+Rust is available in "stable", "beta" and "nightly" flavours.
 Rust intends to avoid (and in practice, generally does avoid)
 breaking existing code which was using stable interfaces.
 
