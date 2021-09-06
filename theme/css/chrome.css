@@ -21,6 +21,10 @@ a > .hljs {
 .fa {
     font: initial !important;
 }
+.fa-copy::before {
+    content: "\1f4cb" !important;
+}
+
 .wasfa-button {
     font: initial;
     display: inline-block;
