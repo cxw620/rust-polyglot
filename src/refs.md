@@ -18,7 +18,8 @@
 [`BTreeMap`]: https://doc.rust-lang.org/nightly/std/collections/struct.BTreeMap.html
 [`Result`]: https://doc.rust-lang.org/std/result/enum.Result.html
 
-[Reference]: (https://doc.rust-lang.org/reference/)
+[Reference]: https://doc.rust-lang.org/reference/
+[type layout]: https://doc.rust-lang.org/reference/type-layout.html
 
 [must_use]: https://doc.rust-lang.org/reference/attributes/diagnostics.html#the-must_use-attribute
 

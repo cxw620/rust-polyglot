@@ -38,7 +38,7 @@ The
 [FFI chapter in the Nomicon](https://doc.rust-lang.org/nomicon/ffi.html)
 is comprehensive.
 You may also need to look at 
-[Type Layout in the Reference](https://doc.rust-lang.org/reference/type-layout.html).
+[Type Layout in the Reference][type layout].
 
 Rust's various string types are typically not the same as the platform's.
 Use [std::ffi](file:///home/rustcargo/docs/share/doc/rust/html/std/ffi/).

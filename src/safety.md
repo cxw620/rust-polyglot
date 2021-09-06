@@ -71,7 +71,7 @@ Many projects prefer the primitves from the [`parking_lot`] crate.
 
 Multithreading in Rust can be an adjunct to,
 or replacement for,
-[async Rust](async.html).
+Async Rust.
 
 Unsafe Rust
 -----------
@@ -84,7 +84,7 @@ are implemented using `unsafe`.
 All `unsafe { }` does by itself is allow you to use unsafe facilities.
 When you use an unsafe facility you take on a proof obligation.
 The documentation for each facility explains what the rules are.
-The Rust Reference has rules for type layout etc.
+The has rules for [type layout] etc.
 
 The Rest community generally tries very hard to make sound APIs
 for libraries which use unsafe internally.
@@ -144,11 +144,12 @@ Particular beartraps in Unsafe Rust are:
    Use [`ManuallyDrop`](https://doc.rust-lang.org/std/mem/struct.ManuallyDrop.html).
 
  * With [`#[repr(transparent)] struct X(Y)`](https://doc.rust-lang.org/reference/type-layout.html#the-transparent-representation),
-   you may *not* assume that things containing X
+   you may *not* assume that *things containing* X
    have the same layout as things containing Y.
-   For example transmuting between `Vec<Y>` and `Vec<X>` is wrong.
+   For example transmuting between `Option<Y>` and `Option<X>` is wrong.
 
- * `mem::transmute` is an extremely powerful hammer
+ * [`mem::transmute`](https://doc.rust-lang.org/nightly/std/mem/fn.transmute.html)
+   is an extremely powerful hammer
    and should be used with great care.
 
 (Here we distinguish references [`&T`](https://doc.rust-lang.org/std/primitive.reference.html) from raw pointers [`*T`](https://doc.rust-lang.org/std/primitive.pointer.html).
