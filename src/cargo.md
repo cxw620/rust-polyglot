@@ -5,13 +5,14 @@ Cargo
 [comment]: # ( SPDX-License-Identifier: MIT                 )
 [comment]: # ( There is NO WARRANTY.                        )
 
-The `cargo` tool,
+[The `cargo` tool](https://doc.rust-lang.org/cargo/index.html),
 which is used to build any nontrivial Rust program,
 will automatically download and build all the dependencies
-(from `crates.io`, typically)
+(from [`crates.io`](https://crates.io/), typically)
 and (together with `rustc`) manage reuse of previous builds etc.
 
-cargo is super-convenient for the common use cases.
+cargo is super-convenient for the common use cases,
+but also has serious problems.
 
 
 Basics
@@ -40,9 +41,7 @@ Unlike some similar tools in other languages,
 the resulting tree does not contain much boilerplate.
 
 If you make a project from scratch do not forget to include
-`edition = "2018"` (or similar),
-or you will be asking the compiler for an older dialect of Rust,
-with more quirks.
+`edition = "2018"` (or similar).  See [Editions](stability.md#editions).
 
 cargo maintains a calculated dependency resolution
 (versions and hashes of all dependencies)

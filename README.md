@@ -34,7 +34,7 @@ The document is in the intersection of
 [mdbook](https://rust-lang.github.io/mdBook/) and 
 [pandoc](https://pandoc.org/) Markdown,
 in the `src/` directory.
-To format it you will need to `cargo install mdbook` and run `make`,
+To format to HTML you will need to `cargo install mdbook` and run `make`,
 but untested contributions are welcome.
 
 **Legal**:

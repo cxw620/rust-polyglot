@@ -52,7 +52,7 @@ Libraries you should know about:
  * [`parking_lot`].  Alternatives to the standard mutex etc.;
    `parking_lot::Mutex` is const-initialisable.
 
- * [`crossbeam`]\: other tools For multithreaded programming.
+ * [`crossbeam`]\: other tools for multithreaded programming.
 
  * [`chrono`] for human-readable date/time handling.
    API is a bit funky.  Be sure to use [`chrono-tz`] on Unix.
