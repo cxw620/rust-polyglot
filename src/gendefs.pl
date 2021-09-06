@@ -27,6 +27,10 @@ I am interested in reports of any or all of
 See the [Colophon](colophon.md) for information about contributing
 including a link to the Gitlab repo.
 
+I hope to remove the "draft" label and
+release this document to a general audience
+soon after Thursday the 23rd of September.
+
 END
 
 @crate_refs_docs_rs = qw(
