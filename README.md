@@ -14,6 +14,10 @@ The rendered document can be found here:
 
    [https://www.chiark.greenend.org.uk/~ianmdlvl/rust-polyglot/](https://www.chiark.greenend.org.uk/~ianmdlvl/rust-polyglot/)
 
+There is also
+[a single HTML page version](https://www.chiark.greenend.org.uk/%7Eianmdlvl/rust-polyglot/print.html) and
+[a PDF](https://www.chiark.greenend.org.uk/%7Eianmdlvl/rust-polyglot/polyglot.pdf).
+
 ### Contributing
 
 Contributions are very welcome, ideally via Issue or Merge Request:
