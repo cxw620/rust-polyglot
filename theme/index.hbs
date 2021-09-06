@@ -116,10 +116,10 @@
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                            <i class="fa fa-bars"></i>
+                            <i class="wasfa-button">&#x2630;</i>
                         </button>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                            <i class="fa fa-paint-brush"></i>
+                            <i class="wasfa-button">&#x1f58c;</i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
                             <li role="none"><button role="menuitem" class="theme" id="light">{{ theme_option "Light" }}</button></li>
@@ -130,19 +130,19 @@
                         </ul>
                         {{#if search_enabled}}
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
+                            <i class="wasfa-button">&#x1f50d;</i>
                         </button>
                         {{/if}}
 
                 {{#previous}}
                     <a rel="prev" href="{{ path_to_root }}{{link}}" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <i class="fa">&lt;</i>
+                        <strong class="wasfa-button">&lt;</strong>
                     </a>
                 {{/previous}}
 
                 {{#next}}
                     <a rel="next" href="{{ path_to_root }}{{link}}" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa">&gt;</i>
+                        <strong class="wasfa-button">&gt;</strong>
                     </a>
                 {{/next}}
 

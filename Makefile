@@ -40,4 +40,4 @@ $(OUTPUT_PDF):
 	pandoc -o $@ src/*.md
 
 clean:
-	$(NAILING_CARGO_JUST_RUN) rm -rf $(OUTPUT_DIR)
+	$(NAILING_CARGO_JUST_RUN) rm -rf $(abspath $(OUTPUT_DIR))

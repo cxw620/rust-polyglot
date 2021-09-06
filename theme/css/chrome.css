@@ -18,6 +18,16 @@ a > .hljs {
     color: var(--links);
 }
 
+.fa {
+    font: initial !important;
+}
+.wasfa-button {
+    font: initial;
+    display: inline-block;
+    line-height: var(--menu-bar-height);
+    padding: 0 8px;
+}
+
 /* Menu Bar */
 
 #menu-bar,
