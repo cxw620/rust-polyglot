@@ -39,6 +39,7 @@ the thing the attribute placed inside.
 Typically it is found only at the top of a whole module or crate,
 
 Attributes are used for many important purposes:
+
   * [Conditional compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) `#[cfg(..)]`;
   * Denoting functions whose value should be checked
     (and types which should not be simply discarded):
