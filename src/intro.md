@@ -147,8 +147,6 @@ rustup's rather alarming `curl|bash`
 is mitigated by the care taken by the rustup mintainers;
 however, you will also end up using cargo which is more of a problem:
 
-xxx somewhere rustup +toolchain thing
-
 Library ecosystem
 -----------------
 

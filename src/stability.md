@@ -28,6 +28,12 @@ and exists mostly to be tested.
 The big difference is between Nightly and Beta/Stable
 (henceforth and elsewhere, Stable).
 
+[`rustup`](https://rustup.rs/) can manage
+multiple versions of Rust.
+The `cargo`, `rustc`, etc. in `~/.cargo/bin` (on your `PATH`)
+are actually links to rustup so that you can
+invoke a different version with e.g. `cargo +nightly build`.
+
 
 ### Nightly
 
