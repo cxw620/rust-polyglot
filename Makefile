@@ -23,7 +23,8 @@ OUTPUT_INDEX = $(OUTPUT_DIR)/index.html
 OUTPUT_PDF = polyglot.pdf
 
 MD_SOURCES := $(wildcard src/*[^A-Z].md)
-GIT_INFLUENCES := $(widlcard .git/HEAD .git/packed-refs)
+GIT_INFLUENCES := $(widlcard .git/HEAD .git/packed-refs) \
+		$(wildcard .git/$(git symbolic-ref HEAD 2>/dev/null))
 
 default: doc
 
