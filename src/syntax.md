@@ -25,7 +25,7 @@ Attributes
 ----------
 
 Rust code is frequently littered with [`#[attributes]`](https://doc.rust-lang.org/reference/attributes.html).
-These are placed before the item or expression they refer to.
+These are placed before the item or expression they apply to.
 The semantics are very varied.
 New attributes can be defined as procedural macros in libraries.
 
@@ -58,7 +58,7 @@ Items
 -----
 
 ```
-fn function(arg: T) -> ReturnValue { ... }
+fn function(arg0: T, arg1: U) -> ReturnValue { ... }
 type TypeAlias = OtherType; // type alias, structural equality
 pub struct WrappedCounter { counter: u64 } // nominal type equality
 trait Trait { fn trait_method(self); }
@@ -98,14 +98,14 @@ function(arg0,arg1)
 receiver.method(arg0,arg1,arg2)  // see the section on "Methods"
 |arg0, arg1: Type1| -> ReturnType expression  // closure
 
-fallible?                      // see [error handling]
-*value                         // deref, see [methods]
+fallible?                      // see "Error handling"
+*value                         // Deref, see "Traits, methods"
 type as other_type             // type conversion (safe but maybe lossy)
 WrappedCounter { counter: 42 } // constructor ("struct literal")
 
 collection[index]        // usually panics if not found, eg array bounds check
 thing.field              // field of a struct with named fields
-tuple.0; tuple.1;        // fields of type or tuple struct    
+tuple.0; tuple.1;        // fields of tuple or tuple struct    
 start..end; start..=end  // end-exclusive and -inclusive Range
 ```
 
