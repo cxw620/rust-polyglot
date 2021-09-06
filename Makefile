@@ -23,6 +23,7 @@ OUTPUT_INDEX = $(OUTPUT_DIR)/index.html
 OUTPUT_PDF = polyglot.pdf
 
 MD_SOURCES := $(wildcard src/*[^A-Z].md)
+GIT_INFLUENCES := $(widlcard .git/HEAD .git/packed-refs)
 
 default: doc
 
@@ -33,7 +34,7 @@ doc:	$(OUTPUT_INDEX)
 $(OUTPUT_INDEX): book.toml mdbook/SUMMARY.md $(MD_SOURCES)
 	$(NAILING_CARGO_JUST_RUN) $(MDBOOK) build $(MDBOOK_BUILD_NAILING_OPTS)
 
-mdbook/SUMMARY.md: regenerate-inputs $(MD_SOURCES)
+mdbook/SUMMARY.md: regenerate-inputs $(MD_SOURCES) $(GIT_INFLUENCES)
 	./$<
 
 $(OUTPUT_PDF):
