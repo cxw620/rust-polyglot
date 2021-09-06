@@ -64,10 +64,11 @@ latex/polyglot.tex:
 	ln -sf ../src/polyglot.tex latex/
 
 TEX_INPUTS = $(foreach c,$(CHAPTERS) precontents,latex/$c.tex)
-$(TEX_INPUTS): latex/%.tex: src/refs.md mdbook/SUMMARY.md
+$(TEX_INPUTS): latex/%.tex: src/refs.md mdbook/SUMMARY.md hack-latex
 	mkdir -p latex/
-	$(PANDOC) $(PANDOC_CHAPTERS_OPTION) --columns=132 -o$@ \
+	$(PANDOC) $(PANDOC_CHAPTERS_OPTION) --columns=132 -tlatex -o$@.raw \
 		$< pandoc/$*.md mdbook/autorefs.md
+	./hack-latex $@.raw >$@
 
 $(OUTPUT_PDF): $(TEX_INPUTS) latex/polyglot.tex
 	cd latex && \
