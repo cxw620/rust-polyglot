@@ -143,7 +143,9 @@ or special values like `crate`, `self`, `super`.
 Each Rust module
 (file, or `mod { }` within a file)
 has its own namespace.
-Other names are imported using `use`.
+Other names are imported using `use path::to::thing;`.
+`use` can also
+[refer to other crates](https://doc.rust-lang.org/reference/names/preludes.html#extern-prelude) (i.e. your `Cargo.toml` dependencies)
 Items can be renamed during import using `as`.
 
 Rust has strong conventions about identifier case and spelling,
