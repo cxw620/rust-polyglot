@@ -5,6 +5,9 @@
 MDBOOK ?= mdbook
 PANDOC ?= pandoc
 
+PDFLATEX = pdflatex
+LATEX_OPTIONS = --interaction=batchmode
+
 CHAPTERS := 	intro syntax types ownership traits safety 		\
 		errors macros async ffi rustdoc stability cargo 	\
 		libs colophon
@@ -31,9 +34,6 @@ GIT_INFLUENCES := $(widlcard .git/HEAD .git/packed-refs) \
 		$(wildcard .git/$(git symbolic-ref HEAD 2>/dev/null))
 MDBOOK_INFLUENCES := $(shell find theme -type f -name '[a-z]*.*[^~]')
 
-PANDOC_INPUTS = $(addprefix pandoc/, $(addsuffix .md, $(CHAPTERS))) \
-	src/refs.md mdbook/autorefs.md
-
 default: doc
 
 doc:	html
@@ -53,9 +53,22 @@ mdbook/SUMMARY.md: generate-inputs src/gendefs.pl \
 		$(MD_SOURCES) $(GIT_INFLUENCES)
 	./$< $(CHAPTERS)
 
-$(OUTPUT_PDF): mdbook/SUMMARY.md
-	pandoc -o $@ $(PANDOC_INPUTS)
+latex/polyglot.tex:
+	mkdir -p latex/
+	ln -sf ../src/polyglot.tex latex/
+
+TEX_INPUTS = $(foreach c,$(CHAPTERS),latex/$c.tex)
+$(TEX_INPUTS): latex/%.tex: src/refs.md mdbook/SUMMARY.md
+	mkdir -p latex/
+	pandoc --chapters --columns=132 -o$@ $< src/$*.md mdbook/autorefs.md
+
+$(OUTPUT_PDF): $(TEX_INPUTS) latex/polyglot.tex
+	cd latex && \
+		$(PDFLATEX) $(LATEX_OPTIONS) polyglot.tex && \
+		$(PDFLATEX) $(LATEX_OPTIONS) polyglot.tex && \
+		$(PDFLATEX) $(LATEX_OPTIONS) polyglot.tex && \
+		mv polyglot.pdf ../
 
 clean:
 	$(NAILING_CARGO_JUST_RUN) rm -rf $(abspath $(OUTPUT_DIR))
-	rm -rf mdbook pandoc
+	rm -rf latex mdbook pandoc
