@@ -39,7 +39,6 @@ must be written `Ok(r)` (or `return Ok(r)`).
 One must write
 `Ok(())` at the end of a function which would otherwise fall off the end
 implicitly returning `()`.
-
 The [`fehler`] macro library addresses this problem;
 due to language limitations it is not perfect,
 but even so it greatly improves the ergonomics.
@@ -87,7 +86,7 @@ But, consider:
  * Defining your own unit struct as the error type
    for a specific function or scenario.  (Perhaps several such.)
 
- * [`std::io::Error`](https://doc.rust-lang.org/nightly/std/io/struct.Error.html) if you primarily need to report OS errors.
+ * [`std::io::Error`](https://doc.rust-lang.org/nightly/std/io/struct.Error.html) if you primarily deal with OS errors.
 
 In a sophisticated program errors often start out
 near the bottom of this list,
