@@ -12,6 +12,7 @@ and document source code,
 I would greatly appreciate feedback from fellow Rustaceans.
 
 I am interested in reports of any or all of
+
  * Technical errors
  * Significant omissions
  * Duplication, redundancy, verbosity, or otioseness
