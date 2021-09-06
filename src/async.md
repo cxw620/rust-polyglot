@@ -58,7 +58,7 @@ become members of the state machine data structure,
 which is an anonymous type whose internals are hidden
 but which `impl Future`.
 
-The special keyword constrution `.await`
+The special keyword constrution [`.await`](https://doc.rust-lang.org/reference/expressions/await-expr.html#await-expressions)
 is to be applied to a `Future`.
 It introduces a yield (await) point
 into the generated state machine.
@@ -119,7 +119,7 @@ In practice,
 library authors have in many cases been forced
 to choose a specific runtime.
 
-Most of the important libraries use **Tokio**
+Most of the important libraries use **Tokio**,
 a mature production-quality runtime
 (which actually predates modern async Rust language features).
 
@@ -132,7 +132,7 @@ There is also
 Despite the name and strapline etc., "`async-std`" is not
 an official emanation of the Rust Project.
 This name grab in itself leaves a bad taste in my mouth.
-Also, "`async-std`" seems less comprehensive than Tokio in some area.
+Also, "`async-std`" seems less comprehensive than Tokio in some areas.
 I prefer Tokio's APIs.
 
 There are some glue libraries to help with bridging
@@ -227,7 +227,7 @@ in a trait implementation.
 So trait methods cannot simply be async.
 
 The 
-[`impl Trait` existential type featuer](traits.md#existential-types)
+[`impl Trait` existential type feature](traits.md#existential-types)
 is nearly enough to solve this,
 but because one cannot write `impl Trait`
 anywhere except as a function return,
@@ -261,7 +261,7 @@ or if a future is put explicitly into a data structure
 and then dropped at some point.
 
 The effect from the point of view of an `async { }`
-is that the code simply stops running in the middle,
+is that the code simply stops running at some `.await`,
 effectively-unpredictably,
 discarding all of the local state.
 

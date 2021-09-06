@@ -83,6 +83,21 @@ containing both the unstable work,
 and improvements to the stable compiler.)
 
 
+Editions
+--------
+
+Orthogonally to the different release channels,
+there are Editions of Rust.
+Currently, Rust 2015, 2018, and the work-in-progress 2021.
+
+Each edition is a dialect.
+The same compiler supports several editions.
+The edition is specified at the level of a crate,
+and a single program may contain code from several editions.
+
+This allows the language to evolve without breaking old code.
+
+
 API stability management tools
 ------------------------------
 

@@ -114,14 +114,15 @@ It is generally not considered good form
 to use this feature to hide `use`;
 after all,
 the reader of the documentation will probably want the same `use`
-and hiding them is Really Not Helping.
+and hiding it is Really Not Helping.
 
 
 Test annotations
 ----------------
 
 Annotations are available for `#[test]` functions and doctests,
-including in particular `should_panic`:
+including in particular
+[`should_panic`](https://doc.rust-lang.org/reference/attributes/testing.html#the-should_panic-attribute):
 
 ```
    #[test]

@@ -5,7 +5,7 @@ Overview
 --------
 
 Rust itself has two macro systems
-and a cargo-based code generation system.
+and cargo has a hook for e.g. build-time code generation.
 Each has its own section in this chapter:
 
  * ["Macros by example" `macro_rules!`](#macros-by-example-macro_rules)
@@ -23,9 +23,8 @@ with different invocation syntaxes:
    (where `macro` is the name of the macro).
    They can expand to expressions, blocks, types, items, etc.
 
-   You can write `macro!{..}`, `macro!(..)` and `macro![..]`,
-   as you please.
-   `macro_rules!` macros cannot distinguish these cases,
+   You can write `macro!{..}`, `macro!(..)` or `macro![..]`.
+   Macros-by-example cannot distinguish these cases,
    but there is generally a conventional invocation style for each macro.
    proc_macros can distinguish them.
 
