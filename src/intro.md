@@ -33,8 +33,8 @@ Alternatives or supplements to this guide
 
  * Official docs:
    the [Standard Library reference](https://doc.rust-lang.org/std/)
-   (excllent) and the
-   [Reference].
+   (excellent) and the
+   [Reference]
    (woefully incomplete).
 
 Language
@@ -78,9 +78,10 @@ for use in embedded situations.
 The concrete syntax has many influences.
 The basic function and expression syntax resembles "bracey" languages,
 but with some wrinkles.
-Notably,
+Notably:
 `( )` are not required around the control expression for `if` etc.
-but `{ }` *are* required around the controlled statement block.
+but `{ }` *are* required around the controlled statement block;
+and, presence vs absence of `;` at the end of a block is highly significant.
 
 There is little meaningful separate compilation.
 The usual aggregation of the Rust libraries making up a single Rust program
