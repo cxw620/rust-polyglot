@@ -228,6 +228,16 @@ sub install_outputs () {
   }
 }
 
+sub make_link ($$) {
+  my ($from, $to) = @_;
+  symlink $from, "$to.tmp" or die "symlink $to -> $from: $!";
+  push @output_files, $to;
+}
+
+sub make_links () {
+  make_link "../src/precontents.md", "pandoc/precontents.md";
+}
+
 die unless @ARGV;
 die if $ARGV[0] =~ m/^-/;
 @chapters = @ARGV;
@@ -239,4 +249,5 @@ scan_filter();
 summary();
 contents();
 autorefs();
+make_links();
 install_outputs();
