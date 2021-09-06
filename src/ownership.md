@@ -74,10 +74,10 @@ This also means that Rust values do not contain addresses
 pointing within themselves.
 (Exception: see [`Pin`](https://doc.rust-lang.org/std/pin/struct.Pin.html).)
 
-Moving in program source terms
-might or might not mean that its memory address actually changes
+Moving in semantic terms
+might or might not mean that the object's memory address actually changes
 (perhaps the compiler can optimise away the memory copy).
-If it does, the compiler will generate the necessary memcpy calls.
+If it does change, the compiler will generate the necessary memcpy calls.
 
 Usually, when you assign a value to a variable, or pass or return it,
 the value is moved.
@@ -86,7 +86,7 @@ Some types are "plain data":
 They can simply be duplicated without problem with memcpy.
 These types are  [**Copy**](https://doc.rust-lang.org/std/marker/trait.Copy.html).
 `Copy` is usually implemented via `#[derive(Copy)]`.
-Types that are `Copy` are copied
+Types that are `Copy` are (semantically) copied
 rather than being moved out of
 (by assignments, parameter passing, etc.)
 
@@ -133,7 +133,8 @@ It is very common to construct from a value of another relevant type,
 for exmaple via the [`From`](https://doc.rust-lang.org/std/convert/trait.From.html) and [`Into`](https://doc.rust-lang.org/std/convert/trait.Into.html) traits,
 or specific methods
 (for purposes like complex construction or conversion,
-typestate arrangements, and so on).
+[typestate](https://github.com/rustype/typestate-rs)
+arrangements, and so on).
 
 There is no equivalent to C++'s "placement new".
 It is up to the caller whether the created object will go on the heap.
@@ -162,7 +163,7 @@ and manage its lifetime or mutability at runtime.
 | [`RwLock<T>`](https://doc.rust-lang.org/std/sync/struct.RwLock.html) | within  | owner | Yes, runtime locking | Yes
 | [`Cell<T>`](https://doc.rust-lang.org/std/cell/struct.Cell.html) | within | owner  | Only move/copy | `Send`
 | [`UnsafeCell<T>`](https://doc.rust-lang.org/std/cell/struct.UnsafeCell.html) | within | owner  | Up to you, `unsafe` | Maybe
-| [`atomic`](https://doc.rust-lang.org/std/sync/atomic/index.html)[3]  | within | owner | Only some operations  | Yes
+| [`atomic`](https://doc.rust-lang.org/std/sync/atomic/index.html) [3]  | within | owner | Only some operations  | Yes
 | `Rc<RefCell<T>>` | heap | refcount[2] | Yes, runtime checks | No |
 | `Arc<Mutex<T>>` | heap | refcount[2] | Yes, runtime locking | Yes |
 | `Arc<RwLock<T>>` | heap | refcount[2] | Yes, runtime locking | Yes |

@@ -8,7 +8,7 @@ Traits, methods
 Methods
 -------
 
-The `<receiver>.method(...)` syntax is used to call a "method":
+The _`receiver`_`.method(...)` syntax is used to call a "method":
 a function
 whose first parameter is a variant on `self`;
 often `&self` or `&mut self`.
@@ -27,7 +27,8 @@ and/or macro crates like
 It follows from the ownership model that a method defined
 `fn foo(self,...)` consumes its argument (unless it's `Copy`)
 so that it can no longer be used.
-This can used to good effect in typestate-like APIs.
+This can used to good effect in
+[typestate](https://github.com/rustype/typestate-rs)-like APIs.
 
 
 Traits
@@ -67,6 +68,7 @@ object-safe by adding `where Self: Sized` to troublesome methods.
 Rust has a strict trait coherence system.
 There can be only one implementation of a trait for any one concrete type,
 in the whole program.
+(Source-code level specialisation is not available in Stable Rust.)
 To ensure this, [it is forbidden](https://doc.rust-lang.org/reference/items/implementations.html#trait-implementation-coherence) (in summary)
 to implement a foreign trait on a foreign type
 (where "foreign" means outside your crate, not outside your module).
@@ -168,7 +170,6 @@ Closures borrow their captures during their whole existence,
 not just while they're running.
 This can impede the use of closures as syntactic sugar.
 
-
 ### `dyn` closures
 
 
@@ -216,11 +217,11 @@ count.
 ### Some other key traits
 
 
- * [`Deref`](https://doc.rust-lang.org/std/ops/trait.Deref.html): method despatch (see below)
+ * [`Deref`] and [`DerefMut`]\: method despatch (see below)
  * [`std::ops::*`](https://doc.rust-lang.org/std/ops/index.html): expression operators (overloading)
  * [`Eq` et al](https://doc.rust-lang.org/std/cmp/index.html) for comparison, and `Hash` for putting objects in many kinds of collections.
- * [`From`]
-   [`Into`]
+ * [`From`],
+   [`Into`],
    [`TryFrom`](https://doc.rust-lang.org/std/convert/trait.TryFrom.html) and 
    [`TryInto`](https://doc.rust-lang.org/std/convert/trait.TryInto.html).
    Prefer to `impl From` rather than `Into` if you can;
@@ -236,7 +237,7 @@ count.
    [`Clone`](https://doc.rust-lang.org/std/clone/trait.Clone.html),
    [`AsRef`](https://doc.rust-lang.org/std/convert/trait.AsRef.html),
    [`Borrow`](https://doc.rust-lang.org/std/borrow/trait.Borrow.html)/[`ToOwned`](https://doc.rust-lang.org/std/borrow/trait.ToOwned.html).
- * [`Send`] [`Sync`]
+ * [`Send`], [`Sync`]
    for thread-safety (permitting use in multithreaded programs).
  * [`Default`](https://doc.rust-lang.org/std/default/trait.Default.html)
    (implemented promiscuously)
@@ -245,7 +246,7 @@ count.
 `Deref` and method resolution
 -------------------------------
 
-The magic traits [`Deref`](https://doc.rust-lang.org/std/ops/trait.Deref.html) and `DerefMut`
+The magic traits [`Deref`] and [`DerefMut`]
 allow a type to "dereference to"
 another type.
 This is typically used for types like `Arc`, `Box`
@@ -258,7 +259,8 @@ with the appropriately-named method.
 The signature of the method is not considered during resolution,
 so there is no signature-based method overloading/dispatch.
 
-If it is necessary to specify a particular method,
+If it is necessary to
+[specify a particular method](https://doc.rust-lang.org/reference/paths.html#qualified-paths),
 `Type::method` or
 `Trait::method` can be used,
 or even `<T as Trait>::method`.
@@ -269,7 +271,9 @@ which are not methods (do not take a `self` parameter).
 Idiomatically this includes constructors like `T::new()`
 and can also include other functions that
 the struct's author has decided ought not to be methods.
-For example `Arc::downgrade` is not a method
+For example
+[`Arc::downgrade`](https://doc.rust-lang.org/nightly/std/sync/struct.Arc.html#method.downgrade)
+is not a method
 to avoid interfering with any `downgrade` method on `T`.
 
 `Deref` effectively imports the dereference target type's methods
