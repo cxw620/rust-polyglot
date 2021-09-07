@@ -72,18 +72,44 @@
 \title{DRAFT -- Rust for the Polyglot Programmer}
 \author{Ian Jackson and contributors}
 
+%% Some hacking.  The objective here is to allow hyphenation of
+%% `\texttt{...}' material after `::' separators.  First of all, keep the old
+%% `\texttt' command around, because we'll need it.
 \let\@latex@texttt=\texttt
+
+%% If we're not actually typesetting stuff directly (e.g., writing to the
+%% table-of-contents file, setting a page marker, or building a PDF bookmark
+%% name) then just expand to `\texttt'.  Otherwise, it's fair game.
 \def\texttt{\ifx\protect\@typeset@protect \expandafter\@texttt@i
   \else \expandafter\@latex@texttt \fi}
+
+%% All we do is set stuff in monospace, with additional discretionary
+%% hyphens.
 \def\@texttt@i#1{\@latex@texttt{\addhyph@{#1}}}
+
+%% And here's how we insert the discretionaries.  `\addhyph@i{SEP}{TEXT}'
+%% inserts a discretionary hyphen after every SEP appearing at top-level in
+%% TEXT.  (It doesn't peer into `{...}' groups.  Fortunately, we don't need
+%% it to.)
 \def\addhyph@#1{\addhyph@i{::}{#1}}
 \def\addhyph@i#1#2{%
+  %% Below, we'll call `\addhyph@ii TEXT SEP \q@end', so there's a known
+  %% separator before the end marker `\q@end'.  This lets us use TeX's macro
+  %% machinery to split TEXT into two pieces at the first occurrence of SEP.
+  %% If the second piece is empty, we know we've found our sentinel, and
+  %% should stop.  Otherwise, typeset the first piece, the separator, and a
+  %% discretionary hyphen (/not/ in monospace), and process the second piece
+  %% tail-recursively.
   \def\addhyph@ii##1#1##2\q@end{%
     ##1%
     \def\temp@{##2}%
     \ifx\temp@\empty\else #1\textrm{\-}\def\next@{\addhyph@ii##2\q@end}%
     \expandafter\next@\fi%
   }%
+  %% Call `\addhyph@ii' as just defined to split our TEXT.  Insert `\relax'
+  %% just before the sentinel separator: otherwise, we get confused if the
+  %% separator consists of two similar characters, and the real TEXT ends
+  %% with just one of them.
   \addhyph@ii#2\relax#1\q@end%
 }
 
