@@ -23,10 +23,10 @@ with different invocation syntaxes:
    (where `macro` is the name of the macro).
    They can expand to expressions, blocks, types, items, etc.
 
-   You can write `macro!{..}`, `macro!(..)` or `macro![..]`.
-   Macros-by-example cannot distinguish these cases,
+   You can write `macro!{..}`, `macro!(..)` or `macro![..]`
+   as you like:
+   the macro cannot distinguish these cases,
    but there is generally a conventional invocation style for each macro.
-   proc_macros can distinguish them.
 
  * Attributes: `#[macro]` (before some language construct).
    The macro can filter/alter the decorated thing.
