@@ -141,7 +141,7 @@ Obtaining Rust is canonically done with rustup,
 a pre-packaged installer/updater tool.
 rustup's rather alarming `curl|bash`
 [install rune](https://www.rust-lang.org/tools/install)
-is mitigated by the care taken by the rustup mintainers;
+is mitigated by the care taken by the rustup maintainers;
 however, you will also end up using cargo which is more of a problem:
 
 xxx somewhere rustup +toolchain thing
@@ -180,7 +180,7 @@ Notable ideological features of the Rust community are:
    including a desire for the compiler to take responsibility
    for preventing programmer error.
  * Pride in helping users write performant code.
- * Effective collaboration between practicing developers and
+ * Effective collaboration between practising developers and
    academic programming language and formal methods experts.
    ([Comprehensive survey](https://github.com/newca12/awesome-rust-formalized-reasoning).)
 

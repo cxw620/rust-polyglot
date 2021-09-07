@@ -178,7 +178,7 @@ closed over data, and code pointer.
 A `dyn` closure trait object
 cannot be passed by value because it's unsized.
 This can make `FnOnce` closures awkward.
-Use monomorphistion,
+Use monomorphisation,
 `Box<dyn FnOnce>` or somehow make the closure be `FnMut`.
 
 ### Monomorphised closures `f: F where F: Fn()`

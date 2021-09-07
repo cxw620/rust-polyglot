@@ -82,7 +82,7 @@ There are no restrictions on what that code might do.
 The `crates.io` package repository contains tarballs,
 and there is no mechanical linkage or machine-readable traceability
 of those crate tarballs
-back to the git repositories they were hopefully orignally created from.
+back to the git repositories they were hopefully originally created from.
 (The `crates.io` index is maintained in git but
 cargo does not look at
 the git history of the index
@@ -111,7 +111,7 @@ even if there is no known real-world bug).
 
 Some OS distros (e.g. Debian) are starting to maintain
 reasonable collections of Rust packages
-within the distro package respository.
+within the distro package repository.
 This puts your OS distro between you
 and the raw data from `crates.io`,
 which is likely to reduce your risk.
@@ -127,7 +127,7 @@ where packages are built in a container or VM of some kind.
 
 One approach is to keep all of the Rust code,
 and run all of the tools and the generated code,
-in the privsep enviroment.
+in the privsep environment.
 But this is not always very convenient for day-to-day development.
 
 I have a tool
@@ -173,7 +173,7 @@ It's hard to know when to rerun cargo and when cargo's outputs changed.
 It's hard to get cargo to build precisely what's needed.
 If you want to run cargo inside `make`,
 you will need to resort to stamp files,
-and live with it sometimes doing unecessary work.
+and live with it sometimes doing unnecessary work.
 
 It is not possible to have a
 completely local (unpublished) dependency

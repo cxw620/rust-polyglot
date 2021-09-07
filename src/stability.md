@@ -10,7 +10,7 @@ but also want to be able to make progress and changes.
 
 There are a number of facilities and practices
 which try to achieve both,
-with a surprising degree of sucess.
+with a surprising degree of success.
 
 Rust language, release channels
 -------------------------------
@@ -117,7 +117,7 @@ and crates are generally expected to
 choose a cargo-semver-incompatible version
 for releases with breaking changes.
 The community will typically expect that
-any inadvertant breaking changes
+any inadvertent breaking changes
 are reverted.
 
 The semver scheme is like official semver,

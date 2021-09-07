@@ -227,7 +227,7 @@ in a trait implementation.
 So trait methods cannot simply be async.
 
 The 
-[`impl Trait` existential type featuer](traits.md#existential-types)
+[`impl Trait` existential type feature](traits.md#existential-types)
 is nearly enough to solve this,
 but because one cannot write `impl Trait`
 anywhere except as a function return,

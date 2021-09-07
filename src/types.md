@@ -23,7 +23,7 @@ This is done with a C++-like `< >` syntax.
 Generic code will be monomorphised automatically by the compiler,
 for all of the concrete types that are actually required.
 
-When it is necessary to explictly specify generic parameters,
+When it is necessary to explicitly specify generic parameters,
 for example in a function call,
 one uses the
 [turbofish](https://doc.rust-lang.org/reference/glossary.html?highlight=turbo#turbofish) syntax
@@ -240,7 +240,7 @@ you can't generally use it as a generic type parameter, etc.
 You can define an enum with no variants.
 The standard library has `Infallible` which is
 an uninhabited error type,
-but its ergnomics are not always great.
+but its ergonomics are not always great.
 The crate [`void`] can help fill this gap.
 It provides not only a trivial uninhabited type (`Void`)
 but also
