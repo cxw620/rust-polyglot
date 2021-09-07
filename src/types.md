@@ -132,7 +132,7 @@ blocks (incl. functions) that do not evaluate to (return) an actual value.
 
 | Purpose | Type |
 | -------- | --- |
-| Heap allocation | [`Box<T>`](Box)
+| Heap allocation | [`Box<T>`][`Box`]
 | Expanding vector (ptr, len, capacity) | [`Vec<T>`][`Vec`]
 | Expanding string (ptr, len, capacity) | [`String`]
 | Hash table / ordered B-Tree | [`HashMap`] / [`BTreeMap`]
@@ -244,7 +244,7 @@ but its ergnomics are not always great.
 The crate [`void`] can help fill this gap.
 It provides not only a trivial uninhabited type (`Void`)
 but also
-helpful trait impls, functions and macros,
+helpful trait impls, functions and macros.
 
 Other features
 ---------------

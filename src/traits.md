@@ -79,7 +79,7 @@ The [`Iterator`](https://doc.rust-lang.org/std/iter/trait.Iterator.html) and [`I
 very important in idiomatic (and performant) Rust.
 
 Most collections and many other key types (eg, [`Option`](https://doc.rust-lang.org/std/option/enum.Option.html)) implement
-`Iterator` and/oor `IntoIterator`,
+`Iterator` and/or `IntoIterator`,
 so that they can be iterated over;
 this is how `for x in y` loops work:
 `y` must `impl IntoIterator`.
