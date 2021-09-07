@@ -130,7 +130,7 @@ Constructors that take arguments are often
 named like `Type::with_wombat()`.
 
 It is very common to construct from a value of another relevant type,
-for exmaple via the [`From`](https://doc.rust-lang.org/std/convert/trait.From.html) and [`Into`](https://doc.rust-lang.org/std/convert/trait.Into.html) traits,
+for example via the [`From`](https://doc.rust-lang.org/std/convert/trait.From.html) and [`Into`](https://doc.rust-lang.org/std/convert/trait.Into.html) traits,
 or specific methods
 (for purposes like complex construction or conversion,
 [typestate](https://github.com/rustype/typestate-rs)

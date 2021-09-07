@@ -73,7 +73,7 @@ mod some_module { ... } // module source is right here
 Expressions
 -----------
 
-Most of the usual infix and assigment operators are available.
+Most of the usual infix and assignment operators are available.
 Control flow "statements" are generally expressions:
 
 ```

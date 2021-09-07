@@ -96,7 +96,7 @@ anything available in any other programming environment.
 
 Generally, the resulting code
 is a fully monomorphised open-coded marshaller
-specialised for the specifc data structure(s) and format(s),
+specialised for the specific data structure(s) and format(s),
 so performance is good but the code size can be very large.
 
 
@@ -119,7 +119,7 @@ but it is hard to choose.
    and is in the process of being replaced by the not-yet-released
    `0.5` which uses async.
    `0.4` to `0.5` is quite a big compat break
-   (this was to be expected, but is still a nuistance).
+   (this was to be expected, but is still a nuisance).
    If you start a new project with Rocket, use the `0.5` preview.
 
  * [`actix-web`](https://actix.rs/) is popular too.

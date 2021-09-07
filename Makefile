@@ -72,9 +72,10 @@ $(TEX_INPUTS): latex/%.tex: src/refs.md mdbook/SUMMARY.md hack-latex
 
 $(OUTPUT_PDF): $(TEX_INPUTS) latex/polyglot.tex
 	cd latex && \
-		$(PDFLATEX) $(LATEX_OPTIONS) polyglot.tex && \
-		$(PDFLATEX) $(LATEX_OPTIONS) polyglot.tex && \
-		$(PDFLATEX) $(LATEX_OPTIONS) polyglot.tex && \
+		{ $(PDFLATEX) $(LATEX_OPTIONS) polyglot.tex && \
+		  $(PDFLATEX) $(LATEX_OPTIONS) polyglot.tex && \
+		  $(PDFLATEX) $(LATEX_OPTIONS) polyglot.tex || \
+			{ cat polyglot.log; false; }; } && \
 		mv polyglot.pdf ../
 
 clean:

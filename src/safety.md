@@ -25,7 +25,7 @@ Safety in Rust does not mean the absence of errors detected at runtime.
 
 Nor does Safe Rust guarantee the absence of memory leaks.
 However, in general, leaks are not very common in practice:
-for example, given the faciities in the standard library,
+for example, given the facilities in the standard library,
 leaks are only possible by making
 circularly referential refcounted data structures,
 or when using certain esoteric or explicitly-leaking functions.
@@ -67,7 +67,7 @@ A reasonable collection of threading primitives and tools
 is in
 [`std::thread`](https://doc.rust-lang.org/std/thread/index.html) and
 [`std::sync`](https://doc.rust-lang.org/std/sync/index.html#higher-level-synchronization-objects).
-Many projects prefer the primitves from the [`parking_lot`] crate.
+Many projects prefer the primitives from the [`parking_lot`] crate.
 
 Multithreading in Rust can be an adjunct to,
 or replacement for,
