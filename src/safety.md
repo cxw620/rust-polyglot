@@ -39,7 +39,7 @@ but overflow handling may need care for correct results.
 The basic arithmetic operations
 panic on overflow in debug builds,
 and silently truncate (bitwise) in release builds.
-The [`as` type conversion operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions),
+The [`as` type conversion operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions)
 silently truncates on overflow.
 
 The stdlib provides `checked_*` and `wrapping_*` methods,

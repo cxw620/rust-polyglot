@@ -27,7 +27,7 @@ and/or macro crates like
 It follows from the ownership model that a method defined
 `fn foo(self,...)` consumes its argument (unless it's `Copy`)
 so that it can no longer be used.
-This can used to good effect in
+This can be used to good effect in
 [typestate](https://github.com/rustype/typestate-rs)-like APIs.
 
 
