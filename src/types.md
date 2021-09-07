@@ -30,12 +30,12 @@ one uses the
 (so named because `::<>` looks a bit like a speedy fish):
 
 ```
-function::<Generic,Args>(...)
+let r = function::<Generic,Args>(...);
 ```
 
 Generic parameters can be constrained with bounds written
-where they are introduced `fn foo<T: Default>() -> T;`
-or with where clauses `fn foo<T>() -> T where T: Default;`.
+where they are introduced `fn foo<T: Default + Clone>() -> T;`
+or with where clauses `fn foo<T>() -> T where T: Default + Clone;`.
 Lifetimes are constrained thus: `'longer: 'shorter`,
 reading `:` as "outlives".
 
@@ -79,7 +79,7 @@ In Rust an
 [**array**](https://doc.rust-lang.org/std/primitive.array.html)
  has a size fixed at compile time.
 (Generic types can be parameterised by constant integers,
-as well as other types,
+not only types,
 so the same code can compile with a variety of different array sizes,
 resulting in monomorphisation.)
 Often a slice is better.
@@ -98,7 +98,7 @@ a type whose size is not known at compile time.
 Unsized values cannot be stack allocated,
 nor passed as parameters or returned from functions.
 But they can be heap allocated, and passed as references.
-References (and raw pointers) to unsized types are "fat pointers":
+References (and heap and raw pointers) to unsized types are "fat pointers":
 they are two words wide - one for the data pointer, and one for the metadata.
 
 [**str**](https://doc.rust-lang.org/std/primitive.str.html) is identical to `[u8]` (ie, a slice of bytes),
@@ -130,7 +130,7 @@ blocks (incl. functions) that do not evaluate to (return) an actual value.
 
 | Purpose | Type |
 | -------- | --- |
-| Heap allocation | [`Box<T>`](Box)
+| Heap allocation | [`Box<T>`][`Box`]
 | Expanding vector (ptr, len, capacity) | [`Vec<T>`][`Vec`]
 | Expanding string (ptr, len, capacity) | [`String`]
 | Hash table / ordered B-Tree | [`HashMap`] / [`BTreeMap`]
@@ -260,6 +260,7 @@ non-breakingly extend types in your published API.
 [`#[derive]`](https://doc.rust-lang.org/reference/attributes/derive.html#derive), often `#[derive(Trait)]`, for many `Trait`.
 In particular, see:
 
+ * `#[derive(`[`Default`](https://doc.rust-lang.org/std/default/trait.Default.html)`])`
  * `#[derive(`[`Debug`](https://doc.rust-lang.org/std/fmt/trait.Debug.html)`])`
  * `#[derive(`[`Clone`](https://doc.rust-lang.org/std/clone/trait.Clone.html)`,`[`Copy`](https://doc.rust-lang.org/std/marker/trait.Copy.html)`)]`
  * `#[derive(`[`Eq`](https://doc.rust-lang.org/std/cmp/trait.Eq.html)`,`[`PartialEq`](https://doc.rust-lang.org/std/cmp/trait.PartialEq.html)`,`[`Ord`](https://doc.rust-lang.org/std/cmp/trait.Ord.html)`,`[`PartialOrd`](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html)`)]`

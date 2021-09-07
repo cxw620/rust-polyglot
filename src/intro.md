@@ -145,7 +145,7 @@ a pre-packaged installer/updater tool.
 rustup's rather alarming `curl|bash`
 [install rune](https://www.rust-lang.org/tools/install)
 is mitigated by the care taken by the rustup mintainers;
-however, you will also end up using cargo which is more of a problem:
+however, you will also end up using cargo which is more of a problem.
 
 Library ecosystem
 -----------------

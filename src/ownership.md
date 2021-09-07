@@ -37,7 +37,7 @@ In Safe Rust, incompatible uses are prevented by the borrow checker.
 The lifetimes of borrows are often part of the types of objects;
 so types can be generic over lifetimes.  For example:
 ```
-   struct WrappedCounterRef<'r>(&'r u64);
+   struct CounterRef<'r>(&'r u64);
 ```
 
 Even simple functions such as this
@@ -72,7 +72,7 @@ since moving it would invalidate any references.
 
 This also means that Rust values do not contain addresses
 pointing within themselves.
-(Exception: see [`Pin`](https://doc.rust-lang.org/std/pin/struct.Pin.html).)
+(Exception: see [`Pin`](async.md#pin).)
 
 Moving in semantic terms
 might or might not mean that the object's memory address actually changes
@@ -275,7 +275,7 @@ you have these options:
    This may be not as slow as you think.
    `Arc` in particular is less slow than reference counting
    in many other languages,
-   since you usually end up passing `&Arc<T>` around,
+   since you usually end up passing `&Arc<T>` or `&T` around,
    borrowing a reference rather than manipulating the refcount.
 
  * Use a crate like
@@ -292,3 +292,4 @@ you have these options:
 
  * Use `unsafe` and take on a proof obligation.
    How onerous that is depends very much on the situation.
+   See [Unsafe Rust](safety.md#unsafe-rust).

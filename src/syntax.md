@@ -60,7 +60,7 @@ Items
 ```
 fn function(arg0: T, arg1: U) -> ReturnValue { ... }
 type TypeAlias = OtherType; // type alias, structural equality
-pub struct WrappedCounter { counter: u64 } // nominal type equality
+pub struct Counter { counter: u64 } // nominal type equality
 trait Trait { fn trait_method(self); }
 const FORTY_TWO: u32 = 42;
 static TABLE: [u8; 256] = { 0x32, 0x26, 0o11, ...many entries };
@@ -85,7 +85,7 @@ if condition { value } else { other_value }   // no ? :, use this
 if let pattern = value { .... } [else ...]    // pattern binding condition
 match value { pat0 if c0 => expr0,.. }        // see "Types and Patterns"
 
-'loopname: loop { ... }                              // 'loopname
+'loopname: loop { ... }                              // 'loopname:
 'loopname: while condition { }                       // is optional
 'loopname: while let pattern = expr { }              // of course
 'loopname: for loopvar in something_iterable { ... } //
@@ -98,10 +98,10 @@ function(arg0,arg1)
 receiver.method(arg0,arg1,arg2)  // see the section on "Methods"
 |arg0, arg1: Type1| -> ReturnType expression  // closure
 
-fallible?                      // see "Error handling"
-*value                         // Deref, see "Traits, methods"
-type as other_type             // type conversion (safe but maybe lossy)
-WrappedCounter { counter: 42 } // constructor ("struct literal")
+fallible?                // see "Error handling"
+*value                   // Deref, see "Traits, methods"
+type as other_type       // type conversion (safe but maybe lossy)
+Counter { counter: 42 }  // constructor ("struct literal")
 
 collection[index]        // usually panics if not found, eg array bounds check
 thing.field              // field of a struct with named fields
@@ -147,7 +147,7 @@ Each Rust module
 has its own namespace.
 Other names are imported using `use path::to::thing;`.
 `use` can also
-[refer to other crates](https://doc.rust-lang.org/reference/names/preludes.html#extern-prelude) (i.e. your `Cargo.toml` dependencies)
+[refer to other crates](https://doc.rust-lang.org/reference/names/preludes.html#extern-prelude) (i.e. your `Cargo.toml` dependencies).
 Items can be renamed during import using `as`.
 
 Rust has strong conventions about identifier case and spelling,
@@ -158,8 +158,8 @@ which the compiler will warn you about violating:
  * `SCREAMING_SNAKE_CASE`: Constants and global variables.
 
 `-` is not valid in identifier names in Rust source code.
-When found in other places in the Rust world,
-you may encounter it in what is described as `kebab-case`.
+In other places in the Rust world,
+you may see names in `kebab-case`.
 
 Many items (including functions, types, fields of product types, etc.)
 can be public (`pub`) or private to the module (the default),
@@ -167,4 +167,4 @@ or have [more subtle visibility](https://doc.rust-lang.org/reference/visibility-
 
 `_` can often be written when an identifier is expected.
 For a type or lifetime, it asks the compiler to infer.
-For a binding, it discards the value (droping it right away).
+For a binding, it discards the value (dropping it right away).
