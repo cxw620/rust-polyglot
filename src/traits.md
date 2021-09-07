@@ -61,7 +61,8 @@ pointers to objects which implement the trait can be
 made into pointers to type-erased [trait objects](https://doc.rust-lang.org/reference/types/trait-object.html#trait-objects) `dyn Trait`.
 These "fat pointers" have a vtable as well as the actual object pointer.
 Trait objects are often seen in the form `Box<dyn Trait>`.
-Ability of a trait to be used this way is called "object safety";
+Ability of a trait to be used this way is called "object safety"
+(confusingly; it's not related to safety).
 [The rules](https://doc.rust-lang.org/reference/items/traits.html#object-safety) are a bit complicated but often a trait can be made
 object-safe by adding `where Self: Sized` to troublesome methods.
 
@@ -81,7 +82,7 @@ The [`Iterator`](https://doc.rust-lang.org/std/iter/trait.Iterator.html) and [`I
 very important in idiomatic (and performant) Rust.
 
 Most collections and many other key types (eg, [`Option`](https://doc.rust-lang.org/std/option/enum.Option.html)) implement
-`Iterator` and/oor `IntoIterator`,
+`Iterator` and/or `IntoIterator`,
 so that they can be iterated over;
 this is how `for x in y` loops work:
 `y` must `impl IntoIterator`.
@@ -96,8 +97,9 @@ Idiomatic coding style for iteration in Rust involves
 chaining iterator combinators.
 Effectively,
 Rust contains an iterator monad sublanguage with a funky syntax.
-withoutboats has an excellent
-[essay on Rust and Monads/effects](https://without.boats/blog/the-problem-of-effects/).
+(More in this essay:
+[The problem of effects in Rust](https://without.boats/blog/the-problem-of-effects/)
+by withoutboats.)
 
 The [`.collect()`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect) method in `Iterator`
 reassembles the result of an iteration
@@ -168,13 +170,13 @@ so closures can only be used with generics
 
 Closures borrow their captures during their whole existence,
 not just while they're running.
-This can impede the use of closures as syntactic sugar.
+This can impede their use to avoid repetition.
 
 ### `dyn` closures
 
 
 An `&dyn Fn` closure pointer is a fat pointer:
-closed over data, and code pointer.
+closed-over data, and code pointer.
 
 A `dyn` closure trait object
 cannot be passed by value because it's unsized.

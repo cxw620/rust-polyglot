@@ -83,8 +83,12 @@ are implemented using `unsafe`.
 
 All `unsafe { }` does by itself is allow you to use unsafe facilities.
 When you use an unsafe facility you take on a proof obligation.
+How difficult a proof obligation you have depends very much on
+what you are doing.
+Sometimes it is easy.
+
 The documentation for each facility explains what the rules are.
-The has rules for [type layout] etc.
+The Reference has rules for [type layout] etc.
 
 The Rest community generally tries very hard to make sound APIs
 for libraries which use unsafe internally.
@@ -94,10 +98,6 @@ You should ensure your library APIs are sound.
 
 Most facilities marked unsafe are unsafe because they can allow
 memory misuse and/or violation of the ownership and aliasing rules.
-
-How difficult a proof obligation you have depends very much on
-what you are doing.
-Sometimes it is easy.
 
 One difficulty is the lack of formal specifications.
 The [Reference] and the

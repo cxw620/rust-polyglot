@@ -140,7 +140,7 @@ which involves unwinding
 including destroying the local variables in the unwound stack frames.
 
 It is highly unidiomatic and inadvisable to use panics for
-handling of expectedly exceptional cases
+handling of expected exceptional cases
 (eg, file not found).
 The very highest quality libraries offer completely panic-free
 versions of their functionality.
