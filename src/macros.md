@@ -70,7 +70,11 @@ In the replacement, write just `$binding` (without the syntax type).
 
 Curious points:
 
- * `macro_rules!` macros are partially hygienic.
+ * `macro_rules!` macros are
+   [partially hygienic](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene).
+   They can't introduce or refer to a local name in the caller's namespace,
+   but
+   the macro body still has to qualify the global names it uses!
 
  * The repetition and optional constructs have funky rules
    to relate repetitions in the substitution to
@@ -84,7 +88,7 @@ Curious points:
    This can cause trouble if the result is fed to further macros.
 
  * The syntax item bindings have annoying rules
-   about what they can be followed by.
+   about [what they can be followed by](https://doc.rust-lang.org/reference/macros-by-example.html#follow-set-ambiguity-restrictions).
    These rules appear intended to remove shift/reduce conflicts
    and therefore remove ambiguity,
    but of course the first-match over the whole set of patterns
