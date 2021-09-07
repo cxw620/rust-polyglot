@@ -17,4 +17,13 @@ set -x
 rsync -r --delete ../Build/polyglot/html/. polyglot.pdf \
 	ianmdlvl@chiark:public-html/rust-polyglot/.
 
-git push origin HEAD:published
+push=HEAD:published
+
+git fetch origin
+if [ "x$(git symbolic-ref HEAD 2>/dev/null)" = xrefs/heads/main ] && \
+   git merge-base --is-ancestor refs/remotes/origin/main HEAD
+then
+	push="$push HEAD:main"
+fi
+
+git push origin $push
