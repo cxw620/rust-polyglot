@@ -27,7 +27,7 @@ and/or macro crates like
 It follows from the ownership model that a method defined
 `fn foo(self,...)` consumes its argument (unless it's `Copy`)
 so that it can no longer be used.
-This can used to good effect in
+This can be used to good effect in
 [typestate](https://github.com/rustype/typestate-rs)-like APIs.
 
 
@@ -62,7 +62,7 @@ made into pointers to type-erased [trait objects](https://doc.rust-lang.org/refe
 These "fat pointers" have a vtable as well as the actual object pointer.
 Trait objects are often seen in the form `Box<dyn Trait>`.
 Ability of a trait to be used this way is called "object safety";
-[The rules](https://doc.rust-lang.org/reference/items/traits.html#object-safety) are a bit complicated but often a trait can be made
+[the rules](https://doc.rust-lang.org/reference/items/traits.html#object-safety) are a bit complicated but often a trait can be made
 object-safe by adding `where Self: Sized` to troublesome methods.
 
 Rust has a strict trait coherence system.

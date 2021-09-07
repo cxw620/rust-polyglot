@@ -110,7 +110,7 @@ Code generation (to native code or WASM) is currently done via LLVM
 but work is ongoing to allow use of
 [GCC](https://blog.antoyo.xyz/rustc_codegen_gcc-progress-report-3)
 and
-[Cranelift](https://github.com/bjorn3/rustc_codegen_cranelift/blob/master/Readme.md)
+[Cranelift](https://github.com/bjorn3/rustc_codegen_cranelift/blob/master/Readme.md).
 There is also an
 [IR interpreter](https://github.com/rust-lang/miri#readme)
 used mostly for validation.
@@ -126,7 +126,7 @@ is excellent and comprehensive.
 For unsafe code, which plays with raw pointers etc.,
 the semantics are formally but unofficially described in
 [Stacked Borrows](https://github.com/rust-lang/unsafe-code-guidelines/blob/master/wip/stacked-borrows.md)
-and programs can be checked by [Miri](https://github.com/rust-lang/miri)
+and programs can be checked by [Miri](https://github.com/rust-lang/miri),
 the interpreter for the Rust Mid-Intermediate Representation.
 
 Rust is available in "stable", "beta" and "nightly" flavours.

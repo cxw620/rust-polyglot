@@ -28,7 +28,7 @@ with different invocation syntaxes:
    but there is generally a conventional invocation style for each macro.
    proc_macros can distinguish them.
 
- * Atrributes: `#[macro]` (before some language construct).
+ * Attributes: `#[macro]` (before some language construct).
    The macro can filter/alter the decorated thing.
 
  * `#[derive(macro)]` before a struct, enum, or union.
@@ -133,7 +133,7 @@ or
 `#[derive(macro)]`s.
 Many important Rust facilities and libraries are derive macros.
 
-`#[derive]` macros can define additional helper `#[atrributes]`
+`#[derive]` macros can define additional helper `#[attributes]`
 to be sprinkled on the type or its fields,
 to influence the generated code.
 (These helper attributes are not namespaced.)

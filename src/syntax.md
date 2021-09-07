@@ -35,8 +35,8 @@ Many Rust libraries provide extremely useful derive macros
 for structs and enums.
 
 The syntax `#![attribute]` applies the attribute to
-the thing the attribute placed inside.
-Typically it is found only at the top of a whole module or crate,
+the thing the attribute is placed inside.
+Typically it is found only at the top of a whole module or crate.
 
 Attributes are used for many important purposes:
 
@@ -91,7 +91,7 @@ match value { pat0 if c0 => expr0,.. }        // see "Types and Patterns"
 'loopname: for loopvar in something_iterable { ... } //
 
 return v  // at end of function, it is idiomatic to just write v
-continue; continue 'loop; break; break 'loop
+continue; continue 'loop; break; break 'loop;
 break value; break 'loop value; // `loop` only; specifies value of `loop` expr
 
 function(arg0,arg1)

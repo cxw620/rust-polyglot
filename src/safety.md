@@ -39,7 +39,7 @@ but overflow handling may need care for correct results.
 The basic arithmetic operations
 panic on overflow in debug builds,
 and silently truncate (bitwise) in release builds.
-The [`as` type conversion operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions),
+The [`as` type conversion operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions)
 silently truncates on overflow.
 
 The stdlib provides `checked_*` and `wrapping_*` methods,
@@ -67,7 +67,7 @@ A reasonable collection of threading primitives and tools
 is in
 [`std::thread`](https://doc.rust-lang.org/std/thread/index.html) and
 [`std::sync`](https://doc.rust-lang.org/std/sync/index.html#higher-level-synchronization-objects).
-Many projects prefer the primitves from the [`parking_lot`] crate.
+Many projects prefer the primitives from the [`parking_lot`] crate.
 
 Multithreading in Rust can be an adjunct to,
 or replacement for,

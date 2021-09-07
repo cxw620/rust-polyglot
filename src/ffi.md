@@ -61,7 +61,7 @@ with a variety of languages.
 
  * C++: [`cxx`]
  * Python: [`inline-python`], [`pyo3`]
- * JS/DOM/WASM: [`wasm-bindgen`] (do *not* use `wasm-pack`) [`web-sys`].  [`rusty_v8`].
+ * JS/DOM/WASM: [`wasm-bindgen`] (do *not* use `wasm-pack`), [`web-sys`].  [`rusty_v8`].
  * Java: [`j4rs`], [`jni`]
 
 There are others available on `crates.io`.
