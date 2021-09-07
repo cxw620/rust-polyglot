@@ -41,7 +41,7 @@ You may also need to look at
 [Type Layout in the Reference][type layout].
 
 Rust's various string types are typically not the same as the platform's.
-Use [std::ffi](file:///home/rustcargo/docs/share/doc/rust/html/std/ffi/).
+Use [std::ffi](https://doc.rust-lang.org/std/ffi/).
 
 The raw FFI system has no direct interworking with C++
 (but see below).

@@ -113,7 +113,7 @@ but don't come out in the documentation:
 It is generally not considered good form
 to use this feature to hide `use`;
 after all,
-the reader of the documentation will probably want the same `use`
+the reader will probably want the same `use`
 and hiding it is Really Not Helping.
 
 

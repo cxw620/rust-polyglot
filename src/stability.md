@@ -69,7 +69,7 @@ which might invalidate a previously-correct use)
 are very much the exception.
 Rarely, they are still considered,
 but they are handled very cautiously,
-including an assessment of the likely practical fallout.
+including theoretical and practical assessment of the likely practical fallout.
 
 (Actually, Stable Rust is actually simply a
 stabilised release branch
@@ -157,7 +157,7 @@ still have `0.x` version numbers.
 
 Multiple versions of the same library can end up in the same program,
 and are then treated as entirely disjoint by the language.
-If they are require to interoperate,
+If they need to interoperate,
 special measures must be taken.
 For example,
 when the [`log`](https://crates.io/crates/log) crate makes a new incompatible release,

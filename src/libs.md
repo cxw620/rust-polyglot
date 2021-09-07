@@ -79,7 +79,7 @@ Libraries you should know about:
 is a serialisation/deserialisation framework.
 
 It defines a [data model](https://serde.rs/data-model.html),
-and provides automatic translation of ordinary Rust `struct` s
+and provides automatic translation of ordinary Rust `struct`s
 to and from that model.
 
 Ecosystem libraries provide concrete implementations
@@ -91,7 +91,7 @@ a wide variety of data marshalling problems.
 serde is especially good for ad-hoc data structures and
 structures whose definition is owned by a Rust project.
 
-serde and its ecosystem is considerably better for many tasks than
+serde and its ecosystem are considerably better for many tasks than
 anything available in any other programming environment.
 
 Generally, the resulting code
