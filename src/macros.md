@@ -76,8 +76,8 @@ Curious points:
    but
    the macro body still has to qualify the global names it uses!
 
- * The repetition and optional constructs have funky rules
-   to relate repetitions in the substitution to
+ * The repetition and optional constructs have nontrivial rules
+   to [relate repetitions](https://doc.rust-lang.org/reference/macros-by-example.html#repetitions) in the substitution to
    repetitions in the template,
    to find the the number of repetitions for the output.
 
@@ -219,7 +219,7 @@ and includes the ability to generate `*.rs` files
 to be included in the current crate build.
 
 This is an awkward way to to organise build-time code generation,
-because Rust is not an ideal language for writing build rules,
+because Rust is not an ideal language for writing build rules
 (although it can make a good language for generating Rust code).
 
 `build.rs` can be the best choice
