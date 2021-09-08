@@ -87,12 +87,12 @@
 %% hyphens.
 \def\@texttt@i#1{\@latex@texttt{\addhyph@{#1}}}
 
-%% And here's how we insert the discretionaries.  `\addhyph@i{SEP}{TEXT}'
-%% inserts a discretionary hyphen after every SEP appearing at top-level in
-%% TEXT.  (It doesn't peer into `{...}' groups.  Fortunately, we don't need
-%% it to.)
-\def\addhyph@#1{\addhyph@i{::}{#1}}
-\def\addhyph@i#1#2{%
+%% And here's how we insert the discretionaries.
+%% `\addhyph@i{SEP}{DISC}{TEXT}' inserts DISC -- presumably some penalty or
+%% discretionary -- after every SEP appearing at top-level in TEXT.  (It
+%% doesn't peer into `{...}' groups.  Fortunately, we don't need it to.)
+\def\addhyph@#1{\addhyph@i{::}{\penalty\hyphenpenalty}{#1}}
+\def\addhyph@i#1#2#3{%
   %% Below, we'll call `\addhyph@ii TEXT SEP \q@end', so there's a known
   %% separator before the end marker `\q@end'.  This lets us use TeX's macro
   %% machinery to split TEXT into two pieces at the first occurrence of SEP.
@@ -103,14 +103,14 @@
   \def\addhyph@ii##1#1##2\q@end{%
     ##1%
     \def\temp@{##2}%
-    \ifx\temp@\empty\else #1\textrm{\-}\def\next@{\addhyph@ii##2\q@end}%
+    \ifx\temp@\empty\else #1#2\def\next@{\addhyph@ii##2\q@end}%
     \expandafter\next@\fi%
   }%
   %% Call `\addhyph@ii' as just defined to split our TEXT.  Insert `\relax'
   %% just before the sentinel separator: otherwise, we get confused if the
   %% separator consists of two similar characters, and the real TEXT ends
   %% with just one of them.
-  \addhyph@ii#2\relax#1\q@end%
+  \addhyph@ii#3\relax#1\q@end%
 }
 
 \begin{document}
