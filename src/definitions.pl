@@ -10,58 +10,58 @@ END
 @crate_refs_docs_rs = qw(
    anyhow
    arrayvec
+   chrono
+   chrono-tz
    crossbeam
    easy-ext
    eyre
+   getopts
+   glob
+   gumdrop
+   hyper
    index_vec
    indexmap
-   num-derive
-   thiserror
-   chrono
-   chrono-tz
-   lazy_static
-   once_cell
-   tracing
-   ndarray
-   lazy-regex
-   log
-   glob
-   tempfile
-   reqwest
-   hyper
-   pyo3
-   warp
-   getopts
-   gumdrop
    jni
+   lazy-regex
+   lazy_static
+   log
+   ndarray
+   num-derive
+   once_cell
+   pyo3
+   reqwest
    ring
+   tempfile
+   thiserror
+   tracing
+   warp
 );
 @crate_refs_crates_io = qw(
+   argparse
+   clap
+   either
+   env_logger
    generational_arena
    itertools
-   num-traits
+   j4rs
+   libc
+   ndarray-linalg
+   nix
    num
+   num-traits
    parking_lot
+   rand
    rayon
+   regex
+   rustls
+   rusty_v8
    slab
    slotmap
-   strum
-   libc
-   nix
-   env_logger
-   regex
-   rand
-   either
-   ndarray-linalg
-   void
    structopt
-   clap
-   argparse
+   strum
+   void
    wasm-bindgen
    web-sys
-   rusty_v8
-   j4rs
-   rustls
 );
 
 1;
