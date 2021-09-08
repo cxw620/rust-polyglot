@@ -22,6 +22,7 @@ END
    lazy_static
    once_cell
    tracing
+   ndarray
    lazy-regex
    log
    glob
@@ -51,6 +52,7 @@ END
    regex
    rand
    either
+   ndarray-linalg
    void
    structopt
    clap

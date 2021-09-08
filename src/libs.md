@@ -67,6 +67,9 @@ Libraries you should know about:
  * [`regex`] (and [`lazy-regex`]), [`glob`], 
    [`tempfile`], [`rand`], [`either`], [`void`].
 
+ * [`ndarray`], [`ndarray-linalg`], etc.
+   Vectors, matrices, linear algebra.
+
  * Cryptography: [`ring`], [`rustls`],
    [Rust Crypto](https://github.com/RustCrypto);
    see [Sylvain Kerkour's writeup](https://kerkour.com/blog/rust-cryptography-ecosystem/).
