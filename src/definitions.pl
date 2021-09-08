@@ -4,9 +4,6 @@
 
 $title = "DRAFT - Rust for the Polyglot Programmer";
 
-$precontents = <<END;
-END
-
 @crate_refs_docs_rs = qw(
    anyhow
    arrayvec
