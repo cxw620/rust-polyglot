@@ -207,6 +207,9 @@ a > .hljs {
     border-radius: 3px;
 }
 
+var {
+    color: var(--fg);
+}
 :not(pre):not(a) > .hljs {
     color: var(--inline-code-color);
     overflow-x: initial;

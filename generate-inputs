@@ -99,6 +99,13 @@ sub append_to_colophon ($$) {
 
 our @output_files;
 our $comment_re = qr{^\Q[comment]:};
+our $fancy_pre_indiv = 0;
+our $fancy_pre_rowspan = 0;
+
+my $lt= 'BGNUu8OOK7UPtX3H';
+my $rt= 'smPE0doaBMjrKFYg';
+my $q = 'uXlUyLF01W1H72NS';
+
 
 sub scan_filter() {
   foreach my $chap (@chapters) {
@@ -116,6 +123,55 @@ sub scan_filter() {
     open C, "$src/$leaf" or die "$src/$leaf $!";
     my $last_l;
     while (<C>) {
+      if (m{^\%\!fancy-pre\s*$} .. m{^\%/fancy-pre\s*$}) {
+	if (m{^\%[/!]}) {
+	  $fancy_pre_indiv = 0;
+	  next;
+	}
+	if (m{^\`\`\`} || !m{\S}) {
+	  if ($fancy_pre_indiv) {
+	    print MD "${lt}/table${rt}\n\n";
+	    $fancy_pre_indiv = 0;
+	  }
+	}
+	if (m{^\`\`\`}) {
+	  print PD;
+	  next;
+	}
+	if (m{\S}) {
+	  if (!$fancy_pre_indiv++) {
+	    print MD "\n${lt}table class=${q}fancy-pre${q}${rt}\n";
+	  }
+	  s{\%(\w*\.*|\[|\]|)\%}{
+	    length $1 ? "${lt}var${rt}$1${lt}/var${rt}" : '%'
+	  }ge;
+	  my ($lhs, $rhs) = m{\s+//[ \t]*?} ? ($`,$') : ($_, undef);
+	  print MD "${lt}tr${rt}${lt}td";
+	  if ($fancy_pre_rowspan) {
+	    die "$fancy_pre_rowspan ?" if $rhs;
+	    $fancy_pre_rowspan--;
+	  } else {
+	    print MD " colspan=${q}2${q}" if !defined $rhs;
+	  }
+	  print MD "${rt}${lt}code class=${q}hljs${q}${rt}\n",
+	           "$lhs",
+	           "${lt}/code${rt}${lt}/td${rt}";
+	  if (defined $rhs) {
+	    print MD "${lt}td";
+	    if ($rhs =~ s{^\s*\%\#\.(\d+)\s*}{}) {
+	      print MD " rowspan=$q$1$q";
+	      $fancy_pre_rowspan = $1-1;
+	    }
+	    print MD "${rt}\n",
+	              "$rhs",
+	              "${lt}/td${rt}";
+	  }
+	  print MD "${lt}/tr${rt}\n";
+	}
+	print PD;
+	next;
+      }
+
       if (!m{$comment_re}) {
 	print MD;
 	print PD;

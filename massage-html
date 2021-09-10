@@ -3,3 +3,7 @@
 BEGIN { system 'pwd >&2'; }
 
 use strict;
+
+s/BGNUu8OOK7UPtX3H/\</g;
+s/smPE0doaBMjrKFYg/\>/g;
+s/uXlUyLF01W1H72NS/"/g;

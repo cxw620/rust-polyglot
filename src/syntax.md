@@ -57,18 +57,20 @@ Attributes are used for many important purposes:
 Items
 -----
 
+%!fancy-pre
 ```
-fn function(arg0: T, arg1: U) -> ReturnValue { ... }
-type TypeAlias = OtherType; // type alias, structural equality
-pub struct Counter { counter: u64 } // nominal type equality
-trait Trait { fn trait_method(self); }
-const FORTY_TWO: u32 = 42;
-static TABLE: [u8; 256] = { 0x32, 0x26, 0o11, ...many entries };
-impl Type { ... }
-impl Trait for Type { ... }
-mod some_module; // causes some_module.rs to be read
-mod some_module { ... } // module source is right here
+fn %function%(%arg0%: %T%, %arg1%: %U%) -> %ReturnValue% { %...% }
+type %TypeAlias% = %OtherType%;         // Type alias, structural equality
+pub struct %Counter% { %counter%: u64 } // Nominal type equality
+trait %Trait% { fn %trait_method%(self); }
+const %FORTY_TWO%: u32 = 42;
+static %TABLE%: [u8; 256] = { 0x32, 0x26, 0o11, %entries...% };
+impl %Type% { ... }
+impl %Trait% for %Type% { ... }
+mod %some_module%;                      // Causes `%some_module%.rs` to be read
+mod %some_module% { ... }               // Module source is right here
 ```
+%/fancy-pre
 
 Expressions
 -----------
@@ -76,38 +78,41 @@ Expressions
 Most of the usual infix and assignment operators are available.
 Control flow "statements" are generally expressions:
 
+%!fancy-pre
+````
+{ %stmt0%; %stmt1%; }  // With semicolon, has type `()`
+{ %stmt0%; %stmt1% }   // No semicolon, has type of `%stmt1%`
+
+if %condition% { %statements...% }                // Can only have type `()`
+if %condition% { %value% } else { %other_value% }   // No `? :`, use this
+if let %pattern% = %value% { %...% } %[%else %...%%]% // Pattern binding condition
+match %value% { %pat0% %[% if %cond0% %]% => %expr0%, %...% } // See [Types and Patterns](types.md)
+
+'%label%: loop { ... }   // %#.4 `'%label%`: is optional of course
+'%label%: while %condition% { }
+'%label%: while let %pattern% = %expr% { }
+'%label%: for loopvar in %something_iterable% { ... }
+
+return %v%  // At end of function, it is idiomatic to just write `%v%`
+break %value%; break '%label% %value%; // `loop` only; specifies value of `loop` expr
+continue; continue '%label%; break; break '%label%;
+
+%function%(%arg0%,%arg1%)
+%receiver%.%method%(%arg0%,%arg1%,%arg2%)  // See [on Methods](traits.md#methods)
+|%arg0%, %arg1%, %...%| %expression%  // %#.2 Closures
+|%arg0%: %Type0%, %arg1%: %Type1%, %...%| %ReturnType% %expression%
+
+%fallible%?                // See [in Error handling](errors.md#result--)
+*%value%                   // [`Deref`], see [in Traits, methods](traits.md#deref-and-method-resolution)
+%value% as %OtherType%      // Type conversion (safe but maybe lossy, see [in Safety](safety.md#integers-conversion-checking))
+%Counter% { %counter%: 42 }  // Constructor ("struct literal")
+
+%collection%[%index%]        // Usually panics if not found, eg array bounds check
+%thing%.%field%              // Field of a struct with named fields
+%tuple%.0; %tuple%.1;        // Fields of tuple or tuple struct
+%start%..%end%; %start%..=%end%  // End-exclusive and -inclusive [`Range`]
 ```
-{ stmt0; stmt1; }  // with semicolon, has type ()
-{ stmt0; stmt1 }   // no semicolon, has type of stmt1
-
-if condition { statements... }                // can only have type ()
-if condition { value } else { other_value }   // no ? :, use this
-if let pattern = value { .... } [else ...]    // pattern binding condition
-match value { pat0 if c0 => expr0,.. }        // see "Types and Patterns"
-
-'label: loop { ... }                              // 'label:
-'label: while condition { }                       // is optional
-'label: while let pattern = expr { }              // of course
-'label: for loopvar in something_iterable { ... } //
-
-return v  // at end of function, it is idiomatic to just write v
-continue; continue 'label; break; break 'label;
-break value; break 'label value; // `loop` only; specifies value of `loop` expr
-
-function(arg0,arg1)
-receiver.method(arg0,arg1,arg2)  // see the section on "Methods"
-|arg0, arg1: Type1| -> ReturnType expression  // closure
-
-fallible?                // see "Error handling"
-*value                   // Deref, see "Traits, methods"
-value as other_type      // type conversion (safe but maybe lossy)
-Counter { counter: 42 }  // constructor ("struct literal")
-
-collection[index]        // usually panics if not found, eg array bounds check
-thing.field              // field of a struct with named fields
-tuple.0; tuple.1;        // fields of tuple or tuple struct    
-start..end; start..=end  // end-exclusive and -inclusive Range
-```
+%/fancy-pre
 
 Note the odd semicolon rule,
 which determines the type of block expressions.
