@@ -100,7 +100,7 @@ receiver.method(arg0,arg1,arg2)  // see the section on "Methods"
 
 fallible?                // see "Error handling"
 *value                   // Deref, see "Traits, methods"
-type as other_type       // type conversion (safe but maybe lossy)
+value as other_type      // type conversion (safe but maybe lossy)
 Counter { counter: 42 }  // constructor ("struct literal")
 
 collection[index]        // usually panics if not found, eg array bounds check
