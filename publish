@@ -8,6 +8,11 @@ if [ "x$dirty" != x ]; then
 #	exit 16
 fi
 
+if [ "x$(git symbolic-ref HEAD 2>/dev/null)" != xrefs/heads/main ]; then
+	echo >&2 '** not on main branch **'
+	exit 16
+fi
+
 git push --dry-run --quiet origin HEAD:published
 
 make clean
@@ -20,8 +25,7 @@ rsync -r --delete ../Build/polyglot/html/. polyglot.pdf \
 push=HEAD:published
 
 git fetch origin
-if [ "x$(git symbolic-ref HEAD 2>/dev/null)" = xrefs/heads/main ] && \
-   git merge-base --is-ancestor refs/remotes/origin/main HEAD
+if git merge-base --is-ancestor refs/remotes/origin/main HEAD
 then
 	push="$push HEAD:main"
 fi
