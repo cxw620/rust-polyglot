@@ -85,14 +85,14 @@ if condition { value } else { other_value }   // no ? :, use this
 if let pattern = value { .... } [else ...]    // pattern binding condition
 match value { pat0 if c0 => expr0,.. }        // see "Types and Patterns"
 
-'loopname: loop { ... }                              // 'loopname:
-'loopname: while condition { }                       // is optional
-'loopname: while let pattern = expr { }              // of course
-'loopname: for loopvar in something_iterable { ... } //
+'label: loop { ... }                              // 'label:
+'label: while condition { }                       // is optional
+'label: while let pattern = expr { }              // of course
+'label: for loopvar in something_iterable { ... } //
 
 return v  // at end of function, it is idiomatic to just write v
-continue; continue 'loop; break; break 'loop;
-break value; break 'loop value; // `loop` only; specifies value of `loop` expr
+continue; continue 'label; break; break 'label;
+break value; break 'label value; // `loop` only; specifies value of `loop` expr
 
 function(arg0,arg1)
 receiver.method(arg0,arg1,arg2)  // see the section on "Methods"
