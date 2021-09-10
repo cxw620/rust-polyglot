@@ -10,6 +10,7 @@
 [`From`]: https://doc.rust-lang.org/std/convert/trait.From.html
 [`Into`]: https://doc.rust-lang.org/std/convert/trait.Into.html
 [`Option`]: https://doc.rust-lang.org/nightly/std/option/
+[`Range`]: https://doc.rust-lang.org/nightly/std/ops/struct.Range.html
 [`Send`]: https://doc.rust-lang.org/std/marker/trait.Send.html
 [`String`]: https://doc.rust-lang.org/std/string/struct.String.html
 [`Sync`]: https://doc.rust-lang.org/std/marker/trait.Sync.html
