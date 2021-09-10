@@ -27,8 +27,30 @@
    urlcolor = darkblue, breaklinks = true]
   {hyperref}
 
-\isopage[10]
-\fixthelayout
+%% Cancel out TeX's daft \hoffset and \voffset.  Now the top left is actually
+%% at (0, 0).
+\hoffset=-1in \voffset=-1in
+
+%% This page layout is based on Mark Wooding's `strayman' document class,
+%% specialized for A4 paper.  The design is fairly simple: there is a uniform
+%% border around the page, with width \pagesurround.  The main text block is
+%% indented further to the right by a further amount \leftindent; but chapter
+%% headings and the running headers and footers extend to the border.  In the
+%% original design A4 paper, both \pagesurround and \leftmargin are equal to
+%% 25mm, but this is in fact a happy coincidence, and I've reduced
+%% \leftmargin to 20mm in this design to allow somewhat more space for
+%% listings; the remaining text block is 210 - 2×25 - 20 = 140 mm wide.  The
+%% headers and footers are each 12 pt high, and separated from the main text
+%% block by \pagesurround/2.  This leaves 213.5mm for the text itself.
+\newdimen\pagesurround \pagesurround=25mm
+\newdimen\leftindent \leftindent=20mm
+\newdimen\headfootheight \headfootheight=12pt
+\setlength\textwidth{\paperwidth - \pagesurround*2 - \leftindent}
+\setlength\textheight{\paperheight - \pagesurround*3 - \headfootheight*2}
+\setlength\oddsidemargin{\pagesurround + \leftindent}
+\evensidemargin=\oddsidemargin
+\topmargin=\pagesurround \headheight=\headfootheight \headsep=.5\pagesurround
+\setlength\footskip{\pagesurround/2 + \headfootheight}
 
 \makechapterstyle{sans}
   {\renewcommand{\chapnamefont}{\normalfont\huge\sffamily\bfseries}
@@ -56,8 +78,8 @@
 
 \makeoddhead{headings}{}{}{\if@mainmatter\bfseries\rightmark\fi}
 \makeoddfoot{headings}{}{}{\thepage}
-\makeevenhead{headings}{\if@mainmatter\bfseries\leftmark\fi}{}{}
-\makeevenfoot{headings}{\thepage}{}{}
+\makeevenhead{headings}{\kern-\leftindent\if@mainmatter\bfseries\leftmark\fi}{}{}
+\makeevenfoot{headings}{\kern-\leftindent\thepage}{}{}
 \makepsmarks{headings}{%
   \renewcommand*{\chaptermark}[1]{\markboth{\@chapapp\ \thechapter. \ ##1}{}}%
   \renewcommand*{\sectionmark}[1]{\markright{\thesection. \ ##1}}%
