@@ -170,7 +170,11 @@ sub scan_filter() {
     }
 
     print MD "\n\n$mdbook_refs" or die $!;
+    die $! if MD->error;
     close MD or die $!;
+
+    die $! if PD->error;
+    close PD or die $!;
 
     push @sections, @csections;
   }
