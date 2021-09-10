@@ -1,0 +1,5 @@
+#!/usr/bin/perl -wpi~
+
+BEGIN { system 'pwd >&2'; }
+
+use strict;

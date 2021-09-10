@@ -26,7 +26,6 @@ endif # Cargo.nail
 CARGO ?= cargo
 OUTPUT_DIR ?= html
 
-OUTPUT_INDEX = $(OUTPUT_DIR)/index.html
 OUTPUT_PDF = polyglot.pdf
 
 MD_SOURCES := $(addprefix src/, $(addsuffix .md, $(CHAPTERS)))
@@ -44,16 +43,19 @@ default: doc
 
 doc:	html
 
-html:	$(OUTPUT_INDEX)
+html:	html.stamp
 	@echo 'Documentation can now be found here:'
-	@echo '  file://$(abspath $<)'
+	@echo '  file://$(abspath $(OUTPUT_DIR)/index.html)'
 
 pdf:	$(OUTPUT_PDF)
 
 .PHONY: html pdf
 
-$(OUTPUT_INDEX): book.toml mdbook/SUMMARY.md $(MD_SOURCES) $(MDBOOK_INFLUENCES)
+html.stamp: book.toml mdbook/SUMMARY.md massage-html \
+		$(MD_SOURCES) $(MDBOOK_INFLUENCES)
 	$(NAILING_CARGO_JUST_RUN) $(MDBOOK) build $(MDBOOK_BUILD_NAILING_OPTS)
+	$(NAILING_CARGO_JUST_RUN) $(abspath massage-html) \
+		$(addprefix html/, $(addsuffix .html, $(CHAPTERS)))
 
 mdbook/SUMMARY.md: generate-inputs src/definitions.pl src/precontents.md \
 		$(MD_SOURCES) $(GIT_INFLUENCES)
@@ -80,4 +82,4 @@ $(OUTPUT_PDF): $(TEX_INPUTS) latex/polyglot.tex
 
 clean:
 	$(NAILING_CARGO_JUST_RUN) rm -rf $(abspath $(OUTPUT_DIR))
-	rm -rf latex mdbook pandoc
+	rm -rf latex mdbook pandoc *.stamp
