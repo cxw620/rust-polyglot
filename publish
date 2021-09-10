@@ -1,5 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 set -e
+set -o pipefail
 
 dirty=$(git status --porcelain)
 if [ "x$dirty" != x ]; then
@@ -24,4 +25,11 @@ set -x
 rsync -r --delete ../Build/polyglot/html/. polyglot.pdf \
 	ianmdlvl@chiark:public-html/rust-polyglot/.
 
-git push origin HEAD:published
+git push origin HEAD:published 2>&1 \
+| perl -0777 -pe '
+	s{^remote: To create a merge request.*\nremote:.*https:.*\n}{}m;
+	s{^(?:remote:[ \t]*\n)*}{};
+	s{(^|\n)(?:remote:[ \t]*\n)*{$1}};
+'
+
+echo 'published.'
