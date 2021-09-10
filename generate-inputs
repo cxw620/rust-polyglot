@@ -117,17 +117,17 @@ sub scan_filter() {
     my $last_l;
     while (<C>) {
       if (!m{$comment_re}) {
-	print MD or die $!;
-	print PD or die $!;
+	print MD;
+	print PD;
       }
 
       if (!m/\S/ && defined($last_l) && $last_l =~ m{$comment_re}) {
 	autogen_any("$src/$leaf", sub {
-	  print MD md_comment($_[0]), "\n" or die $!;
-	  print PD pd_comment($_[0]), "\n" or die $!;
+	  print MD md_comment($_[0]), "\n";
+	  print PD pd_comment($_[0]), "\n";
 	});
-	print MD "\n" or die $!;
-	print PD "\n" or die $!;
+	print MD "\n";
+	print PD "\n";
       }
 
       s{\s+$}{};
