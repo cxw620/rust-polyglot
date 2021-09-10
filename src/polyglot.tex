@@ -158,8 +158,25 @@
 \frontmatter
 
 \begin{titlingpage}
-  \maketitle
-  \vfill
+  \addtolength{\oddsidemargin}{-\leftindent/2}
+  \addtolength{\evensidemargin}{-\leftindent/2}
+
+  \hrule height 0pt
+  \vskip 0pt plus 2fill
+  \begingroup
+    \fontsize{32pt}{40pt} \fontfamily{phv} \fontseries{b} \selectfont
+    \raggedright \thetitle \par
+  \endgroup
+  \vskip 0pt plus 1fill
+  \begingroup
+    \fontsize{18pt}{22pt} \fontfamily{ppl} \fontseries{b} \fontshape{it}
+    \selectfont
+    \raggedleft
+    \theauthor
+    \vskip 8pt
+    \fontsize{12pt}{15pt} \selectfont \today \par
+  \endgroup
+  \vskip 0pt plus 2fill
   \input{precontents}
 \end{titlingpage}
 
