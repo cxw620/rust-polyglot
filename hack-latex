@@ -65,7 +65,7 @@ while (<>) {
 	map { my $t = $_; $t =~ s/^\s+//; $t =~ s/\s.*$//s; lc $t }
 	@hd;
       if ($sig eq "type|storage:|lifetime|interior|threads") {
-	my @wd = (10, 16, 15, 34, 16);
+	my @wd = (10, 16, 15, 34, 17);
 	for (my $i = 0; $i < 5; $i++) {
 	  my $l = $i ? "" : '@{}';
 	  my $r = $i == 4 ? '@{}' : "";
