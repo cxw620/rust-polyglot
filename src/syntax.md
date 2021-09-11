@@ -88,7 +88,7 @@ if %condition% { %value% } else { %other_value% }   // No `? :`, use this
 if let %pattern% = %value% { %...% } %[%else %...%%]% // Pattern binding condition
 match %value% { %pat0% %[% if %cond0% %]% => %expr0%, %...% } // See [Types and Patterns](types.md)
 
-'%label%: loop { ... }   // %#.4 `'%label%`: is optional of course
+'%label%: loop { ... }   // %#.4 `'%label%:` is optional of course
 '%label%: while %condition% { }
 '%label%: while let %pattern% = %expr% { }
 '%label%: for loopvar in %something_iterable% { ... }
