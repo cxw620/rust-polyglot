@@ -126,6 +126,11 @@ the existence of objects bigger than fits into an `isize`.
 The empty tuple `()`, aka "unit", is the type of
 blocks (incl. functions) that do not evaluate to (return) an actual value.
 
+Unit structs are used extensively in idiomatic Rust, e.g.
+as things to `impl Trait` for,
+parameters indicating a type rather than value,
+and as objects to hang methods on.
+
 ### Some very important nominal types from the standard library
 
 | Purpose | Type |
