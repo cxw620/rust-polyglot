@@ -67,7 +67,7 @@ Otherwise, types have structural equivalence.
 | Other Primitives | `bool`, `char`, `str`
 | Array | `[T; N]`
 | Slice | `[T]`
-| References | `&T`, `&mut T`
+| References (always valid, never null) | `&T`, `&mut T`, `&'lifetime T`, `&'l mut T`
 | Raw pointers | `*const T`, `*mut T`
 | Runtime trait despatch (vtable) | `dyn Trait`
 
