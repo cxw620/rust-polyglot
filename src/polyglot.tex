@@ -111,13 +111,33 @@
   {\end{tabular}\end{center}}
 
 \newif\iffirstline
+\let\afterfancy=\relax
 \newenvironment{fancypre}
   {\global\firstlinetrue\begin{tabbing}}
-  {\end{tabbing}}
-\newcommand{\fancypreleft}{\iffirstline\global\firstlinefalse\else\\*[\jot]\fi}
-\newcommand{\fancypreright}[1][1]{\`}
+  {\afterfancy\end{tabbing}}
+\newcommand{\fancypreleft}
+  {\iffirstline\global\firstlinefalse\else\afterfancy\\*[\jot]\fi}
+\def\fancypreright{\@ifnextchar[\fpr@i{\fpr@ii{1}[\relax]}}
+\def\fpr@i[#1]{\@ifnextchar[{\fpr@ii{#1}}{\fpr@ii{#1}[\maxdimen]}}
+\def\fpr@ii#1[#2]%
+  {\afterfancy\`
+   \ifnum#1>1
+     \setlength{\dimen0}{(\baselineskip*#1 + \jot*(#1 - 1) - \ht\strutbox)/2}%
+     \setbox0=\hbox\bgroup\lower\dimen0\hbox\bgroup$%
+       \left.%
+       \vrule width0pt height\dimen0 depth\dimen0%
+       \right\}$\quad
+       $\vcenter\bgroup
+         \setbox0=\hbox\bgroup
+         \def\afterfancy
+           {\egroup
+            \dimen0=#2
+            \ifdim\wd0>\dimen0 \hsize=\dimen0 \raggedleft \unhbox0
+            \else \box0 \fi
+            \egroup$\egroup\egroup\dp0=0pt\box0}%
+   \fi}
 \newcommand{\fancypregap}
-  {\iffirstline\else\\[\bigskipamount]\global\firstlinetrue\fi}
+  {\iffirstline\else\afterfancy\\[\bigskipamount]\global\firstlinetrue\fi}
 
 \title{DRAFT -- Rust for the Polyglot Programmer}
 \author{Ian Jackson and contributors}
