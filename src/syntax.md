@@ -57,6 +57,9 @@ Attributes are used for many important purposes:
 Items
 -----
 
+[comment]: # ( This section uses a local Markdown extension:    )
+[comment]: # ( the %!fancy-pre construct.  See fancy-pre.md.    )
+
 %!fancy-pre
 ```
 fn %function%(%arg0%: %T%, %arg1%: %U%) -> %ReturnValue% { %...% }
