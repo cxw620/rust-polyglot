@@ -100,7 +100,7 @@ continue; continue '%label%; break; break '%label%;
 %function%(%arg0%,%arg1%)
 %receiver%.%method%(%arg0%,%arg1%,%arg2%)  // See [on Methods](traits.md#methods)
 |%arg0%, %arg1%, %...%| %expression%  // %#.2 Closures
-|%arg0%: %Type0%, %arg1%: %Type1%, %...%| %ReturnType% %expression%
+|%arg0%: %Type0%, %arg1%: %Type1%, %...%| -> %ReturnType% %expression%
 
 %fallible%?                // See [in Error handling](errors.md#result--)
 *%value%                   // [`Deref`], see [in Traits, methods](traits.md#deref-and-method-resolution)
