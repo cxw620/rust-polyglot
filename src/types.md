@@ -49,7 +49,7 @@ Nominal types can be defined in terms of (combinations of) other types:
 | ------- | ---------------------------- |
 | Product, named fields  |  `struct S { f: u64, g: &'static str };`
 |  Product, tuple-like    | `struct ST(u64, ());`                     |  
-| Empty product (units) | `struct Z0; struct Z1(); struct Z2{}`	  
+| Empty products (units) | `struct Z0; struct Z1(); struct Z2{}`	  
 | Sum type | `enum E { V0, V1(usize), V2{ f: String, } }`	  
 | Uninhabited type | `enum Void { }`; see [Uninhabited types](#uninhabited-types)
 | Generic type | e.g. `struct SG<F>{ f: F, g: &'static str }`	  
