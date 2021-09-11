@@ -27,9 +27,16 @@ sub hack_label ($) {
 
 sub hack_ref ($$) {
   my ($fn, $frag) = @_;
+  my $ref;
 
-  if (defined $frag) { return "$fn.$frag"; }
-  else { return $fn; }
+  if (defined $frag) { $ref = "$fn.$frag"; }
+  else { $ref = $fn; }
+
+  ## Some specific hacks because Pandoc and mdbook have different fragment
+  ## derivation algorithms.
+  if ($ref eq "errors.result--") { $ref = "errors.result"; }
+
+  return $ref;
 }
 
 while (<>) {
