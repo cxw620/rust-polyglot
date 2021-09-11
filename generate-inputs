@@ -176,7 +176,7 @@ sub scan_filter() {
 	    print MD "${lt}td";
 	    print PD "${bs}fancypreright";
 	    if ($rhs =~ s{^\s*\%\#\.(\d+)\s*}{}) {
-	      print MD " rowspan=$q$1$q";
+	      print MD " rowspan=$q$1$q style=${q}border-left-width: 2px; border-left-color: var(--fg);${q}";
 	      print PD "${lb}$1${rb}";
 	      $fancy_pre_rowspan = $1-1;
 	    }
