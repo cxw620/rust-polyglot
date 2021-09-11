@@ -105,8 +105,12 @@ our $fancy_pre_rowspan = 0;
 my $lt= 'BGNUu8OOK7UPtX3H';
 my $rt= 'smPE0doaBMjrKFYg';
 my $q = 'uXlUyLF01W1H72NS';
+my $bs= 'OlY2yMns1zQ84wyF';
+my $lb= 'IX9Zl6Lbd6F9RgYs';
+my $rb= '1hTgD8bayWOmHqSY';
 
 my %fancypre_markdown = ("var" => "${lt}var${rt}%s${lt}/var${rt}");
+my %fancypre_pandoc = ("var" => "${bs}textit${lt}%s${rt}");
 
 sub translate_fancypre_markup(\%$) {
   my ($markup, $text) = @_;
@@ -133,8 +137,10 @@ sub scan_filter() {
     my $last_l;
     while (<C>) {
       if (m{^\%\!fancy-pre\s*$} .. m{^\%/fancy-pre\s*$}) {
-	if (m{^\%[/!]}) {
+	if (m{^\%([/!])}) {
 	  $fancy_pre_indiv = 0;
+	  printf PD "${bs}%s${lt}fancypre${rt}\n",
+		    $1 eq "!" ? "begin" : "end";
 	  next;
 	}
 	if (m{^\`\`\`} || !m{\S}) {
@@ -144,12 +150,12 @@ sub scan_filter() {
 	  }
 	}
 	if (m{^\`\`\`}) {
-	  print PD;
 	  next;
 	}
 	if (m{\S}) {
 	  if (!$fancy_pre_indiv++) {
 	    print MD "\n${lt}table class=${q}fancy-pre${q}${rt}\n";
+	    print PD "${bs}fancypregap\n";
 	  }
 	  my ($lhs, $rhs) = m{\s+//[ \t]*?} ? ($`,$') : ($_, undef);
 	  print MD "${lt}tr${rt}${lt}td";
@@ -162,19 +168,27 @@ sub scan_filter() {
 	  print MD "${rt}${lt}code class=${q}hljs${q}${rt}\n",
 	           translate_fancypre_markup(%fancypre_markdown, $lhs),
 	           "${lt}/code${rt}${lt}/td${rt}";
+	  print PD "${bs}fancypreleft ",
+		   "\`",
+		   translate_fancypre_markup(%fancypre_pandoc, $lhs),
+		   "\`\n";
 	  if (defined $rhs) {
 	    print MD "${lt}td";
+	    print PD "${bs}fancypreright";
 	    if ($rhs =~ s{^\s*\%\#\.(\d+)\s*}{}) {
 	      print MD " rowspan=$q$1$q";
+	      print PD "${lb}$1${rb}";
 	      $fancy_pre_rowspan = $1-1;
 	    }
 	    print MD "${rt}\n",
 	              translate_fancypre_markup(%fancypre_markdown, $rhs),
 	              "${lt}/td${rt}";
+	    print PD " ",
+		     translate_fancypre_markup(%fancypre_pandoc, $rhs),
+		     "\n";
 	  }
 	  print MD "${lt}/tr${rt}\n";
 	}
-	print PD;
 	next;
       }
 

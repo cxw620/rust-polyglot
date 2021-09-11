@@ -78,5 +78,12 @@ while (<>) {
     }
   }
 
+  ## Hack `fancy-pre' tokens.
+  s/BGNUu8OOK7UPtX3H/{/g;
+  s/smPE0doaBMjrKFYg/}/g;
+  s/OlY2yMns1zQ84wyF/\\/g;
+  s/IX9Zl6Lbd6F9RgYs/[/g;
+  s/1hTgD8bayWOmHqSY/]/g;
+
   print;
 }
