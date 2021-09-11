@@ -8,6 +8,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{textcomp}
+\usepackage{calc}
 \usepackage{pslatex}
 \usepackage{palatino}
 
@@ -26,13 +27,52 @@
    urlcolor = darkblue, breaklinks = true]
   {hyperref}
 
-\isopage[10]
-\fixthelayout
+%% Cancel out TeX's daft \hoffset and \voffset.  Now the top left is actually
+%% at (0, 0).
+\hoffset=-1in \voffset=-1in
+
+%% This page layout is based on Mark Wooding's `strayman' document class,
+%% specialized for A4 paper.  The design is fairly simple: there is a uniform
+%% border around the page, with width \pagesurround.  The main text block is
+%% indented further to the right by a further amount \leftindent; but chapter
+%% headings and the running headers and footers extend to the border.  In the
+%% original design A4 paper, both \pagesurround and \leftmargin are equal to
+%% 25mm, but this is in fact a happy coincidence, and I've reduced
+%% \leftmargin to 20mm in this design to allow somewhat more space for
+%% listings; the remaining text block is 210 - 2×25 - 20 = 140 mm wide.  The
+%% headers and footers are each 12 pt high, and separated from the main text
+%% block by \pagesurround/2.  This leaves 213.5mm for the text itself.
+\newdimen\pagesurround \pagesurround=25mm
+\newdimen\leftindent \leftindent=20mm
+\newdimen\headfootheight \headfootheight=12pt
+\setlength\textwidth{\paperwidth - \pagesurround*2 - \leftindent}
+\setlength\textheight{\paperheight - \pagesurround*3 - \headfootheight*2}
+\setlength\oddsidemargin{\pagesurround + \leftindent}
+\evensidemargin=\oddsidemargin
+\topmargin=\pagesurround \headheight=\headfootheight \headsep=.5\pagesurround
+\setlength\footskip{\pagesurround/2 + \headfootheight}
 
 \makechapterstyle{sans}
   {\renewcommand{\chapnamefont}{\normalfont\huge\sffamily\bfseries}
    \renewcommand{\chapnumfont}{\normalfont\huge\sffamily\bfseries}
-   \renewcommand{\chaptitlefont}{\normalfont\Huge\sffamily\bfseries}}
+   \renewcommand{\chaptitlefont}{\normalfont\HUGE\sffamily\bfseries}
+   \setlength\beforechapskip{32pt}
+   \renewcommand{\printchaptername}{}
+   \renewcommand{\chapternamenum}{}
+   \renewcommand{\printchapternum}
+     {\leavevmode \kern-\leftindent \chaptitlefont
+      \makebox[\leftindent][l]{\thechapter}}
+   \renewcommand{\printchapternonum}
+     {\leavevmode \kern-\leftindent \chaptitlefont}
+   \renewcommand{\afterchapternum}{}
+   \renewcommand{\printchaptertitle}[1]{##1}
+   \renewcommand{\afterchaptertitle}
+     {\par \nobreak
+      \setlength\dimen@{\maxof{14pt - \prevdepth}{8pt}} \vspace{\dimen@}
+      \nointerlineskip
+      \setlength\dimen@{\leftindent + \textwidth}
+      \moveleft\leftindent\vbox{\hrule width \dimen@}
+      \nointerlineskip \nobreak \vspace\dbltextfloatsep}}
 \chapterstyle{sans}
 \setsecheadstyle{\Large\sffamily\bfseries}
 \setsubsecheadstyle{\large\sffamily\bfseries}
@@ -41,6 +81,7 @@
 \setsubparaheadstyle{\sffamily\bfseries}
 \setaftersubsecskip{-1em}
 \maxsecnumdepth{subsection}
+\hangsecnum
 
 \nonzeroparskip \setnzplist \@listi
 \setlength{\parindent}{0pt}
@@ -55,8 +96,8 @@
 
 \makeoddhead{headings}{}{}{\if@mainmatter\bfseries\rightmark\fi}
 \makeoddfoot{headings}{}{}{\thepage}
-\makeevenhead{headings}{\if@mainmatter\bfseries\leftmark\fi}{}{}
-\makeevenfoot{headings}{\thepage}{}{}
+\makeevenhead{headings}{\kern-\leftindent\if@mainmatter\bfseries\leftmark\fi}{}{}
+\makeevenfoot{headings}{\kern-\leftindent\thepage}{}{}
 \makepsmarks{headings}{%
   \renewcommand*{\chaptermark}[1]{\markboth{\@chapapp\ \thechapter. \ ##1}{}}%
   \renewcommand*{\sectionmark}[1]{\markright{\thesection. \ ##1}}%
@@ -127,8 +168,25 @@
 \frontmatter
 
 \begin{titlingpage}
-  \maketitle
-  \vfill
+  \addtolength{\oddsidemargin}{-\leftindent/2}
+  \addtolength{\evensidemargin}{-\leftindent/2}
+
+  \hrule height 0pt
+  \vskip 0pt plus 2fill
+  \begingroup
+    \fontsize{32pt}{40pt} \fontfamily{phv} \fontseries{b} \selectfont
+    \raggedright \thetitle \par
+  \endgroup
+  \vskip 0pt plus 1fill
+  \begingroup
+    \fontsize{18pt}{22pt} \fontfamily{ppl} \fontseries{b} \fontshape{it}
+    \selectfont
+    \raggedleft
+    \theauthor
+    \vskip 8pt
+    \fontsize{12pt}{15pt} \selectfont \today \par
+  \endgroup
+  \vskip 0pt plus 2fill
   \input{precontents}
 \end{titlingpage}
 
