@@ -106,6 +106,15 @@ my $lt= 'BGNUu8OOK7UPtX3H';
 my $rt= 'smPE0doaBMjrKFYg';
 my $q = 'uXlUyLF01W1H72NS';
 
+my %fancypre_markdown = ("var" => "${lt}var${rt}%s${lt}/var${rt}");
+
+sub translate_fancypre_markup(\%$) {
+  my ($markup, $text) = @_;
+  $text =~ s{\%(\w*\.*|\[|\]|)\%}{
+    length $1 ? sprintf $markup->{var}, $1 : '%'
+  }eg;
+  return $text;
+}
 
 sub scan_filter() {
   foreach my $chap (@chapters) {
@@ -142,9 +151,6 @@ sub scan_filter() {
 	  if (!$fancy_pre_indiv++) {
 	    print MD "\n${lt}table class=${q}fancy-pre${q}${rt}\n";
 	  }
-	  s{\%(\w*\.*|\[|\]|)\%}{
-	    length $1 ? "${lt}var${rt}$1${lt}/var${rt}" : '%'
-	  }ge;
 	  my ($lhs, $rhs) = m{\s+//[ \t]*?} ? ($`,$') : ($_, undef);
 	  print MD "${lt}tr${rt}${lt}td";
 	  if ($fancy_pre_rowspan) {
@@ -154,7 +160,7 @@ sub scan_filter() {
 	    print MD " colspan=${q}2${q}" if !defined $rhs;
 	  }
 	  print MD "${rt}${lt}code class=${q}hljs${q}${rt}\n",
-	           "$lhs",
+	           translate_fancypre_markup(%fancypre_markdown, $lhs),
 	           "${lt}/code${rt}${lt}/td${rt}";
 	  if (defined $rhs) {
 	    print MD "${lt}td";
@@ -163,7 +169,7 @@ sub scan_filter() {
 	      $fancy_pre_rowspan = $1-1;
 	    }
 	    print MD "${rt}\n",
-	              "$rhs",
+	              translate_fancypre_markup(%fancypre_markdown, $rhs),
 	              "${lt}/td${rt}";
 	  }
 	  print MD "${lt}/tr${rt}\n";
