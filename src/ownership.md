@@ -159,7 +159,7 @@ and manage its lifetime or mutability at runtime.
 | [`Rc<T>`](https://doc.rust-lang.org/std/rc/index.html)  | heap | refcount[2] |  No | No
 | [`Arc<T>`](https://doc.rust-lang.org/std/sync/struct.Arc.html) | heap | refcount[2] | No  | Yes
 | [`RefCell<T>`](https://doc.rust-lang.org/std/cell/struct.RefCell.html) | within | owner | Yes, runtime checks | `Send`
-| [`Mutex<T>`](https://doc.rust-lang.org/std/sync/struct.Mutex.html) | within  | owner | Yes, runtime locking | Yes
+| [`Mutex<T>`][`std::sync::Mutex`) | within  | owner | Yes, runtime locking | Yes
 | [`RwLock<T>`](https://doc.rust-lang.org/std/sync/struct.RwLock.html) | within  | owner | Yes, runtime locking | Yes
 | [`Cell<T>`](https://doc.rust-lang.org/std/cell/struct.Cell.html) | within | owner  | Only move/copy | `Send`
 | [`UnsafeCell<T>`](https://doc.rust-lang.org/std/cell/struct.UnsafeCell.html) | within | owner  | Up to you, `unsafe` | Maybe
@@ -267,7 +267,7 @@ you have these options:
  * Use runtime ownership checking instead of compile-time checking.
    I.e., switch to
     [`Arc`](https://doc.rust-lang.org/std/sync/struct.Arc.html),
-    [`Mutex`](https://doc.rust-lang.org/std/sync/struct.Mutex.html)
+    [`Mutex`][`std::sync::Mutex`]
     (maybe [`parking_lot`]'s),
     [`Rc`](https://doc.rust-lang.org/std/rc/struct.Rc.html),
     [`RefCell`](https://doc.rust-lang.org/std/cell/struct.RefCell.html) etc.

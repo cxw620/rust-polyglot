@@ -18,6 +18,7 @@
 [`HashMap`]: https://doc.rust-lang.org/nightly/std/collections/struct.HashMap.html
 [`BTreeMap`]: https://doc.rust-lang.org/nightly/std/collections/struct.BTreeMap.html
 [`Result`]: https://doc.rust-lang.org/std/result/enum.Result.html
+[`std::sync::Mutex`]: https://doc.rust-lang.org/std/sync/struct.Mutex.html
 
 [Reference]: https://doc.rust-lang.org/reference/
 [type layout]: https://doc.rust-lang.org/reference/type-layout.html
