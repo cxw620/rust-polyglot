@@ -294,7 +294,7 @@ if the type does not match,
 an attempt is made to see if dereferencing
 (perhaps multiple times) will help.
 
-The `Deref` implementation can be invoked explicitly
+The `Deref[Mut]` implementation can be invoked explicitly
 with the `*` operator.
 Sometimes when this is necessary,
 one wants a reference again,
