@@ -266,7 +266,7 @@ so there is no signature-based method overloading/dispatch.
 
 If it is necessary to
 [specify a particular method](https://doc.rust-lang.org/reference/paths.html#qualified-paths),
-`Type::method` or
+`Type::method(receiver,...)` or
 `Trait::method` can be used,
 or even `<T as Trait>::method`.
 
