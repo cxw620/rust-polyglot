@@ -269,7 +269,7 @@ In particular, see:
  * `#[derive(`[`Debug`](https://doc.rust-lang.org/std/fmt/trait.Debug.html)`])`
  * `#[derive(`[`Clone`](https://doc.rust-lang.org/std/clone/trait.Clone.html)`,`[`Copy`](https://doc.rust-lang.org/std/marker/trait.Copy.html)`)]`
  * `#[derive(`[`Eq`](https://doc.rust-lang.org/std/cmp/trait.Eq.html)`,`[`PartialEq`](https://doc.rust-lang.org/std/cmp/trait.PartialEq.html)`,`[`Ord`](https://doc.rust-lang.org/std/cmp/trait.Ord.html)`,`[`PartialOrd`](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html)`)]`
- * `#[derive(`[`Hash`](https://doc.rust-lang.org/std/hash/trait.Hash.html)`)]`
+ * `#[derive(`[`Hash`]`)]`
 
 It is conventional for libraries to promiscuously implement these for
 their public types, whenever it would make sense.

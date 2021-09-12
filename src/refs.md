@@ -8,6 +8,7 @@
 [`Deref`]: https://doc.rust-lang.org/std/ops/trait.Deref.html
 [`DerefMut`]: https://doc.rust-lang.org/std/ops/trait.DerefMut.html
 [`From`]: https://doc.rust-lang.org/std/convert/trait.From.html
+[`Hash`]: https://doc.rust-lang.org/std/hash/trait.Hash.html
 [`Into`]: https://doc.rust-lang.org/std/convert/trait.Into.html
 [`Option`]: https://doc.rust-lang.org/nightly/std/option/
 [`Range`]: https://doc.rust-lang.org/nightly/std/ops/struct.Range.html
