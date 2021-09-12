@@ -234,7 +234,10 @@ count.
    [`println!`](https://doc.rust-lang.org/std/macro.println.html) etc. and
    [`x.to_string()`](https://doc.rust-lang.org/std/string/trait.ToString.html)
  * [`io::Read`](https://doc.rust-lang.org/std/io/trait.Read.html),
-   [`io::Write`](https://doc.rust-lang.org/std/io/trait.Write.html) (not to be confused with [`fmt::Write`](https://doc.rust-lang.org/std/fmt/trait.Write.html))
+   [`io::Write`](https://doc.rust-lang.org/std/io/trait.Write.html)
+   (not to be confused with
+   [`fmt::Write`](https://doc.rust-lang.org/std/fmt/trait.Write.html));
+   [`BufRead`](https://doc.rust-lang.org/std/io/trait.BufRead.html).
  * [`Copy`](https://doc.rust-lang.org/std/marker/trait.Copy.html),
    [`Clone`](https://doc.rust-lang.org/std/clone/trait.Clone.html),
    [`AsRef`](https://doc.rust-lang.org/std/convert/trait.AsRef.html),
