@@ -85,7 +85,7 @@ Even in a single-threaded program,
 the reentrancy hazards remain.
 So *any* access to a `static mut` is `unsafe`.
 
-Instead, either pass thread mutable access down your call stack,
+Instead, either pass mutable access down your call stack,
 or use [interior mutability](ownership.md#interior-mutability-and-runtime-lifetime-management).
 
 Annoyingly, [`std::sync::Mutex`] is not const-initialisable.
