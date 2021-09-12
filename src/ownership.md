@@ -156,8 +156,8 @@ and manage its lifetime or mutability at runtime.
 | ------ | -------- | --------------  | ------------- | ---------
 | `T` [1]  | itself | owner | No  | Yes
 | [`Box<T>`](https://doc.rust-lang.org/std/boxed/index.html) [1] | heap | owner  | No | Yes
-| [`Rc<T>`](https://doc.rust-lang.org/std/rc/index.html)  | heap | refcount[2] |  No | No
-| [`Arc<T>`](https://doc.rust-lang.org/std/sync/struct.Arc.html) | heap | refcount[2] | No  | Yes
+| [`Rc<T>`](https://doc.rust-lang.org/std/rc/index.html)  | heap | refcount[2] |  No; `T` now immutable | No
+| [`Arc<T>`](https://doc.rust-lang.org/std/sync/struct.Arc.html) | heap | refcount[2] | No; `T` now immutable  | Yes
 | [`RefCell<T>`](https://doc.rust-lang.org/std/cell/struct.RefCell.html) | within | owner | Yes, runtime checks | `Send`
 | [`Mutex<T>`][`std::sync::Mutex`] | within  | owner | Yes, runtime locking | Yes
 | [`RwLock<T>`](https://doc.rust-lang.org/std/sync/struct.RwLock.html) | within  | owner | Yes, runtime locking | Yes
