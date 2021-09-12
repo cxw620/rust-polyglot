@@ -73,7 +73,8 @@ Multithreading in Rust can be an adjunct to,
 or replacement for,
 Async Rust.
 
-### Global variables
+Global variables
+----------------
 
 Mutable global variables `static mut` are completely unsynchronised
 and there is no control of reentrancy hazards.
@@ -84,11 +85,11 @@ Even in a single-threaded program,
 the reentrancy hazards remain.
 So *any* access to a `static mut` is `unsafe`.
 
-You should either pass thread mutable access down your call stack,
+Instead, either pass thread mutable access down your call stack,
 or use [interior mutability](ownership.md#interior-mutability-and-runtime-lifetime-management).
 
 Annoyingly, [`std::sync::Mutex`] is not const-initialisable.
-Use either [`parking_lot`] or [`lazy_static`].
+Use [`parking_lot`], or [`lazy_static`].
 
 Unsafe Rust
 -----------

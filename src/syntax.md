@@ -76,7 +76,7 @@ mod %some_module% { ... }               // Module source is right here
 %/fancy-pre
 
 Rust really hates mutable globals.
-See [under Thread safety](safety.md#global-variables).
+See [under Safety](safety.md#global-variables).
 
 Expressions
 -----------
