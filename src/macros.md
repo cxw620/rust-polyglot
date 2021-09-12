@@ -137,9 +137,10 @@ or
 `#[derive(macro)]`s.
 Many important Rust facilities and libraries are derive macros.
 
-`#[derive]` macros can define additional helper `#[attributes]`
-to be sprinkled on the type or its fields,
-to influence the generated code.
+`#[derive]` macros can define helper `#[attributes]`
+which may then be sprinkled on the type or its fields.
+These are inert, but
+since all attributes are visible to the macro, they can influence it.
 (These helper attributes are not namespaced.)
 
 proc_macros operate at a syntactic, not semantic level.
