@@ -147,6 +147,11 @@ and as objects to hang methods on.
 See also
 [our table comparing `Box`, `Rc`, `Arc`, `RefCell`, `Mutex` etc.](ownership.html#interior-mutability-table)
 
+Other important types include:
+[`BufReader`]/[`BufWriter`],
+[`VecDeque`],
+[`Cow`].
+
 Literals
 --------
 
