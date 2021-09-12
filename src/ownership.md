@@ -112,7 +112,7 @@ If this is nontrivial the type is said to have "drop glue"
 
 If a type's destruction needs something more than
 simply destroying each of its fields,
-it can `impl `[`Drop`](https://doc.rust-lang.org/std/ops/trait.Drop.html).
+it can `impl` [`Drop`](https://doc.rust-lang.org/std/ops/trait.Drop.html).
 You provide a function **drop**
 which is called automatically
 precisely once
