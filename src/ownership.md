@@ -223,7 +223,7 @@ then one of the following is the case:
 
  * Copy rather than borrowing:
    Sprinkle `.clone()`, [`.to_owned()`](https://doc.rust-lang.org/std/borrow/trait.ToOwned.html), etc., and/or
-   change types to owned variants (or [`Cow`](https://doc.rust-lang.org/std/borrow/enum.Cow.html)).
+   change types to owned variants (or [`Cow`]).
 
  * Introduce `let` bindings to prolong the lifetime of temporaries.
    (Normally if this will help the compiler will suggest it.)
