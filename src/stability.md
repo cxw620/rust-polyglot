@@ -69,7 +69,7 @@ which might invalidate a previously-correct use)
 are very much the exception.
 Rarely, they are still considered,
 but they are handled very cautiously,
-including theoretical and practical assessment of the likely practical fallout.
+including theoretical and practical assessment of the likely fallout.
 
 (Actually, Stable Rust is actually simply a
 stabilised release branch
