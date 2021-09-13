@@ -345,7 +345,7 @@ You will end up using, at least:
 
 Unfortunately, many of these don't lend themselves to
 convenient blanket imports
-(although you should consider `use `[`futures::prelude`](https://docs.rs/futures/0.3.17/futures/prelude/)`::*`).
+(although you should consider `use` [`futures::prelude`](https://docs.rs/futures/0.3.17/futures/prelude/)`::*`).
 
 Futures-related items share names with non-async thread tools
 (eg, `Mutex`, `mpsc`, etc., can mean different things).
