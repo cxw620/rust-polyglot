@@ -258,14 +258,13 @@ then one of the following is the case:
    can make it work.
 
  * Turn a closure into a function, and pass in the closed-over variables.
-   Closures are not generic.  Even over lifetimes.
-   So if you call a closure on `&a` and `&b`,
-   there needs to be a single lifetime that is correct for both calls.
-   If you turn the closure into a `fn` (writing out all the types, sorry)
-   then it can be generic over the relevant lifetimes ---
-   and in particular,
-   its return value can now borrow from its input
-   even if the different calls have inputs with different lifetimes.
+   Closures have
+   [complications surrounding lifetimes](https://github.com/rust-lang/rust/issues/58052).
+   There are cases where
+   the compiler doesn't infer the correct lifetime bounds
+   and it there is no syntax to spell them.
+   It can help to turn the closure into a `fn`
+   (writing out all the types, sorry).
 
 ### Strategies for evading the borrow checker
 
