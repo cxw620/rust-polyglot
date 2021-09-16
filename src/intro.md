@@ -65,7 +65,7 @@ Stack objects are explicitly defined and automatically deallocated.
 Heap objects are explicitly allocated, and automatically deallocated
 when their references go out of scope.
 Rust has a novel
-[memory and object lifetime management approach
+memory and object lifetime management approach
 with lifetime-based aliasing/mutability rules.
 
 There are two macro systems for metaprogramming: a pattern matcher
