@@ -164,8 +164,8 @@ The different traits are because closures can borrow or own variables.
 If the closure modifies closed-over variables, it is `FnMut`;
 if it consumes them, it is `FnOnce`.
 
-Each closure has its own separate type,
-so closures can only be used with generics
+Each closure has its own separate unnameable type,
+so closures can only be used with polymorphism
 (whether monomorphised `<F: Fn()>`, or type-erased `&dyn Fn()`).
 
 Closures borrow their captures during their whole existence,
