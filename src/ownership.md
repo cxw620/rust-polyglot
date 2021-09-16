@@ -246,6 +246,10 @@ then one of the following is the case:
    and then commit,
    and start removing them again to try to trim the redundant ones.
 
+   When applying this strategy,
+   try to avoid reusing the same lifetime name in multiple places:
+   doing so can try to identify actually-different lifetimes.
+
  * Add redundant type and lifetime annotations to closures
    (`'_`, `_`, `&'_ _`, `-> &'_ _` etc.)
    The type and [lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html) rules can interact badly with closures.
