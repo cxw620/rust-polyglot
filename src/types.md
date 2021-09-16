@@ -97,7 +97,8 @@ a type whose size is not known at compile time.
 
 Unsized values cannot be stack allocated,
 nor passed as parameters or returned from functions.
-But they can be heap allocated, and passed as references.
+But they can be heap allocated, and passed as references
+(see also [Coercion](#coercion)).
 References (and heap and raw pointers) to unsized types are "fat pointers":
 they are two words wide - one for the data pointer, and one for the metadata.
 
@@ -197,6 +198,22 @@ Using the examples from above:
 
 If a nominal type has fields you cannot name because they're not `pub`,
 you cannot construct it.
+
+Coercion
+--------
+
+Rust does have
+implicit type conversions (["coercions"](https://doc.rust-lang.org/reference/type-coercions.html))
+but only to 
+[change the type, not (in general) the value](https://doc.rust-lang.org/reference/type-coercions.html#coercion-types).
+The effect is to make many things Just Work.
+
+Sometimes,
+especially with [conversions to unsized](https://doc.rust-lang.org/reference/type-coercions.html#unsized-coercions),
+writing _`expression`_ `as _` can help,
+to introduce an explicit conversion to an inferred type.
+If the type is numeric, this can be lossy -
+see [under Safety](safety.md#integers-conversion-checking)
 
 Patterns
 --------
