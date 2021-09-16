@@ -98,7 +98,7 @@ a type whose size is not known at compile time.
 References (and heap and raw pointers) to unsized types are "fat pointers":
 they are two words wide - one for the data pointer, and one for the metadata.
 
-Unsized values cannot be stack allocated,
+Unsized *values* cannot be stack allocated,
 nor passed as parameters or returned from functions.
 But they can be heap allocated, and passed as references.
 Often, unsized references are type-erased references to sized values
