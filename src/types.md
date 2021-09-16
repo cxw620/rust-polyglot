@@ -169,6 +169,11 @@ Literals
 | `[T; N]` | `["hi","there"]` (`[&str; 2]`), `[0u32;14]` (`[u32; 14]`) |
 | `()`, `(T,)`, `(T,U)` | `()`, `(None,)` `(42,"forty-two")` |
 
+Numeric literals default to `i32` or `f64` as applicable,
+if the type is not specified and cannot be inferred.
+
+### Nominal types (e.g., structs)
+
 Literals of nominal types use a straightforward
 literal display syntax.
 Enum variants, qualified by their enum type, are constructors
@@ -200,6 +205,7 @@ Using the examples from above:
 
 If a nominal type has fields you cannot name because they're not `pub`,
 you cannot construct it.
+
 
 Coercion
 --------
