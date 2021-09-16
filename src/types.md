@@ -92,15 +92,17 @@ not a pointer to it - rather an abstract concept.
 Normally one works with `&[T]`, which is a reference to a slice.
 This consists of a pointer to the start, and a length.
 
-A slice is just an example of an **unsized** type:
+A slice is just an example of an **unsized** type
+(a.k.a. dynamically sized type, **DST**):
 a type whose size is not known at compile time.
+References (and heap and raw pointers) to unsized types are "fat pointers":
+they are two words wide - one for the data pointer, and one for the metadata.
 
 Unsized values cannot be stack allocated,
 nor passed as parameters or returned from functions.
-But they can be heap allocated, and passed as references
+But they can be heap allocated, and passed as references.
+Often, unsized references are type-erased references to sized values
 (see also [Coercion](#coercion)).
-References (and heap and raw pointers) to unsized types are "fat pointers":
-they are two words wide - one for the data pointer, and one for the metadata.
 
 [**str**](https://doc.rust-lang.org/std/primitive.str.html) is identical to `[u8]` (ie, a slice of bytes),
 except with the guarantee that it consists entirely of valid UTF-8.
@@ -206,10 +208,13 @@ Rust does have
 implicit type conversions (["coercions"](https://doc.rust-lang.org/reference/type-coercions.html))
 but only to 
 [change the type, not (in general) the value](https://doc.rust-lang.org/reference/type-coercions.html#coercion-types).
-The effect is to make many things Just Work.
+The effect is to make many things Just Work,
+e.g. passing `&[T;N]` as a slice `&[T]`,
+or `&Struct` as `&dyn Trait` where `Struct` implements `Trait`.
 
 Sometimes,
-especially with [conversions to unsized](https://doc.rust-lang.org/reference/type-coercions.html#unsized-coercions),
+especially with these
+[conversions to unsized](https://doc.rust-lang.org/reference/type-coercions.html#unsized-coercions),
 writing _`expression`_ `as _` can help,
 to introduce an explicit conversion to an inferred type.
 If the type is numeric, this can be lossy -
