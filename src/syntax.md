@@ -178,4 +178,4 @@ or have [more subtle visibility](https://doc.rust-lang.org/reference/visibility-
 
 `_` can often be written when an identifier is expected.
 For a type or lifetime, it asks the compiler to infer.
-For a binding, it discards the value (dropping it right away).
+For a binding, it ignores the value.

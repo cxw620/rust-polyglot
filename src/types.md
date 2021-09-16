@@ -225,8 +225,12 @@ of the referred-to value (as if they had been `ref binding`).
 Writing just the field name in a struct pattern
 binds a local variable of the same name as the field.
 
-Unneeded parts of a value can be discarded by use of
-`_` or `..`.
+[Unneeded (parts of) values](https://doc.rust-lang.org/stable/book/ch18-03-pattern-syntax.html#ignoring-values-in-a-pattern) can be ignored
+([not even bound](https://github.com/rust-lang/rust/issues/10488#issuecomment-30879810))
+by writing
+`_` or `..` .
+The usual idiom to suppress the `#[must_use]` warning is `let _ = ...`.
+
 
 Irrefutable patterns appear in ordinary `let` bindings
 and function parameters.
