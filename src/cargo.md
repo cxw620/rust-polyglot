@@ -100,13 +100,14 @@ There are tools to help with the
 software supply chain management problem,
 such as
 [`cargo-supply-chain`](https://crates.io/crates/cargo-supply-chain),
-[`cargo-audit`](https://crates.io/crates/cargo-audit)
-(which uses the
+[`cargo-audit`](https://crates.io/crates/cargo-audit) and
+[`cargo-crev`](https://github.com/crev-dev/cargo-crev).
+The
 [Rustsec](https://rustsec.org/)
-advisory database,
-which even records advisories for 
+advisory database
+even records advisories for 
 APIs which are *capable of misuse*,
-even if there is no known real-world bug).
+even if there is no known real-world bug,
 
 Some OS distros (e.g. Debian) are starting to maintain
 reasonable collections of Rust packages
