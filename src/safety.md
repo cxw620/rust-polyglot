@@ -68,6 +68,8 @@ is in
 [`std::thread`](https://doc.rust-lang.org/std/thread/index.html) and
 [`std::sync`](https://doc.rust-lang.org/std/sync/index.html#higher-level-synchronization-objects).
 Many projects prefer the locking primitives from the [`parking_lot`] crate.
+[`crossbeam`] has [scoped threads],
+which avoids everything having to be `'static`.
 
 Multithreading in Rust can be an adjunct to,
 or replacement for,

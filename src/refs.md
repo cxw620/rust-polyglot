@@ -29,6 +29,7 @@
 [type layout]: https://doc.rust-lang.org/reference/type-layout.html
 
 [must_use]: https://doc.rust-lang.org/reference/attributes/diagnostics.html#the-must_use-attribute
+[scoped threads]: https://docs.rs/crossbeam/0.8.1/crossbeam/thread/index.html
 
 [`cxx`]: https://cxx.rs/
 [`fehler`]: https://boats.gitlab.io/blog/post/failure-to-fehler/
