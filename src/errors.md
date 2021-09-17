@@ -108,7 +108,7 @@ because it will only have one type parameter: the success value:
 e.g. `Result<()>` instead of `Result<(), io::Error>`.
 
 Exercise discretion before importing an unqualified
-`Result` that isn't `std::result::Result`.
+`Result` that isn't `std::result::Result`, without renaming it.
 Consider whether maybe [`fehler`]'s default `#[throws]`
 (meaning `#[throws(Error)]`) would be a better answer.
 
