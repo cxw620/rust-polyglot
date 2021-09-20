@@ -32,6 +32,7 @@ $title = "DRAFT - Rust for the Polyglot Programmer";
    tempfile
    thiserror
    tracing
+   ureq
    warp
 );
 @crate_refs_crates_io = qw(

@@ -114,7 +114,7 @@ Web tools and frameworks
 
 Most Rust web tools are async.
 
-Use [`reqwest`] for making HTTP requests.
+Use [`reqwest`] or [`ureq`] for making HTTP requests.
 
 Use [`hyper`] for a raw HTTP client or server,
 but consider using [`reqwest`] (client)
