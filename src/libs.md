@@ -78,6 +78,10 @@ Libraries for specific purposes
    [Rust Crypto](https://github.com/RustCrypto);
    see [Sylvain Kerkour's writeup](https://kerkour.com/blog/rust-cryptography-ecosystem/).
 
+ * [`bstr`]: Stringish methods on byte strings
+   that are *hopefully* UTF-8 (but might not be).
+   [Disregard the warning that it's experimental](https://github.com/BurntSushi/bstr/issues/99).
+
  * [`bytemuck`]: Reinterpret-casting of plain data.
 
 

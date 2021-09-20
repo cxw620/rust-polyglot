@@ -7,6 +7,7 @@ $title = "DRAFT - Rust for the Polyglot Programmer";
 @crate_refs_docs_rs = qw(
    anyhow
    arrayvec
+   bstr
    bytemuck
    chrono
    chrono-tz
