@@ -66,7 +66,7 @@ Libraries you should know about:
 Libraries for specific purposes:
 --------------------------------
 
- * [`log`] (and [`env_logger`],  etc.); [`tracing`].
+ * [`log`] (and [`env_logger`], etc.); [`tracing`].
 
  * [`regex`] (and [`lazy-regex`]), [`glob`], 
    [`tempfile`], [`rand`], [`either`], [`void`].
