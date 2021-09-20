@@ -63,6 +63,9 @@ Libraries you should know about:
  * [`lazy_static`], [`once_cell`]
    for data to be initialised once.
 
+Libraries for specific purposes:
+--------------------------------
+
  * [`log`] (and [`env_logger`],  etc.); [`tracing`].
 
  * [`regex`] (and [`lazy-regex`]), [`glob`], 
