@@ -23,8 +23,8 @@ It's inexact but is likely to give you fate-sharing
 with the rest of the community, at least.
 
 
-Libraries you should know about:
---------------------------------
+Libraries you should know about
+-------------------------------
 
  * [`itertools`].
    Superb collection of extra iterator combinators.
@@ -63,8 +63,8 @@ Libraries you should know about:
  * [`lazy_static`], [`once_cell`]
    for data to be initialised once.
 
-Libraries for specific purposes:
---------------------------------
+Libraries for specific purposes
+-------------------------------
 
  * [`log`] (and [`env_logger`], etc.); [`tracing`].
 
