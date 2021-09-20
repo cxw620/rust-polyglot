@@ -78,6 +78,8 @@ Libraries for specific purposes:
    [Rust Crypto](https://github.com/RustCrypto);
    see [Sylvain Kerkour's writeup](https://kerkour.com/blog/rust-cryptography-ecosystem/).
 
+ * [`bytemuck`]: Reinterpret-casting of plain data.
+
 
 `serde`
 ---------
