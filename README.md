@@ -60,7 +60,8 @@ and acknowledgement.
 Thanks for helpful review, comments and suggestions from:
 Simon Tatham,
 Mark Wooding,
-Daniel Silverstone.
+Daniel Silverstone,
+and others.
 
 Thanks to Mark Wooding for the LaTeX/PDF arrangements.
 
