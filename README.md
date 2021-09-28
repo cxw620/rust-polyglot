@@ -5,7 +5,7 @@ Colophon
 [comment]: # ( SPDX-License-Identifier: MIT                 )
 [comment]: # ( There is NO WARRANTY.                        )
 
-This is a **DRAFT** guide to the Rust programming language.  It was written by
+This is a guide to the Rust programming language.  It was written by
 me, Ian Jackson, and I am responsible for the content and opinions.
 
 ### Canonical location
@@ -63,8 +63,6 @@ Mark Wooding,
 Daniel Silverstone.
 
 Thanks to Mark Wooding for the LaTeX/PDF arrangements.
-
-[comment]: # ( DRAFT ^ )
 
 ### Legal
 
