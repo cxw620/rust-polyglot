@@ -5,7 +5,8 @@ Types and patterns
 [comment]: # ( SPDX-License-Identifier: MIT                 )
 [comment]: # ( There is NO WARRANTY.                        )
 
-Rust's type system is based on Hindley-Milner-style algebraic types,
+Rust's type system is based on Hindley-Milner-style
+[algebraic types](https://en.wikipedia.org/wiki/Algebraic_data_type),
 as seen in languages like ML and Haskell.
 
 The compiler will often infer the types of variables (including closures)
