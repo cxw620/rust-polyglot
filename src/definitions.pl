@@ -2,7 +2,7 @@
 #
 # sourced by generate-inputs
 
-$title = "Rust for the Polyglot Programmer";
+$title = "DRAFT - Rust for the Polyglot Programmer";
 
 @crate_refs_docs_rs = qw(
    anyhow
