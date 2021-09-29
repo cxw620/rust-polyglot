@@ -74,14 +74,14 @@ Libraries for specific purposes
  * [`ndarray`], [`ndarray-linalg`], etc.
    Vectors, matrices, linear algebra.
 
- * Cryptography: [`ring`], [`rustls`],
+ * Cryptography\: [`ring`], [`rustls`],
    [Rust Crypto](https://github.com/RustCrypto);
    see [Sylvain Kerkour's writeup](https://kerkour.com/blog/rust-cryptography-ecosystem/).
 
- * [`bstr`]: Stringish methods on byte strings
+ * [`bstr`]\: Stringish methods on byte strings
    that are *hopefully* UTF-8 (but might not be).
 
- * [`bytemuck`]: Reinterpret-casting of plain data.
+ * [`bytemuck`]\: Reinterpret-casting of plain data.
 
 
 `serde`
