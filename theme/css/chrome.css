@@ -376,6 +376,12 @@ ul#searchresults span.teaser em {
 .sidebar-hidden .sidebar {
     transform: translateX(calc(0px - var(--sidebar-width)));
 }
+input#sidebar-checkbox:not(:checked) ~ .sidebar {
+    display: none !important;
+}
+input#sidebar-checkbox:not(:checked) ~ * {
+    --sidebar-width: 0px !important;
+}
 .sidebar::-webkit-scrollbar {
     background: var(--sidebar-bg);
 }

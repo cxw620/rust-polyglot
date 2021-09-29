@@ -75,6 +75,9 @@
                     localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
                 }
             } catch (e) { }
+            document.addEventListener('DOMContentLoaded', (event) => {
+		document.getElementById("sidebar-checkbox").remove(); // don't have two things going on at once, would be confusing
+            })
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
