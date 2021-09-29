@@ -101,6 +101,10 @@
             html.classList.add("sidebar-" + sidebar);
         </script>
 
+	<!-- insanely, this has to be before the sidebar so we can do the JS-less style thing
+	     but this means it's totally diveorced from its label. wat.  oh well -->
+        <input type="checkbox" id="sidebar-checkbox" style="display: none" checked>
+
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
                 {{#toc}}{{/toc}}
@@ -115,7 +119,6 @@
                 <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
-                        <input type="checkbox" id="sidebar-checkbox" style="display: none" checked>
 			<label id="sidebar-toggle" for="sidebar-checkbox" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="wasfa-button">&#x2630;</i>
                         </label>
