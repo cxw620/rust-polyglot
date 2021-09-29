@@ -41,7 +41,7 @@ It's nice to have that locally.
 You can use include syntax,
 to include your `README.md`
 in your crate's top-level rustdoc docs too:
-`#[doc=include_str!("../README.md")]`.
+`#![doc=include_str!("../README.md")]`.
 
 See the [Rustdoc Book](https://doc.rust-lang.org/rustdoc/).
 
