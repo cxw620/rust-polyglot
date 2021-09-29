@@ -22,7 +22,8 @@ make clean
 make html pdf
 set -x
 
-rsync -r --delete ../Build/polyglot/html/. polyglot.pdf \
+rsync -r --delete --delete-excluded --exclude=\*~ \
+	../Build/polyglot/html/. polyglot.pdf \
 	ianmdlvl@chiark:public-html/rust-polyglot/.
 
 git push origin HEAD:published 2>&1 \
