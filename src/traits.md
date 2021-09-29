@@ -262,7 +262,7 @@ During [method resolution](https://doc.rust-lang.org/reference/expressions/metho
 `Deref` is applied repeatedly to try to find a type
 with the appropriately-named method.
 The signature of the method is not considered during resolution,
-so there is no signature-based method overloading/dispatch.
+so there is no signature-based method overloading/despatch.
 
 If it is necessary to
 [specify a particular method](https://doc.rust-lang.org/reference/paths.html#qualified-paths),
