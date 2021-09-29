@@ -74,7 +74,7 @@ Curious points:
    [partially hygienic](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene).
    They can't introduce or refer to a local name in the caller's namespace,
    but
-   the macro body still has to qualify the global names it uses!
+   the macro body must usually still qualify the global names it uses!
 
  * The repetition and optional constructs have nontrivial rules
    to [relate repetitions](https://doc.rust-lang.org/reference/macros-by-example.html#repetitions) in the substitution to

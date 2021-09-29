@@ -273,7 +273,7 @@ and `matches!`.
 ```
   match variable { pat1 => ..., pat2 if cond =>, ... }
 ```
-Here `cond` may refer to the bindings established by pat2.
+Here `cond` may refer to the bindings established by `pat2`.
 
 Uninhabited types
 -----------------

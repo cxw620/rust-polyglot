@@ -97,7 +97,7 @@ match %value% { %pat0% %[% if %cond0% %]% => %expr0%, %...% } // See [Types and 
 '%label%: loop { ... }   // %#.4:33mm `'%label%:` is optional of course
 '%label%: while %condition% { }
 '%label%: while let %pattern% = %expr% { }
-'%label%: for loopvar in %something_iterable% { ... }
+'%label%: for %loopvar% in %something_iterable% { ... }
 
 return %v%  // At end of function, it is idiomatic to just write `%v%`
 break %value%; break '%label% %value%; // `loop` only; specifies value of `loop` expr

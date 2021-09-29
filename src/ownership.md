@@ -173,7 +173,7 @@ and manage its lifetime or mutability at runtime.
  3. Only types that the platform can do atomic operations on.
 
 Here `T` can be any type, even a smart pointer (as illustrated) or reference.
-The use of `RefCell<&mut T>` It is not uncommon.
+The use of `RefCell<&mut T>` is not uncommon.
 Whether `Wrapper<T>` is actually `Send` or `Sync`
 [depends on `T`][`Send`] of course.
 
@@ -262,7 +262,7 @@ then one of the following is the case:
    [complications surrounding lifetimes](https://github.com/rust-lang/rust/issues/58052).
    There are cases where
    the compiler doesn't infer the correct lifetime bounds
-   and it there is no syntax to spell them.
+   and there is no syntax to spell them.
    It can help to turn the closure into a `fn`
    (writing out all the types, sorry).
 
