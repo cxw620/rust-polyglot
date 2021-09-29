@@ -212,13 +212,13 @@
                         <!-- Mobile navigation buttons -->
                         {{#previous}}
                             <a rel="prev" href="{{ path_to_root }}{{link}}" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                                <i class="fa fa-angle-left"></i>
+                                <i class="wasfa-button"><strong>&lt;</strong></i>
                             </a>
                         {{/previous}}
 
                         {{#next}}
                             <a rel="next" href="{{ path_to_root }}{{link}}" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                                <i class="wasfa-button"><strong>&gt;</strong></i>
                             </a>
                         {{/next}}
 
@@ -227,7 +227,6 @@
                 </div>
             </div>
 
-<!--
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 {{#previous}}
                     <a rel="prev" href="{{ path_to_root }}{{link}}" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
@@ -241,12 +240,6 @@
                     </a>
                 {{/next}}
             </nav>
--->
-                {{#next}}
-                    <a rel="next" href="{{ path_to_root }}{{link}}" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="next wasfa-button"><strong>&gt;</strong></i>
-                    </a>
-                {{/next}}
 
         </div>
 
