@@ -55,7 +55,7 @@ html.stamp: book.toml mdbook/SUMMARY.md massage-html \
 		$(MD_SOURCES) $(MDBOOK_INFLUENCES)
 	$(NAILING_CARGO_JUST_RUN) $(MDBOOK) build $(MDBOOK_BUILD_NAILING_OPTS)
 	$(NAILING_CARGO_JUST_RUN) $(abspath massage-html) \
-		$(addprefix html/, $(addsuffix .html, $(CHAPTERS)))
+		$(addprefix html/, $(addsuffix .html, print $(CHAPTERS)))
 
 mdbook/SUMMARY.md: generate-inputs src/definitions.pl src/precontents.md \
 		$(MD_SOURCES) $(GIT_INFLUENCES)
