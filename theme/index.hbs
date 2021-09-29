@@ -95,11 +95,15 @@
         <!-- Hide / unhide sidebar before it is displayed -->
         <script type="text/javascript">
             var html = document.querySelector('html');
-            var sidebar = 'visible';
-            if (document.body.clientWidth >= 1080) {
-                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
-                sidebar = sidebar || 'visible';
-            }
+	    var sidebar = null;
+            try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+            if (sidebar === null || sidebar === undefined) {
+		if (document.body.clientWidth >= 1080) {
+                    sidebar = 'visible';
+		} else {
+                    sidebar = 'hidden';
+		}
+	    }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
         </script>
