@@ -47,7 +47,7 @@ Nominal types can be defined in terms of (combinations of) other types:
 
 | Semantics | Syntax (definition of nominal type)
 | ------- | ---------------------------- |
-| Product, named fields  |  `struct S { f: u64, g: &'static str };`
+| Product, named fields  |  `struct S { f: u64, g: &'static str }`
 |  Product, tuple-like    | `struct ST(u64, ());`                     |  
 | Empty products (units) | `struct Z0; struct Z1(); struct Z2{}`	  
 | Sum type | `enum E { V0, V1(usize), V2{ f: String, } }`	  
