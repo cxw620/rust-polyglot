@@ -110,7 +110,7 @@ Sometimes it is easy.
 The documentation for each facility explains what the rules are.
 The Reference has rules for [type layout] etc.
 
-The Rest community generally tries very hard to make sound APIs
+The Rust community generally tries very hard to make sound APIs
 for libraries which use unsafe internally.
 (Soundness being the property that no programs using your library,
 and which do not themselves use `unsafe`, have UB.)
