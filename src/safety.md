@@ -52,7 +52,7 @@ For conversions expected to be infallible,
 using [`num::cast`](https://docs.rs/num/latest/num/cast/index.html)
 will avoid accidentally writing a lossy raw `as` operation.
 
-| from |    i8 |  i16 |  i32 |  i64 | i128 |isize |    u8 |  u16 |  u32 |  u64 | u128 | usize |   f32 |  f64
+| from |    i8 |  i16 |  i32 |  i64 | i128 |isz |    u8 |  u16 |  u32 |  u64 | u128 | usz |   f32 |  f64
 |------|------|-----|-----|-----|-----|-----|------|-----|-----|-----|-----|------|------|-----|
 |   i8 | . | . | . | . | . | T< | T+ | T+ | T+ | T+ | T+ | T< | . | f
 |  i16 | T< | . | . | . | . | T< | T< | T+ | T+ | T+ | T+ | T< | . | f
