@@ -52,24 +52,24 @@ For conversions expected to be infallible,
 using [`num::cast`](https://docs.rs/num/latest/num/cast/index.html)
 will avoid accidentally writing a lossy raw `as` operation.
 
-| from |    8 |  16 |  32 |  64 | 128 |size |    8 |  16 |  32 |  64 | 128 | size |   32 |  64
+| from |    i8 |  i16 |  i32 |  i64 | i128 |isize |    u8 |  u16 |  u32 |  u64 | u128 | usize |   f32 |  f64
 |------|------|-----|-----|-----|-----|-----|------|-----|-----|-----|-----|------|------|-----|
-|   i8 | . | . | . | . | . | T < | T + | T + | T + | T + | T + | T < | . | f
-|  i16 | T < | . | . | . | . | T < | T < | T + | T + | T + | T + | T < | . | f
-|  i32 | T < | T < | . | . | . | T < | T < | T < | T + | T + | T + | T < | N = | f
-|  i64 | T < | T < | T < | . | . | T < | T < | T < | T < | T + | T + | T < | N = | N =
-| i128 | T < | T < | T < | T < | . | T < | T < | T < | T < | T < | T + | T < | N = | N =
-|isize | T < | T < | T < | T < | T < | . | T < | T < | T < | T < | T < | T + | N # | N =
+|   i8 | . | . | . | . | . | T< | T+ | T+ | T+ | T+ | T+ | T< | . | f
+|  i16 | T< | . | . | . | . | T< | T< | T+ | T+ | T+ | T+ | T< | . | f
+|  i32 | T< | T< | . | . | . | T< | T< | T< | T+ | T+ | T+ | T< | N= | f
+|  i64 | T< | T< | T< | . | . | T< | T< | T< | T< | T+ | T+ | T< | N= | N=
+| i128 | T< | T< | T< | T< | . | T< | T< | T< | T< | T< | T+ | T< | N= | N=
+|isize | T< | T< | T< | T< | T< | . | T< | T< | T< | T< | T< | T+ | N# | N=
 |      |      |     |     |     |     |     |      |     |     |     |     |      |      |     |
-|   u8 | T < | . | . | . | . | T < | . | . | . | . | . | T < | . | f
-|  u16 | T < | T < | . | . | . | T < | T < | . | . | . | . | T < | . | f
-|  u32 | T < | T < | T < | . | . | T < | T < | T < | . | . | . | T < | N = | f
-|  u64 | T < | T < | T < | T < | . | T < | T < | T < | T < | . | . | T < | N = | N =
-| u128 | T < | T < | T < | T < | T < | T < | T < | T < | T < | T < | . | T < | N # | N =
-|usize | T < | T < | T < | T < | T < | T < | T < | T < | T < | T < | T < | . | N # | N =
+|   u8 | T< | . | . | . | . | T< | . | . | . | . | . | T< | . | f
+|  u16 | T< | T< | . | . | . | T< | T< | . | . | . | . | T< | . | f
+|  u32 | T< | T< | T< | . | . | T< | T< | T< | . | . | . | T< | N= | f
+|  u64 | T< | T< | T< | T< | . | T< | T< | T< | T< | . | . | T< | N= | N=
+| u128 | T< | T< | T< | T< | T< | T< | T< | T< | T< | T< | . | T< | N# | N=
+|usize | T< | T< | T< | T< | T< | T< | T< | T< | T< | T< | T< | . | N# | N=
 |      |      |     |     |     |     |     |      |     |     |     |     |      |      |     |
-| f32 | N X | N X | N X | N X | N X | N X | N X | N X | N X | N X | N X | N X | . | f
-| f64 | N X | N X | N X | N X | N X | N X | N X | N X | N X | N X | N X | N X | N # | f
+| f32 | NX | NX | NX | NX | NX | NX | NX | NX | NX | NX | NX | NX | . | .
+| f64 | NX | NX | NX | NX | NX | NX | NX | NX | NX | NX | NX | NX | N# | .
 
 Thread safety
 -------------
