@@ -54,22 +54,22 @@ will avoid accidentally writing a lossy raw `as` operation.
 
 | from |    8 |  16 |  32 |  64 | 128 |size |    8 |  16 |  32 |  64 | 128 | size |   32 |  64
 |------|------|-----|-----|-----|-----|-----|------|-----|-----|-----|-----|------|------|-----|
-|   i8 | From | From | From | From | From | t < | t + | t + | t + | t + | t + | t < | From | From
-|  i16 | t < | From | From | From | From | t < | t < | t + | t + | t + | t + | t < | From | From
-|  i32 | t < | t < | From | From | From | t < | t < | t < | t + | t + | t + | t < | N = | From
-|  i64 | t < | t < | t < | From | From | t < | t < | t < | t < | t + | t + | t < | N = | N =
-| i128 | t < | t < | t < | t < | From | t < | t < | t < | t < | t < | t + | t < | N = | N =
-|isize | t < | t < | t < | t < | t < | From | t < | t < | t < | t < | t < | t + | N # | N =
+|   i8 | . | . | . | . | . | T < | T + | T + | T + | T + | T + | T < | . | f
+|  i16 | T < | . | . | . | . | T < | T < | T + | T + | T + | T + | T < | . | f
+|  i32 | T < | T < | . | . | . | T < | T < | T < | T + | T + | T + | T < | N = | f
+|  i64 | T < | T < | T < | . | . | T < | T < | T < | T < | T + | T + | T < | N = | N =
+| i128 | T < | T < | T < | T < | . | T < | T < | T < | T < | T < | T + | T < | N = | N =
+|isize | T < | T < | T < | T < | T < | . | T < | T < | T < | T < | T < | T + | N # | N =
 |      |      |     |     |     |     |     |      |     |     |     |     |      |      |     |
-|   u8 | t < | From | From | From | From | t < | From | From | From | From | From | t < | From | From
-|  u16 | t < | t < | From | From | From | t < | t < | From | From | From | From | t < | From | From
-|  u32 | t < | t < | t < | From | From | t < | t < | t < | From | From | From | t < | N = | From
-|  u64 | t < | t < | t < | t < | From | t < | t < | t < | t < | From | From | t < | N = | N =
-| u128 | t < | t < | t < | t < | t < | t < | t < | t < | t < | t < | From | t < | N # | N =
-|usize | t < | t < | t < | t < | t < | t < | t < | t < | t < | t < | t < | From | N # | N =
+|   u8 | T < | . | . | . | . | T < | . | . | . | . | . | T < | . | f
+|  u16 | T < | T < | . | . | . | T < | T < | . | . | . | . | T < | . | f
+|  u32 | T < | T < | T < | . | . | T < | T < | T < | . | . | . | T < | N = | f
+|  u64 | T < | T < | T < | T < | . | T < | T < | T < | T < | . | . | T < | N = | N =
+| u128 | T < | T < | T < | T < | T < | T < | T < | T < | T < | T < | . | T < | N # | N =
+|usize | T < | T < | T < | T < | T < | T < | T < | T < | T < | T < | T < | . | N # | N =
 |      |      |     |     |     |     |     |      |     |     |     |     |      |      |     |
-| f32 | N X | N X | N X | N X | N X | N X | N X | N X | N X | N X | N X | N X | From | From
-| f64 | N X | N X | N X | N X | N X | N X | N X | N X | N X | N X | N X | N X | N # | From
+| f32 | N X | N X | N X | N X | N X | N X | N X | N X | N X | N X | N X | N X | . | f
+| f64 | N X | N X | N X | N X | N X | N X | N X | N X | N X | N X | N X | N X | N # | f
 
 Thread safety
 -------------
