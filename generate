@@ -16,25 +16,25 @@ my $approx_accute = "⩯";
 sub results ($$) {
   my ($t1,$t2) = @_;
   my $c = "$t1,$t2";
-  if (my ($t1,$w1, $t2,$w2) =
-      $c =~ m/^([iu])(\w+),([iu])(\w+)$/) {
+  my ($k1,$w1, $k2,$w2) = $c =~ m/^([iuf])(\w+),([iuf])(\w+)$/ or die;
+  $w2 = $w1 eq $w2 ? 1024 : 1 if $w2 =~ m/\D/;
+  $w1 =              1024     if $w1 =~ m/\D/;
+  if ("$k1$k2" =~ m/^[iu]+$/) {
     if ($w1 eq $w2) {
-      if ($t1 eq $t2) {
+      if ($k1 eq $k2) {
 	return "F "; # equal types
-      } elsif ("$t1$t2" =~ m/ui/) { # uW -> iW, losing a bit
+      } elsif ("$k1$k2" =~ m/ui/) { # uW -> iW, losing a bit
 	return "t<";
-      } elsif ("$t1$t2" =~ m/iu/) { # iW -> uW, might add 2^W
+      } elsif ("$k1$k2" =~ m/iu/) { # iW -> uW, might add 2^W
 	return "t+";
       } else {
 	die;
       }
-    } elsif ("$w1$w2" =~ m/\D/) { # at least one Tsize
-      return "t<";
-    } else { # different types of specific bit-width
+    } else { # different types of known or assumed bit-width
       if ($w1 > $w2) {
 	return "t<";
       } elsif ($w2 > $w1) {
-	if ("$t1$t2" =~ m/iu/) { # iW -> uW, might add 2^W
+	if ("$k1$k2" =~ m/iu/) { # iW -> uW, might add 2^W
 	  return "t+";
 	} else {
 	  return "F ";
@@ -47,7 +47,18 @@ sub results ($$) {
     return "N≠";
   } else {
     return "@@";
-  }
+  } 
+#  
+#  r
+#  } elsif (($k1,$w1,$w2) = $c =~ m/^[ifu](\w+),f(\d+)/) {
+#    $w1 = '
+#    
+#  } elsif ($t1 eq 'f32') {
+#    if ($t2 =~ m/^[iu]/
+#    my $
+#  } else {
+#    die "$c ?";
+#  }
 }
 
 my @types;
