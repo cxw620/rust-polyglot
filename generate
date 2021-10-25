@@ -12,6 +12,8 @@ my $approx_accute = "⩯";
 # <   might truncate even positive values (might imply +)
 # +   might add 2^n to make positive via twos-complement
 # ⁉   might produce saturated integer values, and ignore NaN
+# ≈   might round
+# ⩯   might round or give Inf
 
 sub results ($$) {
   my ($t1,$t2) = @_;
@@ -45,20 +47,21 @@ sub results ($$) {
     }
   } elsif ($c =~ m/^f.*,[iu].*$/) {
     return "N≠";
+  } elsif ($k2 eq 'f') {
+    if ($k1 eq 'f') {
+      return $w2 >= $w1 ? "F " : "N⩯"
+    } elsif ($k1 =~ m/[iu]/) {
+      if ($w2 > $w1) { # space for exponent
+	return "F ";
+      } elsif ($w2 == 32 && $t1 =~ m/^(?:u128|.size)$/) {
+	return "N⩯";
+      } else {
+	return "N≈";
+      }
+    }
   } else {
-    return "@@";
-  } 
-#  
-#  r
-#  } elsif (($k1,$w1,$w2) = $c =~ m/^[ifu](\w+),f(\d+)/) {
-#    $w1 = '
-#    
-#  } elsif ($t1 eq 'f32') {
-#    if ($t2 =~ m/^[iu]/
-#    my $
-#  } else {
-#    die "$c ?";
-#  }
+    die "$c ?";
+  }
 }
 
 my @types;
@@ -101,7 +104,7 @@ foreach my $t1 (@types) {
     if ($r eq 'F ') {
       print "From";
     } elsif ($r =~ m/^[tN]/) {
-      print "$&$'  ";
+      print "$& $' ";
     } else {
       printf "%4s", $r;
     }
