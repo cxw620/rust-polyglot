@@ -51,14 +51,15 @@ sub results ($$) {
 }
 
 my @types;
-foreach my $s (qw(8 16 32 64 128 size)) {
+my @sizes = qw(8 16 32 64 128 size);
+foreach my $s (@sizes) {
   push @types, "i$s", "u$s";
 }
 push @types, qw(f32 f64);
 
 print <<END;
-         i   u   i   u   i   u   i   u   i   u   i   u   i   u
-            8         16        32        64       128    size
+       | i   u | i   u | i   u | i   u | i   u | i   u |   f   |
+       |    8  |   16  |   32  |   64  |  128  |  size | 32 64 |
 -------+-------+-------+-------+-------+-------+-------+-------+
 END
 
