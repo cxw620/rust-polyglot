@@ -9,9 +9,9 @@ END
 my $approx = "≈";
 my $approx_accute = "⩯";
 
-# !   might truncate even positive values (might imply +)
+# <   might truncate even positive values (might imply +)
 # +   might add 2^n to make positive via twos-complement
-# ‼   might produce saturated integer values, and ignore NaN
+# ⁉   might produce saturated integer values, and ignore NaN
 
 sub results ($$) {
   my ($t1,$t2) = @_;
@@ -22,17 +22,17 @@ sub results ($$) {
       if ($t1 eq $t2) {
 	return "F "; # equal types
       } elsif ("$t1$t2" =~ m/ui/) { # uW -> iW, losing a bit
-	return "t!";
+	return "t<";
       } elsif ("$t1$t2" =~ m/iu/) { # iW -> uW, might add 2^W
 	return "t+";
       } else {
 	die;
       }
     } elsif ("$w1$w2" =~ m/\D/) { # at least one Tsize
-      return "t!";
+      return "t<";
     } else { # different types of specific bit-width
       if ($w1 > $w2) {
-	return "t!";
+	return "t<";
       } elsif ($w2 > $w1) {
 	if ("$t1$t2" =~ m/iu/) { # iW -> uW, might add 2^W
 	  return "t+";
@@ -44,7 +44,7 @@ sub results ($$) {
       }
     }
   } elsif ($c =~ m/^f.*,[iu].*$/) {
-    return "N‼";
+    return "N≠";
   } else {
     return "@@";
   }
@@ -52,21 +52,48 @@ sub results ($$) {
 
 my @types;
 my @sizes = qw(8 16 32 64 128 size);
-foreach my $s (@sizes) {
-  push @types, "i$s", "u$s";
-}
-push @types, qw(f32 f64);
 
 print <<END;
-       | i   u | i   u | i   u | i   u | i   u | i   u |   f   |
-       |    8  |   16  |   32  |   64  |  128  |  size | 32 64 |
--------+-------+-------+-------+-------+-------+-------+-------+
+    to |    i                          |    u                          |   f
+END
+my $hl = <<END;
+-------+-------------------------------+-------------------------------+-----------
 END
 
+print "from   |";
+foreach my $s (@sizes) {
+  push @types, "i$s";
+  printf " %4s", $s;
+}
+print " |";
+foreach my $s (@sizes) {
+  push @types, "u$s";
+  printf " %4s", $s;
+}
+print " |";
+foreach my $s (qw(32 64)) {
+  push @types, "f$s";
+  printf " %4s", $s;
+}
+print "\n";
+print $hl;
+
+sub chg { $_[0] =~ m/^(?:u8|f32)$/ }
+
 foreach my $t1 (@types) {
+  print $hl if chg($t1);
   printf "%5s  |", $t1 or die $!;
   foreach my $t2 (@types) {
-    print " ", results($t1, $t2), " " or die $!;
+    print " |" if chg($t2);
+    print " ";
+    my $r = results($t1, $t2);
+    if ($r eq 'F ') {
+      print "From";
+    } elsif ($r =~ m/^[tN]/) {
+      print "$&$'  ";
+    } else {
+      printf "%4s", $r;
+    }
   }
   print "\n" or die $!;
 }
