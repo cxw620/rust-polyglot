@@ -58,20 +58,20 @@ from  |    8   16   32   64  128 size |    8   16   32   64  128 size |   32   6
 ------+-------------------------------+-------------------------------+-----------
    i8 | From From From From From t <  | t +  t +  t +  t +  t +  t <  | From From
   i16 | t <  From From From From t <  | t <  t +  t +  t +  t +  t <  | From From
-  i32 | t <  t <  From From From t <  | t <  t <  t +  t +  t +  t <  | N ≈  From
-  i64 | t <  t <  t <  From From t <  | t <  t <  t <  t +  t +  t <  | N ≈  N ≈
- i128 | t <  t <  t <  t <  From t <  | t <  t <  t <  t <  t +  t <  | N ≈  N ≈
-isize | t <  t <  t <  t <  t <  From | t <  t <  t <  t <  t <  t +  | N ⩯  N ≈
+  i32 | t <  t <  From From From t <  | t <  t <  t +  t +  t +  t <  | N =  From
+  i64 | t <  t <  t <  From From t <  | t <  t <  t <  t +  t +  t <  | N =  N =
+ i128 | t <  t <  t <  t <  From t <  | t <  t <  t <  t <  t +  t <  | N =  N =
+isize | t <  t <  t <  t <  t <  From | t <  t <  t <  t <  t <  t +  | N #  N =
 ------+-------------------------------+-------------------------------+-----------
    u8 | t <  From From From From t <  | From From From From From t <  | From From
   u16 | t <  t <  From From From t <  | t <  From From From From t <  | From From
-  u32 | t <  t <  t <  From From t <  | t <  t <  From From From t <  | N ≈  From
-  u64 | t <  t <  t <  t <  From t <  | t <  t <  t <  From From t <  | N ≈  N ≈
- u128 | t <  t <  t <  t <  t <  t <  | t <  t <  t <  t <  From t <  | N ⩯  N ≈
-usize | t <  t <  t <  t <  t <  t <  | t <  t <  t <  t <  t <  From | N ⩯  N ≈
+  u32 | t <  t <  t <  From From t <  | t <  t <  From From From t <  | N =  From
+  u64 | t <  t <  t <  t <  From t <  | t <  t <  t <  From From t <  | N =  N =
+ u128 | t <  t <  t <  t <  t <  t <  | t <  t <  t <  t <  From t <  | N #  N =
+usize | t <  t <  t <  t <  t <  t <  | t <  t <  t <  t <  t <  From | N #  N =
 ------+-------------------------------+-------------------------------+-----------
-  f32 | N ≠  N ≠  N ≠  N ≠  N ≠  N ≠  | N ≠  N ≠  N ≠  N ≠  N ≠  N ≠  | From From
-  f64 | N ≠  N ≠  N ≠  N ≠  N ≠  N ≠  | N ≠  N ≠  N ≠  N ≠  N ≠  N ≠  | N ⩯  From
+  f32 | N X  N X  N X  N X  N X  N X  | N X  N X  N X  N X  N X  N X  | From From
+  f64 | N X  N X  N X  N X  N X  N X  | N X  N X  N X  N X  N X  N X  | N #  From
 ```
 
 Thread safety
