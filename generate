@@ -9,11 +9,41 @@ END
 my $approx = "≈";
 my $approx_accute = "⩯";
 
+# !   might truncate positive values (might imply +)
+# +   might add 2^n to make positive via twos-complement
+# ‼   both ! and +
+
 sub results ($$) {
   my ($t1,$t2) = @_;
-  if (my ($iu1, $s1, $iu2, $s2) =
-      "$t1,$t2" =~ m/^([iu])(\w+),([iu])(\w+)$/) {
-    print "$iu1";
+  my $c = "$t1,$t2";
+  if (my ($t1,$w1, $t2,$w2) =
+      $c =~ m/^([iu])(\w+),([iu])(\w+)$/) {
+    if ($w1 eq $w2) {
+      if ($t1 eq $t2) {
+	return "F "; # equal types
+      } elsif ("$t1$t2" =~ m/ui/) { # uW -> iW, losing a bit
+	return "t!";
+      } elsif ("$t1$t2" =~ m/iu/) { # iW -> uW, might add 2^W
+	return "t+";
+      } else {
+	die;
+      }
+    } elsif ("$w1$w2" =~ m/\D/) { # at least one Tsize
+      return "t‼";
+    } else { # different types of specific bit-width
+      if ("$t1$t2" =~ m/iu/) { # iW -> uW, might add 2^W
+	return "t+";
+      }
+      if ($w1 > $w2) {
+	return "t‼";
+      } elsif ($w2 > $w1) {
+	return "F ";
+      } else {
+	die;
+      }
+    }
+  } else {
+    return "@@";
   }
 }
 
@@ -24,8 +54,9 @@ foreach my $s (qw(8 16 32 64 128 size)) {
 push @types, qw(f32 f64);
 
 foreach my $t1 (@types) {
+  printf "%5s |", $t1 or die $!;
   foreach my $t2 (@types) {
-    print " ", results($t1, $t2) or die $!;
+    print "  ", results($t1, $t2) or die $!;
   }
   print "\n" or die $!;
 }
