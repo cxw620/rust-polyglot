@@ -54,13 +54,13 @@ my @types;
 my @sizes = qw(8 16 32 64 128 size);
 
 print <<END;
-    to |    i                          |    u                          |   f
+   to |    i                          |    u                          |   f
 END
 my $hl = <<END;
--------+-------------------------------+-------------------------------+-----------
+------+-------------------------------+-------------------------------+-----------
 END
 
-print "from   |";
+print "from  |";
 foreach my $s (@sizes) {
   push @types, "i$s";
   printf " %4s", $s;
@@ -82,7 +82,7 @@ sub chg { $_[0] =~ m/^(?:u8|f32)$/ }
 
 foreach my $t1 (@types) {
   print $hl if chg($t1);
-  printf "%5s  |", $t1 or die $!;
+  printf "%5s |", $t1 or die $!;
   foreach my $t2 (@types) {
     print " |" if chg($t2);
     print " ";
