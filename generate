@@ -1,0 +1,31 @@
+#!/usr/bin/perl -w
+use strict;
+our $copyright = <<END;
+    Copyright 2021 Ian Jackson and contributors
+    SPDX-License-Identifier: MIT
+    There is NO WARRANTY.
+END
+
+my $approx = "≈";
+my $approx_accute = "⩯";
+
+sub results ($$) {
+  my ($t1,$t2) = @_;
+  if (my ($iu1, $s1, $iu2, $s2) =
+      "$t1,$t2" =~ m/^([iu])(\w+),([iu])(\w+)$/) {
+    print "$iu1";
+  }
+}
+
+my @types;
+foreach my $s (qw(8 16 32 64 128 size)) {
+  push @types, "i$s", "u$s";
+}
+push @types, qw(f32 f64);
+
+foreach my $t1 (@types) {
+  foreach my $t2 (@types) {
+    print " ", results($t1, $t2) or die $!;
+  }
+  print "\n" or die $!;
+}
