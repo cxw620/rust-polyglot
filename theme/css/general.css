@@ -131,6 +131,10 @@ table thead td {
 table thead th {
     padding: 3px 20px;
 }
+div.compact-table th,
+div.compact-table td {
+    padding: 3px 7px;
+}
 th .hljs {
     background: var(--table-header-bg);
 }

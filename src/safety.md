@@ -52,6 +52,8 @@ For conversions expected to be infallible,
 using [`num::cast`](https://docs.rs/num/latest/num/cast/index.html)
 will avoid accidentally writing a lossy raw `as` operation.
 
+<div class="compact-table">
+
 | &nbsp;&nbsp;&nbsp;&nbsp;to<br>from&nbsp;&nbsp; |    `i`<br>`8` |  <br>`16` |  <br>`32` |  <br>`64` | <br>`128` |<br>`sz` |    `u`<br>`8` |  <br>`16` |  <br>`32` |  <br>`64` | <br>`128` | <br>`sz` |   `f`<br>`32` |  <br>`64`
 |------|------|-----|-----|-----|-----|-----|------|-----|-----|-----|-----|------|------|-----|
 |   `i8` | . | . | . | . | . | T< | T+ | T+ | T+ | T+ | T+ | T< | . | f
@@ -70,6 +72,8 @@ will avoid accidentally writing a lossy raw `as` operation.
 |  &nbsp;    |      |     |     |     |     |     |      |     |     |     |     |      |      |     |
 | `f32` | NX | NX | NX | NX | NX | NX | NX | NX | NX | NX | NX | NX | . | .
 | `f64` | NX | NX | NX | NX | NX | NX | NX | NX | NX | NX | NX | NX | N# | .
+
+</div>
 
 Thread safety
 -------------
