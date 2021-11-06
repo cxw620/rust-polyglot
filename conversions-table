@@ -102,11 +102,13 @@ foreach my $t1 (@types) {
     print " ";
     my $r = results($t1, $t2);
     if ($r eq 'F ') {
-      print "From";
-    } elsif ($r =~ m/^[tN]/) {
-      print "$& $' ";
+      print ".   ";
+    } elsif ($r =~ m/^t/) {
+      print "T$'  ";
+    } elsif ($r =~ m/^N/) {
+      print "n$'  ";
     } else {
-      printf "%4s", $r;
+      printf "%3s", $r;
     }
   }
   print "\n" or die $!;
