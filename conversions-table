@@ -79,12 +79,12 @@ my @abstr_row_groups;
 sub iterate_rows ($$$) {
   my ($f_group_start, $f_data_row, $f_group_end) = @_;
   # calls
-  #  $f_group_start->()
+  #  $f_group_start->($ri)
   #  $f_data_row->($head, $ri) # use $abstr_col_groups[]{Data}[$ri]
   #  $f_group_end->()
   my $ri= 0;
   for my $rgroup (@abstr_row_groups) {
-    $f_group_start->();
+    $f_group_start->($ri);
     foreach my $row (@$rgroup) {
       $f_data_row->($row->{Head}, $ri++);
     }
@@ -183,6 +183,23 @@ sub format_plain_text () {
   }, sub {
   });
 
+}
+
+sub format_html () {
+  print "<table class=\"compact-table\"><thead><tr>\n";
+  print "<th style=\"text-align:end;\">$abstr_corner[0]</th>\n";
+  foreach my $cgroup (@abstr_col_groups) {
+    foreach my $ci (0.. $#{ $cgroup->{Head1} }) {
+      print "<th rowspan=\"2\">";
+      print "<code>$cgroup->{Head0}</code>" if !$ci;
+      print "<br><code>$cgroup->{Head1}[$ci]</code>";
+      print "</th>\n";
+    }
+  }
+  print "</tr><tr>\n";
+  print "<th sytle=\"text-align:start;\">$abstr_corner[1]</th>\n";
+  print "</tr></thead><tbody><tr>\n";
+  print "</tr></tbody></table>\n";
 }
 
 my $format = "@ARGV";
