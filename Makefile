@@ -57,6 +57,7 @@ html.stamp: book.toml mdbook/SUMMARY.md mdbook/conversions-table.html \
 	$(NAILING_CARGO_JUST_RUN) $(MDBOOK) build $(MDBOOK_BUILD_NAILING_OPTS)
 	$(NAILING_CARGO_JUST_RUN) $(abspath massage-html) \
 		$(addprefix html/, $(addsuffix .html, print $(CHAPTERS)))
+	touch $@
 
 mdbook/conversions-table.html: conversions-table
 	./$< html >$@.tmp && mv -f $@.tmp $@
