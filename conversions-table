@@ -78,13 +78,13 @@ sub iterate_rows ($$$) {
   my ($f_group_start, $f_data_row, $f_group_end) = @_;
   # calls
   #  $f_group_start->()
-  #  $f_data_row->($head, $di) # use $abstr_col_groups[]{Data}[$di]
+  #  $f_data_row->($head, $ri) # use $abstr_col_groups[]{Data}[$ri]
   #  $f_group_end->()
-  my $di= 0;
+  my $ri= 0;
   for my $rgroup (@abstr_row_groups) {
     $f_group_start->();
     foreach my $row (@$rgroup) {
-      $f_data_row->($row->{Head}, $di++);
+      $f_data_row->($row->{Head}, $ri++);
     }
     $f_group_end->()
   }
@@ -150,7 +150,7 @@ sub chg { $_[0] =~ m/^(?:u8|f32)$/ }
 iterate_rows(sub {
   print $hl;
 }, sub {
-  my ($t1, $di) = @_;
+  my ($t1, $ri) = @_;
   printf "%5s |", $t1 or die $!;
   foreach my $t2 (@types) {
     print " |" if chg($t2);
