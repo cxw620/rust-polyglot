@@ -64,9 +64,59 @@ sub results ($$) {
   }
 }
 
-my @types;
 my @sizes = qw(8 16 32 64 128 size);
+my @fsizes = qw(32 64);
 
+# abstract, input to formatter
+my @abstr_corner = ('to', 'from');
+my @abstr_col_groups;
+# $abstr_col_groups[]{Head0} = 'i', 'u', or 'f'
+# $abstr_col_groups[]{Head1}[] = '8', ..., '128', 'size'
+# $abstr_col_groups[]{Data}[][] = '.', 'T<', 'n≈' etc.
+my @abstr_row_groups;
+# $abstr_row_groups[][]{Head} = 'i8', 'i16', ...
+
+sub iterate_rows ($$$) {
+  my ($f_group_start, $f_data_row, $f_group_end) = @_;
+  # calls
+  #  $f_group_start->()
+  #  $f_data_row->($head, $di) # use $abstr_col_groups[]{Data}[$di]
+  #  $f_group_end->()
+  my $di= 0;
+  for my $group (@abstr_row_groups) {
+    $f_group_start->();
+    foreach my $row (@$group) {
+      $f_data_row->($row->{Head}, $di++);
+    }
+    $f_group_end->()
+  }
+}
+
+@abstr_col_groups = ({
+  Head0 => 'i', 
+  Head1 => \@sizes,
+  Data => [],
+}, {
+  Head0 => 'u', 
+  Head1 => \@sizes,
+  Data => [],
+}, {
+  Head0 => 'f', 
+  Head1 => \@fsizes,
+  Data => [],
+});
+
+foreach my $group (@abstr_col_groups) {
+  push @abstr_row_groups, [map {
+    $group->{Head0}.$_
+  } @{ $group->{Head1} }];
+}
+
+use Data::Dumper;
+print Dumper(\@abstr_col_groups, \@abstr_row_groups);
+exit 0;
+
+my @types;
 print <<END;
    to |    i                          |    u                          |   f
 END
