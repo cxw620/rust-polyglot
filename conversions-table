@@ -112,14 +112,18 @@ foreach my $cgroup (@abstr_col_groups) {
   } @{ $cgroup->{Head1} }];
 }
 
-use Data::Dumper;
-print Dumper(\@abstr_col_groups, \@abstr_row_groups);
-exit 0;
+#use Data::Dumper;
+#print Dumper(\@abstr_col_groups, \@abstr_row_groups);
+#exit 0;
+
+print "   to";
+foreach my $cgroup (@abstr_col_groups) {
+  print " |";
+  printf " %4s%*s", $cgroup->{Head0}, 5* (-1 + scalar @{ $cgroup->{Head1} }), "";
+}
+print "\n";
 
 my @types;
-print <<END;
-   to |    i                          |    u                          |   f
-END
 my $hl = <<END;
 ------+-------------------------------+-------------------------------+-----------
 END
