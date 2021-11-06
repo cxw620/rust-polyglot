@@ -131,8 +131,8 @@ table thead td {
 table thead th {
     padding: 3px 20px;
 }
-div.compact-table th,
-div.compact-table td {
+table.compact-table th,
+table.compact-table td {
     padding: 3px 7px;
 }
 th .hljs {
