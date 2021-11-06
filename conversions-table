@@ -6,6 +6,8 @@ our $copyright = <<END;
     There is NO WARRANTY.
 END
 
+#---------- principal code for determining conversion information ----------
+
 # <   might truncate even positive values (might imply +)
 # +   might add 2^n to make positive via twos-complement
 # ⁉   might produce saturated integer values, and ignore NaN
@@ -61,8 +63,7 @@ sub results ($$) {
   }
 }
 
-my @sizes = qw(8 16 32 64 128 size);
-my @fsizes = qw(32 64);
+#---------- interface to formatter ----------
 
 # abstract, input to formatter
 my @abstr_corner = ('to', 'from');
@@ -89,6 +90,11 @@ sub iterate_rows ($$$) {
   }
 }
 
+#---------- abstract data construction ----------
+
+my @sizes = qw(8 16 32 64 128 size);
+my @fsizes = qw(32 64);
+
 @abstr_col_groups = ({
   Head0 => 'i', 
   Head1 => \@sizes,
@@ -113,6 +119,8 @@ foreach my $cgroup (@abstr_col_groups) {
 #print Dumper(\@abstr_col_groups, \@abstr_row_groups);
 #exit 0;
 
+#---------- formtter ----------
+
 my $hl = '-----';
 print "   to";
 foreach my $cgroup (@abstr_col_groups) {
@@ -136,6 +144,8 @@ foreach my $cgroup (@abstr_col_groups) {
 print "\n";
 
 sub chg { $_[0] =~ m/^(?:u8|f32)$/ }
+
+#---------- XXX ----------
 
 iterate_rows(sub {
   print $hl;
