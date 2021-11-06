@@ -124,7 +124,13 @@ iterate_rows(sub {
     foreach my $ci (0.. $#{ $cgroup->{Head1} }) {
       my $h = $cgroup->{Head1}[$ci];
       my $t2 = $cgroup->{Head0}.$h;
-      $cgroup->{Data}[$ci][$ri] = results($t1, $t2);
+      my $r = results($t1, $t2);
+      $cgroup->{Data}[$ci][$ri] =
+	$r eq 'F '  ? ".   " :
+	$r =~ m/^t/ ? "T$'  " :
+	$r =~ m/^N/ ? "n$'  " :
+	printf "%3s", $r
+	;
     }
   }
 }, sub {
@@ -166,17 +172,7 @@ sub format_plain_text () {
     foreach my $cgroup (@abstr_col_groups) {
       print " |";
       foreach my $data (@{ $cgroup->{Data} }) {
-	print " ";
-	my $r = $data->[$ri];
-	if ($r eq 'F ') {
-	  print ".   ";
-	} elsif ($r =~ m/^t/) {
-	  print "T$'  ";
-	} elsif ($r =~ m/^N/) {
-	  print "n$'  ";
-	} else {
-	  printf "%3s", $r;
-	}
+	print " ", $data->[$ri];
       }
     }
     print "\n" or die $!;
