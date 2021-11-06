@@ -49,7 +49,7 @@ the [`Wrapping`](https://doc.rust-lang.org/std/num/struct.Wrapping.html) wrapper
 For conversions expected to be fallible,
 use the [`TryFrom` implementations](https://doc.rust-lang.org/std/convert/trait.TryFrom.html#implementors) via [`TryInto::try_into()`](https://doc.rust-lang.org/std/convert/trait.TryInto.html).
 For conversions expected to be infallible,
-using [`num::cast`](https://docs.rs/num/latest/num/cast/index.html)
+using `From` or [`num::cast`](https://docs.rs/num/latest/num/cast/index.html)
 will avoid accidentally writing a lossy raw `as` operation.
 
 {{#include conversions-table.html}}
