@@ -77,13 +77,16 @@ $(TEX_INPUTS): latex/%.tex: src/refs.md mdbook/SUMMARY.md hack-latex
 		$< pandoc/$*.md mdbook/autorefs.md
 	./hack-latex $@.raw >$@
 
-$(OUTPUT_PDF): $(TEX_INPUTS) latex/polyglot.tex
+$(OUTPUT_PDF): $(TEX_INPUTS) latex/polyglot.tex latex/conversions-table.tex
 	cd latex && \
 		{ $(PDFLATEX) $(LATEX_OPTIONS) polyglot.tex && \
 		  $(PDFLATEX) $(LATEX_OPTIONS) polyglot.tex && \
 		  $(PDFLATEX) $(LATEX_OPTIONS) polyglot.tex || \
 			{ cat polyglot.log; false; }; } && \
 		mv polyglot.pdf ../
+
+latex/conversions-table.tex: conversions-table
+	./$< tex >$@.tmp && mv -f $@.tmp $@
 
 clean:
 	$(NAILING_CARGO_JUST_RUN) rm -rf $(abspath $(OUTPUT_DIR))

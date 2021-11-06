@@ -231,6 +231,14 @@ sub format_html () {
   print "</tbody></table>\n";
 }
 
+#---------- formatter - latex ----------
+
+sub format_tex () {
+  print "\n\nXXX - THERE SHOULD BE A TABLE HERE\n\n";
+}
+
+#---------- main program ----------
+
 my $format = "@ARGV";
 $format =~ y/-/_/;
 my $fn = ${*::}{"format_$format"};
