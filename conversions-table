@@ -81,6 +81,7 @@ my @abstr_col_groups;
 # $abstr_col_groups[]{Head0} = 'i', 'u', or 'f'
 # $abstr_col_groups[]{Head1}[] = '8', ..., '128', 'size'
 # $abstr_col_groups[]{Data}[]$ri[] = '.', 'T<', 'n≈' etc.
+my $abstr_n_data_cols; # total
 my @abstr_row_groups;
 # $abstr_row_groups[][]{Head} = 'i8', 'i16', ...
 
@@ -128,11 +129,13 @@ foreach my $cgroup (@abstr_col_groups) {
 iterate_rows(sub {
 }, sub {
   my ($t1, $ri) = @_;
+  $abstr_n_data_cols = 0;
   foreach my $cgroup (@abstr_col_groups) {
     foreach my $ci (0.. $#{ $cgroup->{Head1} }) {
       my $h = $cgroup->{Head1}[$ci];
       my $t2 = $cgroup->{Head0}.$h;
       my $r = results($t1, $t2);
+      $abstr_n_data_cols++;
       $cgroup->{Data}[$ci][$ri] =
 	$r eq 'F '  ? ".   " :
 	$r =~ m/^t/ ? "T$'  " :
@@ -202,8 +205,17 @@ sub format_html () {
   }
   print "</tr><tr>\n";
   print "<th sytle=\"text-align:start;\">$abstr_corner[1]</th>\n";
-  print "</tr></thead><tbody><tr>\n";
-  print "</tr></tbody></table>\n";
+  print "</tr></thead><tbody>\n";
+  iterate_rows(sub {
+    my ($ri) = @_;
+    return if $ri==0;
+    printf "<tr><th></th><td colspan=\"%d\">&nbsp;</td></tr>",
+      $abstr_n_data_cols;
+  }, sub {
+    my ($rh, $ri) = @_;
+    
+  }, sub { });
+  print "</tbody></table>\n";
 }
 
 my $format = "@ARGV";
