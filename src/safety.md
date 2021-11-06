@@ -54,6 +54,19 @@ will avoid accidentally writing a lossy raw `as` operation.
 
 {{#include conversions-table.html}}
 
+For conversion, use:
+**.** `From`; 
+**T** `TryFrom`;
+**n** `num_traits`.
+<br>
+Integer `as` might: **<** truncate positive values;
+**+** add 2^n to make positive.
+<br>
+FP `as` might:
+**≠** convert NaN to zero or produce saturated integer values;
+**⩯** round or give Inf;
+**≈** round.
+
 Thread safety
 -------------
 

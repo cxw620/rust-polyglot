@@ -10,20 +10,14 @@ use IO::Handle;
 
 #---------- principal code for determining conversion information ----------
 
-# <   might truncate even positive values (might imply +)
-# +   might add 2^n to make positive via twos-complement
-# ⁉   might produce saturated integer values, and ignore NaN
-# ≈   might round
-# ⩯   might round or give Inf
-
 sub results ($$) {
   # Internal notation!
-  # This gets transformed later.
+  # This gets transformed later into the notation described in safety.md.
   #
   #   F              use From
   #   t              use TryFrom
   #   N              use num_traits
-  #   < + ⁉ ≈ ⩯      as above
+  #   < + ≠ ≈ ⩯      as safety.md
   #   
   my ($t1,$t2) = @_;
   my $c = "$t1,$t2";
