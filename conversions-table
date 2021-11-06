@@ -241,6 +241,7 @@ sub format_tex () {
 
 my $format = "@ARGV";
 $format =~ y/-/_/;
+$format =~ s/^\.//;
 my $fn = ${*::}{"format_$format"};
 $fn->();
 die $! if STDOUT->error;

@@ -59,9 +59,6 @@ html.stamp: book.toml mdbook/SUMMARY.md mdbook/conversions-table.html \
 		$(addprefix html/, $(addsuffix .html, print $(CHAPTERS)))
 	touch $@
 
-mdbook/conversions-table.html: conversions-table
-	./$< html >$@.tmp && mv -f $@.tmp $@
-
 mdbook/SUMMARY.md: generate-inputs src/definitions.pl src/precontents.md \
 		$(MD_SOURCES) $(GIT_INFLUENCES)
 	./$< $(CHAPTERS)
@@ -85,8 +82,10 @@ $(OUTPUT_PDF): $(TEX_INPUTS) latex/polyglot.tex latex/conversions-table.tex
 			{ cat polyglot.log; false; }; } && \
 		mv polyglot.pdf ../
 
-latex/conversions-table.tex: conversions-table
-	./$< tex >$@.tmp && mv -f $@.tmp $@
+mdbook/conversions-table.html \
+latex/conversions-table.tex \
+: %: conversions-table
+	./$< $(suffix $@) >$@.tmp && mv -f $@.tmp $@
 
 clean:
 	$(NAILING_CARGO_JUST_RUN) rm -rf $(abspath $(OUTPUT_DIR))
