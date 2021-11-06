@@ -137,12 +137,12 @@ my $hl = <<END;
 ------+-------------------------------+-------------------------------+-----------
 END
 
-print $hl;
-
 sub chg { $_[0] =~ m/^(?:u8|f32)$/ }
 
-foreach my $t1 (@types) {
-  print $hl if chg($t1);
+iterate_rows(sub {
+  print $hl;
+}, sub {
+  my ($t1, $di) = @_;
   printf "%5s |", $t1 or die $!;
   foreach my $t2 (@types) {
     print " |" if chg($t2);
@@ -159,4 +159,5 @@ foreach my $t1 (@types) {
     }
   }
   print "\n" or die $!;
-}
+}, sub {
+});
