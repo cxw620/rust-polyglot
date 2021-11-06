@@ -6,6 +6,8 @@ our $copyright = <<END;
     There is NO WARRANTY.
 END
 
+use IO::Handle;
+
 #---------- principal code for determining conversion information ----------
 
 # <   might truncate even positive values (might imply +)
@@ -187,3 +189,4 @@ my $format = "@ARGV";
 $format =~ y/-/_/;
 my $fn = ${*::}{"format_$format"};
 $fn->();
+die $! if STDOUT->error;
