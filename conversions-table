@@ -116,12 +116,17 @@ foreach my $cgroup (@abstr_col_groups) {
 #print Dumper(\@abstr_col_groups, \@abstr_row_groups);
 #exit 0;
 
+my $hl = '-----';
 print "   to";
 foreach my $cgroup (@abstr_col_groups) {
   print " |";
-  printf " %4s%*s", $cgroup->{Head0}, 5* (-1 + scalar @{ $cgroup->{Head1} }), "";
+  $hl .= '-+';
+  my $group_len = scalar @{ $cgroup->{Head1} };
+  printf " %4s%*s", $cgroup->{Head0}, 5* ($group_len-1), "";
+  $hl .= '-' x (5 * $group_len);
 }
 print "\n";
+$hl .= "-\n";
 print  "from ";
 my @types; # xxx
 foreach my $cgroup (@abstr_col_groups) {
@@ -132,10 +137,6 @@ foreach my $cgroup (@abstr_col_groups) {
   }
 }
 print "\n";
-
-my $hl = <<END;
-------+-------------------------------+-------------------------------+-----------
-END
 
 sub chg { $_[0] =~ m/^(?:u8|f32)$/ }
 
