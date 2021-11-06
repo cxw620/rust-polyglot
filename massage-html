@@ -7,3 +7,12 @@ use strict;
 s/BGNUu8OOK7UPtX3H/\</g;
 s/smPE0doaBMjrKFYg/\>/g;
 s/uXlUyLF01W1H72NS/"/g;
+
+# Non-unicode adhoc hack to make it like old hand-hacked thing
+s/n≠/NX/g;
+s/⩯/#/g;
+s/≈/=/g;
+
+# Empirically, my browser seems to have wrong metrics for ⩯
+# But using a combining acute with ≈ works.
+#s/⩯/≈&#x0302;/g;

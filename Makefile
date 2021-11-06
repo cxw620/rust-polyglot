@@ -51,11 +51,15 @@ pdf:	$(OUTPUT_PDF)
 
 .PHONY: html pdf
 
-html.stamp: book.toml mdbook/SUMMARY.md massage-html \
+html.stamp: book.toml mdbook/SUMMARY.md mdbook/conversions-table.html \
+	massage-html \
 		$(MD_SOURCES) $(MDBOOK_INFLUENCES)
 	$(NAILING_CARGO_JUST_RUN) $(MDBOOK) build $(MDBOOK_BUILD_NAILING_OPTS)
 	$(NAILING_CARGO_JUST_RUN) $(abspath massage-html) \
 		$(addprefix html/, $(addsuffix .html, print $(CHAPTERS)))
+
+mdbook/conversions-table.html: conversions-table
+	./$< html >$@.tmp && mv -f $@.tmp $@
 
 mdbook/SUMMARY.md: generate-inputs src/definitions.pl src/precontents.md \
 		$(MD_SOURCES) $(GIT_INFLUENCES)

@@ -52,28 +52,7 @@ For conversions expected to be infallible,
 using [`num::cast`](https://docs.rs/num/latest/num/cast/index.html)
 will avoid accidentally writing a lossy raw `as` operation.
 
-<div class="compact-table">
-
-| &nbsp;&nbsp;&nbsp;&nbsp;to<br>from&nbsp;&nbsp; |    `i`<br>`8` |  <br>`16` |  <br>`32` |  <br>`64` | <br>`128` |<br>`size` |    `u`<br>`8` |  <br>`16` |  <br>`32` |  <br>`64` | <br>`128` | <br>`size` |   `f`<br>`32` |  <br>`64`
-|------|------|-----|-----|-----|-----|-----|------|-----|-----|-----|-----|------|------|-----|
-|   `i8` | . | . | . | . | . | T< | T+ | T+ | T+ | T+ | T+ | T< | . | f
-|  `i16` | T< | . | . | . | . | T< | T< | T+ | T+ | T+ | T+ | T< | . | f
-|  `i32` | T< | T< | . | . | . | T< | T< | T< | T+ | T+ | T+ | T< | N= | f
-|  `i64` | T< | T< | T< | . | . | T< | T< | T< | T< | T+ | T+ | T< | N= | N=
-| `i128` | T< | T< | T< | T< | . | T< | T< | T< | T< | T< | T+ | T< | N= | N=
-|`isize` | T< | T< | T< | T< | T< | . | T< | T< | T< | T< | T< | T+ | N# | N=
-|   &nbsp;   |      |     |     |     |     |     |      |     |     |     |     |      |      |     |
-|   `u8` | T< | . | . | . | . | T< | . | . | . | . | . | T< | . | f
-|  `u16` | T< | T< | . | . | . | T< | T< | . | . | . | . | T< | . | f
-|  `u32` | T< | T< | T< | . | . | T< | T< | T< | . | . | . | T< | N= | f
-|  `u64` | T< | T< | T< | T< | . | T< | T< | T< | T< | . | . | T< | N= | N=
-| `u128` | T< | T< | T< | T< | T< | T< | T< | T< | T< | T< | . | T< | N# | N=
-|`usize` | T< | T< | T< | T< | T< | T< | T< | T< | T< | T< | T< | . | N# | N=
-|  &nbsp;    |      |     |     |     |     |     |      |     |     |     |     |      |      |     |
-| `f32` | NX | NX | NX | NX | NX | NX | NX | NX | NX | NX | NX | NX | . | .
-| `f64` | NX | NX | NX | NX | NX | NX | NX | NX | NX | NX | NX | NX | N# | .
-
-</div>
+{{#include conversions-table.html}}
 
 Thread safety
 -------------

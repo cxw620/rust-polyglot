@@ -201,7 +201,7 @@ sub htmlesc ($) {
 }
 
 sub format_html () {
-  print "<table class=\"compact-table\"><thead><tr>\n";
+  print "<div class=\"compact-table\"><table><thead><tr>\n";
   print "<th style=\"text-align:end;\">$abstr_corner[0]</th>\n";
   foreach my $cgroup (@abstr_col_groups) {
     foreach my $ci (0.. $#{ $cgroup->{Head1} }) {
@@ -223,7 +223,7 @@ sub format_html () {
       $abstr_n_data_cols;
   }, sub {
     my ($rh, $ri) = @_;
-    print "<tr><th><code>", htmlesc($rh), "</code></th>\n";
+    print "<tr><td><code>", htmlesc($rh), "</code></td>\n";
     foreach my $cgroup (@abstr_col_groups) {
       foreach my $data (@{ $cgroup->{Data} }) {
 	my $d = $data->[$ri];  $d =~ s/\s+$//;
@@ -232,7 +232,7 @@ sub format_html () {
     }
     print "</tr>\n";
   }, sub { });
-  print "</tbody></table>\n";
+  print "</tbody></table></div>\n";
 }
 
 my $format = "@ARGV";
