@@ -108,7 +108,7 @@ sub iterate_rows ($$$) {
 
 foreach my $cgroup (@abstr_col_groups) {
   push @abstr_row_groups, [map {
-    $cgroup->{Head0}.$_
+    { Head => $cgroup->{Head0}.$_ },
   } @{ $cgroup->{Head1} }];
 }
 
