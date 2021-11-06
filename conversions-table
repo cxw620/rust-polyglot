@@ -151,7 +151,7 @@ iterate_rows(sub {
 #print Dumper(\@abstr_col_groups, \@abstr_row_groups);
 #exit 0;
 
-#---------- formtters ----------
+#---------- formtter - plain text ----------
 
 sub format_plain_text () {
 
@@ -191,6 +191,8 @@ sub format_plain_text () {
   });
 
 }
+
+#---------- formtter - html ----------
 
 sub htmlesc ($) {
   ($_) = @_;
