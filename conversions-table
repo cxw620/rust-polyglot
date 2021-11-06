@@ -146,19 +146,13 @@ foreach my $cgroup (@abstr_col_groups) {
 print "\n";
 $hl .= "-\n";
 print  "from ";
-my @types; # xxx
 foreach my $cgroup (@abstr_col_groups) {
   print " |";
   foreach my $h (@{ $cgroup->{Head1} }) {
     printf " %4s", $h;
-    push @types, $cgroup->{Head0}.$h;
   }
 }
 print "\n";
-
-sub chg { $_[0] =~ m/^(?:u8|f32)$/ }
-
-#---------- XXX ----------
 
 iterate_rows(sub {
   print $hl;
