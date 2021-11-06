@@ -122,28 +122,21 @@ foreach my $cgroup (@abstr_col_groups) {
   printf " %4s%*s", $cgroup->{Head0}, 5* (-1 + scalar @{ $cgroup->{Head1} }), "";
 }
 print "\n";
+print  "from ";
+my @types; # xxx
+foreach my $cgroup (@abstr_col_groups) {
+  print " |";
+  foreach my $h (@{ $cgroup->{Head1} }) {
+    printf " %4s", $h;
+    push @types, $cgroup->{Head0}.$h;
+  }
+}
+print "\n";
 
-my @types;
 my $hl = <<END;
 ------+-------------------------------+-------------------------------+-----------
 END
 
-print "from  |";
-foreach my $s (@sizes) {
-  push @types, "i$s";
-  printf " %4s", $s;
-}
-print " |";
-foreach my $s (@sizes) {
-  push @types, "u$s";
-  printf " %4s", $s;
-}
-print " |";
-foreach my $s (qw(32 64)) {
-  push @types, "f$s";
-  printf " %4s", $s;
-}
-print "\n";
 print $hl;
 
 sub chg { $_[0] =~ m/^(?:u8|f32)$/ }
