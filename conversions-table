@@ -192,14 +192,24 @@ sub format_plain_text () {
 
 }
 
+sub htmlesc ($) {
+  ($_) = @_;
+  s/\&/&amp;/g;
+  s/\</&lt;/g;
+  s/\>/&gt;/g;
+  return $_;
+}
+
 sub format_html () {
   print "<table class=\"compact-table\"><thead><tr>\n";
   print "<th style=\"text-align:end;\">$abstr_corner[0]</th>\n";
   foreach my $cgroup (@abstr_col_groups) {
     foreach my $ci (0.. $#{ $cgroup->{Head1} }) {
       print "<th rowspan=\"2\">";
-      print "<code>$cgroup->{Head0}</code>" if !$ci;
-      print "<br><code>$cgroup->{Head1}[$ci]</code>";
+      if (!$ci) {
+	print "<code>", htmlesc($cgroup->{Head0}), "</code>";
+      }
+      print "<br><code>", htmlesc($cgroup->{Head1}[$ci]), "</code>";
       print "</th>\n";
     }
   }
