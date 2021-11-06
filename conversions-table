@@ -70,7 +70,7 @@ my @abstr_corner = ('to', 'from');
 my @abstr_col_groups;
 # $abstr_col_groups[]{Head0} = 'i', 'u', or 'f'
 # $abstr_col_groups[]{Head1}[] = '8', ..., '128', 'size'
-# $abstr_col_groups[]{Data}[][] = '.', 'T<', 'n≈' etc.
+# $abstr_col_groups[]{Data}[]$ri[] = '.', 'T<', 'n≈' etc.
 my @abstr_row_groups;
 # $abstr_row_groups[][]{Head} = 'i8', 'i16', ...
 
@@ -115,6 +115,19 @@ foreach my $cgroup (@abstr_col_groups) {
   } @{ $cgroup->{Head1} }];
 }
 
+iterate_rows(sub {
+}, sub {
+  my ($t1, $ri) = @_;
+  foreach my $cgroup (@abstr_col_groups) {
+    foreach my $ci (0.. $#{ $cgroup->{Head1} }) {
+      my $h = $cgroup->{Head1}[$ci];
+      my $t2 = $cgroup->{Head0}.$h;
+      $cgroup->{Data}[$ci][$ri] = results($t1, $t2);
+    }
+  }
+}, sub {
+});
+
 #use Data::Dumper;
 #print Dumper(\@abstr_col_groups, \@abstr_row_groups);
 #exit 0;
@@ -151,19 +164,21 @@ iterate_rows(sub {
   print $hl;
 }, sub {
   my ($t1, $ri) = @_;
-  printf "%5s |", $t1 or die $!;
-  foreach my $t2 (@types) {
-    print " |" if chg($t2);
-    print " ";
-    my $r = results($t1, $t2);
-    if ($r eq 'F ') {
-      print ".   ";
-    } elsif ($r =~ m/^t/) {
-      print "T$'  ";
-    } elsif ($r =~ m/^N/) {
-      print "n$'  ";
-    } else {
-      printf "%3s", $r;
+  printf "%5s", $t1 or die $!;
+  foreach my $cgroup (@abstr_col_groups) {
+    print " |";
+    foreach my $data (@{ $cgroup->{Data} }) {
+      print " ";
+      my $r = $data->[$ri];
+      if ($r eq 'F ') {
+	print ".   ";
+      } elsif ($r =~ m/^t/) {
+	print "T$'  ";
+      } elsif ($r =~ m/^N/) {
+	print "n$'  ";
+      } else {
+	printf "%3s", $r;
+      }
     }
   }
   print "\n" or die $!;
