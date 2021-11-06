@@ -17,6 +17,14 @@ use IO::Handle;
 # ⩯   might round or give Inf
 
 sub results ($$) {
+  # Internal notation!
+  # This gets transformed later.
+  #
+  #   F              use From
+  #   t              use TryFrom
+  #   N              use num_traits
+  #   < + ⁉ ≈ ⩯      as above
+  #   
   my ($t1,$t2) = @_;
   my $c = "$t1,$t2";
   my ($k1,$w1, $k2,$w2) = $c =~ m/^([iuf])(\w+),([iuf])(\w+)$/ or die;
