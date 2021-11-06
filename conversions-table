@@ -6,9 +6,6 @@ our $copyright = <<END;
     There is NO WARRANTY.
 END
 
-my $approx = "≈";
-my $approx_accute = "⩯";
-
 # <   might truncate even positive values (might imply +)
 # +   might add 2^n to make positive via twos-complement
 # ⁉   might produce saturated integer values, and ignore NaN
