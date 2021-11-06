@@ -132,49 +132,58 @@ iterate_rows(sub {
 #print Dumper(\@abstr_col_groups, \@abstr_row_groups);
 #exit 0;
 
-#---------- formtter ----------
+#---------- formtters ----------
 
-my $hl = '-----';
-print "   to";
-foreach my $cgroup (@abstr_col_groups) {
-  print " |";
-  $hl .= '-+';
-  my $group_len = scalar @{ $cgroup->{Head1} };
-  printf " %4s%*s", $cgroup->{Head0}, 5* ($group_len-1), "";
-  $hl .= '-' x (5 * $group_len);
-}
-print "\n";
-$hl .= "-\n";
-print  "from ";
-foreach my $cgroup (@abstr_col_groups) {
-  print " |";
-  foreach my $h (@{ $cgroup->{Head1} }) {
-    printf " %4s", $h;
-  }
-}
-print "\n";
+sub format_plain_text () {
 
-iterate_rows(sub {
-  print $hl;
-}, sub {
-  my ($t1, $ri) = @_;
-  printf "%5s", $t1 or die $!;
+  my $hl = '-----';
+  print "   to";
   foreach my $cgroup (@abstr_col_groups) {
     print " |";
-    foreach my $data (@{ $cgroup->{Data} }) {
-      print " ";
-      my $r = $data->[$ri];
-      if ($r eq 'F ') {
-	print ".   ";
-      } elsif ($r =~ m/^t/) {
-	print "T$'  ";
-      } elsif ($r =~ m/^N/) {
-	print "n$'  ";
-      } else {
-	printf "%3s", $r;
-      }
+    $hl .= '-+';
+    my $group_len = scalar @{ $cgroup->{Head1} };
+    printf " %4s%*s", $cgroup->{Head0}, 5* ($group_len-1), "";
+    $hl .= '-' x (5 * $group_len);
+  }
+  print "\n";
+  $hl .= "-\n";
+  print  "from ";
+  foreach my $cgroup (@abstr_col_groups) {
+    print " |";
+    foreach my $h (@{ $cgroup->{Head1} }) {
+      printf " %4s", $h;
     }
   }
-  print "\n" or die $!;
-}, sub {
-});
+  print "\n";
+
+  iterate_rows(sub {
+    print $hl;
+  }, sub {
+    my ($t1, $ri) = @_;
+    printf "%5s", $t1 or die $!;
+    foreach my $cgroup (@abstr_col_groups) {
+      print " |";
+      foreach my $data (@{ $cgroup->{Data} }) {
+	print " ";
+	my $r = $data->[$ri];
+	if ($r eq 'F ') {
+	  print ".   ";
+	} elsif ($r =~ m/^t/) {
+	  print "T$'  ";
+	} elsif ($r =~ m/^N/) {
+	  print "n$'  ";
+	} else {
+	  printf "%3s", $r;
+	}
+      }
+    }
+    print "\n" or die $!;
+  }, sub {
+  });
+
+}
+
+my $format = "@ARGV";
+$format =~ y/-/_/;
+my $fn = ${*::}{"format_$format"};
+$fn->();
