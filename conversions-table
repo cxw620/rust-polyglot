@@ -202,10 +202,15 @@ sub format_html () {
   foreach my $cgroup (@abstr_col_groups) {
     foreach my $ci (0.. $#{ $cgroup->{Head1} }) {
       print "<th rowspan=\"2\">";
+      my $h1 = $cgroup->{Head1}[$ci];
       if (!$ci) {
-	print "<code>", htmlesc($cgroup->{Head0}), "</code>";
+	my $h0 = $cgroup->{Head0};
+	print "<code>",
+	      htmlesc($h0),
+	      ('&nbsp;' x (length($h1) - length($h0))),
+	      "</code>";
       }
-      print "<br><code>", htmlesc($cgroup->{Head1}[$ci]), "</code>";
+      print "<br><code>", htmlesc($h1), "</code>";
       print "</th>\n";
     }
   }
