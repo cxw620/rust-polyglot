@@ -101,7 +101,7 @@ while (<>) {
   s/≠/\$\\ne\$/g; s/≈/\$\\approx\$/g; s/⩯/\$\\hatapprox\$/g;
 
   # Subtle touches.
-  s/2\\\^{}n/\$2^n\$/;
+  s/2\\\^\{\}n/\$2^n\$/;
 
   print;
 }
