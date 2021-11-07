@@ -92,15 +92,16 @@ while (<>) {
   s/IX9Zl6Lbd6F9RgYs/[/g;
   s/1hTgD8bayWOmHqSY/]/g;
 
-  # Include conversions-table
+  ## Include conversions-table
   if ($_ eq "\\{\\{\\#include conversions-table.html\\}\\}\n") {
-    $_ = "XXX SOMEHOW INCLUDE conversions-table.tex\n";
+    $_ = "\\input{conversions-table.tex}\n";
   }
 
-  # Non-unicode.  XXX.
-  s/≠/X/g;
-  s/⩯/H/g;
-  s/≈/=/g;
+  ## Non-unicode.
+  s/≠/\$\\ne\$/g; s/≈/\$\\approx\$/g; s/⩯/\$\\hatapprox\$/g;
+
+  # Subtle touches.
+  s/2\\\^{}n/\$2^n\$/;
 
   print;
 }

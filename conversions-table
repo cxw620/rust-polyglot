@@ -233,8 +233,75 @@ sub format_html () {
 
 #---------- formatter - latex ----------
 
+sub texesc ($) {
+  ($_) = @_;
+  s/\\/\\textbackslash /g;
+  s/\~/\\textasciitilde /g;
+  s/([$%^&{}_#])/\\$1/g;
+  s/≠/\$\\ne\$/g; s/≈/\$\\approx\$/g; s/⩯/\$\\hatapprox\$/g;
+  return $_;
+}
+
 sub format_tex () {
-  print "\n\nXXX - THERE SHOULD BE A TABLE HERE\n\n";
+
+  ## Reduce the space between most columns.  We'll judiciously add more space
+  ## to divide up the table into big regions
+  print "\\begingroup \\setlength{\\tabcolsep}{0.3em}\n";
+
+  ## And this is how much space to add between column groups.
+  print "\\newcommand{\\colgap}{\\qquad}\n";
+
+  ## The table preamble.
+  print "\\begin{longtable}[]{\@{}r";
+  for my $cg (@abstr_col_groups)
+    { print "\@{\\colgap}" . "c" x @{$cg->{Head1}}; }
+  print "\@{}}\n";
+
+  ## Initial rule.
+  print "\\toprule\n";
+
+  ## Top header row.
+  print "\\multicolumn{1}{r\@{\\colgap}}{" . texesc($abstr_corner[0]) . "}";
+  for my $cg (@abstr_col_groups) {
+    my $n = @{$cg->{Head1}};
+    print " & \\multicolumn{$n}{c\@{\\colgap}}" .
+      "{\\ttfamily " . texesc($cg->{Head0}) . "}";
+  }
+  print " \\\\". "\n";
+
+  ## Second header row.
+  print "\\multicolumn{1}{l\@{\\colgap}}" .
+    "{" . texesc($abstr_corner[1]) . "\\quad}";
+  for my $cg (@abstr_col_groups)
+    { for my $h (@{$cg->{Head1}}) { print " & \\ttfamily " . texesc($h); } }
+  print " \\\\" . "\n";
+
+  ## Done the header.  (No newline here!  This will be provided by the first
+  ## data row.)
+  print "\\midrule\n" . "\\endhead";
+
+  ## Table body.
+  iterate_rows
+    sub {
+      ## New group.  If this isn't the first one, leave a vertical gap.
+
+      my ($ri) = @_;
+      if ($ri) { print "[\\medskipamount]"; }
+    },
+    sub {
+      ## Data row.  Grind through the data.
+
+      print "\n"; # newline for previous whatever
+      my ($rh, $ri) = @_;
+      print "\\ttfamily " . texesc($rh);
+      for my $cg (@abstr_col_groups)
+	{ for my $cd (@{$cg->{Data}}) { print " & " . texesc($cd->[$ri]); } }
+      print " \\\\"; # no newline here
+    },
+    sub { };
+
+  ## The end.
+  print "\n" . "\\bottomrule\n" . "\\end{longtable}\n" . "\\endgroup\n";
 }
 
 #---------- main program ----------
