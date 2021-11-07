@@ -59,7 +59,7 @@ For conversion, use:
 **T** `TryFrom`;
 **n** `num_traits`.
 <br>
-Integer `as` might: **<** truncate positive values;
+Integer `as` might: **<** truncate;
 **+** add 2^n to make positive.
 <br>
 FP `as` might:
