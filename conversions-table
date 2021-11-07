@@ -132,6 +132,11 @@ iterate_rows(sub {
       $abstr_n_data_cols++;
       $cgroup->{Data}[$ci][$ri] =
 	$r eq 'F '  ? ".   " :
+	$r =~ m/^t\+$/ ? "T▵  " :
+	$r =~ m/^t\<$/ ? "T◂  " :
+#	$r =~ m/^t\<$/ ? "T◃  " :
+#	$r =~ m/^t\<$/ ? "T∆  " :
+#	$r =~ m/^t\<$/ ? "T⊲  " :
 	$r =~ m/^t/ ? "T$'  " :
 	$r =~ m/^N/ ? "n$'  " :
 	printf "%3s", $r
