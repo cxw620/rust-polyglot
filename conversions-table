@@ -17,7 +17,9 @@ sub results ($$) {
   #   F              use From
   #   t              use TryFrom
   #   N              use num_traits
-  #   < + ≠ ≈ ⩯      as safety.md
+  #   <              truncate
+  #   +              add 2^n
+  #   ≠ ≈ ⩯          as safety.md
   #   
   my ($t1,$t2) = @_;
   my $c = "$t1,$t2";
