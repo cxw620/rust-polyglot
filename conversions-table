@@ -262,9 +262,12 @@ sub format_tex () {
 
   ## Top header row.
   print "\\multicolumn{1}{r\@{\\colgap}}{" . texesc($abstr_corner[0]) . "}";
+  my $i = 0;
   for my $cg (@abstr_col_groups) {
+    $i++;
+    my $gap = $i == @abstr_col_groups ? "" : "\\colgap";
     my $n = @{$cg->{Head1}};
-    print " & \\multicolumn{$n}{c\@{\\colgap}}" .
+    print " & \\multicolumn{$n}{c\@{$gap}}" .
       "{\\ttfamily " . texesc($cg->{Head0}) . "}";
   }
   print " \\\\". "\n";
