@@ -288,7 +288,7 @@ sub format_tex () {
 
   ## Second header row.
   print "\\multicolumn{1}{l\@{\\colgap}}" .
-    "{" . texesc($abstr_corner[1]) . "\\quad}";
+    "{" . texesc($abstr_corner[1]) . "\\quad\\strut}";
   for my $cg (@abstr_col_groups)
     { for my $h (@{$cg->{Head1}}) { print " & \\ttfamily " . texesc($h); } }
   print " \\\\" . "\n";
