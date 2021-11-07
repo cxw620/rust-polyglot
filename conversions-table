@@ -252,7 +252,12 @@ sub texesc ($) {
   s/\\/\\textbackslash /g;
   s/\~/\\textasciitilde /g;
   s/([$%^&{}_#])/\\$1/g;
-  s/≠/\$\\ne\$/g; s/≈/\$\\approx\$/g; s/⩯/\$\\hatapprox\$/g;
+  s/▵/\$\\smalltriangleup\$/g;
+  s/◂/\$\\blacktriangleleft\$/g;
+  s/▿/\$\\smalltriangledown\$/g;
+  s/≠/\$\\ne\$/g;
+  s/≈/\$\\approx\$/g;
+  s/⩯/\$\\hatapprox\$/g;
   return $_;
 }
 

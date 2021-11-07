@@ -98,7 +98,12 @@ while (<>) {
   }
 
   ## Non-unicode.
-  s/≠/\$\\ne\$/g; s/≈/\$\\approx\$/g; s/⩯/\$\\hatapprox\$/g;
+  s/▵/\$\\smalltriangleup\$/g;
+  s/◂/\$\\blacktriangleleft\$/g;
+  s/▿/\$\\smalltriangledown\$/g;
+  s/≠/\$\\ne\$/g;
+  s/≈/\$\\approx\$/g;
+  s/⩯/\$\\hatapprox\$/g;
 
   # Subtle touches.
   s/2\\\^\{\}n/\$2^n\$/;
