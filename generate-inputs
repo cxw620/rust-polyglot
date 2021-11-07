@@ -193,6 +193,11 @@ sub scan_filter() {
 	next;
       }
 
+      if (m{^\<br\>\s*$}) {
+	print MD;
+	print PD "\\newline\n";
+      }
+
       if (!m{$comment_re}) {
 	print MD;
 	print PD;
