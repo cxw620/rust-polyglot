@@ -60,7 +60,7 @@ For conversion, use:
 **n** `num_traits`.
 <br>
 Integer `as` might: **◂** truncate;
-**▵** add 2^n to make positive.
+**▵** add or **▿** subtract 2^n (two's complement).
 <br>
 FP `as` might:
 **≠** convert NaN to zero or produce saturated integer values;

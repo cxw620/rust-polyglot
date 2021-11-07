@@ -19,6 +19,7 @@ sub results ($$) {
   #   N              use num_traits
   #   <              truncate
   #   +              add 2^n
+  #   -              subtract 2^n
   #   ≠ ≈ ⩯          as safety.md
   #   
   my ($t1,$t2) = @_;
@@ -31,7 +32,7 @@ sub results ($$) {
       if ($k1 eq $k2) {
 	return "F "; # equal types
       } elsif ("$k1$k2" =~ m/ui/) { # uW -> iW, losing a bit
-	return "t<";
+	return "t-";
       } elsif ("$k1$k2" =~ m/iu/) { # iW -> uW, might add 2^W
 	return "t+";
       } else {
@@ -136,6 +137,7 @@ iterate_rows(sub {
 	$r eq 'F '  ? ".   " :
 	$r =~ m/^t\+$/ ? "T▵  " :
 	$r =~ m/^t\<$/ ? "T◂  " :
+	$r =~ m/^t\-$/ ? "T▿  " :
 #	$r =~ m/^t\<$/ ? "T◃  " :
 #	$r =~ m/^t\<$/ ? "T∆  " :
 #	$r =~ m/^t\<$/ ? "T⊲  " :
