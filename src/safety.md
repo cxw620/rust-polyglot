@@ -59,8 +59,8 @@ For conversion, use:
 **T** `TryFrom`;
 **n** `num_traits`.
 <br>
-Integer `as` might: **<** truncate;
-**+** add 2^n to make positive.
+Integer `as` might: **◂** truncate;
+**▵** add 2^n to make positive.
 <br>
 FP `as` might:
 **≠** convert NaN to zero or produce saturated integer values;
