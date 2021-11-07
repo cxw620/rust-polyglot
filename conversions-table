@@ -56,7 +56,7 @@ sub results ($$) {
     } elsif ($k1 =~ m/[iu]/) {
       if ($w2 > $w1) { # space for exponent
 	return "F ";
-      } elsif ($w2 == 32 && $t1 =~ m/^(?:u128|.size)$/) {
+      } elsif ($w2 == 32 && ($w1 + ($k1 eq 'u')) > 128) {
 	return "N⩯";
       } else {
 	return "N≈";
