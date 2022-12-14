@@ -98,6 +98,9 @@ Curious points:
    have not 100% kept pace with Rust's language evolution.
    The usual way to deal with this is simply to define one's macro
    to take `,` or `;` delimiters, whenever this problem arises.
+   Sometimes one will resort to open-coding an ad-hoc parser
+   which munches tokens `$tt` from the input one at a type into
+   a "parsed" representation.
 
  * Macros which are lexically in scope at, and precede, the call site
    do not need qualified names (and can be entirely local).
@@ -107,6 +110,13 @@ Curious points:
    of the current *crate* (not in the current module),
    from where it can be `use`d.
    (Rust 2015 has even odder scoping rules.)
+
+ * The provided input template keywords cannot match generics,
+   function signatures,
+   and many other important elements of Rust.
+   Macro authors must accept only handling
+   a restricted subset of the language,
+   or using anomalous syntax (eg `[ ]` for generics instead of `< >`).
 
 There are many details which are too fiddly to go into here.
 
