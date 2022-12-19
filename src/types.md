@@ -72,7 +72,7 @@ Otherwise, types have structural equivalence.
 | Raw pointers | `*const T`, `*mut T`
 | Runtime trait despatch (vtable) | `dyn Trait`
 | Existential type | `impl Trait`
-| Request type inference | `_` |
+| Type to be inferred | `_`, `&'_ T`, `&'_ mut T` |
 
 Most of these are straightforward.
 
@@ -141,12 +141,6 @@ Unit structs are used extensively in idiomatic Rust, e.g.
 as things to `impl Trait` for,
 parameters indicating a type rather than value,
 and as objects to hang methods on.
-
-Underscore `_` (and the lifetime `'_`)
-can be used as a placeholder in to-be-inferred type,
-but only in certainly places:
-where the language doesn't require the type to be explicitly stated,
-such as local variable bindings, closures, and expression.
 
 ### Some very important nominal types from the standard library
 
