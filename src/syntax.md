@@ -131,9 +131,12 @@ Other statements
 -----------------
 
 `let` introduces a binding.
+
+%!fancy-pre
 ```
-let pattern = value;
+let %pattern% = %value%;
 ```
+%/fancy-pre
 
 Variable names may be reused by rebinding;
 this is often considered idiomatic.
