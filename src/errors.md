@@ -127,7 +127,7 @@ for example,
 on arithmetic overflow in debug builds,
 or array bounds violation.
 There are no null pointer exceptions because
-references are never null --- an optional reference is `Option<&T>`.
+references are never null - an optional reference is `Option<&T>`.
 
 Libraries will sometimes generate panics,
 in cases of serious trouble.
