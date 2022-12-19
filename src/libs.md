@@ -57,7 +57,7 @@ Libraries you should know about
  * [`crossbeam`]\: other tools for multithreaded programming,
    including [scoped threads].
 
- * [`chrono`] for human-readable date/time handling.
+ * [`chrono`] (or [`time`]) for human-readable date/time handling
    API is a bit funky.  Be sure to use [`chrono-tz`] on Unix.
 
  * [`libc`] and [`nix`].  Take your pick.

@@ -33,6 +33,7 @@ $title = "Rust for the Polyglot Programmer";
    ring
    tempfile
    thiserror
+   time
    tracing
    ureq
    warp
