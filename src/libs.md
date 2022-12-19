@@ -59,6 +59,7 @@ Libraries you should know about
    API is a bit funky.  Be sure to use [`chrono-tz`] on Unix.
 
  * [`libc`] and [`nix`].  Take your pick.
+   (Maybe consider [`rustix`].)
 
  * [`lazy_static`], [`once_cell`]
    for data to be initialised once.
