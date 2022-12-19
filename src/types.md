@@ -71,6 +71,7 @@ Otherwise, types have structural equivalence.
 | References (always valid, never null) | `&T`, `&mut T`, `&'lifetime T`, `&'l mut T`
 | Raw pointers | `*const T`, `*mut T`
 | Runtime trait despatch (vtable) | `dyn Trait`
+| Existential type | `impl Trait`
 | Request type inference | `_` |
 
 Most of these are straightforward.
@@ -116,10 +117,15 @@ C.f. [`String`], [`Box<str>`](https://doc.rust-lang.org/std/boxed/struct.Box.htm
 [**dyn Trait**](https://doc.rust-lang.org/reference/types/trait-object.html) is a **trait object**:
 an object which implements `Trait`,
 with despatch done at run-time via a vtable.
-(Not to be confused with `impl Trait`,
-which is an existential type.)
+(Not to be confused with `impl Trait`.)
 `&dyn Trait` is a pointer to the object,
 plus a pointer to its vtable; `dyn Trait` itself is unsized.
+
+[**impl Trait**](https://doc.rust-lang.org/reference/types/impl-trait.html)
+represents a generic type implementing some set of traits -
+a monomorphised **existential type**.
+`impl Trait` can only currently be used in certain places:
+function arguments and return values.
 
 [**usize**](file:///home/rustcargo/docs/share/doc/rust/html/std/primitive.usize.html) is the type of array and slice indices.
 It corresponds to C `size_t`.
