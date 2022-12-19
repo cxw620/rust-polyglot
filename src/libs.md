@@ -50,8 +50,9 @@ Libraries you should know about
  * [`rayon`]\: Semi-magical safe multicore parallelism
    as a drop-in replacement for std's serial iterators.
 
- * [`parking_lot`].  Alternatives to the standard mutex etc.;
-   `parking_lot::Mutex` is const-initialisable.
+ * [`parking_lot`].  Alternatives to the standard mutex etc.
+   `parking_lot::Mutex` is const-initialisable;
+   `std`'s only in Rust 1.63 (August 2022).
 
  * [`crossbeam`]\: other tools for multithreaded programming,
    including [scoped threads].
