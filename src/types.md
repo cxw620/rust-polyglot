@@ -71,7 +71,7 @@ Otherwise, types have structural equivalence.
 | References (always valid, never null) | `&T`, `&mut T`, `&'lifetime T`, `&'l mut T`
 | Raw pointers | `*const T`, `*mut T`
 | Runtime trait despatch (vtable) | `dyn Trait`
-| Existential type | `impl Trait`
+| [Existential type](traits.md#existential-types) | `impl Trait`
 | Type to be inferred | `_`, `&'_ T`, `&'_ mut T` |
 
 Most of these are straightforward.
@@ -120,12 +120,6 @@ with despatch done at run-time via a vtable.
 (Not to be confused with `impl Trait`.)
 `&dyn Trait` is a pointer to the object,
 plus a pointer to its vtable; `dyn Trait` itself is unsized.
-
-[**impl Trait**](https://doc.rust-lang.org/reference/types/impl-trait.html)
-represents a generic type implementing some set of traits -
-a monomorphised **existential type**.
-`impl Trait` can only currently be used in certain places:
-function arguments and return values.
 
 [**usize**](file:///home/rustcargo/docs/share/doc/rust/html/std/primitive.usize.html) is the type of array and slice indices.
 It corresponds to C `size_t`.
