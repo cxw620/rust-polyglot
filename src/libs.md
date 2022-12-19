@@ -79,7 +79,7 @@ Libraries for specific purposes
 
  * Cryptography\: [`ring`], [`rustls`],
    [Rust Crypto](https://github.com/RustCrypto);
-   see [Sylvain Kerkour's writeup](https://kerkour.com/blog/rust-cryptography-ecosystem/).
+   see [Sylvain Kerkour's 2021 writeup](https://kerkour.com/blog/rust-cryptography-ecosystem/).
 
  * [`bstr`]\: Stringish methods on byte strings
    that are *hopefully* UTF-8 (but might not be).
