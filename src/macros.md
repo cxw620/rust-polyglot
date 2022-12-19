@@ -31,7 +31,7 @@ with different invocation syntaxes:
  * Attributes: `#[macro]` (before some language construct).
    The macro can filter/alter the decorated thing.
 
- * `#[derive(macro)]` before a struct, enum, or union.
+ * `#[derive(Macro)]` before a struct, enum, or union.
    The macro does not modify the decorated data structure,
    but it takes it as input and can generate *additional* code.
 
