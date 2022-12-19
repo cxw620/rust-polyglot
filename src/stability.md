@@ -88,7 +88,7 @@ Editions
 
 Orthogonally to the different release channels,
 there are Editions of Rust.
-Currently, Rust 2015, 2018, and the work-in-progress 2021.
+Currently, Rust 2015, 2018, and 2021.
 
 Each edition is a dialect, even with different syntax.
 The same compiler supports all the editions.
