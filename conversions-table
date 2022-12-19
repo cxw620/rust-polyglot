@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 use strict;
 our $copyright = <<END;
-    Copyright 2021 Ian Jackson and contributors
+    Copyright 2021-2022 Ian Jackson and contributors
     SPDX-License-Identifier: MIT
     There is NO WARRANTY.
 END

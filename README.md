@@ -1,7 +1,7 @@
 Colophon
 ========
 
-[comment]: # ( Copyright 2021 Ian Jackson and contributors  )
+[comment]: # ( Copyright 2021-2022 Ian Jackson and contributors  )
 [comment]: # ( SPDX-License-Identifier: MIT                 )
 [comment]: # ( There is NO WARRANTY.                        )
 
@@ -68,7 +68,7 @@ Thanks to Mark Wooding for the LaTeX/PDF arrangements.
 ### Legal
 
 Rust for the Polyglot Programmer is
-Copyright 2021 Ian Jackson and contributors.
+Copyright 2021-2022 Ian Jackson and contributors.
 `SPDX-License-Identifier: MIT`.
 
 There is **NO WARRANTY**

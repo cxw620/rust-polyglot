@@ -1,7 +1,7 @@
 Libraries
 =========
 
-[comment]: # ( Copyright 2021 Ian Jackson and contributors  )
+[comment]: # ( Copyright 2021-2022 Ian Jackson and contributors  )
 [comment]: # ( SPDX-License-Identifier: MIT                 )
 [comment]: # ( There is NO WARRANTY.                        )
 
