@@ -130,25 +130,18 @@ Rust is well supplied with web frameworks,
 but it is hard to choose.
 
  * I have been using [Rocket](https://rocket.rs/) for some years,
-   But the `rocket 0.4` branch (sync) doesn't compile on Stable
-   and is in the process of being replaced by the not-yet-released
-   `0.5` which uses async.
-   `0.4` to `0.5` is quite a big compat break
-   (this was to be expected, but is still a nuisance).
-   If you start a new project with Rocket, use the `0.5` preview.
+   But development is rather slow - there still isn't a final release
+   of `rocket 0.5`.  You should use the 0.5 preview.
 
- * [`actix-web`](https://actix.rs/) is popular too.
-   When I was choosing Rocket some years ago,
-   it had lots of unsound `unsafe`, but that seems fixed now.
+ * [`axum`] is from the Tokio team, but quite new.
+
+ * [`actix-web`](https://actix.rs/) is very popular,
+   but sometimes lacking attention to detail.
 
  * [`rouille`](https://crates.io/crates/rouille) is sync.
    Yay!  But I haven't tried it.
 
  * You should perhaps also consider: [`warp`].
-
-I would avoid "`stdweb`",
-which depends on the "`async-std`" async runtime.
-because [I prefer Tokio](async.md#practicalities).
 
 
 Command line parsing: ``clap`

@@ -40,6 +40,7 @@ $title = "Rust for the Polyglot Programmer";
 );
 @crate_refs_crates_io = qw(
    argparse
+   axum
    clap
    either
    env_logger
