@@ -135,8 +135,10 @@ Other statements
 
 %!fancy-pre
 ```
-let %pattern% = %value%;			// irrefutable patterns
-let %pattern% = %value% else { %diverges...% }; // refutable patterns (Rust 1.65, November 2022)
+let %pattern% = %value%;			// Irrefutable patterns
+let %pattern% = %value% else { %diverges...% }; // Refutable patterns (Rust 1.65, Nov 2022)
+%place% = %value%; // Assignment to a mutable variable or location
+%pattern% = %value%; // Destructuring assignment (Rust 1.59, Feb 2022)
 ```
 %/fancy-pre
 
