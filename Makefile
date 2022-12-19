@@ -41,6 +41,8 @@ endif
 
 default: doc
 
+all:	html pdf
+
 doc:	html
 
 html:	html.stamp
