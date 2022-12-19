@@ -101,7 +101,7 @@ match %value% { %pat0% %[% if %cond0% %]% => %expr0%, %...% } // See [Types and 
 
 return %v%  // At end of function, it is idiomatic to just write `%v%`
 break %value%; // `loop` only; specifies value of `loop` expr
-break '%label% %value%; // `break %value%` with named loop; Rust 1.65, November 2022
+break '%label% %value%; // `break %value%` with named loop; Rust 1.65, Nov 2022
 continue; continue '%label%; break; break '%label%;
 
 %function%(%arg0%,%arg1%)
