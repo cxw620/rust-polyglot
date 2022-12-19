@@ -248,7 +248,7 @@ then one of the following is the case:
 
    When applying this strategy,
    try to avoid reusing the same lifetime name in multiple places:
-   doing so can try to identify actually-different lifetimes.
+   keeping them separate can help identify actually-different lifetimes.
 
  * Add redundant type and lifetime annotations to closures
    (`'_`, `_`, `&'_ _`, `-> &'_ _` etc.)
