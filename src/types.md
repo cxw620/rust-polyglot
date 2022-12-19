@@ -149,6 +149,7 @@ such as local variable bindings, closures, and expression.
 | Heap allocation | [`Box<T>`][`Box`]
 | Expanding vector (ptr, len, capacity) | [`Vec<T>`][`Vec`]
 | Expanding string (ptr, len, capacity) | [`String`]
+| Filesystem path, maybe not valid unicode | [`Path` / `PathBuf`](https://doc.rust-lang.org/nightly/std/path/)
 | Hash table / ordered B-Tree | [`HashMap`] / [`BTreeMap`]
 | Reference-counted heap allocation <br> (no GC, can leak cycles) | [`Arc<T>`](https://doc.rust-lang.org/std/sync/struct.Arc.html), [`Rc<T>`](https://doc.rust-lang.org/std/rc/index.html)
 | Optional (aka Haskell `Maybe`) | [`Option<T>`][`Option`]
@@ -162,6 +163,18 @@ Other important types include:
 [`BufReader`]/[`BufWriter`],
 [`VecDeque`],
 [`Cow`].
+
+[`Path` and `PathBuf`](https://doc.rust-lang.org/nightly/std/path/) appear in many standard library APIs.
+They must be used if your program should support accessing
+arbitrarily named files
+(i.e. even files whose names are not valid unicode).
+But they are very awkward; they are a veneer over
+[`OsString`]/[`OsStr`] which have a very very limited API,
+primarily because [Windows is terrible](https://docs.rs/bstr/latest/bstr/#file-paths-and-os-strings).
+If you need to do anything nontrivial with filenames,
+you may need [`os_str_bytes`].
+If you can limit your self to valid unicode,
+you can just pass `str` to the standard library file APIs.
 
 Literals
 --------
