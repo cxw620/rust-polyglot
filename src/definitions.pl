@@ -53,6 +53,7 @@ $title = "Rust for the Polyglot Programmer";
    rand
    rayon
    regex
+   rustix
    rustls
    rusty_v8
    slab

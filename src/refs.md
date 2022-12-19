@@ -35,4 +35,3 @@
 [`fehler`]: https://boats.gitlab.io/blog/post/failure-to-fehler/
 [`inline-python`]: https://blog.m-ou.se/writing-python-inside-rust-1/
 [serde]: https://serde.rs/
-[`rustix`]: https://crates.io/crates/rustix
