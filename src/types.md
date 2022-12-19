@@ -130,8 +130,7 @@ function arguments and return values.
 [**usize**](file:///home/rustcargo/docs/share/doc/rust/html/std/primitive.usize.html) is the type of array and slice indices.
 It corresponds to C `size_t`.
 Rust
-([generally](https://doc.rust-lang.org/std/primitive.pointer.html#method.offset))
-[avoids](https://doc.rust-lang.org/std/primitive.pointer.html#method.offset_from)
+[borbids](https://doc.rust-lang.org/std/primitive.pointer.html#method.offset_from)
 the existence of objects bigger than fits into an `isize`.
 
 The empty tuple `()`, aka "unit", is the type of
