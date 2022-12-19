@@ -60,7 +60,7 @@ In quick-and-dirty programs it is common to call
 But, the return type from `main` can be a suitable `Result`.
 This,
 plus use of `?` and a portmanteau error type like
-[`eyre::Report`](https://docs.rs/eyre/latest/eyre/struct.Report.html),
+[`anyhow::Error`](https://docs.rs/anyhow/latest/anyhow/struct.Error.html),
 is usually better even in a prototype because it avoids writing
 `unwrap` calls that should be removed later
 to make the code production-ready.
@@ -75,7 +75,7 @@ The available and useful range of error types is
 too extensive to discuss here.
 But, consider:
 
- * [`eyre`] (or [`anyhow`])
+ * [`anyhow`] (or [`eyre`])
    for a boxed portmanteau error type;
    good for application programs which need to
    aggregate many kinds of error.
