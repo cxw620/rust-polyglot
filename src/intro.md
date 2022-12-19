@@ -99,7 +99,7 @@ The unit of compilation is large: the "crate", not file or module.
 Implementation, docs, tooling, etc.
 -----------------------------------
 
-There is one implementation, `rustc`
+There is one principal implementation, `rustc`
 which is maintained by the [Rust project](https://www.rust-lang.org/) itself,
 alongside the specifications and documentation.
 
