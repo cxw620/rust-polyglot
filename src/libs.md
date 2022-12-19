@@ -18,8 +18,9 @@ makes it possible for libraries to provide facilities
 that resemble bespoke language features.
 
 When searching for libraries,
-usually use "recent downloads" for the search order on `crates.io`.
-It's inexact but is likely to give you fate-sharing
+usually use the opinionated catalogue at [`lib.rs`](https://lib.rs).
+Or use "recent downloads" for the search order on `crates.io`,
+which is inexact but is likely to give you fate-sharing
 with the rest of the community, at least.
 
 
