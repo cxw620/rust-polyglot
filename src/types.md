@@ -165,13 +165,14 @@ Other important types include:
 [`Path` and `PathBuf`](https://doc.rust-lang.org/nightly/std/path/) appear in many standard library APIs.
 They must be used if your program should support accessing
 arbitrarily named files
-(i.e. even files whose names are not valid unicode).
-But they are very awkward; they are a veneer over
+(i.e. even files whose names are not valid Unicode).
+But they are very awkward.
+They are a veneer over
 [`OsString`]/[`OsStr`] which have a very very limited API,
 primarily because [Windows is terrible](https://docs.rs/bstr/latest/bstr/#file-paths-and-os-strings).
 If you need to do anything nontrivial with filenames,
 you may need [`os_str_bytes`].
-If you can limit your self to valid unicode,
+If you can limit yourself to valid Unicode,
 you can just pass `str` to the standard library file APIs.
 
 Literals
