@@ -274,7 +274,7 @@ and function parameters.
 for a single function name separately like in Haskell or Ocaml;
 use `match`.)
 
-Refutable patterns appear in `if let`, `match`
+Refutable patterns appear in `if let`, `let...else`, `match`
 and `matches!`.
 
 `match` is the most basic way to handle a value of a sum type.
