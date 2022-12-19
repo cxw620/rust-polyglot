@@ -64,13 +64,13 @@ with a variety of languages.
  * JS/DOM/WASM: [`wasm-bindgen`] (do *not* use `wasm-pack`), [`web-sys`].  [`rusty_v8`].
  * Java: [`j4rs`], [`jni`]
 
-There are others available on `crates.io`.
+There are others available - look on `lib.rs`.
 
 
 FFI use in practice
 -------------------
 
-crates.io contains Rust bindings to many C and C++ libraries.
+The ecosystem contains Rust bindings to many C and C++ libraries.
 Look for a binding before writing one.
 However,
 because such bindings are largely `unsafe`,
