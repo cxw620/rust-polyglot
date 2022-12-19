@@ -1,0 +1,336 @@
+#!/usr/bin/perl -w
+use strict;
+our $copyright = <<END;
+    Copyright 2021 Ian Jackson and contributors
+    SPDX-License-Identifier: MIT
+    There is NO WARRANTY.
+END
+
+use IO::Handle;
+
+#---------- principal code for determining conversion information ----------
+
+sub results ($$) {
+  # Internal notation!
+  # This gets transformed later into the notation described in safety.md.
+  #
+  #   F              use From
+  #   t              use TryFrom
+  #   N              use num_traits
+  #   <              truncate
+  #   +              add 2^n
+  #   -              subtract 2^n
+  #   ≠ ≈ ⩯          as safety.md
+  #   
+  my ($t1,$t2) = @_;
+  my $c = "$t1,$t2";
+  my ($k1,$w1, $k2,$w2) = $c =~ m/^([iuf])(\w+),([iuf])(\w+)$/ or die;
+  $w2 = $w1 eq $w2 ? 1024 : 1 if $w2 =~ m/\D/;
+  $w1 =              1024     if $w1 =~ m/\D/;
+  if ("$k1$k2" =~ m/^[iu]+$/) {
+    if ($w1 eq $w2) {
+      if ($k1 eq $k2) {
+	return "F "; # equal types
+      } elsif ("$k1$k2" =~ m/ui/) { # uW -> iW, losing a bit
+	return "t-";
+      } elsif ("$k1$k2" =~ m/iu/) { # iW -> uW, might add 2^W
+	return "t+";
+      } else {
+	die;
+      }
+    } else { # different types of known or assumed bit-width
+      if ($w1 > $w2) {
+	return "t<";
+      } elsif ($w2 > $w1) {
+	if ("$k1$k2" =~ m/iu/) { # iW -> uW, might add 2^W
+	  return "t+";
+	} else {
+	  return "F ";
+	}
+      } else {
+	die;
+      }
+    }
+  } elsif ($c =~ m/^f.*,[iu].*$/) {
+    return "N≠";
+  } elsif ($k2 eq 'f') {
+    if ($k1 eq 'f') {
+      return $w2 >= $w1 ? "F " : "N⩯"
+    } elsif ($k1 =~ m/[iu]/) {
+      if ($w2 > $w1) { # space for exponent
+	return "F ";
+      } elsif ($w2 == 32 && ($w1 + ($k1 eq 'u')) > 128) {
+	return "N⩯";
+      } else {
+	return "N≈";
+      }
+    }
+  } else {
+    die "$c ?";
+  }
+}
+
+#---------- interface to formatter ----------
+
+# abstract, input to formatter
+my @abstr_corner = ('to', 'from');
+my @abstr_col_groups;
+# $abstr_col_groups[]{Head0} = 'i', 'u', or 'f'
+# $abstr_col_groups[]{Head1}[] = '8', ..., '128', 'size'
+# $abstr_col_groups[]{Data}[]$ri[] = '.', 'T<', 'n≈' etc.
+my $abstr_n_data_cols; # total
+my @abstr_row_groups;
+# $abstr_row_groups[][]{Head} = 'i8', 'i16', ...
+
+sub iterate_rows ($$$) {
+  my ($f_group_start, $f_data_row, $f_group_end) = @_;
+  # calls
+  #  $f_group_start->($ri)
+  #  $f_data_row->($head, $ri) # use $abstr_col_groups[]{Data}[$ri]
+  #  $f_group_end->()
+  my $ri= 0;
+  for my $rgroup (@abstr_row_groups) {
+    $f_group_start->($ri);
+    foreach my $row (@$rgroup) {
+      $f_data_row->($row->{Head}, $ri++);
+    }
+    $f_group_end->()
+  }
+}
+
+#---------- abstract data construction ----------
+
+my @sizes = qw(8 16 32 64 128 size);
+my @fsizes = qw(32 64);
+
+@abstr_col_groups = ({
+  Head0 => 'i', 
+  Head1 => \@sizes,
+  Data => [],
+}, {
+  Head0 => 'u', 
+  Head1 => \@sizes,
+  Data => [],
+}, {
+  Head0 => 'f', 
+  Head1 => \@fsizes,
+  Data => [],
+});
+
+foreach my $cgroup (@abstr_col_groups) {
+  push @abstr_row_groups, [map {
+    { Head => $cgroup->{Head0}.$_ },
+  } @{ $cgroup->{Head1} }];
+}
+
+iterate_rows(sub {
+}, sub {
+  my ($t1, $ri) = @_;
+  $abstr_n_data_cols = 0;
+  foreach my $cgroup (@abstr_col_groups) {
+    foreach my $ci (0.. $#{ $cgroup->{Head1} }) {
+      my $h = $cgroup->{Head1}[$ci];
+      my $t2 = $cgroup->{Head0}.$h;
+      my $r = results($t1, $t2);
+      $abstr_n_data_cols++;
+      $cgroup->{Data}[$ci][$ri] =
+	$r eq 'F '  ? ".   " :
+	$r =~ m/^t\+$/ ? "T▵  " :
+	$r =~ m/^t\<$/ ? "T◂  " :
+	$r =~ m/^t\-$/ ? "T▿  " :
+#	$r =~ m/^t\<$/ ? "T◃  " :
+#	$r =~ m/^t\<$/ ? "T∆  " :
+#	$r =~ m/^t\<$/ ? "T⊲  " :
+	$r =~ m/^t/ ? "T$'  " :
+	$r =~ m/^N/ ? "n$'  " :
+	printf "%3s", $r
+	;
+    }
+  }
+}, sub {
+});
+
+#use Data::Dumper;
+#print Dumper(\@abstr_col_groups, \@abstr_row_groups);
+#exit 0;
+
+#---------- formtter - plain text ----------
+
+sub format_plain_text () {
+
+  my $hl = '-----';
+  print "   to";
+  foreach my $cgroup (@abstr_col_groups) {
+    print " |";
+    $hl .= '-+';
+    my $group_len = scalar @{ $cgroup->{Head1} };
+    printf " %4s%*s", $cgroup->{Head0}, 5* ($group_len-1), "";
+    $hl .= '-' x (5 * $group_len);
+  }
+  print "\n";
+  $hl .= "-\n";
+  print  "from ";
+  foreach my $cgroup (@abstr_col_groups) {
+    print " |";
+    foreach my $h (@{ $cgroup->{Head1} }) {
+      printf " %4s", $h;
+    }
+  }
+  print "\n";
+
+  iterate_rows(sub {
+    print $hl;
+  }, sub {
+    my ($t1, $ri) = @_;
+    printf "%5s", $t1 or die $!;
+    foreach my $cgroup (@abstr_col_groups) {
+      print " |";
+      foreach my $data (@{ $cgroup->{Data} }) {
+	print " ", $data->[$ri];
+      }
+    }
+    print "\n" or die $!;
+  }, sub {
+  });
+
+}
+
+#---------- formtter - html ----------
+
+sub htmlesc ($) {
+  ($_) = @_;
+  s/\&/&amp;/g;
+  s/\</&lt;/g;
+  s/\>/&gt;/g;
+  return $_;
+}
+
+sub format_html () {
+  print "<table class=\"compact-table\"><thead><tr>\n";
+  print "<th style=\"text-align:end;\">$abstr_corner[0]</th>\n";
+  foreach my $cgroup (@abstr_col_groups) {
+    foreach my $ci (0.. $#{ $cgroup->{Head1} }) {
+      print "<th rowspan=\"2\">";
+      my $h1 = $cgroup->{Head1}[$ci];
+      if (!$ci) {
+	my $h0 = $cgroup->{Head0};
+	print "<code>",
+	      htmlesc($h0),
+	      ('&nbsp;' x (length($h1) - length($h0))),
+	      "</code>";
+      }
+      print "<br><code>", htmlesc($h1), "</code>";
+      print "</th>\n";
+    }
+  }
+  print "</tr><tr>\n";
+  print "<th sytle=\"text-align:start;\">$abstr_corner[1]</th>\n";
+  print "</tr></thead><tbody>\n";
+  iterate_rows(sub {
+    my ($ri) = @_;
+    return if $ri==0;
+    printf "<tr><th></th><td colspan=\"%d\">&nbsp;</td></tr>",
+      $abstr_n_data_cols;
+  }, sub {
+    my ($rh, $ri) = @_;
+    print "<tr><td><code>", htmlesc($rh), "</code></td>\n";
+    foreach my $cgroup (@abstr_col_groups) {
+      foreach my $data (@{ $cgroup->{Data} }) {
+	my $d = $data->[$ri];  $d =~ s/\s+$//;
+	print "<td>", htmlesc($d), "</td>";
+      }
+    }
+    print "</tr>\n";
+  }, sub { });
+  print "</tbody></table>\n";
+}
+
+#---------- formatter - latex ----------
+
+sub texesc ($) {
+  ($_) = @_;
+  s/\\/\\textbackslash /g;
+  s/\~/\\textasciitilde /g;
+  s/([$%^&{}_#])/\\$1/g;
+  s/▵/\$\\smalltriangleup\$/g;
+  s/◂/\$\\blacktriangleleft\$/g;
+  s/▿/\$\\smalltriangledown\$/g;
+  s/≠/\$\\ne\$/g;
+  s/≈/\$\\approx\$/g;
+  s/⩯/\$\\hatapprox\$/g;
+  return $_;
+}
+
+sub format_tex () {
+
+  ## Reduce the space between most columns.  We'll judiciously add more space
+  ## to divide up the table into big regions
+  print "\\begingroup \\setlength{\\tabcolsep}{0.3em}\n";
+
+  ## And this is how much space to add between column groups.
+  print "\\newcommand{\\colgap}{\\qquad}\n";
+
+  ## The table preamble.
+  print "\\begin{longtable}[]{\@{}r";
+  for my $cg (@abstr_col_groups)
+    { print "\@{\\colgap}" . "c" x @{$cg->{Head1}}; }
+  print "\@{}}\n";
+
+  ## Initial rule.
+  print "\\toprule\n";
+
+  ## Top header row.
+  print "\\multicolumn{1}{r\@{\\colgap}}{" . texesc($abstr_corner[0]) . "}";
+  my $i = 0;
+  for my $cg (@abstr_col_groups) {
+    $i++;
+    my $gap = $i == @abstr_col_groups ? "" : "\\colgap";
+    my $n = @{$cg->{Head1}};
+    print " & \\multicolumn{$n}{c\@{$gap}}" .
+      "{\\ttfamily " . texesc($cg->{Head0}) . "}";
+  }
+  print " \\\\". "\n";
+
+  ## Second header row.
+  print "\\multicolumn{1}{l\@{\\colgap}}" .
+    "{" . texesc($abstr_corner[1]) . "\\quad\\strut}";
+  for my $cg (@abstr_col_groups)
+    { for my $h (@{$cg->{Head1}}) { print " & \\ttfamily " . texesc($h); } }
+  print " \\\\" . "\n";
+
+  ## Done the header.  (No newline here!  This will be provided by the first
+  ## data row.)
+  print "\\midrule\n" . "\\endhead";
+
+  ## Table body.
+  iterate_rows
+    sub {
+      ## New group.  If this isn't the first one, leave a vertical gap.
+
+      my ($ri) = @_;
+      if ($ri) { print "[\\medskipamount]"; }
+    },
+    sub {
+      ## Data row.  Grind through the data.
+
+      print "\n"; # newline for previous whatever
+      my ($rh, $ri) = @_;
+      print "\\ttfamily " . texesc($rh);
+      for my $cg (@abstr_col_groups)
+	{ for my $cd (@{$cg->{Data}}) { print " & " . texesc($cd->[$ri]); } }
+      print " \\\\"; # no newline here
+    },
+    sub { };
+
+  ## The end.
+  print "\n" . "\\bottomrule\n" . "\\end{longtable}\n" . "\\endgroup\n";
+}
+
+#---------- main program ----------
+
+my $format = "@ARGV";
+$format =~ y/-/_/;
+$format =~ s/^\.//;
+my $fn = ${*::}{"format_$format"};
+$fn->();
+die $! if STDOUT->error;

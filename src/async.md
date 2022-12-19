@@ -136,7 +136,9 @@ Also, "`async-std`" seems less comprehensive than Tokio in some areas.
 I prefer Tokio's APIs.
 
 There are some glue libraries to help with bridging
-the gaps between different runtimes.
+the gaps between different runtimes,
+such as
+[`async_executors`](https://docs.rs/async_executors/0.6.0/async_executors/).
 
 ### Mixing and matching sync and async; thread context
 

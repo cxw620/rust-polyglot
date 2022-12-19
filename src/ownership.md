@@ -54,6 +54,9 @@ are generic over elided lifetime arguments:
 Although lifetimes are part of types,
 there are many places where type inference is *not* supported,
 but lifetime inference *is* permitted (and usual).
+Usually, one requests lifetime inference by simply
+omitting the lifetime,
+but it can be requested explicitly with `'_`.
 
 The special lifetime `'static`
 is for objects that will never go away.
@@ -248,13 +251,13 @@ then one of the following is the case:
 
    When applying this strategy,
    try to avoid reusing the same lifetime name in multiple places:
-   doing so can try to identify actually-different lifetimes.
+   keeping them separate can help identify actually-different lifetimes.
 
  * Add redundant type and lifetime annotations to closures
    (`'_`, `_`, `&'_ _`, `-> &'_ _` etc.)
    The type and [lifetime elision](https://doc.rust-lang.org/reference/lifetime-elision.html) rules can interact badly with closures.
-   Sometimes writing out explicit types and lifetimes,
-   even completely elided ones,
+   Sometimes writing out explicit types and lifetimes
+   (even with the `_` and `'_` inference placeholders)
    can make it work.
 
  * Turn a closure into a function, and pass in the closed-over variables.

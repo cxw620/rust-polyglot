@@ -100,7 +100,8 @@ match %value% { %pat0% %[% if %cond0% %]% => %expr0%, %...% } // See [Types and 
 '%label%: for %loopvar% in %something_iterable% { ... }
 
 return %v%  // At end of function, it is idiomatic to just write `%v%`
-break %value%; break '%label% %value%; // `loop` only; specifies value of `loop` expr
+break %value%; // `loop` only; specifies value of `loop` expr
+break '%label% %value%; // `break %value%` with named loop; Rust 1.65, Nov 2022
 continue; continue '%label%; break; break '%label%;
 
 %function%(%arg0%,%arg1%)
@@ -131,9 +132,15 @@ Other statements
 -----------------
 
 `let` introduces a binding.
+
+%!fancy-pre
 ```
-let pattern = value;
+let %pattern% = %value%;			// Irrefutable patterns
+let %pattern% = %value% else { %diverges...% }; // Refutable (Rust 1.65, Nov 2022)
+%place% = %value%; // Assignment to a mutable variable or location
+%pattern% = %value%; // Destructuring assignment (Rust 1.59, Feb 2022)
 ```
+%/fancy-pre
 
 Variable names may be reused by rebinding;
 this is often considered idiomatic.

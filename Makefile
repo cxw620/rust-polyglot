@@ -45,6 +45,8 @@ endif
 
 default: doc
 
+all:	html pdf
+
 doc:	html
 
 html:	html.stamp
@@ -55,11 +57,13 @@ pdf:	$(OUTPUT_PDF)
 
 .PHONY: html pdf
 
-html.stamp: book.toml mdbook/SUMMARY.md massage-html \
+html.stamp: book.toml mdbook/SUMMARY.md mdbook/conversions-table.html \
+	massage-html \
 		$(MD_SOURCES) $(MDBOOK_INFLUENCES)
 	$(NAILING_CARGO_JUST_RUN) $(MDBOOK) build $(MDBOOK_BUILD_NAILING_OPTS)
 	$(NAILING_CARGO_JUST_RUN) $(abspath massage-html) \
 		$(addprefix html/, $(addsuffix .html, print $(CHAPTERS)))
+	touch $@
 
 mdbook/SUMMARY.md: generate-inputs src/definitions.pl src/precontents.md \
 		$(MD_SOURCES) $(GIT_INFLUENCES)
@@ -76,13 +80,18 @@ $(TEX_INPUTS): latex/%.tex: src/refs.md mdbook/SUMMARY.md hack-latex
 		$< pandoc/$*.md mdbook/autorefs.md
 	./hack-latex $@.raw >$@
 
-$(OUTPUT_PDF): $(TEX_INPUTS) latex/polyglot.tex
+$(OUTPUT_PDF): $(TEX_INPUTS) latex/polyglot.tex latex/conversions-table.tex
 	cd latex && \
 		{ $(PDFLATEX) $(LATEX_OPTIONS) polyglot.tex && \
 		  $(PDFLATEX) $(LATEX_OPTIONS) polyglot.tex && \
 		  $(PDFLATEX) $(LATEX_OPTIONS) polyglot.tex || \
 			{ cat polyglot.log; false; }; } && \
 		mv polyglot.pdf ../
+
+mdbook/conversions-table.html \
+latex/conversions-table.tex \
+: %: conversions-table
+	./$< $(suffix $@) >$@.tmp && mv -f $@.tmp $@
 
 clean:
 	$(NAILING_CARGO_JUST_RUN) rm -rf $(abspath $(OUTPUT_DIR))

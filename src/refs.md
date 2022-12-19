@@ -14,6 +14,8 @@
 [`Hash`]: https://doc.rust-lang.org/std/hash/trait.Hash.html
 [`Into`]: https://doc.rust-lang.org/std/convert/trait.Into.html
 [`Option`]: https://doc.rust-lang.org/nightly/std/option/
+[`OsStr`]: https://doc.rust-lang.org/std/ffi/struct.OsStr.html
+[`OsString`]: https://doc.rust-lang.org/std/ffi/struct.OsString.html
 [`Range`]: https://doc.rust-lang.org/nightly/std/ops/struct.Range.html
 [`Send`]: https://doc.rust-lang.org/std/marker/trait.Send.html
 [`String`]: https://doc.rust-lang.org/std/string/struct.String.html

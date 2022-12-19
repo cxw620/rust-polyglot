@@ -27,6 +27,7 @@ $title = "Rust for the Polyglot Programmer";
    ndarray
    num-derive
    once_cell
+   os_str_bytes
    pyo3
    reqwest
    ring
@@ -53,6 +54,7 @@ $title = "Rust for the Polyglot Programmer";
    rand
    rayon
    regex
+   rustix
    rustls
    rusty_v8
    slab

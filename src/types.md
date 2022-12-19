@@ -71,6 +71,8 @@ Otherwise, types have structural equivalence.
 | References (always valid, never null) | `&T`, `&mut T`, `&'lifetime T`, `&'l mut T`
 | Raw pointers | `*const T`, `*mut T`
 | Runtime trait despatch (vtable) | `dyn Trait`
+| Existential type | `impl Trait`
+| Type to be inferred | `_`, `&'_ T`, `&'_ mut T` |
 
 Most of these are straightforward.
 
@@ -115,16 +117,20 @@ C.f. [`String`], [`Box<str>`](https://doc.rust-lang.org/std/boxed/struct.Box.htm
 [**dyn Trait**](https://doc.rust-lang.org/reference/types/trait-object.html) is a **trait object**:
 an object which implements `Trait`,
 with despatch done at run-time via a vtable.
-(Not to be confused with `impl Trait`,
-which is an existential type.)
+(Not to be confused with `impl Trait`.)
 `&dyn Trait` is a pointer to the object,
 plus a pointer to its vtable; `dyn Trait` itself is unsized.
+
+[**impl Trait**](https://doc.rust-lang.org/reference/types/impl-trait.html)
+represents a generic type implementing some set of traits -
+a monomorphised **existential type**.
+`impl Trait` can only currently be used in certain places:
+function arguments and return values.
 
 [**usize**](file:///home/rustcargo/docs/share/doc/rust/html/std/primitive.usize.html) is the type of array and slice indices.
 It corresponds to C `size_t`.
 Rust
-([generally](https://doc.rust-lang.org/std/primitive.pointer.html#method.offset))
-[avoids](https://doc.rust-lang.org/std/primitive.pointer.html#method.offset_from)
+[borbids](https://doc.rust-lang.org/std/primitive.pointer.html#method.offset_from)
 the existence of objects bigger than fits into an `isize`.
 
 The empty tuple `()`, aka "unit", is the type of
@@ -142,6 +148,7 @@ and as objects to hang methods on.
 | Heap allocation | [`Box<T>`][`Box`]
 | Expanding vector (ptr, len, capacity) | [`Vec<T>`][`Vec`]
 | Expanding string (ptr, len, capacity) | [`String`]
+| Filesystem path, maybe not valid unicode | [`Path` / `PathBuf`](https://doc.rust-lang.org/nightly/std/path/)
 | Hash table / ordered B-Tree | [`HashMap`] / [`BTreeMap`]
 | Reference-counted heap allocation <br> (no GC, can leak cycles) | [`Arc<T>`](https://doc.rust-lang.org/std/sync/struct.Arc.html), [`Rc<T>`](https://doc.rust-lang.org/std/rc/index.html)
 | Optional (aka Haskell `Maybe`) | [`Option<T>`][`Option`]
@@ -155,6 +162,18 @@ Other important types include:
 [`BufReader`]/[`BufWriter`],
 [`VecDeque`],
 [`Cow`].
+
+[`Path` and `PathBuf`](https://doc.rust-lang.org/nightly/std/path/) appear in many standard library APIs.
+They must be used if your program should support accessing
+arbitrarily named files
+(i.e. even files whose names are not valid unicode).
+But they are very awkward; they are a veneer over
+[`OsString`]/[`OsStr`] which have a very very limited API,
+primarily because [Windows is terrible](https://docs.rs/bstr/latest/bstr/#file-paths-and-os-strings).
+If you need to do anything nontrivial with filenames,
+you may need [`os_str_bytes`].
+If you can limit your self to valid unicode,
+you can just pass `str` to the standard library file APIs.
 
 Literals
 --------
@@ -239,7 +258,7 @@ additional features:
 
  * `pat1 | pat2` for alternation
    (both branches must bind the same names).
- * `name@ pattern` which binds `name`
+ * `name @ pattern` which binds `name`
    to the whole of whatever matched `pattern`.
  * `ref name` avoids moving out of the matched value;
    instead, it makes the binding a reference to the value.
@@ -267,7 +286,7 @@ and function parameters.
 for a single function name separately like in Haskell or Ocaml;
 use `match`.)
 
-Refutable patterns appear in `if let`, `match`
+Refutable patterns appear in `if let`, `let...else`, `match`
 and `matches!`.
 
 `match` is the most basic way to handle a value of a sum type.

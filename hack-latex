@@ -92,5 +92,21 @@ while (<>) {
   s/IX9Zl6Lbd6F9RgYs/[/g;
   s/1hTgD8bayWOmHqSY/]/g;
 
+  ## Include conversions-table
+  if ($_ eq "\\{\\{\\#include conversions-table.html\\}\\}\n") {
+    $_ = "\\input{conversions-table.tex}\n";
+  }
+
+  ## Non-unicode.
+  s/▵/\$\\smalltriangleup\$/g;
+  s/◂/\$\\blacktriangleleft\$/g;
+  s/▿/\$\\smalltriangledown\$/g;
+  s/≠/\$\\ne\$/g;
+  s/≈/\$\\approx\$/g;
+  s/⩯/\$\\hatapprox\$/g;
+
+  # Subtle touches.
+  s/2\\\^\{\}n/\$2^n\$/;
+
   print;
 }

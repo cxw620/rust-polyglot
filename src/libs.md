@@ -18,8 +18,9 @@ makes it possible for libraries to provide facilities
 that resemble bespoke language features.
 
 When searching for libraries,
-usually use "recent downloads" for the search order on `crates.io`.
-It's inexact but is likely to give you fate-sharing
+usually use the opinionated catalogue at [`lib.rs`](https://lib.rs).
+Or use "recent downloads" for the search order on `crates.io`,
+which is inexact but is likely to give you fate-sharing
 with the rest of the community, at least.
 
 
@@ -49,8 +50,9 @@ Libraries you should know about
  * [`rayon`]\: Semi-magical safe multicore parallelism
    as a drop-in replacement for std's serial iterators.
 
- * [`parking_lot`].  Alternatives to the standard mutex etc.;
-   `parking_lot::Mutex` is const-initialisable.
+ * [`parking_lot`].  Alternatives to the standard mutex etc.
+   `parking_lot::Mutex` is const-initialisable;
+   `std`'s only in Rust 1.63 (August 2022).
 
  * [`crossbeam`]\: other tools for multithreaded programming,
    including [scoped threads].
@@ -59,6 +61,7 @@ Libraries you should know about
    API is a bit funky.  Be sure to use [`chrono-tz`] on Unix.
 
  * [`libc`] and [`nix`].  Take your pick.
+   (Maybe consider [`rustix`].)
 
  * [`lazy_static`], [`once_cell`]
    for data to be initialised once.
@@ -148,22 +151,15 @@ which depends on the "`async-std`" async runtime.
 because [I prefer Tokio](async.md#practicalities).
 
 
-Command line parsing: `structopt` and `clap`
-------------------------------------------------
+Command line parsing: ``clap`
+-----------------------------
 
 If you are writing a command line program
-you should probably use [`structopt`].
+you should probably use [`clap`].
 It allows declarative definition of command line options.
 
 Unfortunately,
-`structopt` has some problems,
-which it inherits from [`clap`] (the underlying command line parser):
-
- * Confusion between options which may be repeated,
-   options which take multiple values as a single argument,
-   and the troubling and novel notion of
-   options which take an indeterminate series of values
-   as separate arguments until the next option.
+`clap` has some problems.
 
  * Serious problems handling options which override each other.
    There is a facility for this but it is not convenient and
@@ -176,12 +172,12 @@ To illustrate:
 it is quite awkward even to provide a conventional pair of
 mutually-overriding `--foo` and `--no-foo` options.
 
-In practice, using `clap` (and, therefore using `structopt`)
+In practice, using `clap`
 means accepting that one's program will have
 an imperfect and sometimes-balky command line syntax.
 
 There are alternatives,
 notably [`getopts`], [`gumdrop`] and [`argparse`],
 but they are much less popular and less well maintained.
-I currently use `argparse` where I want a fine-tuned option parser,
+I sometimes use `argparse` where I want a fine-tuned option parser,
 but it is quite odd and the docs are not great.

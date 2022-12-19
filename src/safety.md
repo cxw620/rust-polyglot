@@ -49,8 +49,23 @@ the [`Wrapping`](https://doc.rust-lang.org/std/num/struct.Wrapping.html) wrapper
 For conversions expected to be fallible,
 use the [`TryFrom` implementations](https://doc.rust-lang.org/std/convert/trait.TryFrom.html#implementors) via [`TryInto::try_into()`](https://doc.rust-lang.org/std/convert/trait.TryInto.html).
 For conversions expected to be infallible,
-using [`num::cast`](https://docs.rs/num/latest/num/cast/index.html)
-will avoid accidentally writing a lossy raw `as` operation.
+using `From` or [`num::cast`](https://docs.rs/num/latest/num/cast/index.html)
+will avoid accidentally writing a lossy raw `as` operation:
+
+{{#include conversions-table.html}}
+
+For conversion, use:
+**.** `From`; 
+**T** `TryFrom`;
+**n** `num_traits`.
+<br>
+Integer `as` might: **◂** truncate;
+**▵** add or **▿** subtract 2^n (two's complement).
+<br>
+FP `as` might:
+**≠** convert NaN to zero or produce saturated integer values;
+**⩯** round or give Inf;
+**≈** round.
 
 Thread safety
 -------------
