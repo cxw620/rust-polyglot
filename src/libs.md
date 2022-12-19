@@ -30,7 +30,7 @@ Libraries you should know about
  * [`itertools`].
    Superb collection of extra iterator combinators.
 
- * [`fehler`]; [`thiserror`]; [`eyre`] (or [`anyhow`]).  Error handling.
+ * [`fehler`]; [`thiserror`]; [`anyhow`] (or [`eyre`]).  Error handling.
 
  * [`num`],
    [`num-traits`],
