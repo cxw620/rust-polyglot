@@ -136,14 +136,9 @@ Other statements
 %!fancy-pre
 ```
 let %pattern% = %value%;			// irrefutable patterns
-let %pattern% = %value% else { %diverges...% }; // refutable patterns
+let %pattern% = %value% else { %diverges...% }; // refutable patterns (Rust 1.65, November 2022)
 ```
 %/fancy-pre
-
-`let ... else` is very new (Rust 1.65, November 2022)
-but can be very nice for avoiding both rightward drift,
-and clumsy repetition like
-`let v = if let Some(v) = perhaps { v } else { panic!() };`
 
 Variable names may be reused by rebinding;
 this is often considered idiomatic.
