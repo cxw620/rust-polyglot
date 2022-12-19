@@ -148,7 +148,6 @@ and as objects to hang methods on.
 | Heap allocation | [`Box<T>`][`Box`]
 | Expanding vector (ptr, len, capacity) | [`Vec<T>`][`Vec`]
 | Expanding string (ptr, len, capacity) | [`String`]
-| Filesystem path, maybe not valid unicode | [`Path` / `PathBuf`](https://doc.rust-lang.org/nightly/std/path/)
 | Hash table / ordered B-Tree | [`HashMap`] / [`BTreeMap`]
 | Reference-counted heap allocation <br> (no GC, can leak cycles) | [`Arc<T>`](https://doc.rust-lang.org/std/sync/struct.Arc.html), [`Rc<T>`](https://doc.rust-lang.org/std/rc/index.html)
 | Optional (aka Haskell `Maybe`) | [`Option<T>`][`Option`]
