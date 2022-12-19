@@ -105,7 +105,8 @@ So *any* access to a `static mut` is `unsafe`.
 Instead, either pass mutable access down your call stack,
 or use [interior mutability](ownership.md#interior-mutability-and-runtime-lifetime-management).
 
-Annoyingly, [`std::sync::Mutex`] is not const-initialisable.
+Annoyingly, [`std::sync::Mutex`] is only const-initialisable
+in very recent Rust (1.63, August 2022).
 Use [`parking_lot`], or [`lazy_static`].
 
 Unsafe Rust
