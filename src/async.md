@@ -121,7 +121,7 @@ to choose a specific runtime.
 
 Most of the important libraries use **Tokio**,
 a mature production-quality runtime
-(which actually predates modern async Rust language features).
+(which actually predates, but now uses, modern async Rust language features).
 
 Worth mentioning is
 [`smol`](https://docs.rs/smol/1.2.5/smol/), which might
