@@ -107,10 +107,11 @@ Compilation is slow by comparison with many other modern languages,
 but the runtime speed of idiomatic Rust code is extremely good.
 
 Code generation (to native code or WASM) is currently done via LLVM
-but work is ongoing to allow use of
-[GCC](https://blog.antoyo.xyz/rustc_codegen_gcc-progress-report-3)
+but projects to allow use of
+[GCC](https://blog.antoyo.xyz/rustc_codegen_gcc-progress-report-18)
 and
-[Cranelift](https://github.com/bjorn3/rustc_codegen_cranelift/blob/master/Readme.md).
+[Cranelift](https://github.com/bjorn3/rustc_codegen_cranelift/blob/master/Readme.md)
+are both at an advanced stage.
 There is also an
 [IR interpreter](https://github.com/rust-lang/miri#readme)
 used mostly for validation.
