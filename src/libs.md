@@ -144,7 +144,7 @@ but it is hard to choose.
  * You should perhaps also consider: [`warp`].
 
 
-Command line parsing: ``clap`
+Command line parsing: `clap`
 -----------------------------
 
 If you are writing a command line program
