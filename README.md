@@ -8,6 +8,9 @@ Colophon
 This is a guide to the Rust programming language.  It was written by
 me, Ian Jackson, and I am responsible for the content and opinions.
 
+Last revised and reviewed December 2022.
+(First edition September 2021.)
+
 ### Canonical location
 
 The rendered document can be found here:
