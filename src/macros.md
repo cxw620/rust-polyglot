@@ -44,7 +44,7 @@ and can be confusing in unusual cases.
 
 [`macro_rules!`](https://doc.rust-lang.org/reference/macros-by-example.html)
 defines a (function-like) macro in terms of
-template matches and and substitutions.
+template matches and substitutions.
 
 ```
    macro_rules! name { { template1 } => { replacement1 }, ... }
