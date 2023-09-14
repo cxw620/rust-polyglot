@@ -62,7 +62,7 @@ Items
 
 %!fancy-pre
 ```
-fn %function%(%arg0%: %T%, %arg1%: %U%) -> %ReturnValue% { %...% }
+fn %function%(%arg0%: %T%, %arg1%: %U%) -> %ReturnType% { %...% }
 type %TypeAlias% = %OtherType%;         // Type alias, structural equality
 pub struct %Counter% { %counter%: u64 } // Nominal type equality
 trait %Trait% { fn %trait_method%(self); }
