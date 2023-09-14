@@ -26,9 +26,11 @@ but objects can also contain references to (borrows of) values
 held elsewhere.
 
 Borrowing is done explicitly with the `&` reference operator.
-Borrows can be [mutable (`&mut T`) or immutable (`&T`)](https://doc.rust-lang.org/std/primitive.reference.html).
-The same object can be borrowed immutably any number of times,
-but only borrowed mutably once.
+Borrows can be [mutable (`&mut T`) or immutable (`&T`)](https://doc.rust-lang.org/std/primitive.reference.html). 
+To prevent data races, no mutable borrow is allowed concurrently with any other borrow.
+Sinning against this principle in unsafe code leads to immediate undefined behavior.
+Thus, the same object can have either only readers (no mutable borrows and any number of immutable borrows),
+or just a single writer (exactly one mutable borrow and no immutable borrows).
 
 During the lifetime of a borrow,
 incompatible uses of the object are forbidden.
