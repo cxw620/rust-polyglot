@@ -18,14 +18,14 @@ ifneq (,$(wildcard ../Cargo.nail))
 NAILING_CARGO ?= nailing-cargo
 CARGO ?= $(NAILING_CARGO)
 BUILD_SUBDIR ?= ../Build
-OUTPUT_DIR = $(BUILD_SUBDIR)/$(notdir $(PWD))/html
+OUTPUT_DIR = $(BUILD_SUBDIR)/$(notdir $(PWD))/book
 NAILING_CARGO_JUST_RUN ?= $(NAILING_CARGO) --just-run -q ---
 MDBOOK_BUILD_NAILING_OPTS ?= -d $(OUTPUT_DIR) $(PWD)
 
 endif # Cargo.nail
 
 CARGO ?= cargo
-OUTPUT_DIR ?= html
+OUTPUT_DIR ?= book
 
 OUTPUT_PDF = polyglot.pdf
 
@@ -59,7 +59,7 @@ html.stamp: book.toml mdbook/SUMMARY.md mdbook/conversions-table.html \
 		$(MD_SOURCES) $(MDBOOK_INFLUENCES)
 	$(NAILING_CARGO_JUST_RUN) $(MDBOOK) build $(MDBOOK_BUILD_NAILING_OPTS)
 	$(NAILING_CARGO_JUST_RUN) $(abspath massage-html) \
-		$(addprefix html/, $(addsuffix .html, print $(CHAPTERS)))
+		$(addprefix book/, $(addsuffix .html, print $(CHAPTERS)))
 	touch $@
 
 mdbook/SUMMARY.md: generate-inputs src/definitions.pl src/precontents.md \
@@ -92,4 +92,4 @@ latex/conversions-table.tex \
 
 clean:
 	$(NAILING_CARGO_JUST_RUN) rm -rf $(abspath $(OUTPUT_DIR))
-	rm -rf latex mdbook pandoc *.stamp
+	rm -rf latex book mdbook pandoc *.stamp

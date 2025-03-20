@@ -1,27 +1,25 @@
-Colophon
+版权说明
 ========
 
-[comment]: # ( Copyright 2021-2022 Ian Jackson and contributors  )
-[comment]: # ( SPDX-License-Identifier: MIT                 )
-[comment]: # ( There is NO WARRANTY.                        )
+[comment]: # (版权所有 2021-2022 Ian Jackson 及贡献者)
+[comment]: # (SPDX-License-Identifier: MIT)
+[comment]: # (本文档不提供任何保证. )
 
-This is a guide to the Rust programming language.  It was written by
-me, Ian Jackson, and I am responsible for the content and opinions.
+这是一本 Rust 编程语言指南, 由 Ian Jackson 撰写并对内容和观点负责.
 
-Last revised and reviewed December 2022.
-(First edition September 2021.)
+本指南中文版由 Hantong Chen 翻译, 遵照原作者的版权声明.
 
-### Canonical location
+最后修订和审核时间为 2022 年 12 月(第一版发布于 2021 年 9 月), 翻译于 2025 年 4 月.
 
-The rendered document can be found here:
+### 规范位置
 
-   [https://www.chiark.greenend.org.uk/~ianmdlvl/rust-polyglot/](https://www.chiark.greenend.org.uk/~ianmdlvl/rust-polyglot/)
+渲染后的文档可以在这里找到: [https://rust-polyglot.acfun.win](https://rust-polyglot.acfun.win)
 
-There is also
-[a single HTML page version](https://www.chiark.greenend.org.uk/%7Eianmdlvl/rust-polyglot/print.html) and
-[a PDF](https://www.chiark.greenend.org.uk/%7Eianmdlvl/rust-polyglot/polyglot.pdf).
+### 贡献
 
-### Contributing
+囿于译者自身水平, 译文虽已力求准确, 但仍可能词不达意, 欢迎提 Issue 或 PR 批评指正.
+
+原文贡献说明参见英文原文.
 
 Contributions are very welcome, ideally via Issue or Merge Request:
 
@@ -32,48 +30,46 @@ especially about the recommendations about particular crates.
 However,
 I will make the final decision about the content of this guide.
 
-**Format, building**:
-The document is in the intersection of
-[mdbook](https://rust-lang.github.io/mdBook/) and 
-[pandoc](https://pandoc.org/) Markdown,
-in the `src/` directory.
-To format to HTML you will need to `cargo install mdbook` and run `make`,
-but untested contributions are welcome.
+**格式, 构建**:
 
-**Legal**:
-Please be sure to indicate your agreement with
-the declarations in the
-[Developer Certificate of Origin](#developer-certificate-of-origin-developer-certificate),
-for example by adding a `Signed-off-by` line to your commits.
+文档采用 [mdbook](https://rust-lang.github.io/mdBook/) 和 [pandoc](https://pandoc.org/) Markdown 的交集格式, 
+内容位于 `src/` 目录中.
 
-**Acknowledging your contribution**:
-If you would like to be acknowledged in the list below,
-please add your name there
-(as part of your MR).
+要格式化为 HTML, 你需要 `cargo install mdbook` 并运行 `make`, 
+但我们也欢迎未经测试的贡献.
 
-**Privacy**:
-Note of course that since this guide is maintained in git,
-your contribution and any acknowledgement
-will be permanently recorded in the git history
-for reasons of traceability, auditability, transparency,
-and acknowledgement.
+**法律信息**:
 
-### Acknowledgements
+请确保表明你同意 [开发者原创声明](#developer-certificate-of-origin-developer-certificate) 中的声明,
+例如在你的提交中添加 `Signed-off-by` 行.
 
-Thanks for helpful review, comments and suggestions from:
+**致谢你的贡献**:
+
+如果你希望在下面的列表中得到致谢, 请在那里添加你的名字 (作为你的合并请求的一部分).
+
+**隐私**:
+
+请注意, 由于本指南在 git 中维护, 你的贡献和任何致谢
+将永久记录在 git 历史中, 以便追溯、审计、透明度和致谢.
+
+### 致谢
+
+感谢以下人员提供有益的审阅、评论和建议：
 Simon Tatham,
 Mark Wooding,
 Daniel Silverstone,
-and others.
+以及其他人.
 
-Thanks to Mark Wooding for the LaTeX/PDF arrangements.
+感谢 Mark Wooding 提供 LaTeX/PDF 支持.
 
-### Legal
+### 法律声明
 
-Rust for the Polyglot Programmer is
-Copyright 2021-2022 Ian Jackson and contributors.
+面向多语言程序员的 Rust 指南
+
+版权所有 2021-2022 Ian Jackson 及贡献者.
+
 `SPDX-License-Identifier: MIT`.
 
-There is **NO WARRANTY**
+**不提供任何保证**
 
-[comment]: # ( Extra data is appended here by generate-inputs: )
+[comment]: #(额外数据由 generate-inputs 附加在此处:)

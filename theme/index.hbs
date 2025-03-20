@@ -20,6 +20,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
+        <!-- Preconnect -->
+        <link rel="preconnect" href="https://s4.zstatic.net/" crossorigin />
+        <link rel="dns-prefetch" href="https://s4.zstatic.net/" />
+
         {{#if favicon_svg}}
         <link rel="icon" href="{{ path_to_root }}favicon.svg">
         {{/if}}
@@ -34,6 +38,7 @@
         {{/if}}
 
         <!-- Fonts -->
+        <link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/lxgw-wenkai-screen-web/1.501.0/style.css" />
         <link rel="stylesheet" href="{{ path_to_root }}FontAwesome/css/font-awesome.css">
         {{#if copy_fonts}}
         <link rel="stylesheet" href="{{ path_to_root }}fonts/fonts.css">

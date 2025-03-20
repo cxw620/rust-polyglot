@@ -1,8 +1,8 @@
 [book]
 src="mdbook"
-title="Rust for the Polyglot Programmer"
+title="面向多语言程序员的 Rust 指南"
 
 [preprocessor.links]
 
 [output.html]
-default-theme="ayu"
+default-theme="rust"
