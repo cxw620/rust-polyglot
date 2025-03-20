@@ -13,7 +13,7 @@
 
 ### 规范位置
 
-渲染后的文档可以在这里找到: [https://rust-polyglot.acfun.win](https://rust-polyglot.acfun.win)
+渲染后的文档可以在这里找到: [https://rust-polyglot.han.rs](https://rust-polyglot.han.rs)
 
 ### 贡献
 
